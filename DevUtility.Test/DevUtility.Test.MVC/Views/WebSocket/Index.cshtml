@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Index</h2>
+<div>
+    <input id="btn_start" type="button" value="start Server" onclick="startServer()" />
+    <input id="btn_stop" type="button" value="stop Server" onclick="stopServer()" />
+</div>
+<script src="http://localhost:9100/lib/jquery/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+    function startServer() {
+        $.getJSON('/WebSocket/StartServer', function (result) {
+            alert(result.Message);
+        });
+    };
+
+    function stopServer() {
+        $.getJSON('/WebSocket/StopServer', function (result) {
+            alert(result.Message);
+        });
+    };
+</script>

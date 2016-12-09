@@ -1,0 +1,19 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>angular test2 ng-repeat</title>
+    <meta charset="utf-8" />
+    <script src="angular-1.5.8/angular.min.js"></script>
+</head>
+<body ng-app="app">
+    <ul ng-controller="test2Controller">
+        <li ng-repeat="item in array">
+            {{item}}
+        </li>
+    </ul>
+    <ul ng-controller="test2Controller">
+        <li ng-repeat="item in array" ng-bind="item"></li>
+    </ul>
+    <script src="controllers/test2.controller.js"></script>
+</body>
+</html>

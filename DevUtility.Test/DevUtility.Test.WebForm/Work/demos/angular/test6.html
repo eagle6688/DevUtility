@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>angular test5 ng-options</title>
+    <meta charset="utf-8" />
+    <script src="angular-1.5.8/angular.min.js"></script>
+</head>
+<body ng-app="app">
+    <div ng-controller="mainController">
+        <select ng-model="myColor" ng-options="color.name for color in colors">
+            <option value="">-- choose color --</option>
+        </select>
+        <br />
+        <hr />
+        Currently selected: {{ {selected_color:myColor} }}
+        <div style="border:solid 1px black; height:20px"
+             ng-style="{'background-color':myColor.name}">
+        </div>
+    </div>
+    <script src="controllers/test6.controller.js"></script>
+</body>
+</html>

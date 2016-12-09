@@ -1,0 +1,12 @@
+{
+  "name": "devutility.test.webform",
+  "version": "1.0.0",
+  "description": "test",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "eagle",
+  "license": "ISC",
+  "dependencies": {}
+}

@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>knockout test4 - two way binding</title>
+    <meta charset="utf-8" />
+    <script src="knockout-3.4.0.js"></script>
+</head>
+<body>
+    The name is <span data-bind="text: personName"></span>
+    <br />
+    Input your name <input id="name" type="text" value="" onkeyup="changeName(this.value)" />
+    <script type="text/javascript">
+        var viewModel = {
+            personName: ko.observable('Bob'),
+            personAge: 123
+        };
+
+        ko.applyBindings(viewModel);
+
+        function changeName(value) {
+            viewModel.personName(value || 'Bob');
+        };
+    </script>
+</body>
+</html>

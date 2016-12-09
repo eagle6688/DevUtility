@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>File Size -- /ownLib/windowPlugin/Size/index.html</title>
+	<meta charset="utf-8" />
+    <script src="../windowPlugin.js"></script>
+</head>
+<body>
+    File: <input type="file" value="" onchange="changeFile(event)" />
+    <script type="text/javascript">
+        function changeFile(e) {
+            var files = e.target.files || e.dataTransfer.files;
+
+            if (!files)
+                return;
+
+            for (var i in files) {
+                console.log(files[i].size);
+            }
+        };
+    </script>
+</body>
+</html>

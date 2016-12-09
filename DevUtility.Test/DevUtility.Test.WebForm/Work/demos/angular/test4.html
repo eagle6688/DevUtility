@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>angular test4 ng-if</title>
+    <meta charset="utf-8" />
+    <script src="angular-1.5.8/angular.min.js"></script>
+</head>
+<body ng-app="app">
+    <ul ng-controller="mainController">
+        <li ng-repeat="item in array">
+            <span data-id="{{item}}"></span>
+            <span>{{$index}}</span>
+            <span>{{item}}</span>
+            <span ng-if="$first"> I am first</span>
+            <span ng-show="$middle"> I am middle</span>
+            <span ng-hide="!$last"> I am last</span>
+            <span ng-bind="$index == 0 ? '1' : ($index + 1)"></span>
+        </li>
+    </ul>
+    <script src="controllers/test4.controller.js"></script>
+</body>
+</html>

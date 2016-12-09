@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>/jquery.plugins/jquery.drag.helper/index.html</title>
+    <link href="../../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../Styles/common.css" rel="stylesheet" />
+    <script src="../../lib/jquery/jquery-1.11.1.min.js"></script>
+    <script src="jquery.drag.helper.js"></script>
+</head>
+<body>
+    <div id="div-drag" style="width: 500px; height: 500px; border: 1px solid red;">
+    </div>
+    <script type="text/javascript">
+        $('#div-drag').dragHelper({
+            dragged: function (files) {
+                console.log(files);
+            }
+        });
+    </script>
+</body>
+</html>

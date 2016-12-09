@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>knockout test2 - init</title>
+    <meta charset="utf-8" />
+    <script src="knockout-3.4.0.js"></script>
+</head>
+<body>
+    The name is <span id="personName" data-bind="text: personName"></span>
+    <br />
+    The age is <span id="personAge" data-bind="text: personAge"></span>
+    <script type="text/javascript">
+        var viewModel1 = {
+            personName: 'Bob'
+        };
+
+        ko.applyBindings(viewModel1, document.getElementById('personName'));
+
+        var viewModel2 = {
+            personAge: 123
+        };
+
+        ko.applyBindings(viewModel2, document.getElementById('personAge'));
+    </script>
+</body>
+</html>

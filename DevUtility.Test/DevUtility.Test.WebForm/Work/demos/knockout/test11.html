@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>knockout test11 - if</title>
+    <meta charset="utf-8" />
+    <script src="knockout-3.4.0.js"></script>
+</head>
+<body>
+    <ul data-bind="foreach: planets">
+        <li>
+            Planet: <b data-bind="text: name"> </b>
+            <span data-bind="if: capital">Capital: <b data-bind="text: capital.cityName"> </b></span>
+            <!-- ko if: capital -->
+            <span>Capital: <b data-bind="text: capital.cityName"> </b></span>
+            <!-- /ko -->
+        </li>
+    </ul>
+    <script>
+        ko.applyBindings({
+            planets: [
+                { name: 'Mercury', capital: null },
+                { name: 'Earth', capital: { cityName: 'Barnsley' } }
+            ]
+        });
+    </script>
+</body>
+</html>

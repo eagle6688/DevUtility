@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>knockout test5 - observableArray</title>
+    <meta charset="utf-8" />
+    <script src="knockout-3.4.0.js"></script>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr><th>First name</th><th>Last name</th></tr>
+        </thead>
+        <tbody data-bind="foreach: people">
+            <tr>
+                <td data-bind="text: firstName"></td>
+                <td data-bind="text: lastName"></td>
+            </tr>
+        </tbody>
+    </table>
+    <script type="text/javascript">
+        var viewModel = {
+            people: ko.observableArray([
+                { firstName: 'Bert', lastName: 'Bertington' },
+                { firstName: 'Charles', lastName: 'Charlesforth' },
+                { firstName: 'Denise', lastName: 'Dentiste' }
+            ])
+        };
+
+        viewModel.people.extend({ rateLimit: 500 });
+        //viewModel.people.push({ firstName: 'asd', lastName: 'qwe' });
+        //viewModel.people.splice(3, 1);
+        ko.applyBindings(viewModel);
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Bootstrap.modalHelper</title>
+    <link href="../../../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../../Styles/common.css" rel="stylesheet" />
+    <script src="../../../lib/jquery/jquery-1.11.1.min.js"></script>
+    <script src="../../../lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="jquery.Bootstrap.modalHelper.js"></script>
+</head>
+<body>
+    <div class="main">
+        <input type="button" value="Open Modal" onclick="openModal();" />
+    </div>
+    <div id="div_modal"></div>
+    <div id="div_modal2"></div>
+    <script type="text/javascript">
+        $('#div_modal').bootstrap_ModalHelper({
+            url: 'modalBody1.html'
+        });
+
+        function openModal() {
+            $('#div_modal').modal('show');
+        };
+
+        $('#div_modal2').bootstrap_ModalHelper({
+            url: 'modalBody2.html'
+        });
+
+        function openModal2() {
+            $('#div_modal2').modal('show');
+        };
+    </script>
+</body>
+</html>

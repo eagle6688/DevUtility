@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>webSocketHelper.js</title>
+    <meta charset="utf-8" />
+    <script src="/lib/jquery/jquery-1.11.1.min.js"></script>
+    <script src="/jquery.plugins/jquery.textareaAppend/jquery.textareaAppend.js"></script>
+    <script src="webSocketHelper.js"></script>
+</head>
+<body>
+    <p>
+        <label>Input you want to send:</label>
+        <input id="input" type="text" value="" />
+        <input id="btnSend" type="button" value="Send" />
+    </p>
+    <p>
+        <textarea id="text_message" rows="18" cols="100"></textarea>
+    </p>
+    <script type="text/javascript">
+        var webSocket = webSocketHelper.init({
+            ip: '127.0.0.1',
+            port: 8080,
+            onopen: function () {
+                $('#text_message').textareaAppend('connection open ...');
+            },
+            onmessage: function (event) {
+                $('#text_message').textareaAppend(event.data);
+            },
+            onclose: function () {
+                $('#text_message').textareaAppend('connection closed.');
+            },
+            onerror: function () {
+            }
+        }).WebSocket;
+
+        $('#btnSend').click(function (event) {
+            webSocket.send($('#input').val());
+        });
+    </script>
+</body>
+</html>

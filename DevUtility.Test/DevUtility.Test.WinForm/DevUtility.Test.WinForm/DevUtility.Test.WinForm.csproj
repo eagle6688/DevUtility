@@ -1,0 +1,290 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EE129259-E003-49C5-99E1-B99CDCA84A30}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DevUtility.Test.WinForm</RootNamespace>
+    <AssemblyName>DevUtility.Test.WinForm</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestForms\Application\Form_Application.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestForms\Application\Form_Application.Designer.cs">
+      <DependentUpon>Form_Application.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TestForms\BaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestForms\BaseForm.Designer.cs">
+      <DependentUpon>BaseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TestForms\Base\Form_Attribute.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestForms\Base\Form_Attribute.Designer.cs">
+      <DependentUpon>Form_Attribute.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TestForms\Base\Form_Inherit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestForms\Base\Form_Inherit.Designer.cs">
+      <DependentUpon>Form_Inherit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TestForms\Data\Form_Concurrency.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestForms\Data\Form_Concurrency.Designer.cs">
+      <DependentUpon>Form_Concurrency.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TestForms\Data\Form_DataTable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestForms\Data\Form_DataTable.Designer.cs">
+      <DependentUpon>Form_DataTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TestForms\Data\Form_EntityHelper.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestForms\Data\Form_EntityHelper.Designer.cs">
+      <DependentUpon>Form_EntityHelper.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TestForms\Data\Form_Random.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestForms\Data\Form_Random.Designer.cs">
+      <DependentUpon>Form_Random.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TestForms\Data\Form_Security.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestForms\Data\Form_Security.Designer.cs">
+      <DependentUpon>Form_Security.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TestForms\Extension\Form_SystemExt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestForms\Extension\Form_SystemExt.Designer.cs">
+      <DependentUpon>Form_SystemExt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TestForms\IO\Files\Form_FileHelper.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestForms\IO\Files\Form_FileHelper.Designer.cs">
+      <DependentUpon>Form_FileHelper.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TestForms\MultiThreads\Form_MultiThreads1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestForms\MultiThreads\Form_MultiThreads1.Designer.cs">
+      <DependentUpon>Form_MultiThreads1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TestForms\Net\Form_FTP.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestForms\Net\Form_FTP.Designer.cs">
+      <DependentUpon>Form_FTP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TestForms\Net\Form_Mail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestForms\Net\Form_Mail.Designer.cs">
+      <DependentUpon>Form_Mail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TestForms\Net\Form_Net.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestForms\Net\Form_Net.Designer.cs">
+      <DependentUpon>Form_Net.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TestForms\NoSQL\Form_Redis.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestForms\NoSQL\Form_Redis.Designer.cs">
+      <DependentUpon>Form_Redis.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TestForms\NoSQL\Form_Redis1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestForms\NoSQL\Form_Redis1.Designer.cs">
+      <DependentUpon>Form_Redis1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TestForms\NoSQL\Form_Redis_Hash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestForms\NoSQL\Form_Redis_Hash.Designer.cs">
+      <DependentUpon>Form_Redis_Hash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TestForms\NoSQL\Form_Set.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestForms\NoSQL\Form_Set.Designer.cs">
+      <DependentUpon>Form_Set.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TestForms\Research\Form_Unicode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestForms\Research\Form_Unicode.Designer.cs">
+      <DependentUpon>Form_Unicode.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="TestForms\Application\Form_Application.resx">
+      <DependentUpon>Form_Application.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestForms\Base\Form_Attribute.resx">
+      <DependentUpon>Form_Attribute.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestForms\Base\Form_Inherit.resx">
+      <DependentUpon>Form_Inherit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestForms\Data\Form_Concurrency.resx">
+      <DependentUpon>Form_Concurrency.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestForms\Data\Form_DataTable.resx">
+      <DependentUpon>Form_DataTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestForms\Data\Form_EntityHelper.resx">
+      <DependentUpon>Form_EntityHelper.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestForms\Data\Form_Random.resx">
+      <DependentUpon>Form_Random.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestForms\Data\Form_Security.resx">
+      <DependentUpon>Form_Security.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestForms\Extension\Form_SystemExt.resx">
+      <DependentUpon>Form_SystemExt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestForms\IO\Files\Form_FileHelper.resx">
+      <DependentUpon>Form_FileHelper.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestForms\MultiThreads\Form_MultiThreads1.resx">
+      <DependentUpon>Form_MultiThreads1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestForms\Net\Form_FTP.resx">
+      <DependentUpon>Form_FTP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestForms\Net\Form_Mail.resx">
+      <DependentUpon>Form_Mail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestForms\Net\Form_Net.resx">
+      <DependentUpon>Form_Net.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestForms\NoSQL\Form_Redis.resx">
+      <DependentUpon>Form_Redis.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestForms\NoSQL\Form_Redis1.resx">
+      <DependentUpon>Form_Redis1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestForms\NoSQL\Form_Redis_Hash.resx">
+      <DependentUpon>Form_Redis_Hash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestForms\NoSQL\Form_Set.resx">
+      <DependentUpon>Form_Set.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestForms\Research\Form_Unicode.resx">
+      <DependentUpon>Form_Unicode.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="App.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\DevUtility.Com\DevUtility.Com.csproj">
+      <Project>{71a90a24-095e-4b0e-bab9-83595297f094}</Project>
+      <Name>DevUtility.Com</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\DevUtility.Out\DevUtility.Out.csproj">
+      <Project>{6f52be40-0f2b-441e-8296-e27aa189104e}</Project>
+      <Name>DevUtility.Out</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\DevUtility.Win\DevUtility.Win.csproj">
+      <Project>{cc5d6456-8aad-4428-a2f8-b53d9cea76d4}</Project>
+      <Name>DevUtility.Win</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DevUtility.Test.Service\DevUtility.Test.Service.csproj">
+      <Project>{7f3cd5cc-e6c9-4fbb-860d-c04ee63c31d7}</Project>
+      <Name>DevUtility.Test.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DevUtility.Test.WinForm.Service\DevUtility.Test.WinForm.Service.csproj">
+      <Project>{10a36c89-42b2-4ce8-ba91-983e9f676b7c}</Project>
+      <Name>DevUtility.Test.WinForm.Service</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

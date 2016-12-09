@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7F3CD5CC-E6C9-4FBB-860D-C04EE63C31D7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DevUtility.Test.Service</RootNamespace>
+    <AssemblyName>DevUtility.Test.Service</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.9.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ServiceStack.Common">
+      <HintPath>..\..\Lib\ServiceStack\ServiceStack.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Interfaces">
+      <HintPath>..\..\Lib\ServiceStack\ServiceStack.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Redis">
+      <HintPath>..\..\Lib\ServiceStack\ServiceStack.Redis.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Text">
+      <HintPath>..\..\Lib\ServiceStack\ServiceStack.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Com\DataProviderService.cs" />
+    <Compile Include="MVC\Basic\RecursiveService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Winform\Base\InheritService.cs" />
+    <Compile Include="Winform\Base\TestAttributeHelper\ExistsAttributeService.cs" />
+    <Compile Include="Winform\Data\Concurrency\InsertDataService.cs" />
+    <Compile Include="Winform\Data\Concurrency\InsertDuplicateDataService.cs" />
+    <Compile Include="Winform\Data\Cryptography\AESHelperTest\TestDecryptService.cs" />
+    <Compile Include="Winform\Data\Cryptography\AESHelperTest\TestEncryptService.cs" />
+    <Compile Include="Winform\Data\Cryptography\MD5HelperTest\TestMD5Service.cs" />
+    <Compile Include="Winform\Data\Cryptography\SHA1HelperTest\TestFileSHA1Service.cs" />
+    <Compile Include="Winform\Data\Cryptography\SHA1HelperTest\TestSHA1Service.cs" />
+    <Compile Include="Winform\Data\Cryptography\SHA256HelperTest\TestSHA256Service.cs" />
+    <Compile Include="Winform\Data\DataTableExt\TestDataTableService.cs" />
+    <Compile Include="Winform\Data\EntityHelperTest\GetKeysValuesService.cs" />
+    <Compile Include="Winform\Data\RandomHelper\GetRandomNumberService.cs" />
+    <Compile Include="Winform\IO\Files\TestFileHelper\ChecksumSHA1Service.cs" />
+    <Compile Include="Winform\IO\ImageService.cs" />
+    <Compile Include="Winform\Net\Http\TestHttpHelperUsingService.cs" />
+    <Compile Include="Winform\NoSQL\Redis\ESP\GetESPDataService.cs" />
+    <Compile Include="Winform\NoSQL\Redis\ESP\PerformanceTestService.cs" />
+    <Compile Include="Winform\NoSQL\Redis\HashHelper\GetAllByKeyService.cs" />
+    <Compile Include="Winform\NoSQL\Redis\HashHelper\GetValueByKeyAndFieldService.cs" />
+    <Compile Include="Winform\NoSQL\Redis\ModelHelper\SetAllService.cs" />
+    <Compile Include="Winform\NoSQL\Redis\SetHelper\CheckValueService.cs" />
+    <Compile Include="Winform\NoSQL\Redis\SetHelper\GetValuesService.cs" />
+    <Compile Include="Winform\NoSQL\Redis\TestGeneral\GetValueFromDB1Service.cs" />
+    <Compile Include="Winform\NoSQL\Redis\TestGeneral\GetService.cs" />
+    <Compile Include="Winform\NoSQL\Redis\TestGeneral\LuaService.cs" />
+    <Compile Include="Winform\NoSQL\Redis\TestRedisRelationDataHelper\GetModelKeyService.cs" />
+    <Compile Include="Winform\NoSQL\Redis\TestGeneral\RemoveService.cs" />
+    <Compile Include="Winform\NoSQL\Redis\TestGeneral\SetService.cs" />
+    <Compile Include="Winform\NoSQL\Redis\TestSet\GetValueService.cs" />
+    <Compile Include="Winform\NoSQL\Redis\TestSet\SetSaveIndexesService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="WebForm\" />
+    <Folder Include="Winform\Common\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DevUtility.Com\DevUtility.Com.csproj">
+      <Project>{71a90a24-095e-4b0e-bab9-83595297f094}</Project>
+      <Name>DevUtility.Com</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DevUtility.Out\DevUtility.Out.csproj">
+      <Project>{6f52be40-0f2b-441e-8296-e27aa189104e}</Project>
+      <Name>DevUtility.Out</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DevUtility.Win\DevUtility.Win.csproj">
+      <Project>{cc5d6456-8aad-4428-a2f8-b53d9cea76d4}</Project>
+      <Name>DevUtility.Win</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DevUtility.Test.Common\DevUtility.Test.Common.csproj">
+      <Project>{d25a223d-1433-4d60-956c-d1fbf6e421a0}</Project>
+      <Name>DevUtility.Test.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DevUtility.Test.Data\DevUtility.Test.Data.csproj">
+      <Project>{02171a26-9782-4871-a42f-47853e1dcd00}</Project>
+      <Name>DevUtility.Test.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DevUtility.Test.Model\DevUtility.Test.Model.csproj">
+      <Project>{be31fcb7-1e25-43a3-b54e-7fc12b5c4c54}</Project>
+      <Name>DevUtility.Test.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DevUtility.Test.RedisData\DevUtility.Test.RedisData.csproj">
+      <Project>{1b528525-d6db-45d5-b463-b4d3119df6ec}</Project>
+      <Name>DevUtility.Test.RedisData</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

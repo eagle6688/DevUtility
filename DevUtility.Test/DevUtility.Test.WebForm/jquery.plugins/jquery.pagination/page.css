@@ -1,0 +1,41 @@
+﻿body 
+{
+    font-family: 微软雅黑;
+}
+
+p, input, select, textarea
+{
+    font-size: 16px;
+}
+
+hr
+{
+    height:1px;
+    border:none;
+    border-top:1px solid Black;
+    margin:0;
+    *margin:0 0 -14px 0;
+    float:none;
+    *float:left;
+    display:block;
+}
+
+.main
+{
+    margin-left:10px;
+}
+
+input[type="file"]
+{
+    border: 1px solid #999;
+    width: 200px;
+}
+
+input[type="text"]
+{
+    width: 240px;
+}
+
+.content{
+    margin-top: 10px;
+}

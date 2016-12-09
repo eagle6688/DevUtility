@@ -1,0 +1,15 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>angular test5 ng-pattern</title>
+    <meta charset="utf-8" />
+    <script src="angular-1.5.8/angular.min.js"></script>
+</head>
+<body ng-app="app">
+    <form name="mainForm" ng-controller="mainController" ng-submit="submit()">
+        <input name="inputValue" type="text" ng-model="value" ng-pattern="/^(13[0-9]|15[0-9]|18[0-9]|14[0-9])\d{8}$/" maxlength="11" />
+        <input type="submit" value="Submit" />
+    </form>
+    <script src="controllers/test5.controller.js"></script>
+</body>
+</html>

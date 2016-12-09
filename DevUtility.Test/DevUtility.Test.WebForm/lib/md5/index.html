@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>/lib/md5/index.html</title>
+	<meta charset="utf-8" />
+    <script src="../../bower_components/cryptojslib/rollups/md5.js"></script>
+</head>
+<body>
+    <div class="main marginTop10">
+        <h2>md5</h2>
+        <div class="marginTop10">
+            <input id="file-test" type="file" />
+            <input type="button" value="md5" onclick="md5();" />
+        </div>
+    </div>
+    <script type="text/javascript">
+        function md5() {
+            var fileReader = new FileReader();
+
+            fileReader.onloadend = function () {
+                var latin = CryptoJS.enc.Latin1.parse(this.result);
+                var value = CryptoJS.MD5(latin);
+                console.log(value.toString());
+            }
+
+            fileReader.readAsBinaryString(document.getElementById('file-test').files[0]);
+            console.log('asd');
+        };
+    </script>
+</body>
+</html>
