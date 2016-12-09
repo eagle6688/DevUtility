@@ -62,6 +62,7 @@
     <Compile Include="Base\AttributeHelper.cs" />
     <Compile Include="Base\EncodingHelper.cs" />
     <Compile Include="Base\PropertyHelper.cs" />
+    <Compile Include="Base\Reflection\AssemblyHelper.cs" />
     <Compile Include="Base\SingletonInstance.cs" />
     <Compile Include="Database\Access\BaseMySQLDataAccessHelper.cs" />
     <Compile Include="Database\Access\MSSQLDataAccessHelper.cs" />
@@ -122,6 +123,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

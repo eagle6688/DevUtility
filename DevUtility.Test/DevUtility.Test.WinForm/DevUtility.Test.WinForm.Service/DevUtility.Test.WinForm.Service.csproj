@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\Reflection\AssemblyLoadFileService.cs" />
+    <Compile Include="Base\Reflection\AssemblyLoadService.cs" />
     <Compile Include="Data\Cryptography\FileMD5EncryptService.cs" />
     <Compile Include="MultiThreads\AsyncAndAwaitService.cs" />
     <Compile Include="MultiThreads\BeginInvokeService.cs" />

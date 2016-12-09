@@ -57,6 +57,7 @@
             this.button_MultiThreads1 = new System.Windows.Forms.Button();
             this.groupBox_Research = new System.Windows.Forms.GroupBox();
             this.button_Unicode = new System.Windows.Forms.Button();
+            this.button_Reflection = new System.Windows.Forms.Button();
             this.groupBox_Application.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -200,6 +201,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button_Reflection);
             this.groupBox1.Controls.Add(this.button_Attribute);
             this.groupBox1.Controls.Add(this.button_Inherit);
             this.groupBox1.Location = new System.Drawing.Point(12, 100);
@@ -368,6 +370,16 @@
             this.button_Unicode.UseVisualStyleBackColor = true;
             this.button_Unicode.Click += new System.EventHandler(this.button_Unicode_Click);
             // 
+            // button_Reflection
+            // 
+            this.button_Reflection.Location = new System.Drawing.Point(171, 20);
+            this.button_Reflection.Name = "button_Reflection";
+            this.button_Reflection.Size = new System.Drawing.Size(82, 23);
+            this.button_Reflection.TabIndex = 11;
+            this.button_Reflection.Text = "Reflection";
+            this.button_Reflection.UseVisualStyleBackColor = true;
+            this.button_Reflection.Click += new System.EventHandler(this.button_Reflection_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -429,5 +441,6 @@
         private System.Windows.Forms.Button button_FTP;
         private System.Windows.Forms.GroupBox groupBox_Research;
         private System.Windows.Forms.Button button_Unicode;
+        private System.Windows.Forms.Button button_Reflection;
     }
 }

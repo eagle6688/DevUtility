@@ -220,5 +220,14 @@ namespace DevUtility.Test.WinForm
         }
 
         #endregion
+
+        #region button_Reflection_Click
+
+        private void button_Reflection_Click(object sender, EventArgs e)
+        {
+            OpenForm(new TestForms.Base.Form_Reflection());
+        }
+
+        #endregion
     }
 }
