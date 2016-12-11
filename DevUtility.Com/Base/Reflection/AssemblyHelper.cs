@@ -25,9 +25,26 @@ namespace DevUtility.Com.Base.Reflection
             return Assembly.Load(assemblyName);
         }
 
+        public static Assembly GetAssemblyByNameSpace(string nameSpace)
+        {
+            return Assembly.Load(nameSpace);
+        }
+
         #endregion
 
         #region Get Type
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="className">Class name with namespace</param>
+        /// <returns></returns>
+        public static Type GetType(string className)
+        {
+            string nameSpace = NamespaceHelper.GetNamespace(className);
+            Assembly assembly = GetAssemblyByNameSpace(nameSpace);
+            return assembly.GetType(className);
+        }
 
         public static Type GetType(string referenceName, string className)
         {

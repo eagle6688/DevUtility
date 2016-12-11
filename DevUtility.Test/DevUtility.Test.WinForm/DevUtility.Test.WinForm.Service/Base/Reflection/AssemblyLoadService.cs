@@ -33,6 +33,7 @@ namespace DevUtility.Test.WinForm.Service.Base.Reflection
         {
             try
             {
+                path = "DevUtility.Out";
                 string assemblyName = AssemblyHelper.GetAssemblyName(path);
                 DisplayMessage(assemblyName);
                 Assembly assembly = Assembly.Load(assemblyName);
@@ -41,8 +42,19 @@ namespace DevUtility.Test.WinForm.Service.Base.Reflection
                 Type type = assembly.GetType("DevUtility.Out.Net.FTP.FTPHelper");
                 DisplayMessage(type.Name);
 
-                var t = AssemblyHelper.GetType(path, "DevUtility.Out.Net.FTP.FTPHelper");
+                var t = AssemblyHelper.GetType("DevUtility.Out.Net.FTP.FTPHelper");
                 DisplayMessage(t.Name);
+
+                Activator.CreateInstance(t);
+
+                MethodInfo methodInfo = t.GetMethod("UploadOverMove");
+
+                foreach (var p in methodInfo.GetParameters())
+                {
+                    DisplayMessage(string.Format("Type: {0}, Name: {1}", p.GetType().FullName, p.Name));
+                }
+
+                DisplayMessage(string.Format("Return type: {0}", methodInfo.ReturnType.FullName));
             }
             catch (Exception exception)
             {

@@ -61,6 +61,7 @@
     <Compile Include="Base\ASCIIHelper.cs" />
     <Compile Include="Base\AttributeHelper.cs" />
     <Compile Include="Base\EncodingHelper.cs" />
+    <Compile Include="Base\NamespaceHelper.cs" />
     <Compile Include="Base\PropertyHelper.cs" />
     <Compile Include="Base\Reflection\AssemblyHelper.cs" />
     <Compile Include="Base\SingletonInstance.cs" />
