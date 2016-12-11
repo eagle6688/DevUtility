@@ -40,6 +40,9 @@ namespace DevUtility.Test.WinForm.Service.Base.Reflection
 
                 Type type = assembly.GetType("DevUtility.Out.Net.FTP.FTPHelper");
                 DisplayMessage(type.Name);
+
+                var t = AssemblyHelper.GetType(path, "DevUtility.Out.Net.FTP.FTPHelper");
+                DisplayMessage(t.Name);
             }
             catch (Exception exception)
             {
