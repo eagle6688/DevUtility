@@ -19,13 +19,13 @@ namespace DevUtility.Com.Base.Reflection
 
         #region Get Assembly
 
-        public static Assembly GetAssembly(string referenceName, string version = "1.0.0.0", string culture = "neutral", string publicKey_token = "null")
+        public static Assembly GetAssemblyByReference(string referenceName, string version = "1.0.0.0", string culture = "neutral", string publicKey_token = "null")
         {
             string assemblyName = GetAssemblyName(referenceName);
             return Assembly.Load(assemblyName);
         }
 
-        public static Assembly GetAssemblyByNameSpace(string nameSpace)
+        public static Assembly GetAssembly(string nameSpace)
         {
             return Assembly.Load(nameSpace);
         }
@@ -42,13 +42,13 @@ namespace DevUtility.Com.Base.Reflection
         public static Type GetType(string className)
         {
             string nameSpace = NamespaceHelper.GetNamespace(className);
-            Assembly assembly = GetAssemblyByNameSpace(nameSpace);
+            Assembly assembly = GetAssembly(nameSpace);
             return assembly.GetType(className);
         }
 
         public static Type GetType(string referenceName, string className)
         {
-            Assembly assembly = GetAssembly(referenceName);
+            Assembly assembly = GetAssemblyByReference(referenceName);
             return assembly.GetType(className);
         }
 
