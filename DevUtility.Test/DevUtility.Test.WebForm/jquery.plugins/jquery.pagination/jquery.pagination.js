@@ -1,7 +1,7 @@
 ﻿;
 (function ($, window, document, undefined) {
     var pluginName = 'pagination',
-        version = '20160912';
+        version = '20161212';
 
     var defaults = {
         totalRecords: 0,
@@ -21,6 +21,7 @@
         lastButtonClass: 'last', //Button's style of Last.
         disabledButtonClass: 'disabled', //Button's style of disabled.
         currentButtonClass: 'active', //Button's style of current clicked.
+        ulClass: 'pagination pagination-sm', //Class of ul
         onPageClick: null, //Event that on click.
         afterPageClick: null //Event that after click.
     };
@@ -92,18 +93,19 @@
         var currentPage = this.currentPage;
         var firstVisiblePage = this.firstVisiblePage;
         var lastVisiblePage = this.lastVisiblePage;
-        var $listContainer = $('<ul class="pagination pagination-sm"></ul>');
+        var $listContainer = $('<ul></ul>');
+
+        if (this.options.ulClass) {
+            $listContainer.addClass(this.options.ulClass);
+        }
 
         if (firstVisiblePage === currentPage) {
-            className = this.options.firstButtonClass + ' ' + this.options.disabledButtonClass;
-            $listContainer.append(this.generateLink(this.options.firstButtonName, className, -4, false));
-
-            className = this.options.preButtonClass + ' ' + this.options.disabledButtonClass;
-            $listContainer.append(this.generateLink(this.options.preButtonName, className, -3, false));
+            $listContainer.append(this.getFirstButton(false));
+            $listContainer.append(this.getPreButton(false));
         }
         else {
-            $listContainer.append(this.generateLink(this.options.firstButtonName, this.options.firstButtonClass, -4, true));
-            $listContainer.append(this.generateLink(this.options.preButtonName, this.options.preButtonClass, -3, true));
+            $listContainer.append(this.getFirstButton(true));
+            $listContainer.append(this.getPreButton(true));
         }
 
         for (var i = firstVisiblePage; i < lastVisiblePage + 1; i++) {
@@ -119,18 +121,71 @@
         }
 
         if (lastVisiblePage === currentPage) {
-            className = this.options.nextButtonClass + ' ' + this.options.disabledButtonClass;
-            $listContainer.append(this.generateLink(this.options.nextButtonName, className, -2, false));
-
-            className = this.options.lastButtonName + ' ' + this.options.disabledButtonClass;
-            $listContainer.append(this.generateLink(this.options.lastButtonName, className, -1, false));
+            $listContainer.append(this.getNextButton(false));
+            $listContainer.append(this.getLastButton(false));
         }
         else {
-            $listContainer.append(this.generateLink(this.options.nextButtonName, this.options.nextButtonClass, -2, true));
-            $listContainer.append(this.generateLink(this.options.lastButtonName, this.options.lastButtonName, -1, true));
+            $listContainer.append(this.getNextButton(true));
+            $listContainer.append(this.getLastButton(true));
         }
 
         return $listContainer;
+    };
+
+    Plugin.prototype.getFirstButton = function (available) {
+        if (!this.options.firstButtonClass && !this.options.firstButtonName) {
+            return null;
+        }
+
+        var className = this.options.firstButtonClass;
+
+        if (!available) {
+            className += ' ' + this.options.disabledButtonClass;
+        }
+
+        return this.generateLink(this.options.firstButtonName, className, -4, available);
+    };
+
+    Plugin.prototype.getPreButton = function (available) {
+        if (!this.options.preButtonClass && !this.options.preButtonName) {
+            return null;
+        }
+
+        var className = this.options.preButtonClass;
+
+        if (!available) {
+            className += ' ' + this.options.disabledButtonClass;
+        }
+
+        return this.generateLink(this.options.preButtonName, className, -3, available);
+    };
+
+    Plugin.prototype.getNextButton = function (available) {
+        if (!this.options.nextButtonClass && !this.options.nextButtonName) {
+            return null;
+        }
+
+        var className = this.options.nextButtonClass;
+
+        if (!available) {
+            className += ' ' + this.options.disabledButtonClass;
+        }
+
+        return this.generateLink(this.options.nextButtonName, className, -2, available);
+    };
+
+    Plugin.prototype.getLastButton = function (available) {
+        if (!this.options.lastButtonClass && !this.options.lastButtonName) {
+            return null;
+        }
+
+        var className = this.options.lastButtonName;
+
+        if (!available) {
+            className += ' ' + this.options.disabledButtonClass;
+        }
+
+        return this.generateLink(this.options.lastButtonName, className, -1, available);
     };
 
     Plugin.prototype.generateLink = function (text, className, pageNum, canClick) {
