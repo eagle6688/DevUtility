@@ -1,7 +1,7 @@
 ﻿;
 (function ($, window, document, undefined) {
     var pluginName = 'uploadHelper',
-        version = '20161207';
+        version = '20161214';
 
     var defaults = {
         file: null,
@@ -10,6 +10,7 @@
         retryTimes: 6,
         sliceSize: 1 * 1024 * 1024,
         needMD5Checksum: false,
+        formData: null,
         formNames: {
             slice: 'slice',
             sliceIndex: 'sliceIndex',
@@ -131,6 +132,11 @@
 
     Plugin.prototype.getFormData = function (slice) {
         var formData = new FormData();
+
+        if (this.options.formData) {
+            formData = this.options.formData;
+        }
+
         formData.append(this.options.formNames.slice, slice.sliceFile);
         formData.append(this.options.formNames.sliceIndex, slice.index);
         formData.append(this.options.formNames.sliceCount, this.model.sliceCount);
