@@ -1,4 +1,5 @@
-﻿using DevUtility.Out.Extensions.System.Web;
+﻿using DevUtility.Com.Model;
+using DevUtility.Out.Extensions.System.Web;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -17,12 +18,13 @@ namespace DevUtility.Test.WebForm.jquery.plugins.jquery.upload.helper
         public void ProcessRequest(HttpContext context)
         {
             context.Response.ContentType = "text/plain";
+            OperationResult result = new OperationResult();
 
-            if (context.Request.SaveAsSlice())
+            if (context.Request.SaveAsSlice(ref result))
             {
                 string objectFilePath = context.Server.MapPath(string.Format("~/App_Data/{0}", context.Request["fileName"]));
 
-                if (context.Request.CombineSlices(objectFilePath))
+                if (context.Request.CombineSlices(objectFilePath, ref result))
                 {
                     context.Response.Write("Combined!");
                     context.Response.End();

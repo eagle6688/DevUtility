@@ -1,4 +1,5 @@
 ﻿using DevUtility.Com.Base;
+using DevUtility.Com.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,7 +12,7 @@ namespace DevUtility.Com.IO.Files
     {
         #region Combine
 
-        public bool Combine(List<string> files, string path, bool deleteFiles = false)
+        public bool Combine(List<string> files, string path, bool deleteFiles, ref OperationResult result)
         {
             lock (this)
             {
@@ -21,6 +22,7 @@ namespace DevUtility.Com.IO.Files
                     {
                         if (!File.Exists(file))
                         {
+                            result.SetErrorMessage(string.Format("{0} does not exist.", file));
                             return false;
                         }
 
@@ -28,6 +30,7 @@ namespace DevUtility.Com.IO.Files
                         {
                             if (!sliceFileStream.CanRead)
                             {
+                                result.SetErrorMessage(string.Format("{0} can not read.", file));
                                 return false;
                             }
 
@@ -44,12 +47,17 @@ namespace DevUtility.Com.IO.Files
 
                         if (deleteFiles)
                         {
+                            result.SetMessage(string.Format("Delete {0} failed!", file));
                             FileHelper.Delete(file);
                         }
                     }
                 }
 
-                DirectoryHelper.DeleteByPath(files[0]);
+                if (!DirectoryHelper.DeleteByPath(files[0]))
+                {
+                    result.SetMessage(string.Format("Delete directory of {0} failed!", files[0]));
+                }
+
                 return true;
             }
         }

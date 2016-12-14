@@ -1,5 +1,5 @@
-﻿using DevUtility.Com.IO;
-using DevUtility.Com.IO.Files;
+﻿using DevUtility.Com.IO.Files;
+using DevUtility.Com.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,9 +13,9 @@ namespace DevUtility.Out.Extensions.System.Web
     {
         #region Save as Slice
 
-        public static bool SaveAsSlice(this HttpRequest httpRequest)
+        public static bool SaveAsSlice(this HttpRequest httpRequest, ref OperationResult result)
         {
-            if (!httpRequest.IsValidSliceRequest())
+            if (!httpRequest.IsValidSliceRequest(ref result))
             {
                 return false;
             }
@@ -23,7 +23,7 @@ namespace DevUtility.Out.Extensions.System.Web
             int index = int.Parse(httpRequest["sliceIndex"]);
             string fileName = httpRequest["fileName"];
 
-            if (!httpRequest.Files[0].SaveAsSlice(fileName, index))
+            if (!httpRequest.Files[0].SaveAsSlice(fileName, index, ref result))
             {
                 return false;
             }
@@ -34,11 +34,12 @@ namespace DevUtility.Out.Extensions.System.Web
             {
                 if (!httpRequest.Files[0].VerifySlice(fileName, index, sliceChecksum))
                 {
+                    result.SetErrorMessage(string.Format("MD5 value {0} for {1} is invalid."));
                     return false;
                 }
             }
 
-            if (!HttpPostedFileExt.ChangeSliceName(fileName, index))
+            if (!HttpPostedFileExt.ChangeSliceName(fileName, index, ref result))
             {
                 return false;
             }
@@ -50,27 +51,30 @@ namespace DevUtility.Out.Extensions.System.Web
 
         #region Combine Slices
 
-        public static bool CombineSlices(this HttpRequest httpRequest, string path)
+        public static bool CombineSlices(this HttpRequest httpRequest, string path, ref OperationResult result)
         {
             int count = int.Parse(httpRequest["sliceCount"]);
             var slices = HttpPostedFileExt.GetAllSlicesPath(httpRequest["fileName"], count);
 
             if (!HasSavedAllSlices(slices))
             {
+                result.SetErrorMessage("Some slices have not uploaded completely!");
                 return false;
             }
 
-            return FilesCombiner.Instance.Combine(slices, path, true);
+            FilesCombiner.Instance.Combine(slices, path, true, ref result);
+            return result.IsSucceeded;
         }
 
         #endregion
 
         #region Is Valid Slice Request
 
-        private static bool IsValidSliceRequest(this HttpRequest httpRequest)
+        private static bool IsValidSliceRequest(this HttpRequest httpRequest, ref OperationResult result)
         {
             if (httpRequest.Files == null || httpRequest.Files.Count == 0)
             {
+                result.SetErrorMessage("HttpRequest has no file!");
                 return false;
             }
 
@@ -80,6 +84,7 @@ namespace DevUtility.Out.Extensions.System.Web
 
             if (string.IsNullOrWhiteSpace(sliceIndex) || string.IsNullOrWhiteSpace(sliceCount) || string.IsNullOrWhiteSpace(fileName))
             {
+                result.SetErrorMessage("HttpRequest has parameter problems!");
                 return false;
             }
 
@@ -87,11 +92,13 @@ namespace DevUtility.Out.Extensions.System.Web
 
             if (!int.TryParse(httpRequest["sliceIndex"], out temp))
             {
+                result.SetErrorMessage("Format of sliceIndex is invalid!");
                 return false;
             }
 
             if (!int.TryParse(httpRequest["sliceCount"], out temp))
             {
+                result.SetErrorMessage("Format of sliceCount is invalid!");
                 return false;
             }
 

@@ -1,5 +1,7 @@
-﻿using DevUtility.Com.IO;
+﻿using DevUtility.Com.Application.Log;
+using DevUtility.Com.IO;
 using DevUtility.Com.IO.Files;
+using DevUtility.Com.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -32,19 +34,25 @@ namespace DevUtility.Out.Extensions.System.Web
 
         #region Save as Slice
 
-        public static bool SaveAsSlice(this HttpPostedFile file, string fileName, int index)
+        public static bool SaveAsSlice(this HttpPostedFile file, string fileName, int index, ref OperationResult result)
         {
             string path = GetSlicePathForVerify(fileName, index);
-            DirectoryHelper.CreatByPath(path);
-            file.SaveAs(path);
+
+            if (!DirectoryHelper.CreatByPath(path))
+            {
+                result.SetErrorMessage(string.Format("Create directory of {0} failed.", path));
+                return false;
+            }
 
             try
             {
-                
+                file.SaveAs(path);
                 return true;
             }
-            catch
+            catch (Exception exception)
             {
+                LogHelper.Error(exception);
+                result.SetErrorMessage(string.Format("Save {0} failed.", path));
                 return false;
             }
         }
@@ -88,23 +96,35 @@ namespace DevUtility.Out.Extensions.System.Web
 
         #region Change Slice Name
 
-        public static bool ChangeSliceName(string fileName, int index)
+        public static bool ChangeSliceName(string fileName, int index, ref OperationResult result)
         {
             string verifyPath = GetSlicePathForVerify(fileName, index);
             string path = GetSlicePath(fileName, index);
 
             if (!File.Exists(verifyPath))
             {
+                result.SetErrorMessage(string.Format("{0} does not exist.", verifyPath));
                 return false;
             }
 
             if (File.Exists(path))
             {
+                result.SetErrorMessage(string.Format("{0} has existed.", path));
                 return false;
             }
 
-            FileInfo fileInfo = new FileInfo(verifyPath);
-            fileInfo.MoveTo(path);
+            try
+            {
+                FileInfo fileInfo = new FileInfo(verifyPath);
+                fileInfo.MoveTo(path);
+            }
+            catch (Exception exception)
+            {
+                LogHelper.Error(exception);
+                result.SetErrorMessage(string.Format("Move from {0} to {1} failed.", verifyPath, path));
+                return false;
+            }
+            
             return true;
         }
 

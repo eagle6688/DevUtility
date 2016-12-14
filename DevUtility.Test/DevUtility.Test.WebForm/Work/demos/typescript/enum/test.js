@@ -6,3 +6,4 @@ var Color;
 })(Color || (Color = {}));
 ;
 var c = Color.Green;
+//# sourceMappingURL=test.js.map

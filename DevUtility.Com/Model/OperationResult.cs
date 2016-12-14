@@ -34,6 +34,15 @@ namespace DevUtility.Com.Model
 
         #endregion
 
+        #region Set Message
+
+        public void SetMessage(string message)
+        {
+            Message = message;
+        }
+
+        #endregion
+
         #region Set Error Message
 
         public void SetErrorMessage(string message)
