@@ -975,6 +975,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="research\TypeScript\ObjectLiterals\page.ts" />
     <TypeScriptCompile Include="work\demos\typescript\any\test.ts" />
     <TypeScriptCompile Include="work\demos\typescript\enum\test.ts" />
     <TypeScriptCompile Include="work\demos\typescript\greeter.ts" />
