@@ -44,6 +44,15 @@ namespace DevUtility.Out.Extensions.System.Web
                 return false;
             }
 
+            if (File.Exists(path))
+            {
+                if (!FileHelper.Delete(path))
+                {
+                    result.SetErrorMessage(string.Format("{0} has existed and can not be deleted.", path));
+                    return false;
+                }
+            }
+
             try
             {
                 file.SaveAs(path);
@@ -109,8 +118,11 @@ namespace DevUtility.Out.Extensions.System.Web
 
             if (File.Exists(path))
             {
-                result.SetErrorMessage(string.Format("{0} has existed.", path));
-                return false;
+                if (!FileHelper.Delete(path))
+                {
+                    result.SetErrorMessage(string.Format("{0} has existed and can not be deleted.", path));
+                    return false;
+                }
             }
 
             try

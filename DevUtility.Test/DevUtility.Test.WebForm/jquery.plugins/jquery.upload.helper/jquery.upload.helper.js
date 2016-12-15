@@ -137,10 +137,10 @@
             formData = this.options.formData;
         }
 
-        formData.append(this.options.formNames.slice, slice.sliceFile);
-        formData.append(this.options.formNames.sliceIndex, slice.index);
-        formData.append(this.options.formNames.sliceCount, this.model.sliceCount);
-        formData.append(this.options.formNames.fileName, this.model.name);
+        formData.set(this.options.formNames.slice, slice.sliceFile);
+        formData.set(this.options.formNames.sliceIndex, slice.index);
+        formData.set(this.options.formNames.sliceCount, this.model.sliceCount);
+        formData.set(this.options.formNames.fileName, this.model.name);
         return formData;
     };
 

@@ -103,13 +103,9 @@
     };
 
     Array.prototype.contain = function (value) {
-        var array = this;
-
-        if (array) {
-            for (var i = 0; i < array.length; i++) {
-                if (array[i] === value) {
-                    return true;
-                }
+        for (var index in this) {
+            if (this[index] == value) {
+                return true;
             }
         }
 

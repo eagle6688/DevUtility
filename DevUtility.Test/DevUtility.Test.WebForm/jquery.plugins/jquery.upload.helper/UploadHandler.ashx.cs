@@ -26,12 +26,14 @@ namespace DevUtility.Test.WebForm.jquery.plugins.jquery.upload.helper
 
                 if (context.Request.CombineSlices(objectFilePath, ref result))
                 {
-                    context.Response.Write("Combined!");
+                    context.Response.Write(JsonConvert.SerializeObject(result));
                     context.Response.End();
+                    return;
                 }
             }
 
-            context.Response.Write("Empty!");
+            context.Response.Write(JsonConvert.SerializeObject(result));
+            context.Response.End();
         }
 
         public bool IsReusable
