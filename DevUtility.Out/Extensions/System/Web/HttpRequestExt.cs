@@ -58,7 +58,7 @@ namespace DevUtility.Out.Extensions.System.Web
 
             if (!HasSavedAllSlices(slices))
             {
-                result.SetErrorMessage("Some slices have not uploaded completely!");
+                result.SetMessage("Some slices have not uploaded completely!");
                 return false;
             }
 
