@@ -1,5 +1,4 @@
-﻿using DevUtility.Com.Application;
-using DevUtility.Com.IO.Files;
+﻿using DevUtility.Com.IO.Files;
 using DevUtility.Com.Model;
 using System;
 using System.Collections.Generic;
@@ -67,7 +66,13 @@ namespace DevUtility.Out.Extensions.System.Web
                     return false;
                 }
 
-                FilesCombiner.Instance.Combine(slices, path, true, ref result);
+                FilesCombiner.Instance.Combine(slices, path, ref result);
+
+                if (result.IsSucceeded)
+                {
+                    FilesCombiner.Instance.DeleteSlices(slices, ref result);
+                }
+
                 return result.IsSucceeded;
             }
         }

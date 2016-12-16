@@ -12,7 +12,7 @@ namespace DevUtility.Com.IO.Files
     {
         #region Combine
 
-        public bool Combine(List<string> files, string path, bool deleteFiles, ref OperationResult result)
+        public bool Combine(List<string> files, string path, ref OperationResult result)
         {
             using (FileStream fileStream = new FileStream(path, FileMode.Create))
             {
@@ -42,18 +42,25 @@ namespace DevUtility.Com.IO.Files
 
                         fileStream.Flush();
                     }
-
-                    if (deleteFiles)
-                    {
-                        if (!FileHelper.Delete(file))
-                        {
-                            result.SetMessage(string.Format("Delete {0} failed!", file));
-                        }
-                    }
                 }
             }
 
             return true;
+        }
+
+        #endregion
+
+        #region Delete Slices
+
+        public void DeleteSlices(List<string> files, ref OperationResult result)
+        {
+            foreach(string file in files)
+            {
+                if (!FileHelper.Delete(file))
+                {
+                    result.SetMessage(string.Format("Delete {0} failed!", file));
+                }
+            }
         }
 
         #endregion
