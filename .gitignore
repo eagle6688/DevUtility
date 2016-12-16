@@ -240,3 +240,4 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/DevUtility.Test/DevUtility.Test.WebForm/Logs/Error/2016/12/16

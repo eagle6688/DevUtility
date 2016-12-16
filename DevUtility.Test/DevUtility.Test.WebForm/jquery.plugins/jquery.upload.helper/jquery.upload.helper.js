@@ -7,7 +7,7 @@
         file: null,
         url: '',
         uploadThreadsCount: 1,
-        retryTimes: 6,
+        retryTimes: 1,
         sliceSize: 1 * 1024 * 1024,
         needMD5Checksum: false,
         formData: null,
@@ -307,7 +307,7 @@
 
     Uploader.prototype.getResult = function (type, response) {
         this.options.slice.type = type;
-        this.options.slice.response = response;
+        this.options.slice.response = $.parseJSON(response);
         return this.options.slice;
     };
 

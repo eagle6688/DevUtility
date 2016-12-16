@@ -37,6 +37,10 @@
                 uploading: function (data) {
                     $('#div-progress').attr('aria-valuenow', data.percentage).css('width', data.percentage + '%');
                     console.log(data);
+
+                    if (!data.slice.response.IsSucceeded) {
+                        console.log(data.slice.response.Message);
+                    }
                 },
                 uploaded: function (data) {
                     console.log(data);

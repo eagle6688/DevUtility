@@ -13,7 +13,7 @@ namespace DevUtility.Out.Extensions.System.Web
     {
         #region Save as Slice
 
-        public static bool SaveAsSlice(this HttpRequest httpRequest, ref OperationResult result)
+        public static bool SaveAsSlice(this HttpRequest httpRequest, string saveDir, ref OperationResult result)
         {
             if (!httpRequest.IsValidSliceRequest(ref result))
             {
@@ -23,7 +23,7 @@ namespace DevUtility.Out.Extensions.System.Web
             int index = int.Parse(httpRequest["sliceIndex"]);
             string fileName = httpRequest["fileName"];
 
-            if (!httpRequest.Files[0].SaveAsSlice(fileName, index, ref result))
+            if (!httpRequest.Files[0].SaveAsSlice(saveDir, fileName, index, ref result))
             {
                 return false;
             }
@@ -32,14 +32,14 @@ namespace DevUtility.Out.Extensions.System.Web
 
             if (!string.IsNullOrWhiteSpace(sliceChecksum))
             {
-                if (!httpRequest.Files[0].VerifySlice(fileName, index, sliceChecksum))
+                if (!httpRequest.Files[0].VerifySlice(saveDir, fileName, index, sliceChecksum))
                 {
                     result.SetErrorMessage(string.Format("MD5 value {0} for {1} is invalid."));
                     return false;
                 }
             }
 
-            if (!HttpPostedFileExt.ChangeSliceName(fileName, index, ref result))
+            if (!HttpPostedFileExt.ChangeSliceName(saveDir, fileName, index, ref result))
             {
                 return false;
             }
@@ -51,10 +51,10 @@ namespace DevUtility.Out.Extensions.System.Web
 
         #region Combine Slices
 
-        public static bool CombineSlices(this HttpRequest httpRequest, string path, ref OperationResult result)
+        public static bool CombineSlices(this HttpRequest httpRequest, string sliceSaveDir, string path, ref OperationResult result)
         {
             int count = int.Parse(httpRequest["sliceCount"]);
-            var slices = HttpPostedFileExt.GetAllSlicesPath(httpRequest["fileName"], count);
+            var slices = HttpPostedFileExt.GetAllSlicesPath(sliceSaveDir, httpRequest["fileName"], count);
 
             if (!HasSavedAllSlices(slices))
             {
@@ -113,9 +113,7 @@ namespace DevUtility.Out.Extensions.System.Web
         {
             foreach (var slice in slices)
             {
-                FileInfo fileInfo = new FileInfo(slice);
-
-                if (!fileInfo.Exists)
+                if (!File.Exists(slice))
                 {
                     return false;
                 }

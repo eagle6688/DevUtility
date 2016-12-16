@@ -21,11 +21,27 @@ namespace DevUtility.Out.Extensions.System.Web
 
         #endregion
 
+        #region Get Slice Name
+
+        public static string GetSliceName(string fileName, int index)
+        {
+            string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileName);
+            return string.Format(SliceNameFormat, fileNameWithoutExtension, index);
+        }
+
+        public static string GetSliceNameForVerify(string fileName, int index)
+        {
+            string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileName);
+            return string.Format(SliceNameFormatForVerify, fileNameWithoutExtension, index);
+        }
+
+        #endregion
+
         #region Verify Slice
 
-        public static bool VerifySlice(this HttpPostedFile file, string fileName, int index, string checksum)
+        public static bool VerifySlice(this HttpPostedFile file, string saveDir, string fileName, int index, string checksum)
         {
-            string verifyPath = GetSlicePathForVerify(fileName, index);
+            string verifyPath = GetSlicePathForVerify(saveDir, fileName, index);
             string md5 = FileHelper.ChecksumMD5(verifyPath);
             return checksum.Equals(md5.ToLower());
         }
@@ -34,9 +50,9 @@ namespace DevUtility.Out.Extensions.System.Web
 
         #region Save as Slice
 
-        public static bool SaveAsSlice(this HttpPostedFile file, string fileName, int index, ref OperationResult result)
+        public static bool SaveAsSlice(this HttpPostedFile file, string saveDir, string fileName, int index, ref OperationResult result)
         {
-            string path = GetSlicePathForVerify(fileName, index);
+            string path = GetSlicePathForVerify(saveDir, fileName, index);
 
             if (!DirectoryHelper.CreatByPath(path))
             {
@@ -70,45 +86,39 @@ namespace DevUtility.Out.Extensions.System.Web
 
         #region Get Slice Path
 
-        public static List<string> GetAllSlicesPath(string fileName, int count)
+        public static List<string> GetAllSlicesPath(string saveDir, string fileName, int count)
         {
             List<string> slices = new List<string>();
-            string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileName);
-            string directory = Path.Combine(DirectoryHelper.TempDirectory, fileNameWithoutExtension);
 
             for (int index = 0; index < count; index++)
             {
-                string sliceName = string.Format(SliceNameFormat, fileNameWithoutExtension, index);
-                slices.Add(Path.Combine(directory, sliceName));
+                string sliceName = GetSliceName(fileName, index);
+                slices.Add(Path.Combine(saveDir, sliceName));
             }
 
             return slices;
         }
 
-        public static string GetSlicePath(string fileName, int index)
+        public static string GetSlicePath(string saveDir, string fileName, int index)
         {
-            string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileName);
-            string directory = Path.Combine(DirectoryHelper.TempDirectory, fileNameWithoutExtension);
-            string sliceName = string.Format(SliceNameFormat, fileNameWithoutExtension, index);
-            return Path.Combine(directory, sliceName);
+            string sliceName = GetSliceName(fileName, index);
+            return Path.Combine(saveDir, sliceName);
         }
 
-        public static string GetSlicePathForVerify(string fileName, int index)
+        public static string GetSlicePathForVerify(string saveDir, string fileName, int index)
         {
-            string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileName);
-            string directory = Path.Combine(DirectoryHelper.TempDirectory, fileNameWithoutExtension);
-            string sliceName = string.Format(SliceNameFormatForVerify, fileNameWithoutExtension, index);
-            return Path.Combine(directory, sliceName);
+            string sliceName = GetSliceNameForVerify(fileName, index);
+            return Path.Combine(saveDir, sliceName);
         }
 
         #endregion
 
         #region Change Slice Name
 
-        public static bool ChangeSliceName(string fileName, int index, ref OperationResult result)
+        public static bool ChangeSliceName(string saveDir, string fileName, int index, ref OperationResult result)
         {
-            string verifyPath = GetSlicePathForVerify(fileName, index);
-            string path = GetSlicePath(fileName, index);
+            string verifyPath = GetSlicePathForVerify(saveDir, fileName, index);
+            string path = GetSlicePath(saveDir, fileName, index);
 
             if (!File.Exists(verifyPath))
             {
@@ -136,7 +146,7 @@ namespace DevUtility.Out.Extensions.System.Web
                 result.SetErrorMessage(string.Format("Move from {0} to {1} failed.", verifyPath, path));
                 return false;
             }
-            
+
             return true;
         }
 

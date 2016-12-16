@@ -19,12 +19,13 @@ namespace DevUtility.Test.WebForm.jquery.plugins.jquery.upload.helper
         {
             context.Response.ContentType = "text/plain";
             OperationResult result = new OperationResult();
+            string sliceSaveDir = context.Server.MapPath("~/App_Data/");
 
-            if (context.Request.SaveAsSlice(ref result))
+            if (context.Request.SaveAsSlice(sliceSaveDir, ref result))
             {
                 string objectFilePath = context.Server.MapPath(string.Format("~/App_Data/{0}", context.Request["fileName"]));
 
-                if (context.Request.CombineSlices(objectFilePath, ref result))
+                if (context.Request.CombineSlices(sliceSaveDir, objectFilePath, ref result))
                 {
                     context.Response.Write(JsonConvert.SerializeObject(result));
                     context.Response.End();

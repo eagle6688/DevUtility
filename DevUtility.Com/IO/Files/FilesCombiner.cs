@@ -53,11 +53,6 @@ namespace DevUtility.Com.IO.Files
                     }
                 }
 
-                if (!DirectoryHelper.DeleteByPath(files[0]))
-                {
-                    result.SetMessage(string.Format("Delete directory of {0} failed!", files[0]));
-                }
-
                 return true;
             }
         }
