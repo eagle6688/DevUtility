@@ -7,7 +7,6 @@
         file: null,
         url: '',
         uploadThreadsCount: 1,
-        retryTimes: 1,
         sliceSize: 1 * 1024 * 1024,
         needMD5Checksum: false,
         formData: null,
@@ -61,7 +60,6 @@
             this.slicesQueue.push({
                 isSuccessed: false,
                 response: null,
-                retryTimes: 0,
                 index: i,
                 size: end - start,
                 start: start,
@@ -81,7 +79,7 @@
     };
 
     Plugin.prototype.reUploadFailedSlices = function () {
-        for (var i in this.failedSlicesQueue) {
+        for (var i = 0; i < this.failedSlicesQueue.length; i++) {
             this.slicesQueue.push(this.failedSlicesQueue[i]);
         }
 
@@ -190,29 +188,11 @@
 
     Plugin.prototype.failed = function (slice) {
         this.model.slice = slice;
+        this.failedSlicesQueue.push(slice);
 
-        if (this.pushSlicesQueue(slice)) {
-            this.upload();
+        if (this.options.failed) {
+            this.options.failed(this.model);
         }
-        else {
-            if (this.options.failed) {
-                this.options.failed(this.model);
-            }
-        }
-    };
-
-    Plugin.prototype.pushSlicesQueue = function (slice) {
-        if (slice.retryTimes < this.options.retryTimes) {
-            slice.retryTimes += 1;
-            this.slicesQueue.push(slice);
-            return true;
-        }
-        else {
-            slice.retryTimes = 0;
-            this.failedSlicesQueue.push(slice);
-        }
-
-        return false;
     };
 
     function Uploader(options) {
@@ -280,13 +260,15 @@
     };
 
     Uploader.prototype.loadend = function () {
-        var result = this.getResult(this.resultTypes.server, this.xhr.responseText);
+        var result;
 
         if ((this.xhr.status >= 200 && this.xhr.status < 300) || this.xhr.status === 304) {
+            result = this.getResult(this.resultTypes.server, this.xhr.responseText);
             result.isSuccessed = true;
             this.uploaded(result);
         }
         else {
+            result = this.getResult(this.resultTypes.error, this.xhr.responseText);
             this.failed(result);
         }
 
@@ -307,7 +289,14 @@
 
     Uploader.prototype.getResult = function (type, response) {
         this.options.slice.type = type;
-        this.options.slice.response = $.parseJSON(response);
+
+        if (this.resultTypes.server === type) {
+            this.options.slice.response = $.parseJSON(response);
+        }
+        else {
+            this.options.slice.response = response;
+        }
+
         return this.options.slice;
     };
 
