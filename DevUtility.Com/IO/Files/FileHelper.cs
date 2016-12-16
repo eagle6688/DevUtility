@@ -134,5 +134,15 @@ namespace DevUtility.Com.IO.Files
         }
 
         #endregion
+
+        #region Get Locker
+
+        public static string GetLocker(string path)
+        {
+            string fileName = Path.GetFileName(path);
+            return LockerHelper.Instance.GetLocker(fileName);
+        }
+
+        #endregion
     }
 }

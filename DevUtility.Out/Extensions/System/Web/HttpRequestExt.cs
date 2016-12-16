@@ -1,4 +1,5 @@
-﻿using DevUtility.Com.IO.Files;
+﻿using DevUtility.Com.Application;
+using DevUtility.Com.IO.Files;
 using DevUtility.Com.Model;
 using System;
 using System.Collections.Generic;
@@ -54,16 +55,21 @@ namespace DevUtility.Out.Extensions.System.Web
         public static bool CombineSlices(this HttpRequest httpRequest, string sliceSaveDir, string path, ref OperationResult result)
         {
             int count = int.Parse(httpRequest["sliceCount"]);
-            var slices = HttpPostedFileExt.GetAllSlicesPath(sliceSaveDir, httpRequest["fileName"], count);
+            string fileName = httpRequest["fileName"];
+            string locker = FileHelper.GetLocker(fileName);
+            var slices = HttpPostedFileExt.GetAllSlicesPath(sliceSaveDir, fileName, count);
 
-            if (!HasSavedAllSlices(slices))
+            lock (locker)
             {
-                result.SetMessage("Some slices have not uploaded completely!");
-                return false;
-            }
+                if (!HasSavedAllSlices(slices))
+                {
+                    result.SetMessage("Some slices have not uploaded completely!");
+                    return false;
+                }
 
-            FilesCombiner.Instance.Combine(slices, path, true, ref result);
-            return result.IsSucceeded;
+                FilesCombiner.Instance.Combine(slices, path, true, ref result);
+                return result.IsSucceeded;
+            }
         }
 
         #endregion

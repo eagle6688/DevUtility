@@ -14,47 +14,46 @@ namespace DevUtility.Com.IO.Files
 
         public bool Combine(List<string> files, string path, bool deleteFiles, ref OperationResult result)
         {
-            lock (this)
+            using (FileStream fileStream = new FileStream(path, FileMode.Create))
             {
-                using (FileStream fileStream = new FileStream(path, FileMode.Create))
+                foreach (var file in files)
                 {
-                    foreach (var file in files)
+                    if (!File.Exists(file))
                     {
-                        if (!File.Exists(file))
+                        result.SetErrorMessage(string.Format("{0} does not exist.", file));
+                        return false;
+                    }
+
+                    using (FileStream sliceFileStream = new FileStream(file, FileMode.Open, FileAccess.Read))
+                    {
+                        if (!sliceFileStream.CanRead)
                         {
-                            result.SetErrorMessage(string.Format("{0} does not exist.", file));
+                            result.SetErrorMessage(string.Format("{0} can not read.", file));
                             return false;
                         }
 
-                        using (FileStream sliceFileStream = new FileStream(file, FileMode.Open, FileAccess.Read))
+                        int readBytesCount = 0;
+                        byte[] bytes = new byte[2048];
+
+                        while ((readBytesCount = sliceFileStream.Read(bytes, 0, bytes.Length)) > 0)
                         {
-                            if (!sliceFileStream.CanRead)
-                            {
-                                result.SetErrorMessage(string.Format("{0} can not read.", file));
-                                return false;
-                            }
-
-                            int readBytesCount = 0;
-                            byte[] bytes = new byte[2048];
-
-                            while ((readBytesCount = sliceFileStream.Read(bytes, 0, bytes.Length)) > 0)
-                            {
-                                fileStream.Write(bytes, 0, readBytesCount);
-                            }
-
-                            fileStream.Flush();
+                            fileStream.Write(bytes, 0, readBytesCount);
                         }
 
-                        if (deleteFiles)
+                        fileStream.Flush();
+                    }
+
+                    if (deleteFiles)
+                    {
+                        if (!FileHelper.Delete(file))
                         {
                             result.SetMessage(string.Format("Delete {0} failed!", file));
-                            FileHelper.Delete(file);
                         }
                     }
                 }
-
-                return true;
             }
+
+            return true;
         }
 
         #endregion
