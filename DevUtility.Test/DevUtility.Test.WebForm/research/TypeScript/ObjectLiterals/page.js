@@ -31,3 +31,4 @@ common.options = {
     lastButtonClass: '',
     ulClass: 'pagination'
 };
+//# sourceMappingURL=page.js.map

@@ -16,8 +16,15 @@ namespace DevUtility.Com.Application.Cache
 
         #region Set
 
-        public static void Set(string key, object value, int minutes)
+        public static void Set(string key, object value, int minutes, bool isAbsoluteExpiration = true)
         {
+            if (isAbsoluteExpiration)
+            {
+                DateTimeOffset dateTimeOffset = DateTimeOffset.Now.AddMinutes(minutes);
+                Set(key, value, null, dateTimeOffset, null);
+                return;
+            }
+
             TimeSpan timeSpan = new TimeSpan(0, minutes, 0);
             Set(key, value, timeSpan);
         }
