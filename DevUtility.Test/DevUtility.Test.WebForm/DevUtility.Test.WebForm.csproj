@@ -77,6 +77,7 @@
     <Content Include="ownLib\webSocketHelper\index.html" />
     <Content Include="ownLib\webSocketHelper\webSocketHelper.js" />
     <Content Include="research\domain-upgrade\index.html" />
+    <Content Include="research\ie\formDataIE11.html" />
     <Content Include="research\TypeScript\jquery-plugins\index.html" />
     <Content Include="work\demos\angular\angular-1.5.8\angular-animate.js" />
     <Content Include="work\demos\angular\angular-1.5.8\angular-animate.min.js" />
