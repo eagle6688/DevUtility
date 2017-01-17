@@ -13,8 +13,6 @@ namespace DevUtility.Test.WinForm.Service.Data.MemoryFootprint
 
         int count = 0;
 
-        static List<Product> list = new List<Product>();
-
         #endregion
 
         #region Constructor
@@ -30,6 +28,8 @@ namespace DevUtility.Test.WinForm.Service.Data.MemoryFootprint
 
         public override void Start()
         {
+            var list = new List<Product>();
+
             for (int i = 0; i < count; i++)
             {
                 list.Add(new Product()
