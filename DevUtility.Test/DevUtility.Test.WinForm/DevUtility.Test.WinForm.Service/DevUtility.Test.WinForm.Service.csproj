@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Base\Reflection\AssemblyLoadFileService.cs" />
     <Compile Include="Base\Reflection\AssemblyLoadService.cs" />
+    <Compile Include="Base\Reflection\LockerHelperService.cs" />
     <Compile Include="Data\Cryptography\FileMD5EncryptService.cs" />
     <Compile Include="Data\MemoryFootprint\ProductsService.cs" />
     <Compile Include="MultiThreads\AsyncAndAwaitService.cs" />

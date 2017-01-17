@@ -39,5 +39,14 @@ namespace DevUtility.Test.WinForm.TestForms.Base
         }
 
         #endregion
+
+        #region button_LockerHelper_Click
+
+        private void button_LockerHelper_Click(object sender, EventArgs e)
+        {
+            ExecuteService(new Service.Base.Reflection.LockerHelperService(), button_LockerHelper);
+        }
+
+        #endregion
     }
 }
