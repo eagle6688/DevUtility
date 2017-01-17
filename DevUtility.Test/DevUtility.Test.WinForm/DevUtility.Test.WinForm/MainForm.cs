@@ -229,5 +229,14 @@ namespace DevUtility.Test.WinForm
         }
 
         #endregion
+
+        #region button_MemoryFootprint_Click
+
+        private void button_MemoryFootprint_Click(object sender, EventArgs e)
+        {
+            OpenForm(new TestForms.Data.Form_MemoryFootprint());
+        }
+
+        #endregion
     }
 }

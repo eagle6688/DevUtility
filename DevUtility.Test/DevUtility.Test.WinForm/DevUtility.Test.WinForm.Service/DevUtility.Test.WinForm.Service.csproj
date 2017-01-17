@@ -44,6 +44,7 @@
     <Compile Include="Base\Reflection\AssemblyLoadFileService.cs" />
     <Compile Include="Base\Reflection\AssemblyLoadService.cs" />
     <Compile Include="Data\Cryptography\FileMD5EncryptService.cs" />
+    <Compile Include="Data\MemoryFootprint\ProductsService.cs" />
     <Compile Include="MultiThreads\AsyncAndAwaitService.cs" />
     <Compile Include="MultiThreads\BeginInvokeService.cs" />
     <Compile Include="Net\FTP\UploadService.cs" />
