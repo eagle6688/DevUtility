@@ -238,5 +238,14 @@ namespace DevUtility.Test.WinForm
         }
 
         #endregion
+
+        #region button_DBHelper_Click
+
+        private void button_DBHelper_Click(object sender, EventArgs e)
+        {
+            OpenForm(new TestForms.Database.Form_DBHelper());
+        }
+
+        #endregion
     }
 }

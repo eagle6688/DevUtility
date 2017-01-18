@@ -1,12 +1,9 @@
 ﻿using DevUtility.Com.Application.Log;
-using DevUtility.Com.Model;
+using DevUtility.Com.Data;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
 
 namespace DevUtility.Com.Database.DBHelper
 {
@@ -99,6 +96,13 @@ namespace DevUtility.Com.Database.DBHelper
         {
             List<SqlBulkCopyColumnMapping> mappingList = GetMappingList(dt);
             return Excute(dt, mappingList);
+        }
+
+        public bool Insert<TModel>(string tableName, List<TModel> list, List<string> excludeProperties) where TModel : class, new()
+        {
+            DataTable dt = ListHelper.ConvertToDataTable<TModel>(list, excludeProperties);
+            dt.TableName = tableName;
+            return Insert(dt);
         }
 
         public bool Insert(DataTable dt, List<string> sourceColumns, List<string> destinationColumns)

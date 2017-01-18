@@ -215,7 +215,7 @@ namespace DevUtility.Com.Base
         {
             List<string> list = new List<string>();
             List<PropertyInfo> properties = GetProperties<TModel>(excludeProperties);
-
+            
             foreach (var property in properties)
             {
                 list.Add(property.Name);

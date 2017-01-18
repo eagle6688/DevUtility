@@ -85,6 +85,12 @@
     <Compile Include="TestForms\Base\Form_Reflection.Designer.cs">
       <DependentUpon>Form_Reflection.cs</DependentUpon>
     </Compile>
+    <Compile Include="TestForms\Database\Form_DBHelper.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestForms\Database\Form_DBHelper.Designer.cs">
+      <DependentUpon>Form_DBHelper.cs</DependentUpon>
+    </Compile>
     <Compile Include="TestForms\Data\Form_Concurrency.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -211,6 +217,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TestForms\Base\Form_Reflection.resx">
       <DependentUpon>Form_Reflection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestForms\Database\Form_DBHelper.resx">
+      <DependentUpon>Form_DBHelper.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TestForms\Data\Form_Concurrency.resx">
       <DependentUpon>Form_Concurrency.cs</DependentUpon>

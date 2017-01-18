@@ -20,20 +20,20 @@ namespace DevUtility.Com.Data
                 return table;
             }
 
-            List<string> columns = PropertyHelper.GetPropertyNames<TModel>(excludeProperties);
+            var properties = PropertyHelper.GetProperties<TModel>(excludeProperties);
 
-            foreach (string column in columns)
+            foreach (var property in properties)
             {
-                table.Columns.Add(column);
+                table.Columns.Add(property.Name, property.PropertyType);
             }
 
             foreach (TModel model in list)
             {
                 DataRow row = table.NewRow();
 
-                foreach (string column in columns)
+                foreach (var property in properties)
                 {
-                    row[column] = EntityHelper.GetPropertyValue<TModel>(model, column);
+                    row[property.Name] = EntityHelper.GetPropertyValue<TModel>(model, property.Name);
                 }
 
                 table.Rows.Add(row);
