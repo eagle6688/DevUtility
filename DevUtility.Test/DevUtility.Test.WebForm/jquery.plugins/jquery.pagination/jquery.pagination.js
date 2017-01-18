@@ -1,7 +1,7 @@
 ﻿;
 (function ($, window, document, undefined) {
     var pluginName = 'pagination',
-        version = '20161212';
+        version = '20170118';
 
     var defaults = {
         totalRecords: 0,
@@ -22,6 +22,7 @@
         disabledButtonClass: 'disabled', //Button's style of disabled.
         currentButtonClass: 'active', //Button's style of current clicked.
         ulClass: 'pagination pagination-sm', //Class of ul
+        isReturnedTop: true,
         onPageClick: null, //Event that on click.
         afterPageClick: null //Event that after click.
     };
@@ -212,7 +213,9 @@
                     afterPageClick(pageIndex);
                 }
 
-                document.documentElement.scrollTop = document.body.scrollTop = 0;
+                if (that.options.isReturnedTop) {
+                    document.documentElement.scrollTop = document.body.scrollTop = 0;
+                }
             });
         }
 
