@@ -23,6 +23,7 @@
         currentButtonClass: 'active', //Button's style of current clicked.
         ulClass: 'pagination pagination-sm', //Class of ul
         isReturnedTop: true,
+        positionID: '',
         onPageClick: null, //Event that on click.
         afterPageClick: null //Event that after click.
     };
@@ -215,6 +216,10 @@
 
                 if (that.options.isReturnedTop) {
                     document.documentElement.scrollTop = document.body.scrollTop = 0;
+                }
+
+                if (that.options.positionID) {
+                    document.getElementById(that.options.positionID).scrollIntoView();
                 }
             });
         }
