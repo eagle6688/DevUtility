@@ -42,7 +42,9 @@
             this.groupBox_Application = new System.Windows.Forms.GroupBox();
             this.label_Title = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button_Reflection = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button_MemoryFootprint = new System.Windows.Forms.Button();
             this.button_EntityHelper = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.button_SystemExt = new System.Windows.Forms.Button();
@@ -57,7 +59,7 @@
             this.button_MultiThreads1 = new System.Windows.Forms.Button();
             this.groupBox_Research = new System.Windows.Forms.GroupBox();
             this.button_Unicode = new System.Windows.Forms.Button();
-            this.button_Reflection = new System.Windows.Forms.Button();
+            this.button_DBHelper = new System.Windows.Forms.Button();
             this.groupBox_Application.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -211,8 +213,20 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Base";
             // 
+            // button_Reflection
+            // 
+            this.button_Reflection.Location = new System.Drawing.Point(171, 20);
+            this.button_Reflection.Name = "button_Reflection";
+            this.button_Reflection.Size = new System.Drawing.Size(82, 23);
+            this.button_Reflection.TabIndex = 11;
+            this.button_Reflection.Text = "Reflection";
+            this.button_Reflection.UseVisualStyleBackColor = true;
+            this.button_Reflection.Click += new System.EventHandler(this.button_Reflection_Click);
+            // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.button_DBHelper);
+            this.groupBox2.Controls.Add(this.button_MemoryFootprint);
             this.groupBox2.Controls.Add(this.button_EntityHelper);
             this.groupBox2.Controls.Add(this.button_Concurrency);
             this.groupBox2.Controls.Add(this.button_DataTable);
@@ -224,6 +238,16 @@
             this.groupBox2.TabIndex = 14;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Data";
+            // 
+            // button_MemoryFootprint
+            // 
+            this.button_MemoryFootprint.Location = new System.Drawing.Point(428, 20);
+            this.button_MemoryFootprint.Name = "button_MemoryFootprint";
+            this.button_MemoryFootprint.Size = new System.Drawing.Size(119, 23);
+            this.button_MemoryFootprint.TabIndex = 11;
+            this.button_MemoryFootprint.Text = "Memory Footprint";
+            this.button_MemoryFootprint.UseVisualStyleBackColor = true;
+            this.button_MemoryFootprint.Click += new System.EventHandler(this.button_MemoryFootprint_Click);
             // 
             // button_EntityHelper
             // 
@@ -370,15 +394,15 @@
             this.button_Unicode.UseVisualStyleBackColor = true;
             this.button_Unicode.Click += new System.EventHandler(this.button_Unicode_Click);
             // 
-            // button_Reflection
+            // button_DBHelper
             // 
-            this.button_Reflection.Location = new System.Drawing.Point(171, 20);
-            this.button_Reflection.Name = "button_Reflection";
-            this.button_Reflection.Size = new System.Drawing.Size(82, 23);
-            this.button_Reflection.TabIndex = 11;
-            this.button_Reflection.Text = "Reflection";
-            this.button_Reflection.UseVisualStyleBackColor = true;
-            this.button_Reflection.Click += new System.EventHandler(this.button_Reflection_Click);
+            this.button_DBHelper.Location = new System.Drawing.Point(553, 20);
+            this.button_DBHelper.Name = "button_DBHelper";
+            this.button_DBHelper.Size = new System.Drawing.Size(71, 23);
+            this.button_DBHelper.TabIndex = 12;
+            this.button_DBHelper.Text = "DBHelper";
+            this.button_DBHelper.UseVisualStyleBackColor = true;
+            this.button_DBHelper.Click += new System.EventHandler(this.button_DBHelper_Click);
             // 
             // MainForm
             // 
@@ -442,5 +466,7 @@
         private System.Windows.Forms.GroupBox groupBox_Research;
         private System.Windows.Forms.Button button_Unicode;
         private System.Windows.Forms.Button button_Reflection;
+        private System.Windows.Forms.Button button_MemoryFootprint;
+        private System.Windows.Forms.Button button_DBHelper;
     }
 }

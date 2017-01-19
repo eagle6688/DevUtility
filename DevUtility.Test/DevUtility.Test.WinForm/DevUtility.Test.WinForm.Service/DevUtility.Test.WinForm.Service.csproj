@@ -43,7 +43,10 @@
   <ItemGroup>
     <Compile Include="Base\Reflection\AssemblyLoadFileService.cs" />
     <Compile Include="Base\Reflection\AssemblyLoadService.cs" />
+    <Compile Include="Base\Reflection\LockerHelperService.cs" />
+    <Compile Include="Database\DBHelper\BigDataHelper\InsertListService.cs" />
     <Compile Include="Data\Cryptography\FileMD5EncryptService.cs" />
+    <Compile Include="Data\MemoryFootprint\ProductsService.cs" />
     <Compile Include="MultiThreads\AsyncAndAwaitService.cs" />
     <Compile Include="MultiThreads\BeginInvokeService.cs" />
     <Compile Include="Net\FTP\UploadService.cs" />
@@ -62,6 +65,10 @@
     <ProjectReference Include="..\..\..\DevUtility.Out\DevUtility.Out.csproj">
       <Project>{6F52BE40-0F2B-441E-8296-E27AA189104E}</Project>
       <Name>DevUtility.Out</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DevUtility.Test.Common\DevUtility.Test.Common.csproj">
+      <Project>{d25a223d-1433-4d60-956c-d1fbf6e421a0}</Project>
+      <Name>DevUtility.Test.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\DevUtility.Test.Model\DevUtility.Test.Model.csproj">
       <Project>{BE31FCB7-1E25-43A3-B54E-7FC12B5C4C54}</Project>
