@@ -28,7 +28,7 @@
             uploadHelper = $.uploadHelper({
                 file: $('#file-test')[0].files[0],
                 url: 'UploadHandler.ashx',
-                uploadThreadsCount: 3,
+                uploadThreadsCount: 1,
                 needMD5Checksum: true,
                 beforeUpload: function (data) {
                     $('#div-progress').attr('aria-valuenow', 0).css('width', '0');

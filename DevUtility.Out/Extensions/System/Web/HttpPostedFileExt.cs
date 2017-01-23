@@ -43,7 +43,7 @@ namespace DevUtility.Out.Extensions.System.Web
         {
             string verifyPath = GetSlicePathForVerify(saveDir, fileName, index);
             string md5 = FileHelper.ChecksumMD5(verifyPath);
-            return checksum.Equals(md5.ToLower());
+            return checksum.ToLower().Equals(md5.ToLower());
         }
 
         #endregion

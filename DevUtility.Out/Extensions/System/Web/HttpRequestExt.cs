@@ -34,7 +34,7 @@ namespace DevUtility.Out.Extensions.System.Web
             {
                 if (!httpRequest.Files[0].VerifySlice(saveDir, fileName, index, sliceChecksum))
                 {
-                    result.SetErrorMessage(string.Format("MD5 value {0} for {1} is invalid."));
+                    result.SetErrorMessage(string.Format("MD5 value {0} for {1} is invalid.", sliceChecksum, fileName));
                     return false;
                 }
             }
