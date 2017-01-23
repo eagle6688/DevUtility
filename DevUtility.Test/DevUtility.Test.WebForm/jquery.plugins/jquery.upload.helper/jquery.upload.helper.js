@@ -1,7 +1,7 @@
 ﻿;
 (function ($, window, document, undefined) {
     var pluginName = 'uploadHelper',
-        version = '20161214';
+        version = '20170123';
 
     var defaults = {
         file: null,
@@ -100,7 +100,7 @@
         if (this.options.needMD5Checksum) {
             checksumMD5(slice.sliceFile, function (md5) {
                 if (md5) {
-                    formData.append(self.options.formNames.sliceChecksum, md5);
+                    formData.set(self.options.formNames.sliceChecksum, md5);
                 }
 
                 self.execUploader(slice, formData);
