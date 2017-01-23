@@ -302,7 +302,7 @@
 
     var checksumMD5 = function (file, callback) {
         if (!window.FileReader) {
-            console.error('Your browser does not support FileReader!');
+            alert('Your browser does not support FileReader, please change your browser!');
             callback();
             return;
         }
