@@ -72,5 +72,24 @@ namespace DevUtility.Test.WinForm.TestForms.MultiThreads
         }
 
         #endregion
+
+        #region button_Locker_Click
+
+        private void button_Locker_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                BaseAppService service = new Service.MultiThreads.LockerService(i);
+                service.AppTextBoxService = textBoxService;
+
+                System.Threading.ThreadStart threadStart = new System.Threading.ThreadStart(service.Start);
+                System.Threading.Thread thread = new System.Threading.Thread(threadStart);
+                thread.Start();
+            }
+
+            textBoxService.SafeAppend("Over!");
+        }
+
+        #endregion
     }
 }

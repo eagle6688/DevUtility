@@ -49,6 +49,7 @@
     <Compile Include="Data\MemoryFootprint\ProductsService.cs" />
     <Compile Include="MultiThreads\AsyncAndAwaitService.cs" />
     <Compile Include="MultiThreads\BeginInvokeService.cs" />
+    <Compile Include="MultiThreads\LockerService.cs" />
     <Compile Include="Net\FTP\UploadService.cs" />
     <Compile Include="NoSQL\Redis\Hash\HashHelper\GetHashModelService.cs" />
     <Compile Include="NoSQL\Redis\Hash\HashHelper\GetHashValuesByFieldsService.cs" />

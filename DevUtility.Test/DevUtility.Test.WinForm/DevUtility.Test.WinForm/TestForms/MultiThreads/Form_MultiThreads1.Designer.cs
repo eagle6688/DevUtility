@@ -30,9 +30,10 @@
         {
             this.label_Title = new System.Windows.Forms.Label();
             this.groupBox_Functions = new System.Windows.Forms.GroupBox();
+            this.button_AsyncAndAwait = new System.Windows.Forms.Button();
             this.button_BeginInvoke = new System.Windows.Forms.Button();
             this.textBox_Message = new System.Windows.Forms.TextBox();
-            this.button_AsyncAndAwait = new System.Windows.Forms.Button();
+            this.button_Locker = new System.Windows.Forms.Button();
             this.groupBox_Functions.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,6 +50,7 @@
             // 
             // groupBox_Functions
             // 
+            this.groupBox_Functions.Controls.Add(this.button_Locker);
             this.groupBox_Functions.Controls.Add(this.button_AsyncAndAwait);
             this.groupBox_Functions.Controls.Add(this.button_BeginInvoke);
             this.groupBox_Functions.Location = new System.Drawing.Point(12, 34);
@@ -57,6 +59,16 @@
             this.groupBox_Functions.TabIndex = 31;
             this.groupBox_Functions.TabStop = false;
             this.groupBox_Functions.Text = "Functions";
+            // 
+            // button_AsyncAndAwait
+            // 
+            this.button_AsyncAndAwait.Location = new System.Drawing.Point(103, 21);
+            this.button_AsyncAndAwait.Name = "button_AsyncAndAwait";
+            this.button_AsyncAndAwait.Size = new System.Drawing.Size(117, 23);
+            this.button_AsyncAndAwait.TabIndex = 1;
+            this.button_AsyncAndAwait.Text = "Async And Await";
+            this.button_AsyncAndAwait.UseVisualStyleBackColor = true;
+            this.button_AsyncAndAwait.Click += new System.EventHandler(this.button_AsyncAndAwait_Click);
             // 
             // button_BeginInvoke
             // 
@@ -77,15 +89,15 @@
             this.textBox_Message.Size = new System.Drawing.Size(760, 319);
             this.textBox_Message.TabIndex = 32;
             // 
-            // button_AsyncAndAwait
+            // button_Locker
             // 
-            this.button_AsyncAndAwait.Location = new System.Drawing.Point(103, 21);
-            this.button_AsyncAndAwait.Name = "button_AsyncAndAwait";
-            this.button_AsyncAndAwait.Size = new System.Drawing.Size(117, 23);
-            this.button_AsyncAndAwait.TabIndex = 1;
-            this.button_AsyncAndAwait.Text = "Async And Await";
-            this.button_AsyncAndAwait.UseVisualStyleBackColor = true;
-            this.button_AsyncAndAwait.Click += new System.EventHandler(this.button_AsyncAndAwait_Click);
+            this.button_Locker.Location = new System.Drawing.Point(226, 21);
+            this.button_Locker.Name = "button_Locker";
+            this.button_Locker.Size = new System.Drawing.Size(55, 23);
+            this.button_Locker.TabIndex = 2;
+            this.button_Locker.Text = "Locker";
+            this.button_Locker.UseVisualStyleBackColor = true;
+            this.button_Locker.Click += new System.EventHandler(this.button_Locker_Click);
             // 
             // Form_MultiThreads1
             // 
@@ -110,5 +122,6 @@
         private System.Windows.Forms.TextBox textBox_Message;
         private System.Windows.Forms.Button button_BeginInvoke;
         private System.Windows.Forms.Button button_AsyncAndAwait;
+        private System.Windows.Forms.Button button_Locker;
     }
 }
