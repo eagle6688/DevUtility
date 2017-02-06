@@ -202,6 +202,10 @@ namespace DevUtility.Com.Data
                         propertyInfo.SetValue(model, Convert.ToDecimal(value), null);
                         break;
 
+                    case "System.Guid":
+                        propertyInfo.SetValue(model, Guid.Parse(value.ToString()), null);
+                        break;
+
                     default:
                         propertyInfo.SetValue(model, value, null);
                         break;
