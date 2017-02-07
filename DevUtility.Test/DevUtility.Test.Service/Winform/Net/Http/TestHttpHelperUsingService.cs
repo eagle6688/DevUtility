@@ -18,7 +18,7 @@ namespace DevUtility.Test.Service.Winform.Net.Http
 
         public override void Start()
         {
-            HttpHelper.GetHttps(url);
+            HttpHelper.GetHttpsText(url);
         }
     }
 }

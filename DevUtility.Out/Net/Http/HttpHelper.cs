@@ -1,8 +1,4 @@
-﻿using DevUtility.Com.Application.Log;
-using DevUtility.Com.Extension.SystemExt;
-using DevUtility.Com.Model;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
 using System.Net;
 using System.Net.Security;
@@ -13,91 +9,113 @@ namespace DevUtility.Out.Net.Http
 {
     public class HttpHelper
     {
+        public const int DefaultRequestTimeout = 100000;
+
         #region Get
 
-        public static string Get(string url)
+        public static string Get(string url, string contentType, int timeout)
         {
-            return Get(url, "application/x-www-form-urlencoded");
+            HttpWebRequest request = CreateHttpRequest(url, "GET", contentType, timeout);
+            return GetResponseValue(request);
         }
 
         public static string Get(string url, string contentType)
         {
-            return Get(url, contentType, 100000);
+            return Get(url, contentType, DefaultRequestTimeout);
         }
 
-        public static string Get(string url, string contentType, int timeout)
+        public static string GetText(string url)
         {
-            HttpWebRequest request = CreateBaseHttpRequest(url, "GET", contentType, timeout);
+            return Get(url, "text/html");
+        }
+
+        public static string GetHttps(string url, string contentType, int timeout)
+        {
+            HttpWebRequest request = CreateHttpsRequest(url, "GET", contentType, timeout);
             return GetResponseValue(request);
         }
 
-        public static string GetHttps(string url)
+        public static string GetHttps(string url, string contentType)
         {
-            HttpWebRequest request = CreateBaseHttpsRequest(url, "GET", "application/x-www-form-urlencoded");
-            return GetResponseValue(request);
+            return GetHttps(url, contentType, DefaultRequestTimeout);
+        }
+
+        public static string GetHttpsText(string url)
+        {
+            return GetHttps(url, "text/html");
         }
 
         #endregion
 
         #region Post
 
-        public static string Post(string url, string postData, int timeout = 100000)
+        public static string Post(string url, string postData, string contentType, int timeout)
         {
-            var result = PostAndGetResult(url, postData, "application/x-www-form-urlencoded", timeout);
-            return result.Data != null ? result.Data.ToString() : "";
-        }
-
-        public static OperationResult PostAndGetResult(string url, string postData, int timeout = 100000)
-        {
-            return PostAndGetResult(url, postData, "application/x-www-form-urlencoded", timeout); ;
-        }
-
-        public static string Post(string url, string postData, string contentType, int timeout = 100000)
-        {
-            var result = PostAndGetResult(url, postData, contentType, timeout);
-            return result.Data != null ? result.Data.ToString() : "";
-        }
-
-        public static OperationResult PostAndGetResult(string url, string postData, string contentType, int timeout = 100000)
-        {
-            OperationResult result = new OperationResult();
-            HttpWebRequest request;
-
-            if (url.StartsWith("https", StringComparison.OrdinalIgnoreCase))
-            {
-                request = CreateBaseHttpsRequest(url, "POST", contentType, timeout);
-            }
-            else
-            {
-                request = CreateBaseHttpRequest(url, "POST", contentType, timeout);
-            }
-
-            byte[] data = Encoding.ASCII.GetBytes(postData);
+            HttpWebRequest request = CreateHttpRequest(url, "POST", contentType, timeout);
+            byte[] data = Encoding.UTF8.GetBytes(postData);
             request.ContentLength = data.Length;
 
-            try
+            using (Stream stream = request.GetRequestStream())
             {
-                using (Stream stream = request.GetRequestStream())
-                {
-                    stream.Write(data, 0, data.Length);
-                }
-            }
-            catch (Exception exception)
-            {
-                LogHelper.Error(exception);
-                result.SetErrorMessage(exception.ToExceptionContent().ToString());
-                return result;
+                stream.Write(data, 0, data.Length);
             }
 
-            result.Data = GetResponseValue(request);
-            return result;
+            return GetResponseValue(request);
+        }
+
+        public static string PostForm(string url, string data)
+        {
+            return Post(url, data, "application/x-www-form-urlencoded", DefaultRequestTimeout);
+        }
+
+        public static string PostHttps(string url, string postData, string contentType, int timeout)
+        {
+            HttpWebRequest request = CreateHttpsRequest(url, "POST", contentType, timeout);
+            byte[] data = Encoding.UTF8.GetBytes(postData);
+            request.ContentLength = data.Length;
+
+            using (Stream stream = request.GetRequestStream())
+            {
+                stream.Write(data, 0, data.Length);
+            }
+
+            return GetResponseValue(request);
+        }
+
+        public static string PostHttpsForm(string url, string data)
+        {
+            return PostHttps(url, data, "application/x-www-form-urlencoded", DefaultRequestTimeout);
+        }
+
+        #endregion
+
+        #region Init Http Request
+
+        private static HttpWebRequest InitHttpRequest(string url, string method, string contentType, int timeout)
+        {
+            HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
+            request.ProtocolVersion = HttpVersion.Version11;
+            request.Method = method;
+            request.ContentType = contentType;
+            request.Timeout = timeout > 0 ? timeout : DefaultRequestTimeout;
+            return request;
         }
 
         #endregion
 
         #region Create request
 
-        public static HttpWebRequest CreateBaseHttpsRequest(string url, string method, string contentType, int timeout = 100000)
+        public static HttpWebRequest CreateHttpRequest(string url, string method, string contentType, int timeout)
+        {
+            if (!url.StartsWith("http", StringComparison.OrdinalIgnoreCase))
+            {
+                return null;
+            }
+
+            return InitHttpRequest(url, method, contentType, timeout);
+        }
+
+        public static HttpWebRequest CreateHttpsRequest(string url, string method, string contentType, int timeout)
         {
             if (!url.StartsWith("https", StringComparison.OrdinalIgnoreCase))
             {
@@ -105,27 +123,7 @@ namespace DevUtility.Out.Net.Http
             }
 
             ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(ValidateServerCertificate);
-            return GetBaseHttpRequest(url, method, contentType, timeout);
-        }
-
-        public static HttpWebRequest CreateBaseHttpRequest(string url, string method, string contentType, int timeout = 100000)
-        {
-            if (!url.StartsWith("http", StringComparison.OrdinalIgnoreCase))
-            {
-                return null;
-            }
-
-            return GetBaseHttpRequest(url, method, contentType, timeout);
-        }
-
-        public static HttpWebRequest GetBaseHttpRequest(string url, string method, string contentType, int timeout = 100000)
-        {
-            HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
-            request.ProtocolVersion = HttpVersion.Version11;
-            request.Method = method;
-            request.ContentType = contentType;
-            request.Timeout = timeout;
-            return request;
+            return InitHttpRequest(url, method, contentType, timeout);
         }
 
         #endregion
@@ -142,31 +140,11 @@ namespace DevUtility.Out.Net.Http
 
         #endregion
 
-        #region Get response
-
-        public static HttpWebResponse GetResponse(HttpWebRequest request)
-        {
-            HttpWebResponse response = null;
-
-            try
-            {
-                response = request.GetResponse() as HttpWebResponse;
-            }
-            catch (Exception exception)
-            {
-                DevUtility.Com.Application.Log.LogHelper.Error(exception);
-            }
-
-            return response;
-        }
-
-        #endregion
-
         #region Get response value
 
         public static string GetResponseValue(HttpWebRequest request)
         {
-            using (HttpWebResponse response = GetResponse(request))
+            using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
             {
                 if (response == null)
                 {
@@ -180,77 +158,6 @@ namespace DevUtility.Out.Net.Http
                     return reader.ReadToEnd();
                 }
             }
-        }
-
-        #endregion
-
-        #region Create http request
-
-        public static HttpWebRequest CreateHttpRequest(string url, string method, Encoding encoding, string postData = "")
-        {
-            HttpWebRequest request = null;
-
-            if (url.StartsWith("https", StringComparison.OrdinalIgnoreCase))
-            {
-                //对服务端证书进行有效性校验（非第三方权威机构颁发的证书，如自己生成的，不进行验证，这里返回true）
-                ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(ValidateServerCertificate);
-                request = WebRequest.Create(url) as HttpWebRequest;
-                request.ProtocolVersion = HttpVersion.Version10;
-            }
-            else
-            {
-                request = WebRequest.Create(url) as HttpWebRequest;
-            }
-
-            request.Method = method;
-
-            if (method.ToLower() == "post")
-            {
-                byte[] data = encoding.GetBytes(postData);
-                request.ContentType = "application/x-www-form-urlencoded";
-                request.ContentLength = data.Length;
-
-                using (Stream stream = request.GetRequestStream())
-                {
-                    stream.Write(data, 0, data.Length);
-                }
-            }
-
-            return request;
-        }
-
-        public static HttpWebRequest CreateHttpFileRequest(string url, Encoding encoding, string contentType = "", string postData = "")
-        {
-            HttpWebRequest request = null;
-
-            if (url.StartsWith("https", StringComparison.OrdinalIgnoreCase))
-            {
-                //对服务端证书进行有效性校验（非第三方权威机构颁发的证书，如自己生成的，不进行验证，这里返回true）
-                ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(ValidateServerCertificate);
-                request = WebRequest.Create(url) as HttpWebRequest;
-                request.ProtocolVersion = HttpVersion.Version10;
-            }
-            else
-            {
-                request = WebRequest.Create(url) as HttpWebRequest;
-            }
-
-            if (string.IsNullOrWhiteSpace(contentType))
-            {
-                contentType = "application/x-www-form-urlencoded";
-            }
-
-            byte[] data = encoding.GetBytes(postData);
-            request.Method = "POST";
-            request.ContentType = contentType;
-            request.ContentLength = data.Length;
-
-            using (Stream stream = request.GetRequestStream())
-            {
-                stream.Write(data, 0, data.Length);
-            }
-
-            return request;
         }
 
         #endregion

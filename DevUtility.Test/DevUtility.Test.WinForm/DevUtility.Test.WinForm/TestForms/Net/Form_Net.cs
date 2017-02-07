@@ -56,7 +56,7 @@ namespace DevUtility.Test.WinForm.TestForms.Net
 
         private void button_HttpHelper_Post_Click(object sender, EventArgs e)
         {
-            string result = HttpHelper.Post("http://localhost:8888/None", "asd");
+            string result = HttpHelper.PostForm("http://localhost:8888/None", "asd");
             textBox_Message.Text = result;
         }
 
