@@ -34,6 +34,7 @@
             this.label_Title = new System.Windows.Forms.Label();
             this.button_GetChecksumSHA1 = new System.Windows.Forms.Button();
             this.button_GetExtension = new System.Windows.Forms.Button();
+            this.button_Combine = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBox_Message
@@ -92,11 +93,22 @@
             this.button_GetExtension.UseVisualStyleBackColor = true;
             this.button_GetExtension.Click += new System.EventHandler(this.button_GetExtension_Click);
             // 
+            // button_Combine
+            // 
+            this.button_Combine.Location = new System.Drawing.Point(246, 80);
+            this.button_Combine.Name = "button_Combine";
+            this.button_Combine.Size = new System.Drawing.Size(69, 23);
+            this.button_Combine.TabIndex = 20;
+            this.button_Combine.Text = "Combine";
+            this.button_Combine.UseVisualStyleBackColor = true;
+            this.button_Combine.Click += new System.EventHandler(this.button_Combine_Click);
+            // 
             // Form_FileHelper
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 461);
+            this.Controls.Add(this.button_Combine);
             this.Controls.Add(this.button_GetExtension);
             this.Controls.Add(this.button_GetChecksumSHA1);
             this.Controls.Add(this.textBox_Message);
@@ -105,7 +117,6 @@
             this.Controls.Add(this.label_Title);
             this.Name = "Form_FileHelper";
             this.Text = "Form_FileHelper";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form_FileHelper_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -119,5 +130,6 @@
         private System.Windows.Forms.Label label_Title;
         private System.Windows.Forms.Button button_GetChecksumSHA1;
         private System.Windows.Forms.Button button_GetExtension;
+        private System.Windows.Forms.Button button_Combine;
     }
 }
