@@ -76,6 +76,7 @@
     <Content Include="ownLib\extends\extends.js" />
     <Content Include="ownLib\webSocketHelper\index.html" />
     <Content Include="ownLib\webSocketHelper\webSocketHelper.js" />
+    <Content Include="research\ajaxSetup\index.html" />
     <Content Include="research\domain-upgrade\index.html" />
     <Content Include="research\ie\formDataIE11.html" />
     <Content Include="research\TypeScript\jquery-plugins\index.html" />

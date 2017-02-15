@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 
 namespace DevUtility.Com.Extension.SystemExt
@@ -106,6 +107,32 @@ namespace DevUtility.Com.Extension.SystemExt
             result.Insert(0, separator);
             result.Insert(0, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"));
             return result.ToString();
+        }
+
+        #endregion
+
+        #region Filter SQL
+
+        public static string FilterSQL(this string str)
+        {
+            if (string.IsNullOrEmpty(str))
+            {
+                return str;
+            }
+
+            List<string> list = new List<string>();
+            list.Add(Regex.Replace(str, "select ", "", RegexOptions.IgnoreCase));
+            list.Add(Regex.Replace(list.Last(), "insert ", "", RegexOptions.IgnoreCase));
+            list.Add(Regex.Replace(list.Last(), "update ", "", RegexOptions.IgnoreCase));
+            list.Add(Regex.Replace(list.Last(), "delete ", "", RegexOptions.IgnoreCase));
+            list.Add(Regex.Replace(list.Last(), "drop  ", "", RegexOptions.IgnoreCase));
+            list.Add(Regex.Replace(list.Last(), "truncate  ", "", RegexOptions.IgnoreCase));
+            list.Add(Regex.Replace(list.Last(), "xp_cmdshell  ", "", RegexOptions.IgnoreCase));
+            list.Add(Regex.Replace(list.Last(), "exec master", "", RegexOptions.IgnoreCase));
+            list.Add(Regex.Replace(list.Last(), "net localgroup administrators", "", RegexOptions.IgnoreCase));
+            list.Add(Regex.Replace(list.Last(), "net user", "", RegexOptions.IgnoreCase));
+
+            return list.Last();
         }
 
         #endregion

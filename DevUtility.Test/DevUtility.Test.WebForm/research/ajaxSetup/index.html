@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>/research/ajaxSetup/index.html</title>
+    <meta charset="utf-8" />
+    <script src="../../lib/jquery/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+    <div>
+        <input id="btn-ajax" type="button" value="ajax" />
+    </div>
+    <script type="text/javascript">
+        //$.ajaxSetup({
+        //    success: function (data, textStatus, jqXHR) {
+        //        console.log('I am ajaxSetup!');
+        //    }
+        //});
+
+        $(document).ajaxComplete(function (event, xhr, settings) {
+            console.log('I am ajaxComplete!');
+        });
+
+        $(document).ajaxSuccess(function (event, xhr, settings) {
+            console.log('I am ajaxSuccess!');
+        });
+
+        $('#btn-ajax').click(function () {
+            $.get("/Handlers/DataHandler.ashx", function (result) {
+                console.log('haha');
+            });
+        });
+    </script>
+</body>
+</html>
