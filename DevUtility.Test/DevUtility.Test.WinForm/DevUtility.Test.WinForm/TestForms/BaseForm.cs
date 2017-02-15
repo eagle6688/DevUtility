@@ -17,7 +17,7 @@ namespace DevUtility.Test.WinForm.TestForms
     {
         #region Variable
 
-        TextBoxService textBoxService;
+        protected TextBoxService textBoxService;
 
         #endregion
 

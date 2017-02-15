@@ -12,50 +12,14 @@ using System.Windows.Forms;
 
 namespace DevUtility.Test.WinForm.TestForms.IO.Files
 {
-    public partial class Form_FileHelper : Form
+    public partial class Form_FileHelper : BaseForm
     {
-        #region Variable
-
-        TextBoxService textBoxService;
-
-        #endregion
-
         #region Constructor
 
         public Form_FileHelper()
         {
             InitializeComponent();
-            this.StartPosition = FormStartPosition.CenterScreen;
-            Init();
-        }
-
-        #endregion
-
-        #region Init
-
-        private void Init()
-        {
-            textBoxService = new TextBoxService(this, textBox_Message);
-        }
-
-        #endregion
-
-        #region FormClosing
-
-        private void Form_FileHelper_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            AppServiceHelper.OpenForm("MainForm");
-        }
-
-        #endregion
-
-        #region Execute Service
-
-        private void ExecuteService(BaseAppService service, Button button)
-        {
-            service.AppButtonService = new ButtonService(this, button);
-            service.AppTextBoxService = textBoxService;
-            AppServiceHelper.RunThread(service);
+            Init(textBox_Message);
         }
 
         #endregion
@@ -76,6 +40,15 @@ namespace DevUtility.Test.WinForm.TestForms.IO.Files
             textBoxService.SafeAppend(System.IO.Path.GetExtension(textBox_inputValue.Text));
             textBoxService.SafeAppend(System.IO.Path.GetFileNameWithoutExtension(textBox_inputValue.Text));
             textBoxService.SafeAppend(Com.IO.PathHelper.GetFullExtension(textBox_inputValue.Text));
+        }
+
+        #endregion
+
+        #region button_Combine_Click
+
+        private void button_Combine_Click(object sender, EventArgs e)
+        {
+            ExecuteService(new Service.IO.Path.CombineService(), button_Combine);
         }
 
         #endregion

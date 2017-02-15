@@ -47,6 +47,7 @@
     <Compile Include="Database\DBHelper\BigDataHelper\InsertListService.cs" />
     <Compile Include="Data\Cryptography\FileMD5EncryptService.cs" />
     <Compile Include="Data\MemoryFootprint\ProductsService.cs" />
+    <Compile Include="IO\Path\CombineService.cs" />
     <Compile Include="MultiThreads\AsyncAndAwaitService.cs" />
     <Compile Include="MultiThreads\BeginInvokeService.cs" />
     <Compile Include="MultiThreads\LockerService.cs" />
