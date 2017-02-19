@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>/jquery.plugins/jquery.uploader/index.html</title>
+	<meta charset="utf-8" />
+    <link href="../../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../Styles/common.css" rel="stylesheet" />
+    <script src="../../lib/jquery/jquery-1.11.1.min.js"></script>
+    <script src="jquery.uploader.js"></script>
+</head>
+<body>
+    <div class="main marginTop10">
+        <h2>jquery.upload.helper.js</h2>
+        <div class="marginTop10">
+            <input id="file-test" type="file" />
+            <input id="btn-upload" type="button" value="upload" />
+        </div>
+    </div>
+    <script type="text/javascript">
+        $('#btn-upload').click(function () {
+            var uploader = $.uploader({
+                url: 'TestUploaderHandler.ashx',
+                file: $('#file-test')[0].files[0],
+                uploaded: function (data) {
+                    console.log(data);
+                },
+                failed: function (data) {
+                    console.log(data);
+                }
+            });
+
+            uploader.upload();
+        });
+    </script>
+</body>
+</html>

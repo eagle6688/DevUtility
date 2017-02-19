@@ -35,6 +35,7 @@ namespace DevUtility.Out.Extensions.System.Web
                 if (!httpRequest.Files[0].VerifySlice(saveDir, fileName, index, sliceChecksum))
                 {
                     result.SetErrorMessage(string.Format("MD5 value {0} for {1} is invalid.", sliceChecksum, fileName));
+                    result.Data = new { NeedReUpload = true };
                     return false;
                 }
             }
@@ -95,7 +96,7 @@ namespace DevUtility.Out.Extensions.System.Web
 
             if (string.IsNullOrWhiteSpace(sliceIndex) || string.IsNullOrWhiteSpace(sliceCount) || string.IsNullOrWhiteSpace(fileName))
             {
-                result.SetErrorMessage("HttpRequest has parameter problems!");
+                result.SetErrorMessage("Parameter errors!");
                 return false;
             }
 
@@ -103,13 +104,13 @@ namespace DevUtility.Out.Extensions.System.Web
 
             if (!int.TryParse(httpRequest["sliceIndex"], out temp))
             {
-                result.SetErrorMessage("Format of sliceIndex is invalid!");
+                result.SetErrorMessage("Slice index format is invalid!");
                 return false;
             }
 
             if (!int.TryParse(httpRequest["sliceCount"], out temp))
             {
-                result.SetErrorMessage("Format of sliceCount is invalid!");
+                result.SetErrorMessage("Slice count format is invalid!");
                 return false;
             }
 

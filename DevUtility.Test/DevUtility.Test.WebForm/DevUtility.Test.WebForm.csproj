@@ -68,10 +68,14 @@
     <Content Include="jquery.plugins\jquery.drag.helper\index.html" />
     <Content Include="jquery.plugins\jquery.drag.helper\jquery.drag.helper.js" />
     <Content Include="jquery.plugins\jquery.knockout.helper\jquery.knockout.helper2.0.js" />
+    <Content Include="jquery.plugins\jquery.slicingUploader\index.html" />
+    <Content Include="jquery.plugins\jquery.slicingUploader\jquery.slicingUploader.js" />
     <Content Include="jquery.plugins\jquery.textareaAppend\index.html" />
     <Content Include="jquery.plugins\jquery.textareaAppend\jquery.textareaAppend.js" />
     <Content Include="jquery.plugins\jquery.upload.helper\index.html" />
     <Content Include="jquery.plugins\jquery.upload.helper\jquery.upload.helper.js" />
+    <Content Include="jquery.plugins\jquery.uploader\index.html" />
+    <Content Include="jquery.plugins\jquery.uploader\jquery.uploader.js" />
     <Content Include="lib\md5\index.html" />
     <Content Include="ownLib\extends\extends.js" />
     <Content Include="ownLib\webSocketHelper\index.html" />
@@ -79,6 +83,7 @@
     <Content Include="research\ajaxSetup\index.html" />
     <Content Include="research\domain-upgrade\index.html" />
     <Content Include="research\ie\formDataIE11.html" />
+    <Content Include="research\object\index.html" />
     <Content Include="research\TypeScript\jquery-plugins\index.html" />
     <Content Include="work\demos\angular\angular-1.5.8\angular-animate.js" />
     <Content Include="work\demos\angular\angular-1.5.8\angular-animate.min.js" />
@@ -891,7 +896,6 @@
     <Content Include="jquery.plugins\jquery.pagination\index.html" />
     <Content Include="jquery.plugins\jquery.pagination\jquery.pagination.js" />
     <Content Include="jquery.plugins\jquery.pagination\page.css" />
-    <Content Include="jquery.plugins\jquery.uploadHelper\jquery.uploadHelper.js" />
     <Content Include="lib\angular\angular.js" />
     <Content Include="lib\angular\angular.min.js" />
     <Content Include="lib\bootstrap\css\bootstrap-theme.css" />
@@ -922,8 +926,14 @@
     <Compile Include="Handlers\DataHandler.ashx.cs">
       <DependentUpon>DataHandler.ashx</DependentUpon>
     </Compile>
+    <Compile Include="jquery.plugins\jquery.slicingUploader\UploadHandler.ashx.cs">
+      <DependentUpon>UploadHandler.ashx</DependentUpon>
+    </Compile>
     <Compile Include="jquery.plugins\jquery.upload.helper\UploadHandler.ashx.cs">
       <DependentUpon>UploadHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="jquery.plugins\jquery.uploader\TestUploaderHandler.ashx.cs">
+      <DependentUpon>TestUploaderHandler.ashx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -952,6 +962,8 @@
     <Content Include="jquery.plugins\jquery.upload.helper\UploadHandler.ashx" />
     <Content Include="packages.config" />
     <Content Include="package.json" />
+    <Content Include="jquery.plugins\jquery.uploader\TestUploaderHandler.ashx" />
+    <Content Include="jquery.plugins\jquery.slicingUploader\UploadHandler.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

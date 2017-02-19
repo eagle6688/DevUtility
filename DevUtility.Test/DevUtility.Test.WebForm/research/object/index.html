@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>/research/object/index.html</title>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <script type="text/javascript">
+        function createObject() {
+            var obj = {
+                name: 'asd',
+                age: 100
+            }
+
+            return obj;
+        };
+
+        var o1 = createObject();
+        var o2 = createObject();
+        console.log(o1 == o2);
+        console.log(o1 === o2);
+
+        function createObject1() {
+            return {
+                name: 'qwe',
+                age: 1000
+            };
+        }
+
+        var o3 = createObject1();
+        var o4 = createObject1();
+        console.log(o3 == o4);
+        console.log(o3 === o4);
+    </script>
+</body>
+</html>

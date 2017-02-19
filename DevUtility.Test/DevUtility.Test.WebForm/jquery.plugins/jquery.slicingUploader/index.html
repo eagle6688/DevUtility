@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>/jquery.plugins/jquery.slicingUploader/index.html</title>
+    <link href="../../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../Styles/common.css" rel="stylesheet" />
+    <script src="../../lib/jquery/jquery-1.11.1.min.js"></script>
+    <script src="../../bower_components/cryptojslib/rollups/md5.js"></script>
+    <script src="../jquery.uploader/jquery.uploader.js"></script>
+    <script src="jquery.slicingUploader.js"></script>
+</head>
+<body>
+    <div class="main marginTop10">
+        <h2>jquery.upload.helper.js</h2>
+        <div class="marginTop10">
+            <input id="file-test" type="file" />
+            <input type="button" value="upload" onclick="upload();" />
+            <input type="button" value="reUpload" onclick="reUpload();" />
+        </div>
+        <div class="progress marginTop10">
+            <div id="div-progress" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var uploadHelper;
+
+        var upload = function () {
+            uploadHelper = $.slicingUploader({
+                file: $('#file-test')[0].files[0],
+                url: 'UploadHandler.ashx',
+                uploadThreadsCount: 1,
+                needMD5Checksum: true,
+                beforeUpload: function (data) {
+                    $('#div-progress').attr('aria-valuenow', 0).css('width', '0');
+                    console.log(data);
+                },
+                uploading: function (data) {
+                    $('#div-progress').attr('aria-valuenow', data.percentage).css('width', data.percentage + '%');
+                    console.log('return data:');
+                    console.log(data);
+
+                    var result = data.currentResult;
+                    console.log(result);
+                    console.log(result.response);
+                },
+                uploaded: function (data) {
+                    console.log('finished:');
+                    console.log(data);
+                },
+                failed: function (data) {
+                    console.log('error:');
+                    console.log(data);
+                }
+            });
+
+            uploadHelper.upload();
+        };
+
+        var reUpload = function () {
+            uploadHelper.reUpload();
+        };
+    </script>
+</body>
+</html>

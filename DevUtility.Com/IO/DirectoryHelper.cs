@@ -1,4 +1,5 @@
-﻿using DevUtility.Com.Extension.SystemIO;
+﻿using DevUtility.Com.Application.Log;
+using DevUtility.Com.Extension.SystemIO;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -53,16 +54,17 @@ namespace DevUtility.Com.IO
 
         public static bool Create(string directory)
         {
-            try
+            if (!Directory.Exists(directory))
             {
-                if (!Directory.Exists(directory))
+                try
                 {
                     Directory.CreateDirectory(directory);
                 }
-            }
-            catch
-            {
-                return false;
+                catch (Exception exception)
+                {
+                    LogHelper.Error(exception);
+                    return false;
+                }
             }
 
             return true;
