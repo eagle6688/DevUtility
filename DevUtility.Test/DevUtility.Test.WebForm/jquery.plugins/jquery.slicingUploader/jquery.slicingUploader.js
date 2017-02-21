@@ -1,7 +1,7 @@
 ﻿;
 (function ($, window, document, undefined) {
     var pluginName = 'slicingUploader',
-        version = '20170219';
+        version = '20170221';
 
     var defaults = {
         file: null,
@@ -16,7 +16,8 @@
             fileSize: 'fileSize',
             sliceIndex: 'sliceIndex',
             sliceCount: 'sliceCount',
-            sliceChecksum: 'sliceChecksum'
+            sliceChecksum: 'sliceChecksum',
+            uploadTime: 'uploadTime'
         },
         beforeUpload: function (data) { },
         uploading: function (data) { },
@@ -71,6 +72,7 @@
         }
 
         this.model = {
+            uploadTime: new Date(),
             name: this.options.file.name,
             size: this.options.file.size,
             sliceCount: Math.ceil(this.options.file.size / this.options.sliceSize)
@@ -144,12 +146,13 @@
     };
 
     Plugin.prototype._createFormData = function (slice) {
-        var formData = this.options.formData; 
+        var formData = this.options.formData;
 
         if (!formData) {
             formData = new FormData();
         }
 
+        formData.set(this.options.formNames.uploadTime, getDateStr(this.model.uploadTime));
         formData.set(this.options.formNames.fileName, this.model.name);
         formData.set(this.options.formNames.fileSize, this.model.size);
         formData.set(this.options.formNames.sliceIndex, slice.index);
@@ -252,6 +255,13 @@
         }
 
         fileReader.readAsBinaryString(file);
+    };
+
+    var getDateStr = function (time) {
+        var year = time.getFullYear();
+        var month = time.getMonth() + 1;
+        var day = time.getDate();
+        return year + '-' + month + '-' + day;
     };
 
     $[pluginName] = function (options) {
