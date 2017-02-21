@@ -97,6 +97,12 @@
     <Compile Include="TestForms\Data\Form_Concurrency.Designer.cs">
       <DependentUpon>Form_Concurrency.cs</DependentUpon>
     </Compile>
+    <Compile Include="TestForms\Data\Form_Convert.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestForms\Data\Form_Convert.Designer.cs">
+      <DependentUpon>Form_Convert.cs</DependentUpon>
+    </Compile>
     <Compile Include="TestForms\Data\Form_DataTable.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -223,6 +229,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TestForms\Data\Form_Concurrency.resx">
       <DependentUpon>Form_Concurrency.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestForms\Data\Form_Convert.resx">
+      <DependentUpon>Form_Convert.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TestForms\Data\Form_DataTable.resx">
       <DependentUpon>Form_DataTable.cs</DependentUpon>

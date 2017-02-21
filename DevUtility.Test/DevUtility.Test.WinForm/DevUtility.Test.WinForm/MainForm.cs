@@ -247,5 +247,14 @@ namespace DevUtility.Test.WinForm
         }
 
         #endregion
+
+        #region button_Convert_Click
+
+        private void button_Convert_Click(object sender, EventArgs e)
+        {
+            OpenForm(new TestForms.Data.Form_Convert());
+        }
+
+        #endregion
     }
 }
