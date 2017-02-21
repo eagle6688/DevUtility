@@ -44,8 +44,12 @@ namespace DevUtility.Com.IO
 
         public static string GetDateDirectory()
         {
-            DateTime time = DateTime.Now.Date;
-            return string.Format("{0}\\{1}\\{2}", time.Year, time.Month, time.Day);
+            return GetDateDirectory(DateTime.Now.Date);
+        }
+
+        public static string GetDateDirectory(DateTime date)
+        {
+            return string.Format("{0}\\{1}\\{2}", date.Year, date.Month, date.Day);
         }
 
         #endregion
