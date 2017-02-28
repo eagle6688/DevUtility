@@ -1,12 +1,13 @@
 ﻿;
 (function ($, window, document, undefined) {
     var pluginName = 'koHelper',
-        version = '20161121';
+        version = '20170228';
 
     var defaults = {
         url: '', //request url，required
         requestType: 'GET',
         requestData: null,
+        viewModel: null,
         pk: 'ID', //Primary key
         paginationID: 'pagination', //paging control id
         checkAllID: 'cb_selectAll', //id of 'select all' button
@@ -54,12 +55,19 @@
     };
 
     Plugin.prototype.initData = function () {
-        this.viewModel = {
+        this.viewModel = this.options.viewModel;
+
+        if (!this.viewModel) {
+            this.viewModel = {};
+        }
+
+        var defaultModel = {
             Url: '',
             Data: ko.observableArray([]),
             RecordsCount: ko.observable(0)
         };
 
+        this.viewModel = $.extend(true, {}, this.viewModel, defaultModel);
         ko.applyBindings(this.viewModel, this.element);
     };
 
