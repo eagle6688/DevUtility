@@ -129,6 +129,7 @@
     <Compile Include="NpoiExt\ISheetExt.cs" />
     <Compile Include="NpoiExt\IWorkbookExt.cs" />
     <Compile Include="NpoiExt\NpoiHelper.cs" />
+    <Compile Include="NpoiExt\NpoiMemoryStream.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Web\Client\ClientHelper.cs" />
     <Compile Include="Web\Client\CookieHelper.cs" />

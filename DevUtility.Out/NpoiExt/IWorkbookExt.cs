@@ -68,6 +68,22 @@ namespace DevUtility.Out.NpoiExt
             return memoryStream;
         }
 
+        public static NpoiMemoryStream ToNpoiMemoryStream(this IWorkbook workbook)
+        {
+            if (workbook == null)
+            {
+                return null;
+            }
+
+            NpoiMemoryStream npoiMemoryStream = new NpoiMemoryStream();
+            npoiMemoryStream.AllowClose = false;
+            workbook.Write(npoiMemoryStream);
+            npoiMemoryStream.Flush();
+            npoiMemoryStream.Position = 0;
+            npoiMemoryStream.AllowClose = true;
+            return npoiMemoryStream;
+        }
+
         #endregion
     }
 }

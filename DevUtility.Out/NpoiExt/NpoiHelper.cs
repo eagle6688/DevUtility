@@ -22,17 +22,12 @@ namespace DevUtility.Out.NpoiExt
 
         public static IWorkbook ReadExcelToWorkbook(string path)
         {
-            IWorkbook workbook = null;
-
             if (File.Exists(path))
             {
-                using (FileStream fileStream = new FileStream(path, FileMode.Open, FileAccess.Read))
-                {
-                    workbook = WorkbookFactory.Create(fileStream);
-                }
+                return WorkbookFactory.Create(path);
             }
 
-            return workbook;
+            return null;
         }
 
         public static DataSet ReadExcel(string path)
