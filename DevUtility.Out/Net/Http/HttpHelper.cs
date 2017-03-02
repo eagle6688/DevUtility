@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DevUtility.Com.Extension.SystemExt;
+using DevUtility.Com.Model;
+using System;
 using System.IO;
 using System.Net;
 using System.Net.Security;
@@ -48,6 +50,22 @@ namespace DevUtility.Out.Net.Http
         #endregion
 
         #region Post
+
+        public static OperationResult PostReturnResult(string url, string postData, string contentType, int timeout)
+        {
+            OperationResult result = new OperationResult();
+
+            try
+            {
+                result.Data = Post(url, postData, contentType, timeout);
+            }
+            catch (Exception exception)
+            {
+                result.SetErrorMessage(exception.ToExceptionString());
+            }
+
+            return result;
+        }
 
         public static string Post(string url, string postData, string contentType, int timeout)
         {
