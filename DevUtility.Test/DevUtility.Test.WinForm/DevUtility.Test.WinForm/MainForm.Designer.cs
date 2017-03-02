@@ -44,6 +44,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button_Reflection = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button_Convert = new System.Windows.Forms.Button();
             this.button_DBHelper = new System.Windows.Forms.Button();
             this.button_MemoryFootprint = new System.Windows.Forms.Button();
             this.button_EntityHelper = new System.Windows.Forms.Button();
@@ -60,7 +61,7 @@
             this.button_MultiThreads1 = new System.Windows.Forms.Button();
             this.groupBox_Research = new System.Windows.Forms.GroupBox();
             this.button_Unicode = new System.Windows.Forms.Button();
-            this.button_Convert = new System.Windows.Forms.Button();
+            this.button_Research = new System.Windows.Forms.Button();
             this.groupBox_Application.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -241,6 +242,16 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Data";
             // 
+            // button_Convert
+            // 
+            this.button_Convert.Location = new System.Drawing.Point(630, 20);
+            this.button_Convert.Name = "button_Convert";
+            this.button_Convert.Size = new System.Drawing.Size(71, 23);
+            this.button_Convert.TabIndex = 13;
+            this.button_Convert.Text = "Convert";
+            this.button_Convert.UseVisualStyleBackColor = true;
+            this.button_Convert.Click += new System.EventHandler(this.button_Convert_Click);
+            // 
             // button_DBHelper
             // 
             this.button_DBHelper.Location = new System.Drawing.Point(553, 20);
@@ -388,6 +399,7 @@
             // 
             // groupBox_Research
             // 
+            this.groupBox_Research.Controls.Add(this.button_Research);
             this.groupBox_Research.Controls.Add(this.button_Unicode);
             this.groupBox_Research.Location = new System.Drawing.Point(12, 562);
             this.groupBox_Research.Name = "groupBox_Research";
@@ -406,15 +418,15 @@
             this.button_Unicode.UseVisualStyleBackColor = true;
             this.button_Unicode.Click += new System.EventHandler(this.button_Unicode_Click);
             // 
-            // button_Convert
+            // button_Research
             // 
-            this.button_Convert.Location = new System.Drawing.Point(630, 20);
-            this.button_Convert.Name = "button_Convert";
-            this.button_Convert.Size = new System.Drawing.Size(71, 23);
-            this.button_Convert.TabIndex = 13;
-            this.button_Convert.Text = "Convert";
-            this.button_Convert.UseVisualStyleBackColor = true;
-            this.button_Convert.Click += new System.EventHandler(this.button_Convert_Click);
+            this.button_Research.Location = new System.Drawing.Point(81, 20);
+            this.button_Research.Name = "button_Research";
+            this.button_Research.Size = new System.Drawing.Size(66, 23);
+            this.button_Research.TabIndex = 12;
+            this.button_Research.Text = "Research";
+            this.button_Research.UseVisualStyleBackColor = true;
+            this.button_Research.Click += new System.EventHandler(this.button_Research_Click);
             // 
             // MainForm
             // 
@@ -481,5 +493,6 @@
         private System.Windows.Forms.Button button_MemoryFootprint;
         private System.Windows.Forms.Button button_DBHelper;
         private System.Windows.Forms.Button button_Convert;
+        private System.Windows.Forms.Button button_Research;
     }
 }

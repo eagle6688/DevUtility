@@ -256,5 +256,14 @@ namespace DevUtility.Test.WinForm
         }
 
         #endregion
+
+        #region button_Research_Click
+
+        private void button_Research_Click(object sender, EventArgs e)
+        {
+            OpenForm(new TestForms.Research.Form_Research());
+        }
+
+        #endregion
     }
 }

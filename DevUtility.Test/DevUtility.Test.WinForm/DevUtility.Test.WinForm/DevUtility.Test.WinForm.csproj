@@ -193,6 +193,12 @@
     <Compile Include="TestForms\NoSQL\Form_Set.Designer.cs">
       <DependentUpon>Form_Set.cs</DependentUpon>
     </Compile>
+    <Compile Include="TestForms\Research\Form_Research.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestForms\Research\Form_Research.Designer.cs">
+      <DependentUpon>Form_Research.cs</DependentUpon>
+    </Compile>
     <Compile Include="TestForms\Research\Form_Unicode.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -277,6 +283,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TestForms\NoSQL\Form_Set.resx">
       <DependentUpon>Form_Set.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestForms\Research\Form_Research.resx">
+      <DependentUpon>Form_Research.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TestForms\Research\Form_Unicode.resx">
       <DependentUpon>Form_Unicode.cs</DependentUpon>
