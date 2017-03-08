@@ -146,6 +146,7 @@
     <Compile Include="Areas\Database\DatabaseAreaRegistration.cs" />
     <Compile Include="Areas\JsLibs\Controllers\JQueryPluginController.cs" />
     <Compile Include="Areas\JsLibs\JsLibsAreaRegistration.cs" />
+    <Compile Include="Attributes\AuthAttribute.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TestAPIController.cs" />
     <Compile Include="Controllers\WebSocketController.cs" />
@@ -166,6 +167,7 @@
     <Content Include="Areas\Database\Views\BigDataHelper\Index.cshtml" />
     <Content Include="Areas\JsLibs\Views\web.config" />
     <Content Include="Areas\JsLibs\Views\JQueryPlugin\Index.cshtml" />
+    <Content Include="Views\Home\Auth.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

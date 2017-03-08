@@ -114,7 +114,12 @@ namespace DevUtility.Out.Net.Http
             HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
             request.ProtocolVersion = HttpVersion.Version11;
             request.Method = method;
-            request.ContentType = contentType;
+
+            if (!string.IsNullOrEmpty(contentType))
+            {
+                request.ContentType = contentType;
+            }
+            
             request.Timeout = timeout > 0 ? timeout : DefaultRequestTimeout;
             return request;
         }
