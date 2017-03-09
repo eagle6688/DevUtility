@@ -64,7 +64,6 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\ReadMe.txt" />
     <Content Include="jquery.plugins\jquery.drag.helper\index.html" />
     <Content Include="jquery.plugins\jquery.drag.helper\jquery.drag.helper.js" />
     <Content Include="jquery.plugins\jquery.knockout.helper\jquery.knockout.helper2.0.js" />
@@ -972,6 +971,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="work\demos\angular\angular-1.5.8\i18n\ngLocale\" />
     <Folder Include="work\demos\typescript\interface\" />
   </ItemGroup>
