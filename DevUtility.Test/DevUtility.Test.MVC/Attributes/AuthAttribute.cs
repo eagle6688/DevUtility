@@ -15,10 +15,10 @@ namespace DevUtility.Test.MVC.Attributes
         {
             if (!IsAuth)
             {
-                ContentResult Content = new ContentResult();
-                Content.Content = string.Format("<script type='text/javascript'>alert('请先登录！');window.location.href='{0}';</script>", FormsAuthentication.LoginUrl);
-                filterContext.Result = Content;
-                //filterContext.Result = new RedirectResult("/Home/Login");
+                //ContentResult Content = new ContentResult();
+                //Content.Content = string.Format("<script type='text/javascript'>alert('请先登录！');window.location.href='{0}';</script>", FormsAuthentication.LoginUrl);
+                //filterContext.Result = Content;
+                filterContext.Result = new RedirectResult("/Home/Login");
             }
         }
     }
