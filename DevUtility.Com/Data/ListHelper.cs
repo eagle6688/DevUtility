@@ -9,7 +9,7 @@ namespace DevUtility.Com.Data
 {
     public class ListHelper
     {
-        #region ConvertToDataTable
+        #region Convert To DataTable
 
         public static DataTable ConvertToDataTable<TModel>(List<TModel> list, List<string> excludeProperties) where TModel : class, new()
         {
