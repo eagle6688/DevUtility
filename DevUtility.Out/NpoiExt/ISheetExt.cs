@@ -17,6 +17,11 @@ namespace DevUtility.Out.NpoiExt
         /// <param name="sheet"></param>
         public static void ApplyRowStyle(this ISheet sheet, int usingRowIndex, int startRowIndex = 1)
         {
+            if (sheet.FirstRowNum == -1 || sheet.LastRowNum == -1)
+            {
+                return;
+            }
+
             IRow row = sheet.GetRow(usingRowIndex);
 
             if (row == null)
