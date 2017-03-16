@@ -9,7 +9,7 @@ namespace DevUtility.Out.NpoiExt
 {
     public static class ISheetExt
     {
-        #region ApplyRowStyle
+        #region Apply Row's Style
 
         /// <summary>
         /// Appling row style to other rows

@@ -10,7 +10,7 @@ namespace DevUtility.Out.NpoiExt
 {
     public static class IWorkbookExt
     {
-        #region Apply RowStyle
+        #region Apply Row's Style
 
         public static void ApplyRowStyle(this IWorkbook workbook, int usingRowIndex, int startRowIndex = 1)
         {

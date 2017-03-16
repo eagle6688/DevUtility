@@ -14,13 +14,25 @@ using System.Text;
 namespace DevUtility.Out.NpoiExt
 {
     /// <summary>
-    /// Edit on 2015-08-27
+    /// 2017-03-16
     /// </summary>
     public class NpoiHelper
     {
-        #region Reading excel
+        #region Read
 
-        public static IWorkbook ReadExcelToWorkbook(string path)
+        public static DataSet Read(string path)
+        {
+            IWorkbook workbook = ReadToWorkbook(path);
+
+            if (workbook == null)
+            {
+                return null;
+            }
+
+            return Read(workbook);
+        }
+
+        public static IWorkbook ReadToWorkbook(string path)
         {
             if (File.Exists(path))
             {
@@ -30,69 +42,64 @@ namespace DevUtility.Out.NpoiExt
             return null;
         }
 
-        public static DataSet ReadExcel(string path)
+        public static DataSet Read(IWorkbook workbook)
         {
-            IWorkbook workbook = ReadExcelToWorkbook(path);
-            DataSet ds = ReadExcel(workbook);
-            return ds;
-        }
+            if (workbook == null)
+            {
+                return null;
+            }
 
-        public static DataSet ReadExcel(IWorkbook workbook)
-        {
             DataSet ds = new DataSet();
 
-            if (workbook != null)
+            for (int i = 0; i < workbook.NumberOfSheets; i++)
             {
-                for (int i = 0; i < workbook.NumberOfSheets; i++)
+                DataTable table = new DataTable();
+                ISheet sheet = workbook.GetSheetAt(i);
+
+                if (!string.IsNullOrWhiteSpace(sheet.SheetName))
                 {
-                    DataTable table = new DataTable();
-                    ISheet sheet = workbook.GetSheetAt(i);
-
-                    if (!string.IsNullOrWhiteSpace(sheet.SheetName))
-                    {
-                        table.TableName = sheet.SheetName;
-                    }
-
-                    IRow firstRow = sheet.GetRow(0);
-
-                    if (firstRow == null)
-                    {
-                        continue;
-                    }
-
-                    int rowCount = sheet.LastRowNum + 1;
-                    int columnsCount = firstRow.LastCellNum;
-
-                    for (int j = 0; j < columnsCount; j++)
-                    {
-                        table.Columns.Add(j.ToString());
-                    }
-
-                    for (int j = 0; j < rowCount; j++)
-                    {
-                        IRow row = sheet.GetRow(j);
-
-                        if (row != null)
-                        {
-                            DataRow dr = table.NewRow();
-
-                            for (int k = 0; k < columnsCount; k++)
-                            {
-                                ICell cell = row.GetCell(k);
-
-                                if (cell != null)
-                                {
-                                    dr[k] = cell.ToString();
-                                }
-                            }
-
-                            table.Rows.Add(dr);
-                        }
-                    }
-
-                    sheet = null;
-                    ds.Tables.Add(table);
+                    table.TableName = sheet.SheetName;
                 }
+
+                IRow firstRow = sheet.GetRow(0);
+
+                if (firstRow == null)
+                {
+                    continue;
+                }
+
+                int rowCount = sheet.LastRowNum + 1;
+                int columnsCount = firstRow.LastCellNum;
+
+                for (int j = 0; j < columnsCount; j++)
+                {
+                    table.Columns.Add(j.ToString());
+                }
+
+                for (int j = 0; j < rowCount; j++)
+                {
+                    IRow row = sheet.GetRow(j);
+
+                    if (row != null)
+                    {
+                        DataRow dr = table.NewRow();
+
+                        for (int k = 0; k < columnsCount; k++)
+                        {
+                            ICell cell = row.GetCell(k);
+
+                            if (cell != null)
+                            {
+                                dr[k] = cell.ToString();
+                            }
+                        }
+
+                        table.Rows.Add(dr);
+                    }
+                }
+
+                sheet = null;
+                ds.Tables.Add(table);
             }
 
             return ds;
@@ -100,11 +107,10 @@ namespace DevUtility.Out.NpoiExt
 
         #endregion
 
-        #region Writing excel
+        #region Write
 
-        public static MemoryStream WritingExcel(DataSet ds)
+        public static MemoryStream Write(DataSet ds)
         {
-            MemoryStream memoryStream = new MemoryStream();
             HSSFWorkbook workbook = GetWorkbook();
 
             foreach (DataTable table in ds.Tables)
@@ -112,10 +118,19 @@ namespace DevUtility.Out.NpoiExt
                 GetWorksheet(ref workbook, table);
             }
 
-            workbook.Write(memoryStream);
-            memoryStream.Flush();
-            memoryStream.Position = 0;
-            return memoryStream;
+            return workbook.ToMemoryStream();
+        }
+
+        public static NpoiMemoryStream WriteToNpoiMemoryStream(DataSet ds)
+        {
+            HSSFWorkbook workbook = GetWorkbook();
+
+            foreach (DataTable table in ds.Tables)
+            {
+                GetWorksheet(ref workbook, table);
+            }
+
+            return workbook.ToNpoiMemoryStream();
         }
 
         #endregion
