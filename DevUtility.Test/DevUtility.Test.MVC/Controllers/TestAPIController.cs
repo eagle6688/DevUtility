@@ -10,6 +10,8 @@ namespace DevUtility.Test.MVC.Controllers
 {
     public class TestAPIController : ApiController
     {
+        //Get: api/TestAPI/
+
         string key = "TestCache";
 
         public IHttpActionResult ReceiveParam(TestTable param, int index = 1)
