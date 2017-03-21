@@ -32,5 +32,14 @@ namespace DevUtility.Test.WinForm.TestForms.Data
         }
 
         #endregion
+
+        #region button_Count0ToList_Click
+
+        private void button_Count0ToList_Click(object sender, EventArgs e)
+        {
+            ExecuteService(new Service.Data.Convert.Count0ToListService(), button_Count0ToList);
+        }
+
+        #endregion
     }
 }

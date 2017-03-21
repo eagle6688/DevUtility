@@ -50,6 +50,7 @@
     <Compile Include="Base\Reflection\AssemblyLoadService.cs" />
     <Compile Include="Base\Reflection\LockerHelperService.cs" />
     <Compile Include="Database\DBHelper\BigDataHelper\InsertListService.cs" />
+    <Compile Include="Data\Convert\Count0ToListService.cs" />
     <Compile Include="Data\Cryptography\FileMD5EncryptService.cs" />
     <Compile Include="Data\MemoryFootprint\ProductsService.cs" />
     <Compile Include="IO\Path\CombineService.cs" />

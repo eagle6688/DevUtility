@@ -34,6 +34,7 @@
             this.textBox_inputValue = new System.Windows.Forms.TextBox();
             this.label_inputValue = new System.Windows.Forms.Label();
             this.label_Title = new System.Windows.Forms.Label();
+            this.button_Count0ToList = new System.Windows.Forms.Button();
             this.groupBox_Functions.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,6 +49,7 @@
             // 
             // groupBox_Functions
             // 
+            this.groupBox_Functions.Controls.Add(this.button_Count0ToList);
             this.groupBox_Functions.Controls.Add(this.button_ToDateTime);
             this.groupBox_Functions.Location = new System.Drawing.Point(12, 77);
             this.groupBox_Functions.Name = "groupBox_Functions";
@@ -94,6 +96,16 @@
             this.label_Title.TabIndex = 50;
             this.label_Title.Text = "Convert";
             // 
+            // button_Count0ToList
+            // 
+            this.button_Count0ToList.Location = new System.Drawing.Point(102, 21);
+            this.button_Count0ToList.Name = "button_Count0ToList";
+            this.button_Count0ToList.Size = new System.Drawing.Size(115, 23);
+            this.button_Count0ToList.TabIndex = 1;
+            this.button_Count0ToList.Text = "Count 0 To List";
+            this.button_Count0ToList.UseVisualStyleBackColor = true;
+            this.button_Count0ToList.Click += new System.EventHandler(this.button_Count0ToList_Click);
+            // 
             // Form_Convert
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -120,5 +132,6 @@
         private System.Windows.Forms.TextBox textBox_inputValue;
         private System.Windows.Forms.Label label_inputValue;
         private System.Windows.Forms.Label label_Title;
+        private System.Windows.Forms.Button button_Count0ToList;
     }
 }
