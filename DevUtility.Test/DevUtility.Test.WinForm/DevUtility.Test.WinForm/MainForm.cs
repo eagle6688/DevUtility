@@ -265,5 +265,14 @@ namespace DevUtility.Test.WinForm
         }
 
         #endregion
+
+        #region button_Linq_Click
+
+        private void button_Linq_Click(object sender, EventArgs e)
+        {
+            OpenForm(new TestForms.Data.Form_LinqData());
+        }
+
+        #endregion
     }
 }

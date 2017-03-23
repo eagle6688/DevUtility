@@ -115,6 +115,12 @@
     <Compile Include="TestForms\Data\Form_EntityHelper.Designer.cs">
       <DependentUpon>Form_EntityHelper.cs</DependentUpon>
     </Compile>
+    <Compile Include="TestForms\Data\Form_LinqData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestForms\Data\Form_LinqData.Designer.cs">
+      <DependentUpon>Form_LinqData.cs</DependentUpon>
+    </Compile>
     <Compile Include="TestForms\Data\Form_MemoryFootprint.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -244,6 +250,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TestForms\Data\Form_EntityHelper.resx">
       <DependentUpon>Form_EntityHelper.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestForms\Data\Form_LinqData.resx">
+      <DependentUpon>Form_LinqData.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TestForms\Data\Form_MemoryFootprint.resx">
       <DependentUpon>Form_MemoryFootprint.cs</DependentUpon>

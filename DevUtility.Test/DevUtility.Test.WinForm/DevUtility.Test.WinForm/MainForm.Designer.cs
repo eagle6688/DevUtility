@@ -60,8 +60,9 @@
             this.groupBox_MultiThreads = new System.Windows.Forms.GroupBox();
             this.button_MultiThreads1 = new System.Windows.Forms.Button();
             this.groupBox_Research = new System.Windows.Forms.GroupBox();
-            this.button_Unicode = new System.Windows.Forms.Button();
             this.button_Research = new System.Windows.Forms.Button();
+            this.button_Unicode = new System.Windows.Forms.Button();
+            this.button_Linq = new System.Windows.Forms.Button();
             this.groupBox_Application.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -408,16 +409,6 @@
             this.groupBox_Research.TabStop = false;
             this.groupBox_Research.Text = "Research";
             // 
-            // button_Unicode
-            // 
-            this.button_Unicode.Location = new System.Drawing.Point(9, 20);
-            this.button_Unicode.Name = "button_Unicode";
-            this.button_Unicode.Size = new System.Drawing.Size(66, 23);
-            this.button_Unicode.TabIndex = 11;
-            this.button_Unicode.Text = "Unicode";
-            this.button_Unicode.UseVisualStyleBackColor = true;
-            this.button_Unicode.Click += new System.EventHandler(this.button_Unicode_Click);
-            // 
             // button_Research
             // 
             this.button_Research.Location = new System.Drawing.Point(81, 20);
@@ -428,11 +419,32 @@
             this.button_Research.UseVisualStyleBackColor = true;
             this.button_Research.Click += new System.EventHandler(this.button_Research_Click);
             // 
+            // button_Unicode
+            // 
+            this.button_Unicode.Location = new System.Drawing.Point(9, 20);
+            this.button_Unicode.Name = "button_Unicode";
+            this.button_Unicode.Size = new System.Drawing.Size(66, 23);
+            this.button_Unicode.TabIndex = 11;
+            this.button_Unicode.Text = "Unicode";
+            this.button_Unicode.UseVisualStyleBackColor = true;
+            this.button_Unicode.Click += new System.EventHandler(this.button_Unicode_Click);
+            // 
+            // button_Linq
+            // 
+            this.button_Linq.Location = new System.Drawing.Point(719, 186);
+            this.button_Linq.Name = "button_Linq";
+            this.button_Linq.Size = new System.Drawing.Size(47, 23);
+            this.button_Linq.TabIndex = 14;
+            this.button_Linq.Text = "Linq";
+            this.button_Linq.UseVisualStyleBackColor = true;
+            this.button_Linq.Click += new System.EventHandler(this.button_Linq_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 631);
+            this.Controls.Add(this.button_Linq);
             this.Controls.Add(this.groupBox_Research);
             this.Controls.Add(this.groupBox_MultiThreads);
             this.Controls.Add(this.groupBox6);
@@ -494,5 +506,6 @@
         private System.Windows.Forms.Button button_DBHelper;
         private System.Windows.Forms.Button button_Convert;
         private System.Windows.Forms.Button button_Research;
+        private System.Windows.Forms.Button button_Linq;
     }
 }
