@@ -67,6 +67,9 @@
     <Content Include="jquery.plugins\jquery.drag.helper\index.html" />
     <Content Include="jquery.plugins\jquery.drag.helper\jquery.drag.helper.js" />
     <Content Include="jquery.plugins\jquery.knockout.helper\jquery.knockout.helper2.0.js" />
+    <Content Include="jquery.plugins\jquery.knockout.helper\jquery.knockout.helper3.0.js" />
+    <Content Include="jquery.plugins\jquery.knockout.helper\viewModel.js" />
+    <Content Include="jquery.plugins\jquery.pagination\jquery.pagination2.0.js" />
     <Content Include="jquery.plugins\jquery.slicingUploader\index.html" />
     <Content Include="jquery.plugins\jquery.slicingUploader\jquery.slicingUploader.js" />
     <Content Include="jquery.plugins\jquery.textareaAppend\index.html" />
