@@ -1,7 +1,7 @@
 ﻿;
 (function ($, window, document, undefined) {
     var pluginName = 'koHelper',
-        version = '20170409';
+        version = '20170410';
 
     var defaults = {
         url: '', //request url，required
@@ -14,9 +14,9 @@
         oddTrClass: '',
         noneDataDom: '', //Dom displays when there is no datum loaded.
         loadingDom: '', //Dom displays when data are loading.
-        validateData: null, //Validating data before display them.
-        beforeLoadData: null,
-        afterLoadData: null,
+        verifyData: function (data) { return true }, //Verify data before display them.
+        beforeLoadData: function (data) { },
+        afterLoadData: function (data) { },
         paginationOptions: {
             pageSize: 10,
             pageIndex: 1
@@ -61,7 +61,7 @@
                 onPageClick(pageIndex);
             }
 
-            that.requestServer(pageIndex);
+            that.loadData(pageIndex);
         };
 
         this.pagination = $pagination.pagination(this.paginationOptions).data('pagination');
@@ -69,7 +69,7 @@
 
     Plugin.prototype.initData = function () {
         if (!this.options.viewModel) {
-            this.requestServer(this.paginationOptions.pageIndex);
+            this.loadData(this.paginationOptions.pageIndex);
             return;
         }
 
@@ -96,52 +96,43 @@
         });
     };
 
-    Plugin.prototype.clearData = function () {
-        this.displayData(0, [], 1);
-    };
-
-    Plugin.prototype.reLoad = function (url, pageIndex) {
-        this.options.requestType = 'GET';
-
-        if (url && typeof (url) === 'string') {
-            this.options.url = url;
-        }
-
-        if (!pageIndex || pageIndex < 1) {
-            pageIndex = 1;
-        }
-
-        this.requestServer(pageIndex);
-    };
-
-    Plugin.prototype.reLoadPost = function (options) {
+    Plugin.prototype.reload = function (options) {
         var defaults = {
             url: '',
-            data: '',
-            success: function (data) { }
+            type: 'GET',
+            data: null,
+            pageIndex: 1
         };
 
-        this.options.requestType = 'POST';
-        this.reLoadConfig = $.extend(true, {}, defaults, options);
+        var config = $.extend(true, {}, defaults, options);
 
-        if (this.reLoadConfig.url) {
-            this.options.url = this.reLoadConfig.url;
+        if (config.url) {
+            this.options.url = config.url;
         }
 
-        if (this.reLoadConfig.data) {
-            this.options.requestData = this.reLoadConfig.data;
+        if (config.type) {
+            this.options.requestType = config.type;
         }
 
-        this.requestServer(1);
+        if (config.data) {
+            this.options.requestData = config.data;
+        }
+
+        if (!config.pageIndex || config.pageIndex < 1) {
+            config.pageIndex = 1;
+        }
+
+        this.loadData(config.pageIndex);
     };
 
-    Plugin.prototype.requestServer = function (pageIndex) {
+    Plugin.prototype.loadData = function (pageIndex) {
         var that = this;
-        this.viewModel.Url = getRequestUrl(this.options.url, pageIndex, this.options.paginationOptions.pageSize);
+        this.viewModel.Url = this.getRequestUrl(pageIndex);
         displayDom(this.options.loadingDom, true);
 
-        this.httpRequest(function (data) {
+        this.ajax(function (data) {
             that.applyData(data, pageIndex);
+            displayDom(that.options.loadingDom, false);
         });
     };
 
@@ -158,13 +149,11 @@
             this.options.beforeLoadData(data);
         }
 
-        displayDom(this.options.loadingDom, false);
-
         if (data && data.Count > 0 && data.Data) {
             this.displayData(data.Count, data.Data, pageIndex);
         }
         else {
-            this.displayData(0, [], 1);
+            this.clearData();
         }
 
         if (this.options.afterLoadData) {
@@ -173,11 +162,11 @@
     };
 
     Plugin.prototype.verifyData = function (data) {
-        if (!this.options.validateData) {
+        if (!this.options.verifyData) {
             return true;
         }
 
-        if (!this.options.validateData(data)) {
+        if (!this.options.verifyData(data)) {
             this.clearData();
             return false;
         }
@@ -234,7 +223,11 @@
         return array;
     };
 
-    Plugin.prototype.httpRequest = function (succeeded) {
+    Plugin.prototype.clearData = function () {
+        this.displayData(0, [], 1);
+    };
+
+    Plugin.prototype.ajax = function (succeeded) {
         $.ajax({
             url: this.viewModel.Url,
             dataType: 'json',
@@ -249,11 +242,12 @@
         });
     };
 
-    function getRequestUrl(baseUrl, pageIndex, pageSize) {
-        var url = baseUrl;
+    Plugin.prototype.getRequestUrl = function (pageIndex) {
+        var url = this.options.url;
+        var pageSize = this.options.paginationOptions.pageSize;
         var skip = (pageIndex - 1) * pageSize;
 
-        if (baseUrl.indexOf('?') > 0) {
+        if (url.indexOf('?') > 0) {
             url += '&';
         }
         else {
@@ -264,17 +258,6 @@
         url += '&pageSize=' + pageSize;
         url += '&skip=' + skip;
         return url;
-    };
-
-    var fadeDom = function (id, times) {
-        if (!id) return;
-
-        if (!times) {
-            times = 3000;
-        }
-
-        $('#' + id).fadeIn(times);
-        $('#' + id).fadeOut(times);
     };
 
     var displayDom = function (id, isDisplay) {

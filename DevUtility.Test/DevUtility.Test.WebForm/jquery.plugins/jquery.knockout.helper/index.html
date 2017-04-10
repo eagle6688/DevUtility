@@ -7,8 +7,7 @@
     <script src="../../lib/jquery/jquery-1.11.1.min.js"></script>
     <script src="../../lib/knockout/knockout-3.4.0.js"></script>
     <script src="../jquery.pagination/jquery.pagination2.0.js"></script>
-    <script src="jquery.knockout.helper3.0.js"></script>
-    <script src="viewModel.js"></script>
+    <script src="jquery.knockout.helper2.0.js"></script>
 </head>
 <body>
     <br />
@@ -58,15 +57,8 @@
         <input id="btn-changeRequestType" type="button" value="Change Request Type" onclick="changeRequestType();" />
     </div>
     <script type="text/javascript">
-        for (var i in initViewModel.Data) {
-            initViewModel.Data[i].NameID = ko.pureComputed(function () {
-                return this.Name + " " + this.MyID;
-            }, initViewModel.Data[i]);
-        }
-
         $('#myKo').koHelper({
             url: 'http://localhost:9000/Handlers/DataHandler.ashx',
-            viewModel: initViewModel,
             beforeLoadData: function (data) {
                 for (var i in data.Data) {
                     data.Data[i].NameID = ko.pureComputed(function () {
