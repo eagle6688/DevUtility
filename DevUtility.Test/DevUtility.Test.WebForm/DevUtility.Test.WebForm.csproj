@@ -927,6 +927,9 @@
     <Content Include="work\jquery.browseProduct\jquery.browseProduct.js" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Handlers\Concurrency.ashx.cs">
+      <DependentUpon>Concurrency.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Handlers\DataHandler.ashx.cs">
       <DependentUpon>DataHandler.ashx</DependentUpon>
     </Compile>
@@ -968,6 +971,7 @@
     <Content Include="package.json" />
     <Content Include="jquery.plugins\jquery.uploader\TestUploaderHandler.ashx" />
     <Content Include="jquery.plugins\jquery.slicingUploader\UploadHandler.ashx" />
+    <Content Include="Handlers\Concurrency.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
