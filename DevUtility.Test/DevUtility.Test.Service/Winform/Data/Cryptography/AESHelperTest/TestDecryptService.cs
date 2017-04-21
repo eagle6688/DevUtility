@@ -18,7 +18,7 @@ namespace DevUtility.Test.Service.Winform.Data.Cryptography.AESHelperTest
 
         public override void Start()
         {
-            string key = "1234567890";
+            string key = "esupport.enterprise";
             DisplayMessage(string.Format("key:{0}, value:{1}", key, value));
             //DisplayMessage(string.Format("Decrypt base64: {0}", AESHelper.DecryptFromBase64(key, value)));
             DisplayMessage(string.Format("Decrypt hex: {0}", AESHelper.Decrypt(key, value)));

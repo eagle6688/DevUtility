@@ -9,14 +9,6 @@ namespace DevUtility.Com.Data.Cryptography
 {
     public class AESHelper
     {
-        #region Variable
-
-        static MD5 md5 = new MD5CryptoServiceProvider();
-
-        static SHA256 sha256 = new SHA256CryptoServiceProvider();
-
-        #endregion
-
         #region Encrypt
 
         public static byte[] Encrypt(byte[] keyBytes, byte[] ivBytes, byte[] dataBytes)
@@ -42,12 +34,22 @@ namespace DevUtility.Com.Data.Cryptography
             byte[] keyBytes = Encoding.UTF8.GetBytes(key);
             byte[] dataBytes = Encoding.UTF8.GetBytes(data);
 
-            byte[] aesKeyBytes = sha256.ComputeHash(keyBytes);
-            byte[] aesIVBytes = md5.ComputeHash(keyBytes);
+            List<byte> aesKeyBytes = new List<byte>();
+            List<byte> aesValueBytes = new List<byte>();
+
+            using (SHA256 sha256 = new SHA256CryptoServiceProvider())
+            {
+                aesKeyBytes = sha256.ComputeHash(keyBytes).ToList();
+            }
+
+            using (MD5 md5 = new MD5CryptoServiceProvider())
+            {
+                aesValueBytes = md5.ComputeHash(keyBytes).ToList();
+            }
 
             try
             {
-                byte[] resultBytes = Encrypt(aesKeyBytes, aesIVBytes, dataBytes);
+                byte[] resultBytes = Encrypt(aesKeyBytes.ToArray(), aesValueBytes.ToArray(), dataBytes);
                 result = ConvertHelper.BytesToHexString(resultBytes);
             }
             catch (Exception exception)
@@ -64,15 +66,25 @@ namespace DevUtility.Com.Data.Cryptography
             byte[] keyBytes = Encoding.UTF8.GetBytes(key);
             byte[] dataBytes = Encoding.UTF8.GetBytes(data);
 
-            byte[] aesKeyBytes = sha256.ComputeHash(keyBytes);
-            byte[] aesIVBytes = md5.ComputeHash(keyBytes);
+            List<byte> aesKeyBytes = new List<byte>();
+            List<byte> aesValueBytes = new List<byte>();
+
+            using (SHA256 sha256 = new SHA256CryptoServiceProvider())
+            {
+                aesKeyBytes = sha256.ComputeHash(keyBytes).ToList();
+            }
+
+            using (MD5 md5 = new MD5CryptoServiceProvider())
+            {
+                aesValueBytes = md5.ComputeHash(keyBytes).ToList();
+            }
 
             try
             {
-                byte[] resultBytes = Encrypt(aesKeyBytes, aesIVBytes, dataBytes);
+                byte[] resultBytes = Encrypt(aesKeyBytes.ToArray(), aesValueBytes.ToArray(), dataBytes);
                 result = Convert.ToBase64String(resultBytes);
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 DevUtility.Com.Application.Log.LogHelper.Error(exception);
             }
@@ -107,12 +119,22 @@ namespace DevUtility.Com.Data.Cryptography
             byte[] keyBytes = Encoding.UTF8.GetBytes(key);
             byte[] dataBytes = ConvertHelper.HexStringToBytes(data);
 
-            byte[] aesKeyBytes = sha256.ComputeHash(keyBytes);
-            byte[] aesIVBytes = md5.ComputeHash(keyBytes);
+            List<byte> aesKeyBytes = new List<byte>();
+            List<byte> aesValueBytes = new List<byte>();
+
+            using (SHA256 sha256 = new SHA256CryptoServiceProvider())
+            {
+                aesKeyBytes = sha256.ComputeHash(keyBytes).ToList();
+            }
+
+            using (MD5 md5 = new MD5CryptoServiceProvider())
+            {
+                aesValueBytes = md5.ComputeHash(keyBytes).ToList();
+            }
 
             try
             {
-                byte[] resultBytes = Decrypt(aesKeyBytes, aesIVBytes, dataBytes);
+                byte[] resultBytes = Decrypt(aesKeyBytes.ToArray(), aesValueBytes.ToArray(), dataBytes);
                 result = Encoding.UTF8.GetString(resultBytes);
             }
             catch (Exception exception)
@@ -129,12 +151,22 @@ namespace DevUtility.Com.Data.Cryptography
             byte[] keyBytes = Encoding.UTF8.GetBytes(key);
             byte[] dataBytes = Convert.FromBase64String(data);
 
-            byte[] aesKeyBytes = sha256.ComputeHash(keyBytes);
-            byte[] aesIVBytes = md5.ComputeHash(keyBytes);
+            List<byte> aesKeyBytes = new List<byte>();
+            List<byte> aesValueBytes = new List<byte>();
+
+            using (SHA256 sha256 = new SHA256CryptoServiceProvider())
+            {
+                aesKeyBytes = sha256.ComputeHash(keyBytes).ToList();
+            }
+
+            using (MD5 md5 = new MD5CryptoServiceProvider())
+            {
+                aesValueBytes = md5.ComputeHash(keyBytes).ToList();
+            }
 
             try
             {
-                byte[] resultBytes = Decrypt(aesKeyBytes, aesIVBytes, dataBytes);
+                byte[] resultBytes = Decrypt(aesKeyBytes.ToArray(), aesValueBytes.ToArray(), dataBytes);
                 result = Encoding.UTF8.GetString(resultBytes);
             }
             catch (Exception exception)
