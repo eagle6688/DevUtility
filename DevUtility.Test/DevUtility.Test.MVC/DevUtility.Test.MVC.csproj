@@ -144,6 +144,8 @@
     <Compile Include="Areas\Ajax\Controllers\FormDataController.cs" />
     <Compile Include="Areas\Database\Controllers\BigDataHelperController.cs" />
     <Compile Include="Areas\Database\DatabaseAreaRegistration.cs" />
+    <Compile Include="Areas\Data\Controllers\SecurityController.cs" />
+    <Compile Include="Areas\Data\DataAreaRegistration.cs" />
     <Compile Include="Areas\JsLibs\Controllers\JQueryPluginController.cs" />
     <Compile Include="Areas\JsLibs\JsLibsAreaRegistration.cs" />
     <Compile Include="Attributes\AuthAttribute.cs" />
@@ -169,6 +171,8 @@
     <Content Include="Areas\JsLibs\Views\JQueryPlugin\Index.cshtml" />
     <Content Include="Views\Home\Auth.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Areas\Data\Views\web.config" />
+    <Content Include="Areas\Data\Views\Security\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

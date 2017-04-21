@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Index</h2>
+<div>
+    <h4>AES Encrypt</h4>
+    <p>
+        <label>Code: </label>
+        <input id="txt-code" type="text" value="" style="width: 200px" />
+        <label>Value: </label>
+        <input id="txt-value" type="text" value="" style="width: 300px" />
+        <input id="btn-encrypt" type="button" value="encrypt" />
+    </p>
+    <p id="p-result"></p>
+</div>
+<script type="text/javascript">
+    $('#btn-encrypt').click(function () {
+        $.post('AESEncrypt', {
+            code: $('#txt-code').val(),
+            value: $('#txt-value').val()
+        }, function (data, textStatus, jqXHR) {
+            $('#p-result').text('Encrypted value is: ' + data.Data);
+        }, 'json');
+    });
+</script>
