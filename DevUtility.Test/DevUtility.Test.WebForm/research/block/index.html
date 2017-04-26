@@ -6,7 +6,12 @@
 </head>
 <body>
     <script type="text/javascript">
-        throw ('asd');
+        function timeoutFunction() {
+            console.log('Click OK to Continue');  // timing ACTUALLY stops until user hits ok
+            setTimeout(timeoutFunction, 0);
+        }
+
+        timeoutFunction();
         console.log('go on');
     </script>
 </body>
