@@ -890,6 +890,7 @@
     <Content Include="work\demos\knockout\test6.html" />
     <Content Include="work\demos\knockout\test7.html" />
     <Content Include="work\demos\knockout\test8.html" />
+    <Content Include="work\demos\knockout\testInput.html" />
     <Content Include="work\demos\knockout\test9.html" />
     <Content Include="research\webSocket\index.html" />
     <Content Include="index.html" />
