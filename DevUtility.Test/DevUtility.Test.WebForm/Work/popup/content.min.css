@@ -1,0 +1,1813 @@
+[class^="lenovo-"], [class*=" lenovo-"] {
+    font-family: 'LenovoSupport';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.lenovo-users:before {
+    content: "\e956";
+}
+
+.lenovo-check:before {
+    content: "\e951";
+}
+
+.lenovo-close:before {
+    content: "\e952";
+}
+
+.lenovo-article:before, .lenovo-KB:before {
+    content: "\e94f";
+}
+
+.lenovo-spider:before, .lenovo-Spider:before {
+    content: "\e950";
+}
+
+.lenovo-circle-sm-arrow-right:before {
+    content: "\e947";
+}
+
+.lenovo-circle-sm-arrow-up:before {
+    content: "\e948";
+}
+
+.lenovo-circle-sm-arrow-left:before {
+    content: "\e949";
+}
+
+.lenovo-circle-sm-arrow-down:before {
+    content: "\e94a";
+}
+
+.lenovo-rss:before {
+    content: "\e94b";
+}
+
+.lenovo-laptop:before {
+    content: "\e94c";
+}
+
+.lenovo-warranty:before {
+    content: "\e94d";
+}
+
+.lenovo-warranty-no:before {
+    content: "\e998";
+}
+
+.lenovo-warranty-out:before {
+    content: "\e1000";
+}
+
+.lenovo-person:before {
+    content: "\e94e";
+}
+
+.lenovo-circle-arrow-down:before {
+    content: "\e900";
+}
+
+.lenovo-circle-arrow-left:before {
+    content: "\e901";
+}
+
+.lenovo-circle-arrow-right:before {
+    content: "\e902";
+}
+
+.lenovo-circle-arrow-up:before, .lenovo-circle-arrow-top:before {
+    content: "\e903";
+}
+
+.lenovo-alerts:before {
+    content: "\e904";
+}
+
+.lenovo-android:before {
+    content: "\e905";
+}
+
+.lenovo-arrow-down:before {
+    content: "\e906";
+}
+
+.lenovo-arrow-left:before {
+    content: "\e907";
+}
+
+.lenovo-arrow-right:before {
+    content: "\e908";
+}
+
+.lenovo-arrow-top:before {
+    content: "\e909";
+}
+
+.lenovo-black-arrow-bottom:before {
+    content: "\e90a";
+}
+
+.lenovo-black-arrow-left:before {
+    content: "\e90b";
+}
+
+.lenovo-black-arrow-right:before {
+    content: "\e90c";
+}
+
+.lenovo-black-arrow-top:before {
+    content: "\e90d";
+}
+
+.lenovo-box-arrow-down:before {
+    content: "\e90e";
+}
+
+.lenovo-box-arrow-left:before {
+    content: "\e90f";
+}
+
+.lenovo-box-arrow-right:before {
+    content: "\e910";
+}
+
+.lenovo-box-arrow-top:before, .lenovo-box-arrow-up:before {
+    content: "\e911";
+}
+
+.lenovo-burger:before {
+    content: "\e912";
+}
+
+.lenovo-cart:before {
+    content: "\e913";
+}
+
+.lenovo-circle-add:before {
+    content: "\e914";
+}
+
+.lenovo-circle-checkmark:before {
+    content: "\e915";
+}
+
+.lenovo-circle-remove:before {
+    content: "\e916";
+}
+
+.lenovo-circle-x:before {
+    content: "\e917";
+}
+
+.lenovo-cog:before {
+    content: "\e918";
+}
+
+.lenovo-contact:before {
+    content: "\e919";
+}
+
+.lenovo-deals:before, .lenovo-ProductInfo:before {
+    content: "\e91a";
+}
+
+.lenovo-downcart:before {
+    content: "\e91b";
+}
+
+.lenovo-downloads:before, .lenovo-Driver:before {
+    content: "\e91c";
+}
+
+.lenovo-edit:before {
+    content: "\e91d";
+}
+
+.lenovo-flag:before {
+    content: "\e91e";
+}
+
+.lenovo-forums:before {
+    content: "\e91f";
+}
+
+.lenovo-guides:before, .lenovo-Manual:before {
+    content: "\e920";
+}
+
+.lenovo-health:before {
+    content: "\e921";
+}
+
+.lenovo-heart:before {
+    content: "\e922";
+}
+
+.lenovo-home:before {
+    content: "\e923";
+}
+
+.lenovo-letter:before {
+    content: "\e924";
+}
+
+.lenovo-lock:before {
+    content: "\e925";
+}
+
+.lenovo-logo-a:before {
+    content: "\e926";
+}
+
+.lenovo-logo-b:before {
+    content: "\e927";
+}
+
+.lenovo-menu:before {
+    content: "\e928";
+}
+
+.lenovo-mic:before {
+    content: "\e929";
+}
+
+.lenovo-parts:before, .lenovo-AccessoryInfo:before, .lenovo-PartInfo:before {
+    content: "\e92a";
+}
+
+.lenovo-person-b:before {
+    content: "\e92b";
+}
+
+.lenovo-recycle:before {
+    content: "\e92c";
+}
+
+.lenovo-refresh:before {
+    content: "\e92d";
+}
+
+.lenovo-reload:before {
+    content: "\e92e";
+}
+
+.lenovo-repair:before {
+    content: "\e92f";
+}
+
+.lenovo-toolbox:before {
+    content: "\e1001";
+}
+
+.lenovo-search:before {
+    content: "\e930";
+}
+
+.lenovo-solid-add:before {
+    content: "\e931";
+}
+
+.lenovo-solid-arrow-bottom:before {
+    content: "\e932";
+}
+
+.lenovo-solid-arrow-left:before {
+    content: "\e933";
+}
+
+.lenovo-solid-arrow-right:before {
+    content: "\e934";
+}
+
+.lenovo-solid-arrow-top:before {
+    content: "\e935";
+}
+
+.lenovo-solid-checkmark:before {
+    content: "\e936";
+}
+
+.lenovo-solid-remove:before {
+    content: "\e937";
+}
+
+.lenovo-solid-x:before {
+    content: "\e938";
+}
+
+.lenovo-solutions:before, .lenovo-question-sign:before {
+    content: "\e939";
+}
+
+.lenovo-subscribe:before {
+    content: "\e93a";
+}
+
+.lenovo-subscribed:before {
+    content: "\e93b";
+}
+
+.lenovo-thumbs_down:before {
+    content: "\e93c";
+}
+
+.lenovo-thumbs_up:before {
+    content: "\e93d";
+}
+
+.lenovo-unlock:before {
+    content: "\e93e";
+}
+
+.lenovo-videos:before, .lenovo-Video:before {
+    content: "\e93f";
+}
+
+.lenovo-windows:before {
+    content: "\e940";
+}
+
+.lenovo-pinterest:before {
+    content: "\e941";
+}
+
+.lenovo-flikr:before {
+    content: "\e942";
+}
+
+.lenovo-facebook:before {
+    content: "\e943";
+}
+
+.lenovo-google:before {
+    content: "\e944";
+}
+
+.lenovo-twitter:before {
+    content: "\e945";
+}
+
+.lenovo-youtube:before {
+    content: "\e946";
+}
+
+.lenovo-loading-spin:before {
+    content: "\e92e";
+}
+
+.lenovo-browse:before {
+    content: "\e958";
+}
+
+.lenovo-upload:before {
+    content: "\e984";
+}
+
+.lenovo-browse-browse:before {
+    content: "\e968";
+}
+
+.lenovo-delete:before {
+    content: "\e999";
+}
+
+.lenovo-upgrade:before {
+    content: "\e994";
+}
+
+.lenovo-double-arrow-left:before {
+    content: "\e992";
+}
+
+.lenovo-double-arrow-right:before {
+    content: "\e993";
+}
+
+.lenovo-download:before {
+    content: "\e978";
+}
+
+.lenovo-readme:before {
+    content: "\e976";
+}
+
+.lenovo-link:before {
+    content: "\e997";
+}
+
+[class^="option-"], [class*=" option-"] {
+    font-family: 'ContactOptions';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.option-sales-support:before {
+    content: "\e600";
+}
+
+.option-assisted-search:before {
+    content: "\e601";
+}
+
+.option-call-back:before {
+    content: "\e602";
+}
+
+.option-chat:before {
+    content: "\e603";
+}
+
+.option-email-support:before {
+    content: "\e604";
+}
+
+.option-feedback:before {
+    content: "\e605";
+}
+
+.option-forum:before {
+    content: "\e606";
+}
+
+.option-intl-warranty:before {
+    content: "\e607";
+}
+
+.option-online-ticket:before {
+    content: "\e608";
+}
+
+.option-phone-list:before {
+    content: "\e609";
+}
+
+.option-premium-support:before {
+    content: "\e60a";
+}
+
+.option-recovery-media:before {
+    content: "\e60b";
+}
+
+.option-repair-status:before {
+    content: "\e60c";
+}
+
+.option-service-provider:before {
+    content: "\e60d";
+}
+
+.option-service-shop:before {
+    content: "\e60e";
+}
+
+.option-warranty:before {
+    content: "\e60f";
+}
+
+[class^="dl-category-"], [class*=" dl-category-"] {
+    font-family: 'LenovoDownloadsCategories';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.dl-category-scsi:before {
+    content: "\e902";
+}
+
+.dl-category-memory:before {
+    content: "\e903";
+}
+
+.dl-category-mgmtmodule:before {
+    content: "\e900";
+}
+
+.dl-category-powermgmt:before {
+    content: "\e901";
+}
+
+.dl-category-wan:before {
+    content: "\e619";
+}
+
+.dl-category-security:before {
+    content: "\e61c";
+}
+
+.dl-category-audio:before {
+    content: "\e600";
+}
+
+.dl-category-baseboard:before {
+    content: "\e601";
+}
+
+.dl-category-bios:before {
+    content: "\e602";
+}
+
+.dl-category-bluetooth:before {
+    content: "\e603";
+}
+
+.dl-category-camerareader:before {
+    content: "\e604";
+}
+
+.dl-category-chipset:before {
+    content: "\e605";
+}
+
+.dl-category-diags:before {
+    content: "\e606";
+}
+
+.dl-category-docking:before {
+    content: "\e607";
+}
+
+.dl-category-dvddrive:before {
+    content: "\e608";
+}
+
+.dl-category-easysuite:before {
+    content: "\e609";
+}
+
+.dl-category-enterprise:before {
+    content: "\e60a";
+}
+
+.dl-category-ethernet:before, .dl-category-networking:before {
+    content: "\e60b";
+}
+
+.dl-category-fingerprint:before {
+    content: "\e60c";
+}
+
+.dl-category-keyboard:before {
+    content: "\e60d";
+}
+
+.dl-category-patch:before {
+    content: "\e60e";
+}
+
+.dl-category-powermgmt2:before {
+    content: "\e60f";
+}
+
+.dl-category-preload:before {
+    content: "\e610";
+}
+
+.dl-category-rackplanner:before {
+    content: "\e611";
+}
+
+.dl-category-raid:before {
+    content: "\e612";
+}
+
+.dl-category-recovery:before {
+    content: "\e613";
+}
+
+.dl-category-storage:before {
+    content: "\e614";
+}
+
+.dl-category-swutils:before, .dl-category-software:before {
+    content: "\e615";
+}
+
+.dl-category-thinkvantage:before {
+    content: "\e616";
+}
+
+.dl-category-usb:before {
+    content: "\e617";
+}
+
+.dl-category-video:before {
+    content: "\e618";
+}
+
+.dl-category-Wifi:before {
+    content: "\e61a";
+}
+
+.dl-category-Windows:before {
+    content: "\e61b";
+}
+
+[class^="commercial-icon-"], [class*="commercial-icon-"] {
+    font-family: 'LenovoCommercial' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.commercial-icon-users:before {
+    content: "\e900";
+}
+
+.commercial-icon-admins-it:before {
+    content: "\e901";
+}
+
+.commercial-icon-admins-operations:before {
+    content: "\e902";
+}
+
+.commercial-icon-admins-procurement:before {
+    content: "\e903";
+}
+
+.commercial-icon-untitled:before {
+    content: "\e904";
+}
+
+.commercial-icon-clock-watch-time:before {
+    content: "\e905";
+}
+
+.commercial-icon-reporting:before {
+    content: "\e906";
+}
+
+.commercial-icon-warranty-active:before {
+    content: "\e907";
+}
+
+.commercial-icon-warranty-expiring:before {
+    content: "\e908";
+}
+
+.commercial-icon-warranty-expired:before {
+    content: "\e909";
+}
+
+.commercial-icon-youtube-circle:before {
+    content: "\e90a";
+}
+
+.commercial-icon-Server2:before {
+    content: "\e90b";
+}
+
+.commercial-icon-bulb-light:before {
+    content: "\e90c";
+}
+
+.commercial-icon-user:before {
+    content: "\e90d";
+}
+
+.commercial-icon-people:before {
+    content: "\e90e";
+}
+
+.commercial-icon-business_conections_diagram_globe:before {
+    content: "\e90f";
+}
+
+.commercial-icon-mail:before {
+    content: "\e910";
+}
+
+.commercial-icon-search-magnifying-glass-symbol:before {
+    content: "\e911";
+}
+
+.commercial-icon-processor-01:before {
+    content: "\e912";
+}
+
+.commercial-icon-calendar:before {
+    content: "\e913";
+}
+
+.commercial-icon-service-ordered:before {
+    content: "\e914";
+}
+
+.commercial-icon-chat:before {
+    content: "\e915";
+}
+
+.commercial-icon-Technology__Storage:before {
+    content: "\e916";
+}
+
+.commercial-icon-Technology_Storage_and_netwroking:before {
+    content: "\e917";
+}
+
+.commercial-icon-error-outline:before {
+    content: "\e918";
+}
+
+.commercial-icon-global:before {
+    content: "\e919";
+}
+
+.commercial-icon-alarm:before {
+    content: "\e91a";
+}
+
+.commercial-icon-notebook:before {
+    content: "\e91b";
+}
+
+.commercial-icon-Communication51:before {
+    content: "\e91c";
+}
+
+.commercial-icon-product:before {
+    content: "\e91d";
+}
+
+.commercial-icon-book:before {
+    content: "\e91e";
+}
+
+.commercial-icon-download:before {
+    content: "\e91f";
+}
+
+.commercial-icon-name:before {
+    content: "\e920";
+}
+
+.commercial-icon-pen-angled:before {
+    content: "\e921";
+}
+
+.commercial-icon-text:before {
+    content: "\e922";
+}
+
+.commercial-icon-saved-solutions:before {
+    content: "\e92c";
+}
+
+.commercial-icon-Server:before {
+    content: "\e92d";
+}
+
+.commercial-icon-text-document:before {
+    content: "\e92e";
+}
+
+.commercial-icon-tool:before {
+    content: "\e92f";
+}
+
+.commercial-icon-cell-12-8:before {
+    content: "\e930";
+}
+
+.commercial-icon-whatsapp-phone:before {
+    content: "\e964";
+}
+
+.commercial-icon-credit_card_back:before {
+    content: "\e967";
+}
+
+.commercial-icon-download2:before {
+    content: "\e968";
+}
+
+.commercial-icon-multimedia-28:before {
+    content: "\e969";
+}
+
+.commercial-icon-network1:before {
+    content: "\e96a";
+}
+
+.commercial-icon-arrows_converge_2:before {
+    content: "\e96b";
+}
+
+.commercial-icon-arrows_axis_angle:before {
+    content: "\e96c";
+}
+
+.commercial-icon-arrow_download:before {
+    content: "\e96d";
+}
+
+.commercial-icon-database:before {
+    content: "\e96e";
+}
+
+.commercial-icon-008_073_settings_ethernet_html_code:before {
+    content: "\e96f";
+}
+
+.commercial-icon-server:before {
+    content: "\e970";
+}
+
+.commercial-icon-Marketing_web_hosting:before {
+    content: "\e971";
+}
+
+.commercial-icon-office-78:before {
+    content: "\e972";
+}
+
+.commercial-icon-seo-97:before {
+    content: "\e973";
+}
+
+.commercial-icon-toolbox_job_tool_work_repair:before {
+    content: "\e974";
+}
+
+.commercial-icon-puzzle:before {
+    content: "\e975";
+}
+
+.commercial-icon-devices:before {
+    content: "\e978";
+}
+
+.commercial-icon-mobile:before {
+    content: "\e979";
+}
+
+.commercial-icon-laptap:before {
+    content: "\e97a";
+}
+
+.commercial-icon-enterprise:before {
+    content: "\e97b";
+}
+
+.commercial-icon-server2:before {
+    content: "\e97c";
+}
+
+.commercial-icon-network_internet_web_technology_computer:before {
+    content: "\e97d";
+}
+
+.commercial-icon-technology_internet_communications30-01:before {
+    content: "\e97e";
+}
+
+.commercial-icon-shrink:before {
+    content: "\e97f";
+}
+
+.commercial-icon-xxx005:before {
+    content: "\e980";
+}
+
+.commercial-icon-Idea_Out_Of_The_box:before {
+    content: "\e981";
+}
+
+.commercial-icon-storage:before {
+    content: "\e982";
+}
+
+.commercial-icon-7:before {
+    content: "\e983";
+}
+
+.commercial-icon-Database:before {
+    content: "\e984";
+}
+
+.commercial-icon-arrows_in_2:before {
+    content: "\e985";
+}
+
+.commercial-icon-5011:before {
+    content: "\e986";
+}
+
+.commercial-icon-217:before {
+    content: "\e987";
+}
+
+.commercial-icon-toolbox:before {
+    content: "\e988";
+}
+
+.commercial-icon-ToolBox:before {
+    content: "\e989";
+}
+
+.commercial-icon-toolbox2:before {
+    content: "\e98a";
+}
+
+.commercial-icon-toolbox_job_tool_work_repair2:before {
+    content: "\e98b";
+}
+
+.commercial-icon-code_application_development_programming_software:before {
+    content: "\e98c";
+}
+
+.commercial-icon-duplicate_application_web_interface_software:before {
+    content: "\e98d";
+}
+
+.commercial-icon-application:before {
+    content: "\e98e";
+}
+
+.commercial-icon-multitasking_interface_app_gui_software_buttons:before {
+    content: "\e98f";
+}
+
+.commercial-icon-Delivery_Van:before {
+    content: "\e990";
+}
+
+.commercial-icon-5112_-_Delivery_Car:before {
+    content: "\e991";
+}
+
+.commercial-icon-service-car:before {
+    content: "\e992";
+}
+
+.commercial-icon-shop-cart:before {
+    content: "\e993";
+}
+
+.commercial-icon-setting:before {
+    content: "\e994";
+}
+
+.commercial-icon-key:before {
+    content: "\e995";
+}
+
+.commercial-icon-Clock02:before {
+    content: "\e997";
+}
+
+.commercial-icon-Feb03-28:before {
+    content: "\e998";
+}
+
+.commercial-icon-handshake2:before {
+    content: "\e999";
+}
+
+.commercial-icon-User_Head:before {
+    content: "\e99a";
+}
+
+.commercial-icon-toolbox-repair:before {
+    content: "\e99b";
+}
+
+.commercial-icon-business-card:before {
+    content: "\e923";
+}
+
+.commercial-icon-alert:before {
+    content: "\e924";
+}
+
+.commercial-icon-company:before {
+    content: "\e925";
+}
+
+.commercial-icon-contact:before {
+    content: "\e926";
+}
+
+.commercial-icon-icon_screen_Admin:before {
+    content: "\e927";
+}
+
+.commercial-icon-list:before {
+    content: "\e928";
+}
+
+.commercial-icon-images:before {
+    content: "\e929";
+}
+
+.commercial-icon-video:before {
+    content: "\e92a";
+}
+
+[class^="psp-icon-"], [class*=" psp-icon-"] {
+    font-family: 'PspDownload';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.psp-icon-download:before {
+    content: "\e900";
+}
+
+.psp-icon-readme:before {
+    content: "\e901";
+}
+
+.psp-icon-checksum:before {
+    content: "\e902";
+}
+
+.psp-icon-checked:before {
+    content: "\e903";
+}
+
+.psp-icon-checkbox:before {
+    content: "\e904";
+}
+
+.psp-icon-update-system:before {
+    content: "\e905";
+}
+
+[class^="aps-"], [class*=" aps-"] {
+    font-family: 'LenovoAPS';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.aps-buy-access:before {
+    content: "\e900";
+}
+
+.aps-buy-parts:before {
+    content: "\e901";
+}
+
+.aps-camera:before {
+    content: "\e902";
+}
+
+.aps-camera2:before {
+    content: "\e903";
+}
+
+.aps-export:before {
+    content: "\e905";
+}
+
+.ga-default-btn {
+    color: #108ddb;
+    border: 1px solid #108ddb;
+    border-radius: 2px;
+}
+
+    .ga-default-btn:hover {
+        color: #0d6eab;
+    }
+
+.ga-blue-btn {
+    display: inline-block;
+    text-align: center;
+    color: white;
+    background-color: #3e8ddd;
+    border: 1px solid #3e8ddd;
+    border-radius: 2px;
+}
+
+    .ga-blue-btn:hover {
+        background-color: #2373c5;
+        color: white;
+    }
+
+.gray {
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    filter: grayscale(100%);
+    filter: progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);
+    filter: gray;
+}
+
+.absolute {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    z-index: 1;
+}
+
+.mask {
+    background: rgba(0,0,0,0.5);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 9990;
+}
+
+.mask-open {
+    overflow: hidden;
+    padding-right: 18px;
+}
+
+    .mask-open .mask {
+        overflow: auto;
+    }
+
+.loading-mask {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 9999;
+    height: 100%;
+    width: 100%;
+    background: rgba(255,255,255,0.2);
+    background-image: url(../../images/loading.gif);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.caps-loading-small {
+    position: absolute;
+}
+
+.caps-mask-small {
+    position: absolute;
+    background: rgba(217,216,214,0.5);
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 1;
+}
+
+.absolute-center {
+    position: relative;
+    top: 80px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.font-weight {
+    font-weight: 800;
+}
+
+.border0 {
+    border: 0 !important;
+}
+
+.clearfix::after {
+    content: '.';
+    overflow: hidden;
+    clear: both;
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+.clearfix:before, .clearfix:after {
+    content: " ";
+    display: table;
+}
+
+.clearfix:after {
+    content: '.';
+    display: block;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    clear: both;
+}
+
+.clearfix {
+    *zoom: 1;
+}
+
+[class*="col-"] {
+    display: block;
+    float: left;
+    min-height: 25px;
+    box-sizing: border-box;
+}
+
+.ga-page-padding {
+    padding-left: 80px !important;
+    padding-right: 80px !important;
+}
+
+.ga-padL-2 {
+    padding-left: 20px;
+}
+
+.ga-padLR-4 {
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.ga-padL-5 {
+    padding-left: 50px;
+}
+
+.ga-padR-5 {
+    padding-right: 50px;
+}
+
+.ga-padLR-1 {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.ga-pad-top-4 {
+    padding-top: 40px;
+}
+
+.ga-padT-0 {
+    padding-top: 0;
+}
+
+.ga-padR-0 {
+    padding-right: 0;
+}
+
+.ga-padR-6 {
+    padding-right: 60px;
+}
+
+.ga-padT-5 {
+    padding-top: 5px;
+}
+
+.no-underline {
+    text-decoration: none;
+}
+
+.col-8 {
+    width: 66.66667%;
+}
+
+.col-5 {
+    width: 50%;
+}
+
+.col-6 {
+    width: 60%;
+}
+
+.col-4 {
+    width: 25%;
+}
+
+.col-3 {
+    width: 33.33333%;
+}
+
+.col-2 {
+    width: 20%;
+}
+
+.col-1 {
+    width: 10%;
+}
+
+.col-1-6 {
+    width: 16.6666%;
+}
+
+.default-tip-color {
+    color: #108ddb;
+}
+
+.font12 {
+    font-size: 12px !important;
+}
+
+.font14 {
+    font-size: 14px !important;
+}
+
+.font5 {
+    font-size: 50px !important;
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+.opacity-4 {
+    opacity: 0.4;
+    filter: alpha(opacity=40);
+}
+
+.warranty-status-active, .success-tip-color, .success-color {
+    color: #7ac65d;
+}
+
+.warranty-status-expiring {
+    color: #ff720e;
+}
+
+.warranty-status-expired {
+    color: #e4362d;
+}
+
+.no-sn-warranty-status {
+    color: #e4e4e4;
+}
+
+.error-tip-color {
+    color: #a94442;
+}
+
+.error-tip {
+    color: #a94442;
+    line-height: 19px;
+    display: none;
+}
+
+.has-error .error-tip {
+    display: block;
+}
+
+.purple {
+    color: #a94442;
+}
+
+.orange {
+    color: #ff6a00;
+}
+
+.link-color-blue {
+    color: #3f8cdb !important;
+}
+
+    .link-color-blue:hover {
+        color: #2472c3 !important;
+    }
+
+.fixed-top {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 999;
+    box-shadow: 1px 2px 1px #ddd;
+}
+
+.tablist-head-color {
+    background-color: #fbfbfa;
+}
+
+.flex-justify-between {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+}
+
+.file-browse {
+    position: relative;
+    overflow: hidden;
+}
+
+    .file-browse input[type="file"] {
+        position: absolute;
+        left: 0;
+        top: -50%;
+        width: 100%;
+        font-size: 100px;
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+
+.failure-color {
+    color: red;
+}
+
+.ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.modal-header-user {
+    background-color: #3f8cdb;
+    color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    margin-bottom: 20px;
+}
+
+    .modal-header-user .close {
+        margin-top: 3px;
+        color: white;
+        opacity: 1;
+        filter: alpha(opacity=100);
+    }
+
+.prompt-message {
+    font-size: 19px;
+    text-align: center;
+}
+
+.icon-alarm-circle {
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    text-align: center;
+    font-size: 14px;
+    color: white;
+    border-radius: 50%;
+    background-color: #ff6a00;
+    padding-top: 7px;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #ddd;
+}
+
+.algin-right {
+    text-align: right;
+}
+
+.text-left {
+    text-align: left !important;
+}
+
+.opactity5 {
+    filter: alpha(opacity=50);
+    opacity: 0.5;
+}
+
+.has-error-input {
+    border-color: #a94442;
+}
+
+.relative {
+    position: relative;
+}
+
+.blue-color {
+    color: #3e8ddd !important;
+}
+
+@-webkit-keyframes rotate-down-to-up {
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(-180deg);
+    }
+}
+
+@-ms-keyframes rotate-down-to-up {
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(-180deg);
+    }
+}
+
+@keyframes rotate-down-to-up {
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(-180deg);
+    }
+}
+
+.arrow-down-to-up {
+    -webkit-animation: rotate-down-to-up 0.5s forwards;
+    -ms-animation: rotate-down-to-up 0.5s forwards;
+    -moz-animation: rotate-down-to-up 0.5s forwards;
+    animation: rotate-down-to-up 0.5s forwards;
+}
+
+@-webkit-keyframes rotate-up-to-down {
+    from {
+        transform: rotate(-180deg);
+    }
+
+    to {
+        transform: rotate(0);
+    }
+}
+
+@-ms-keyframes rotate-up-to-down {
+    from {
+        transform: rotate(-180deg);
+    }
+
+    to {
+        transform: rotate(0);
+    }
+}
+
+@keyframes rotate-up-to-down {
+    from {
+        transform: rotate(-180deg);
+    }
+
+    to {
+        transform: rotate(0);
+    }
+}
+
+.arrow-up-to-down {
+    -webkit-animation: rotate-up-to-down 0.5s forwards;
+    -ms-animation: rotate-up-to-down 0.5s forwards;
+    -moz-animation: rotate-up-to-down 0.5s forwards;
+    animation: rotate-up-to-down 0.5s forwards;
+}
+
+@-webkit-keyframes rotate-right-to-down {
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(90deg);
+    }
+}
+
+@-ms-keyframes rotate-right-to-down {
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(90deg);
+    }
+}
+
+@keyframes rotate-right-to-down {
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(90deg);
+    }
+}
+
+.arrow-right-to-down {
+    -webkit-animation: rotate-right-to-down 0.5s forwards;
+    -ms-animation: rotate-right-to-down 0.5s forwards;
+    -moz-animation: rotate-right-to-down 0.5s forwards;
+    animation: rotate-right-to-down 0.5s forwards;
+}
+
+@-webkit-keyframes rotate-down-to-right {
+    from {
+        transform: rotate(90deg);
+    }
+
+    to {
+        transform: rotate(0);
+    }
+}
+
+@-ms-keyframes rotate-down-to-right {
+    from {
+        transform: rotate(90deg);
+    }
+
+    to {
+        transform: rotate(0);
+    }
+}
+
+@keyframes rotate-down-to-right {
+    from {
+        transform: rotate(90deg);
+    }
+
+    to {
+        transform: rotate(0);
+    }
+}
+
+.arrow-down-to-right {
+    -webkit-animation: rotate-down-to-right 0.5s forwards;
+    -ms-animation: rotate-down-to-right 0.5s forwards;
+    -moz-animation: rotate-down-to-right 0.5s forwards;
+    animation: rotate-down-to-right 0.5s forwards;
+}
+
+@-webkit-keyframes opacity {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes opacity {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.fade-in {
+    display: block !important;
+    -webkit-animation: opacity 1s forwards;
+    -ms-animation: opacity 1s forwards;
+    -moz-animation: opacity 1s forwards;
+    animation: opacity 1s forwards;
+}
+
+blockquote, button, dd, dl, fieldset, figure, form, h1, h2, h3, h4, h5, h6, input, legend, ol, p, pre, td, textarea, th, ul, li, dl, dt, dd, div, img, menu {
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6, small, big, input, textarea, button, select {
+    font-size: inherit;
+}
+
+address, cite, dfn, em, i, optgroup, var {
+    font-style: normal;
+}
+
+fieldset, img {
+    border: 0;
+    vertical-align: middle;
+}
+
+ul, ol, li {
+    list-style: none;
+}
+
+dl, dt, dd {
+    font-weight: normal;
+}
+
+article, aside, details, figcaption, figure, footer, header, main, menu, nav, section, summary {
+    display: block;
+}
+
+input:required:invalid, input:focus:invalid, textarea:required:invalid, textarea:focus:invalid {
+    box-shadow: none;
+}
+
+::-ms-clear {
+    display: none;
+}
+
+html, body {
+    font-family: "museo_sans300";
+    color: #898989;
+}
+
+    html a, body a {
+        color: #108ddb;
+        text-decoration: none !important;
+    }
+
+@media screen and (max-width: 1280px) {
+    body {
+        width: 1280px;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .container-box, .ga-page-padding {
+        width: 100%;
+        max-width: 1480px;
+        margin: 0 auto;
+    }
+}
+
+.alert-modal {
+    width: 340px;
+    max-width: 450px;
+    margin: 15% auto;
+}
+
+.confirm-modal {
+    width: 360px;
+    max-width: 450px;
+    margin: 15% auto;
+}
+
+.my-modal-header {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    background-color: #3e8ddd;
+    color: white;
+    text-align: center;
+    position: relative;
+}
+
+    .my-modal-header .modal-header-title {
+        font-size: 17px;
+    }
+
+    .my-modal-header .close {
+        position: absolute;
+        right: 10px;
+        top: 5px;
+        color: white;
+        opacity: 1;
+        filter: alpha(opacity=100);
+    }
+
+        .my-modal-header .close:hover {
+            opacity: .5;
+            filter: alpha(opacity=50);
+        }
+
+.my-modal-body {
+    min-height: 100px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+
+    .my-modal-body .modal-body-tip {
+        text-align: center;
+        font-size: 15px;
+    }
+
+.my-modal-footer {
+    background-color: #eee;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+    .my-modal-footer .btn {
+        min-width: 80px;
+    }
+
+        .my-modal-footer .btn + .btn {
+            margin-left: 15px;
+        }

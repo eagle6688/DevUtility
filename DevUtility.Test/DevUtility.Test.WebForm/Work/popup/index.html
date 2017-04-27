@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>http://localhost:9000/work/popup/index.html</title>
+    <meta charset="utf-8" />
+    <link href="../../lib/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="../../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="content.min.css" rel="stylesheet" />
+    <script src="../../lib/jquery/jquery-1.11.1.min.js"></script>
+    <script src="jquery.popup.js"></script>
+</head>
+<body>
+    <div class="btn-wrapper" style="margin:15% auto;width:200px;">
+        <button id="btn-alert" class="btn btn-dafault">Alert</button>
+        <button id="btn-confirm" class="btn btn-primary">confirm</button>
+    </div>
+    <div id="div-alert" class="alert-modal modal-content">
+        <div class="modal-header my-modal-header">
+            <h2 class="modal-header-title">Alert</h2>
+            <a id="a-close" href="javascript:;" class="close">&times;</a>
+        </div>
+        <div class="modal-body my-modal-body">
+            <p id="p-message" class="modal-body-tip"></p>
+        </div>
+        <div class="modal-footer my-modal-footer">
+            <div class="btn-wrapper text-right">
+                <a id="a-ok" class="btn ga-blue-btn ok">OK</a>
+            </div>
+        </div>
+    </div>
+    <div id="div-confirm" class="confirm-modal modal-content">
+        <div class="modal-header my-modal-header">
+            <h2 class="modal-header-title">Confirm</h2>
+            <a id="confirm-close" href="javascript:;" class="close">&times;</a>
+        </div>
+        <div class="modal-body my-modal-body">
+            <p id="confirm-message" class="modal-body-tip"></p>
+        </div>
+        <div class="modal-footer my-modal-footer">
+            <div class="btn-wrapper text-center">
+                <a id="confirm-ok" class="btn btn-default ok">OK</a>
+                <a id="confirm-cancel" class="btn ga-blue-btn cancel">Cancel</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        var alertPopup = $.popup({
+            popupID: 'div-alert',
+            messageID: 'p-message',
+            btn_OK_ID: 'a-ok',
+            btn_Close_ID: 'a-close'
+        });
+
+        var confirmPopup = $.popup({
+            popupID: 'div-confirm',
+            messageID: 'confirm-message',
+            btn_OK_ID: 'confirm-ok',
+            btn_Close_ID: 'confirm-close',
+            btn_Cancel_ID: 'confirm-cancel'
+        });
+
+        $('#btn-alert').click(function () {
+            alertPopup.alert('Hello World Alert!');
+        });
+
+        $('#btn-confirm').click(function () {
+            confirmPopup.comfirm('Hello World confirm!', function () {
+                alert('OK');
+            });
+        });
+    </script>
+</body>
+</html>

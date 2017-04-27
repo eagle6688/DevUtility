@@ -927,6 +927,9 @@
     <Content Include="Web.config" />
     <Content Include="work\demos\typescript\greeter.html" />
     <Content Include="work\jquery.browseProduct\jquery.browseProduct.js" />
+    <Content Include="work\popup\content.min.css" />
+    <Content Include="work\popup\index.html" />
+    <Content Include="work\popup\jquery.popup.js" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Handlers\Concurrency.ashx.cs">
