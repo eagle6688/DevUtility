@@ -1,7 +1,7 @@
 ﻿;
 (function ($, window, document, undefined) {
     var pluginName = 'popup',
-        version = '20170427';
+        version = '20170502';
 
     var defaults = {
         backgroundID: 'alert-background',
@@ -130,7 +130,7 @@
     Plugin.prototype._register = function (okCallback, closeCallback, cancelCallback) {
         var self = this;
 
-        this.$btnOK.click(function (e) {
+        this.$btnOK.unbind('click').click(function (e) {
             e.stopPropagation();
             self._hide();
 
@@ -139,7 +139,7 @@
             }
         });
 
-        this.$btnClose.click(function (e) {
+        this.$btnClose.unbind('click').click(function (e) {
             e.stopPropagation();
             self._hide();
 
@@ -149,7 +149,7 @@
         });
 
         if (this.$btnCancel.length > 0) {
-            this.$btnCancel.click(function (e) {
+            this.$btnCancel.unbind('click').click(function (e) {
                 e.stopPropagation();
                 self._hide();
 

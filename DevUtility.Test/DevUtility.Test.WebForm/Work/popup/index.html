@@ -12,6 +12,7 @@
 <body>
     <div class="btn-wrapper" style="margin:15% auto;width:200px;">
         <button id="btn-alert" class="btn btn-dafault">Alert</button>
+        <button id="btn-alert2" class="btn btn-dafault">Alert2</button>
         <button id="btn-confirm" class="btn btn-primary">confirm</button>
     </div>
     <div id="div-alert" class="alert-modal modal-content">
@@ -60,7 +61,15 @@
         });
 
         $('#btn-alert').click(function () {
-            alertPopup.alert('Hello World Alert!');
+            alertPopup.alert('Hello World Alert!', function () {
+                console.log('1');
+            });
+        });
+
+        $('#btn-alert2').click(function () {
+            alertPopup.alert('Hello World Alert!', function () {
+                console.log('2');
+            });
         });
 
         $('#btn-confirm').click(function () {
