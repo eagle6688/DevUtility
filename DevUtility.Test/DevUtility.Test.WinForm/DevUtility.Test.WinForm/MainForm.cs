@@ -274,5 +274,14 @@ namespace DevUtility.Test.WinForm
         }
 
         #endregion
+
+        #region button_Directory_Click
+
+        private void button_Directory_Click(object sender, EventArgs e)
+        {
+            OpenForm(new TestForms.IO.Form_Directory());
+        }
+
+        #endregion
     }
 }

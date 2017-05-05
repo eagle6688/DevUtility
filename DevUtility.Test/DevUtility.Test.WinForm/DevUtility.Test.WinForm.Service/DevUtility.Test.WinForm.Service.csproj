@@ -54,6 +54,7 @@
     <Compile Include="Data\Cryptography\FileMD5EncryptService.cs" />
     <Compile Include="Data\LinqData\NullInLinqService.cs" />
     <Compile Include="Data\MemoryFootprint\ProductsService.cs" />
+    <Compile Include="IO\Directory\DeleteService.cs" />
     <Compile Include="IO\Path\CombineService.cs" />
     <Compile Include="MultiThreads\AsyncAndAwaitService.cs" />
     <Compile Include="MultiThreads\BeginInvokeService.cs" />

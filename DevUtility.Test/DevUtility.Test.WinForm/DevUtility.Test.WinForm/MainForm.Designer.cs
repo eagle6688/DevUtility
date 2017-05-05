@@ -63,6 +63,7 @@
             this.button_Research = new System.Windows.Forms.Button();
             this.button_Unicode = new System.Windows.Forms.Button();
             this.button_Linq = new System.Windows.Forms.Button();
+            this.button_Directory = new System.Windows.Forms.Button();
             this.groupBox_Application.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -305,6 +306,7 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.button_Directory);
             this.groupBox4.Controls.Add(this.button_FileHelper);
             this.groupBox4.Location = new System.Drawing.Point(12, 298);
             this.groupBox4.Name = "groupBox4";
@@ -439,6 +441,16 @@
             this.button_Linq.UseVisualStyleBackColor = true;
             this.button_Linq.Click += new System.EventHandler(this.button_Linq_Click);
             // 
+            // button_Directory
+            // 
+            this.button_Directory.Location = new System.Drawing.Point(104, 20);
+            this.button_Directory.Name = "button_Directory";
+            this.button_Directory.Size = new System.Drawing.Size(79, 23);
+            this.button_Directory.TabIndex = 12;
+            this.button_Directory.Text = "Directory";
+            this.button_Directory.UseVisualStyleBackColor = true;
+            this.button_Directory.Click += new System.EventHandler(this.button_Directory_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -507,5 +519,6 @@
         private System.Windows.Forms.Button button_Convert;
         private System.Windows.Forms.Button button_Research;
         private System.Windows.Forms.Button button_Linq;
+        private System.Windows.Forms.Button button_Directory;
     }
 }

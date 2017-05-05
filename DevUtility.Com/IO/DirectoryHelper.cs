@@ -84,21 +84,28 @@ namespace DevUtility.Com.IO
 
         #region Delete
 
-        public static bool Delete(string path)
+        public static bool Delete(string path, bool recursive = true)
         {
-            if (Directory.Exists(path))
+            if (!Directory.Exists(path))
             {
-                try
-                {
-                    Directory.Delete(path);
-                }
-                catch
-                {
-                    return false;
-                }
+                return true;
             }
 
-            return true;
+            if (recursive && !path.EndsWith("\\"))
+            {
+                path += "\\";
+            }
+
+            try
+            {
+                Directory.Delete(path, recursive);
+                return true;
+            }
+            catch (Exception exception)
+            {
+                LogHelper.Error(exception);
+                return false;
+            }
         }
 
         public static bool DeleteByPath(string path)
