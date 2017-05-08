@@ -27,5 +27,13 @@ namespace DevUtility.Test.Common.Winform
         }
 
         #endregion
+
+        public static string Test
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["Test"];
+            }
+        }
     }
 }

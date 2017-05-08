@@ -2,6 +2,7 @@
 using DevUtility.Win.Services.AppService;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,15 +13,14 @@ namespace DevUtility.Test.WinForm.Service.Net.FTP
     {
         #region Variables
 
-        string host, user, pwd;
+        string user, pwd;
 
         #endregion
 
-        #region UploadService
+        #region Constructor
 
-        public UploadService(string host, string user, string pwd)
+        public UploadService(string user, string pwd)
         {
-            this.host = host;
             this.user = user;
             this.pwd = pwd;
         }
@@ -31,17 +31,7 @@ namespace DevUtility.Test.WinForm.Service.Net.FTP
 
         public override void Start()
         {
-            FTPHelper ftpHelper = new FTPHelper(user, pwd);
-            string message = "";
 
-            if (!ftpHelper.UploadOverMove("ftp://127.0.0.1/storage/", @"E:\Downloads\Hotel.png", "ftp://127.0.0.1/storage/Hotel.png", "Hotel.png", ref message))
-            {
-                DisplayMessage("Failed!");
-            }
-            else
-            {
-                DisplayMessage("Success!");
-            }
         }
 
         #endregion

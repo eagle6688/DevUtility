@@ -101,12 +101,19 @@
     <Compile Include="Application\ServiceProcessHelper.cs" />
     <Compile Include="Extensions\System\Web\HttpPostedFileExt.cs" />
     <Compile Include="Extensions\System\Web\HttpRequestExt.cs" />
-    <Compile Include="Net\FTP\FTPHelper.cs" />
+    <Compile Include="Net\BaseNetHelper.cs" />
+    <Compile Include="Net\FTP\FtpFileInfo.cs" />
+    <Compile Include="Net\FTP\FtpFileTypes.cs" />
+    <Compile Include="Net\FTP\FtpHelper.cs" />
+    <Compile Include="Net\FTP\FtpOSTypes.cs" />
     <Compile Include="Net\Http\HttpHelper.cs" />
     <Compile Include="Net\Mail\Delegates.cs" />
     <Compile Include="Net\Mail\EmailCredential.cs" />
     <Compile Include="Net\Mail\EmailHelper.cs" />
     <Compile Include="Net\Mail\EmailHelperModel.cs" />
+    <Compile Include="Net\NetDelegates.cs" />
+    <Compile Include="Net\NetUri.cs" />
+    <Compile Include="Net\WebClientHelper.cs" />
     <Compile Include="NoSQL\Redis\Base\BaseRedisHelper.cs" />
     <Compile Include="NoSQL\Redis\ModelHelper\BaseRedisDataHelper.cs" />
     <Compile Include="NoSQL\Redis\ModelHelper\BaseRedisModelHelper.cs" />
@@ -146,6 +153,9 @@
       <Project>{71a90a24-095e-4b0e-bab9-83595297f094}</Project>
       <Name>DevUtility.Com</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Net\FTP\ListDirectoryDetails.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
