@@ -37,8 +37,10 @@
             this.label_Input = new System.Windows.Forms.Label();
             this.textBox_Message = new System.Windows.Forms.TextBox();
             this.groupBox_FTPHelper = new System.Windows.Forms.GroupBox();
-            this.button_Upload = new System.Windows.Forms.Button();
             this.button_ListDirectoryDetails = new System.Windows.Forms.Button();
+            this.button_Upload = new System.Windows.Forms.Button();
+            this.button_ListDirectory = new System.Windows.Forms.Button();
+            this.button_Exists = new System.Windows.Forms.Button();
             this.groupBox_FTPHelper.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -115,6 +117,8 @@
             // 
             // groupBox_FTPHelper
             // 
+            this.groupBox_FTPHelper.Controls.Add(this.button_Exists);
+            this.groupBox_FTPHelper.Controls.Add(this.button_ListDirectory);
             this.groupBox_FTPHelper.Controls.Add(this.button_ListDirectoryDetails);
             this.groupBox_FTPHelper.Controls.Add(this.button_Upload);
             this.groupBox_FTPHelper.Location = new System.Drawing.Point(12, 75);
@@ -123,6 +127,16 @@
             this.groupBox_FTPHelper.TabIndex = 32;
             this.groupBox_FTPHelper.TabStop = false;
             this.groupBox_FTPHelper.Text = "FTP Helper";
+            // 
+            // button_ListDirectoryDetails
+            // 
+            this.button_ListDirectoryDetails.Location = new System.Drawing.Point(84, 21);
+            this.button_ListDirectoryDetails.Name = "button_ListDirectoryDetails";
+            this.button_ListDirectoryDetails.Size = new System.Drawing.Size(155, 23);
+            this.button_ListDirectoryDetails.TabIndex = 1;
+            this.button_ListDirectoryDetails.Text = "List Directory Details";
+            this.button_ListDirectoryDetails.UseVisualStyleBackColor = true;
+            this.button_ListDirectoryDetails.Click += new System.EventHandler(this.button_ListDirectoryDetails_Click);
             // 
             // button_Upload
             // 
@@ -134,15 +148,25 @@
             this.button_Upload.UseVisualStyleBackColor = true;
             this.button_Upload.Click += new System.EventHandler(this.button_Upload_Click);
             // 
-            // button_ListDirectoryDetails
+            // button_ListDirectory
             // 
-            this.button_ListDirectoryDetails.Location = new System.Drawing.Point(84, 21);
-            this.button_ListDirectoryDetails.Name = "button_ListDirectoryDetails";
-            this.button_ListDirectoryDetails.Size = new System.Drawing.Size(155, 23);
-            this.button_ListDirectoryDetails.TabIndex = 1;
-            this.button_ListDirectoryDetails.Text = "List Directory Details";
-            this.button_ListDirectoryDetails.UseVisualStyleBackColor = true;
-            this.button_ListDirectoryDetails.Click += new System.EventHandler(this.button_ListDirectoryDetails_Click);
+            this.button_ListDirectory.Location = new System.Drawing.Point(245, 21);
+            this.button_ListDirectory.Name = "button_ListDirectory";
+            this.button_ListDirectory.Size = new System.Drawing.Size(104, 23);
+            this.button_ListDirectory.TabIndex = 2;
+            this.button_ListDirectory.Text = "List Directory";
+            this.button_ListDirectory.UseVisualStyleBackColor = true;
+            this.button_ListDirectory.Click += new System.EventHandler(this.button_ListDirectory_Click);
+            // 
+            // button_Exists
+            // 
+            this.button_Exists.Location = new System.Drawing.Point(355, 21);
+            this.button_Exists.Name = "button_Exists";
+            this.button_Exists.Size = new System.Drawing.Size(69, 23);
+            this.button_Exists.TabIndex = 3;
+            this.button_Exists.Text = "Exists";
+            this.button_Exists.UseVisualStyleBackColor = true;
+            this.button_Exists.Click += new System.EventHandler(this.button_Exists_Click);
             // 
             // Form_FTP
             // 
@@ -179,5 +203,7 @@
         private System.Windows.Forms.GroupBox groupBox_FTPHelper;
         private System.Windows.Forms.Button button_Upload;
         private System.Windows.Forms.Button button_ListDirectoryDetails;
+        private System.Windows.Forms.Button button_ListDirectory;
+        private System.Windows.Forms.Button button_Exists;
     }
 }

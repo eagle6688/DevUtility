@@ -77,6 +77,30 @@ namespace DevUtility.Out.Net.FTP
 
         #endregion
 
+        #region Get Response
+
+        public FtpWebResponse GetResponse(string url, string method)
+        {
+            FtpWebRequest request = CreateRequest(url, method);
+            FtpWebResponse response = request.GetResponse() as FtpWebResponse;
+            return response;
+        }
+
+        #endregion
+
+        #region Close Response
+
+        public void CloseResponse(ref FtpWebResponse response)
+        {
+            try
+            {
+                response.Close();
+            }
+            catch { }
+        }
+
+        #endregion
+
         #region Download
 
         /// <summary>
@@ -176,6 +200,25 @@ namespace DevUtility.Out.Net.FTP
 
         #region List
 
+        public List<string> List(string ftpPath)
+        {
+            List<string> list = new List<string>();
+            FtpWebResponse response = GetResponse(ftpPath, WebRequestMethods.Ftp.ListDirectory);
+
+            using (StreamReader streamReader = new StreamReader(response.GetResponseStream(), Encoding.UTF8))
+            {
+                string line = "";
+
+                while ((line = streamReader.ReadLine()) != null)
+                {
+                    list.Add(line);
+                }
+            }
+
+            CloseResponse(ref response);
+            return list;
+        }
+
         public List<string> ListDetails(string ftpPath)
         {
             List<string> list = new List<string>();
@@ -192,7 +235,25 @@ namespace DevUtility.Out.Net.FTP
                 }
             }
 
+            CloseResponse(ref response);
             return list;
+        }
+
+        #endregion
+
+        #region Exists
+
+        public bool Exists(string ftpPath)
+        {
+            try
+            {
+                var list = List(ftpPath);
+                return list.Count > 0;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         #endregion

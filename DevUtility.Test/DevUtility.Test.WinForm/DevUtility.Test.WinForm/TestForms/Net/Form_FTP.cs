@@ -39,5 +39,23 @@ namespace DevUtility.Test.WinForm.TestForms.Net
         }
 
         #endregion
+
+        #region button_ListDirectory_Click
+
+        private void button_ListDirectory_Click(object sender, EventArgs e)
+        {
+            ExecuteService(new Service.Net.FTP.ListDirectoryService(textBox_Input.Text, textBox_User.Text, textBox_Pwd.Text), button_ListDirectory);
+        }
+
+        #endregion
+
+        #region button_Exists_Click
+
+        private void button_Exists_Click(object sender, EventArgs e)
+        {
+            ExecuteService(new Service.Net.FTP.ExistsService(), button_Exists);
+        }
+
+        #endregion
     }
 }

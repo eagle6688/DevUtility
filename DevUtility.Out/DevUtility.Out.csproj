@@ -102,6 +102,7 @@
     <Compile Include="Extensions\System\Web\HttpPostedFileExt.cs" />
     <Compile Include="Extensions\System\Web\HttpRequestExt.cs" />
     <Compile Include="Net\BaseNetHelper.cs" />
+    <Compile Include="Net\FTP\clsFTP.cs" />
     <Compile Include="Net\FTP\FtpFileInfo.cs" />
     <Compile Include="Net\FTP\FtpFileTypes.cs" />
     <Compile Include="Net\FTP\FtpHelper.cs" />
