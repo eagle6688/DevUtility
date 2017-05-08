@@ -4,242 +4,253 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace DevUtility.Out.Net.FTP
 {
-    public class FTPHelper
+    public class FtpHelper : BaseNetHelper, IDisposable
     {
         #region Variables
 
-        private FtpWebRequest reqFTP = null;
+        WebClientHelper webClientHelper;
 
-        private string userName { get; set; }
+        #endregion
 
-        private string password { get; set; }
+        #region Porperties
 
-        //private string ftpUri { get; set; }
+        public event DownloadProgressChanged DownloadProgressChangedEvent;
 
-        private NetworkCredential certficate;
+        public event DownloadDataCompleted DownloadDataCompletedEvent;
 
-        public FtpStatusCode statusCode { get; set; }
+        public event UploadProgressChanged UploadProgressChangedEvent;
 
-        public string statusDescription { get; set; }
+        public event UploadFileCompleted UploadFileCompletedEvent;
 
         #endregion
 
         #region Constructor
 
-        public FTPHelper(string ftpUserName, string ftpPassword)
+        public FtpHelper()
+            : this("anonymous", "")
         {
-            this.userName = ftpUserName;
-            this.password = ftpPassword;
-            certficate = new NetworkCredential(ftpUserName, ftpPassword);
-            //this.ftpUri = ftpUri;
+
+        }
+
+        public FtpHelper(string loginName, string password)
+            : this(loginName, password, null)
+        {
+
+        }
+
+        public FtpHelper(string loginName, string password, WebProxy webProxy)
+        {
+            SetCredential(loginName, password);
+            base.webProxy = webProxy;
+            webClientHelper = new WebClientHelper(loginName, password, webProxy);
         }
 
         #endregion
 
-        #region UploadOverMove
+        #region Create Request
 
-        public bool UploadOverMove(string ftpRootDirectory, string sourceFilePath, string storedFilePath, string storedFileName, ref string errMessage)
+        public FtpWebRequest CreateRequest(string url, string method)
         {
-            FileInfo fileInfo = new FileInfo(sourceFilePath);
-            Uri uri = new Uri(storedFilePath);
-            string remoteDirectory = storedFilePath.Remove(0, ftpRootDirectory.Length);
-            remoteDirectory = remoteDirectory.Substring(0, remoteDirectory.Length - storedFileName.Length);
+            NetUri netUri = NetUri.Create(url);
 
-            try
+            if (!netUri.IsValidProtocol)
             {
-                CreateDirectory(ftpRootDirectory, remoteDirectory);
-
-                FtpWebRequest reqFTP = CreateFtpRequest(uri, WebRequestMethods.Ftp.UploadFile);
-                reqFTP.ContentLength = fileInfo.Length;
-
-                int buffLength = 2048;
-                byte[] buff = new byte[buffLength];
-                int contentLen;
-
-                FileStream fs = fileInfo.OpenRead();
-                Stream strm = reqFTP.GetRequestStream();
-                contentLen = fs.Read(buff, 0, buffLength);
-
-                while (contentLen != 0)
-                {
-                    strm.Write(buff, 0, contentLen);
-                    contentLen = fs.Read(buff, 0, buffLength);
-                }
-
-                strm.Close();
-                fs.Close();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                errMessage = ex.Message;
+                throw new Exception("Invalid protocol.");
             }
 
-            return false;
+            FtpWebRequest ftpWebRequest = FtpWebRequest.Create(url) as FtpWebRequest;
+            ftpWebRequest.UseBinary = true;
+            ftpWebRequest.Method = method;
+            ftpWebRequest.Credentials = networkCredential;
+
+            if (webProxy != null)
+            {
+                ftpWebRequest.Proxy = webProxy;
+            }
+
+            return ftpWebRequest;
         }
 
         #endregion
 
-        #region DownloadFile
+        #region Download
 
-        public bool DownloadFile(string remoteFilePath, string localFilePath, ref string errMessage)
+        /// <summary>
+        /// Download a file from ftpPath to path.
+        /// </summary>
+        /// <param name="ftpPath"></param>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public void Download(string ftpPath, string path)
         {
-            try
-            {
-                string localDirector = Path.GetDirectoryName(localFilePath);
-                if (!Directory.Exists(localDirector))
-                {
-                    Directory.CreateDirectory(localDirector);
-                }
+            Download(ftpPath, path, true);
+        }
 
-                FtpWebResponse response = CreateFtpResponse(new Uri(remoteFilePath), WebRequestMethods.Ftp.DownloadFile);
-                byte[] buffer = new byte[2048];
-                int bytesCount = 0;
-                Stream stream = response.GetResponseStream();
-                using (FileStream fs = new FileStream(localFilePath, FileMode.Create))
+        /// <summary>
+        /// Download a file from ftpPath to path.
+        /// </summary>
+        /// <param name="ftpPath"></param>
+        /// <param name="path"></param>
+        /// <param name="overwrite"></param>
+        /// <returns></returns>
+        public void Download(string ftpPath, string path, bool overwrite)
+        {
+            InitDirAndFile(path, overwrite);
+            FtpWebRequest request = CreateRequest(ftpPath, WebRequestMethods.Ftp.DownloadFile);
+            FtpWebResponse response = request.GetResponse() as FtpWebResponse;
+
+            using (Stream stream = response.GetResponseStream())
+            {
+                int readBytesCount = 0;
+                byte[] buffer = new byte[1024];
+
+                using (FileStream fileStream = new FileStream(path, FileMode.Create, FileAccess.Write))
                 {
-                    while ((bytesCount = stream.Read(buffer, 0, buffer.Length)) > 0)
+                    while ((readBytesCount = stream.Read(buffer, 0, buffer.Length)) > 0)
                     {
-                        fs.Write(buffer, 0, bytesCount);
-                    }
-                }
-                return true;
-            }
-            catch (Exception ex)
-            {
-                errMessage = ex.Message;
-            }
-            return false;
-        }
-
-        #endregion
-
-        #region DirectoryExist
-
-        private bool DirectoryExist(string ftpDirectory)
-        {
-            List<string> list = GetDirectoryList(ftpDirectory);
-
-            if (list != null)
-            {
-                return true;
-            }
-
-            return false;
-        }
-        #endregion
-
-        #region Create Directory
-
-        public void CreateDirectory(string ftpUri, string remoteDirectory)
-        {
-            this.statusDescription = ftpUri;
-            string parentDirector = ftpUri;
-
-            try
-            {
-                if (!string.IsNullOrEmpty(remoteDirectory))
-                {
-                    remoteDirectory = remoteDirectory.Replace("\\", "/");
-                    string[] directors = remoteDirectory.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
-
-                    foreach (string director in directors)
-                    {
-                        parentDirector = string.Concat(parentDirector, director);
-                        this.statusDescription = parentDirector;
-
-                        if (!DirectoryExist(parentDirector))
-                        {
-                            CreateFtpResponse(new Uri(parentDirector), WebRequestMethods.Ftp.MakeDirectory);
-                        }
-
-                        parentDirector = string.Concat(parentDirector, "/");
+                        fileStream.Write(buffer, 0, readBytesCount);
                     }
                 }
             }
-            catch (WebException ex)
+        }
+
+        public void DownloadAsync(string ftpPath, string path)
+        {
+            DownloadAsync(ftpPath, path, true);
+        }
+
+        public void DownloadAsync(string ftpPath, string path, bool overwrite)
+        {
+            InitDirAndFile(path, overwrite);
+
+            using (WebClient webClient = webClientHelper.Create())
             {
-                statusDescription = ex.Message;
-                throw ex;
+                webClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(DownloadProgressChanged);
+                webClient.DownloadDataCompleted += new DownloadDataCompletedEventHandler(DownloadFileCompleted);
+                webClient.DownloadFileAsync(new Uri(ftpPath), path);
             }
         }
 
         #endregion
 
-        #region CreateFtpWebRequest
+        #region Download Events
 
-        private FtpWebRequest CreateFtpRequest(Uri uri, string method)
+        private void DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
-            reqFTP = (FtpWebRequest)WebRequest.Create(uri);
-            reqFTP.Proxy = null;
-            reqFTP.Credentials = new NetworkCredential(userName, password);
-            reqFTP.KeepAlive = true;
-            reqFTP.UseBinary = true;
-            reqFTP.UsePassive = true;
-            reqFTP.Method = method;
-            reqFTP.UsePassive = true;
-            return reqFTP;
+            DownloadProgressChangedEvent?.Invoke(sender, e);
+        }
+
+        private void DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
+        {
+            DownloadDataCompletedEvent?.Invoke(sender, e);
         }
 
         #endregion
 
-        #region CreateFtpResponse
+        #region Init directory and file
 
-        private FtpWebResponse CreateFtpResponse(Uri uri, string method)
+        private void InitDirAndFile(string path, bool overwrite)
         {
-            try
+            FileInfo fileInfo = new FileInfo(path);
+
+            if (!fileInfo.Exists)
             {
-                FtpWebRequest request = CreateFtpRequest(uri, method);
-                FtpWebResponse response = (FtpWebResponse)request.GetResponse();
-                this.statusCode = response.StatusCode;
-                this.statusDescription = response.StatusDescription;
-                return response;
+                Directory.CreateDirectory(fileInfo.DirectoryName);
+                return;
             }
-            catch (WebException ex)
+
+            if (overwrite)
             {
-                FtpWebResponse response = ex.Response as FtpWebResponse;
-                if (response != null)
+                File.Delete(path);
+                return;
+            }
+
+            throw new Exception("File already exists in local machine.");
+        }
+
+        #endregion
+
+        #region List
+
+        public List<string> ListDetails(string ftpPath)
+        {
+            List<string> list = new List<string>();
+            FtpWebRequest request = CreateRequest(ftpPath, WebRequestMethods.Ftp.ListDirectoryDetails);
+            FtpWebResponse response = request.GetResponse() as FtpWebResponse;
+
+            using (StreamReader streamReader = new StreamReader(response.GetResponseStream(), Encoding.UTF8))
+            {
+                string line = "";
+
+                while ((line = streamReader.ReadLine()) != null)
                 {
-                    this.statusCode = response.StatusCode;
-                    this.statusDescription = response.StatusDescription;
-                }
-                throw ex;
-            }
-        }
-
-        #endregion
-
-        #region GetDirectoryList
-
-        private List<string> GetDirectoryList(string ftpDirectory)
-        {
-            List<string> ftpRawList = new List<string>();
-            StringBuilder result = new StringBuilder();
-
-            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(new Uri(ftpDirectory));
-            request.Timeout = 60000;
-            request.ReadWriteTimeout = 60000;
-            request.Credentials = this.certficate;
-            request.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
-
-            using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
-            {
-                Stream data = response.GetResponseStream();
-
-                using (StreamReader reader = new StreamReader(data))
-                {
-                    string responseString = reader.ReadToEnd();
-                    reader.Close();
-                    response.Close();
-
-                    ftpRawList.AddRange(result.ToString().Split(new char[2] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries));
-
-                    return ftpRawList;
+                    list.Add(line);
                 }
             }
+
+            return list;
+        }
+
+        #endregion
+
+        #region Get Ftp OS Type
+
+        public static FtpOSTypes GetFtpOSType(string detail)
+        {
+            if (IsUnixDetail(detail))
+            {
+                return FtpOSTypes.Unix;
+            }
+
+            if (IsWindowsDetail(detail))
+            {
+                return FtpOSTypes.Windows;
+            }
+
+            return FtpOSTypes.Unknown;
+        }
+
+        #endregion
+
+        #region Is Unix Detail
+
+        public static bool IsUnixDetail(string value)
+        {
+            if (value.Length < 10)
+            {
+                return false;
+            }
+
+            string str = value.Substring(0, 8);
+            return Regex.IsMatch(str, "(-|d)(-|r)(-|w)(-|x)(-|r)(-|w)(-|x)(-|r)(-|w)(-|x)");
+        }
+
+        #endregion
+
+        #region Is Windows Detail
+
+        public static bool IsWindowsDetail(string value)
+        {
+            if (value.Length < 8)
+            {
+                return false;
+            }
+
+            string str = value.Substring(0, 8);
+            return Regex.IsMatch(str, "[0-9][0-9]-[0-9][0-9]-[0-9][0-9]");
+        }
+
+        #endregion
+
+        #region Dispose
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

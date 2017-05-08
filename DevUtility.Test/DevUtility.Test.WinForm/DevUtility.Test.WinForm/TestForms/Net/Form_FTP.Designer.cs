@@ -33,11 +33,12 @@
             this.label_User = new System.Windows.Forms.Label();
             this.textBox_Pwd = new System.Windows.Forms.TextBox();
             this.label_Pwd = new System.Windows.Forms.Label();
-            this.textBox_Host = new System.Windows.Forms.TextBox();
-            this.label_Host = new System.Windows.Forms.Label();
+            this.textBox_Input = new System.Windows.Forms.TextBox();
+            this.label_Input = new System.Windows.Forms.Label();
             this.textBox_Message = new System.Windows.Forms.TextBox();
             this.groupBox_FTPHelper = new System.Windows.Forms.GroupBox();
             this.button_Upload = new System.Windows.Forms.Button();
+            this.button_ListDirectoryDetails = new System.Windows.Forms.Button();
             this.groupBox_FTPHelper.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,7 +55,7 @@
             // 
             // textBox_User
             // 
-            this.textBox_User.Location = new System.Drawing.Point(250, 44);
+            this.textBox_User.Location = new System.Drawing.Point(367, 44);
             this.textBox_User.Name = "textBox_User";
             this.textBox_User.Size = new System.Drawing.Size(129, 21);
             this.textBox_User.TabIndex = 26;
@@ -63,7 +64,7 @@
             // 
             this.label_User.AutoSize = true;
             this.label_User.Font = new System.Drawing.Font("SimSun", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label_User.Location = new System.Drawing.Point(197, 47);
+            this.label_User.Location = new System.Drawing.Point(314, 47);
             this.label_User.Name = "label_User";
             this.label_User.Size = new System.Drawing.Size(47, 15);
             this.label_User.TabIndex = 25;
@@ -71,7 +72,7 @@
             // 
             // textBox_Pwd
             // 
-            this.textBox_Pwd.Location = new System.Drawing.Point(441, 44);
+            this.textBox_Pwd.Location = new System.Drawing.Point(558, 44);
             this.textBox_Pwd.Name = "textBox_Pwd";
             this.textBox_Pwd.Size = new System.Drawing.Size(129, 21);
             this.textBox_Pwd.TabIndex = 24;
@@ -80,28 +81,28 @@
             // 
             this.label_Pwd.AutoSize = true;
             this.label_Pwd.Font = new System.Drawing.Font("SimSun", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label_Pwd.Location = new System.Drawing.Point(388, 47);
+            this.label_Pwd.Location = new System.Drawing.Point(505, 47);
             this.label_Pwd.Name = "label_Pwd";
             this.label_Pwd.Size = new System.Drawing.Size(39, 15);
             this.label_Pwd.TabIndex = 23;
             this.label_Pwd.Text = "Pwd:";
             // 
-            // textBox_Host
+            // textBox_Input
             // 
-            this.textBox_Host.Location = new System.Drawing.Point(67, 44);
-            this.textBox_Host.Name = "textBox_Host";
-            this.textBox_Host.Size = new System.Drawing.Size(120, 21);
-            this.textBox_Host.TabIndex = 22;
+            this.textBox_Input.Location = new System.Drawing.Point(72, 44);
+            this.textBox_Input.Name = "textBox_Input";
+            this.textBox_Input.Size = new System.Drawing.Size(235, 21);
+            this.textBox_Input.TabIndex = 22;
             // 
-            // label_Host
+            // label_Input
             // 
-            this.label_Host.AutoSize = true;
-            this.label_Host.Font = new System.Drawing.Font("SimSun", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label_Host.Location = new System.Drawing.Point(14, 47);
-            this.label_Host.Name = "label_Host";
-            this.label_Host.Size = new System.Drawing.Size(47, 15);
-            this.label_Host.TabIndex = 21;
-            this.label_Host.Text = "Host:";
+            this.label_Input.AutoSize = true;
+            this.label_Input.Font = new System.Drawing.Font("SimSun", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label_Input.Location = new System.Drawing.Point(14, 47);
+            this.label_Input.Name = "label_Input";
+            this.label_Input.Size = new System.Drawing.Size(55, 15);
+            this.label_Input.TabIndex = 21;
+            this.label_Input.Text = "Input:";
             // 
             // textBox_Message
             // 
@@ -114,6 +115,7 @@
             // 
             // groupBox_FTPHelper
             // 
+            this.groupBox_FTPHelper.Controls.Add(this.button_ListDirectoryDetails);
             this.groupBox_FTPHelper.Controls.Add(this.button_Upload);
             this.groupBox_FTPHelper.Location = new System.Drawing.Point(12, 75);
             this.groupBox_FTPHelper.Name = "groupBox_FTPHelper";
@@ -132,6 +134,16 @@
             this.button_Upload.UseVisualStyleBackColor = true;
             this.button_Upload.Click += new System.EventHandler(this.button_Upload_Click);
             // 
+            // button_ListDirectoryDetails
+            // 
+            this.button_ListDirectoryDetails.Location = new System.Drawing.Point(84, 21);
+            this.button_ListDirectoryDetails.Name = "button_ListDirectoryDetails";
+            this.button_ListDirectoryDetails.Size = new System.Drawing.Size(155, 23);
+            this.button_ListDirectoryDetails.TabIndex = 1;
+            this.button_ListDirectoryDetails.Text = "List Directory Details";
+            this.button_ListDirectoryDetails.UseVisualStyleBackColor = true;
+            this.button_ListDirectoryDetails.Click += new System.EventHandler(this.button_ListDirectoryDetails_Click);
+            // 
             // Form_FTP
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -143,8 +155,8 @@
             this.Controls.Add(this.label_User);
             this.Controls.Add(this.textBox_Pwd);
             this.Controls.Add(this.label_Pwd);
-            this.Controls.Add(this.textBox_Host);
-            this.Controls.Add(this.label_Host);
+            this.Controls.Add(this.textBox_Input);
+            this.Controls.Add(this.label_Input);
             this.Controls.Add(this.label_FTPTest);
             this.Name = "Form_FTP";
             this.Text = "Form_FTP";
@@ -161,10 +173,11 @@
         private System.Windows.Forms.Label label_User;
         private System.Windows.Forms.TextBox textBox_Pwd;
         private System.Windows.Forms.Label label_Pwd;
-        private System.Windows.Forms.TextBox textBox_Host;
-        private System.Windows.Forms.Label label_Host;
+        private System.Windows.Forms.TextBox textBox_Input;
+        private System.Windows.Forms.Label label_Input;
         private System.Windows.Forms.TextBox textBox_Message;
         private System.Windows.Forms.GroupBox groupBox_FTPHelper;
         private System.Windows.Forms.Button button_Upload;
+        private System.Windows.Forms.Button button_ListDirectoryDetails;
     }
 }

@@ -26,7 +26,16 @@ namespace DevUtility.Test.WinForm.TestForms.Net
 
         private void button_Upload_Click(object sender, EventArgs e)
         {
-            ExecuteService(new Service.Net.FTP.UploadService(textBox_Host.Text, textBox_User.Text, textBox_Pwd.Text), button_Upload);
+            ExecuteService(new Service.Net.FTP.UploadService(textBox_User.Text, textBox_Pwd.Text), button_Upload);
+        }
+
+        #endregion
+
+        #region button_ListDirectoryDetails_Click
+
+        private void button_ListDirectoryDetails_Click(object sender, EventArgs e)
+        {
+            ExecuteService(new Service.Net.FTP.ListDirectoryDetailsService(textBox_Input.Text, textBox_User.Text, textBox_Pwd.Text), button_ListDirectoryDetails);
         }
 
         #endregion
