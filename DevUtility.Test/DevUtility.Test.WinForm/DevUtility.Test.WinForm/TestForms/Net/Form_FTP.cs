@@ -57,5 +57,14 @@ namespace DevUtility.Test.WinForm.TestForms.Net
         }
 
         #endregion
+
+        #region button_Download_Click
+
+        private void button_Download_Click(object sender, EventArgs e)
+        {
+            ExecuteService(new Service.Net.FTP.DownloadService(), button_Download);
+        }
+
+        #endregion
     }
 }

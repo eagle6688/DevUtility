@@ -37,10 +37,11 @@
             this.label_Input = new System.Windows.Forms.Label();
             this.textBox_Message = new System.Windows.Forms.TextBox();
             this.groupBox_FTPHelper = new System.Windows.Forms.GroupBox();
+            this.button_Exists = new System.Windows.Forms.Button();
+            this.button_ListDirectory = new System.Windows.Forms.Button();
             this.button_ListDirectoryDetails = new System.Windows.Forms.Button();
             this.button_Upload = new System.Windows.Forms.Button();
-            this.button_ListDirectory = new System.Windows.Forms.Button();
-            this.button_Exists = new System.Windows.Forms.Button();
+            this.button_Download = new System.Windows.Forms.Button();
             this.groupBox_FTPHelper.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -109,6 +110,7 @@
             // textBox_Message
             // 
             this.textBox_Message.Location = new System.Drawing.Point(12, 140);
+            this.textBox_Message.MaxLength = 0;
             this.textBox_Message.Multiline = true;
             this.textBox_Message.Name = "textBox_Message";
             this.textBox_Message.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -117,6 +119,7 @@
             // 
             // groupBox_FTPHelper
             // 
+            this.groupBox_FTPHelper.Controls.Add(this.button_Download);
             this.groupBox_FTPHelper.Controls.Add(this.button_Exists);
             this.groupBox_FTPHelper.Controls.Add(this.button_ListDirectory);
             this.groupBox_FTPHelper.Controls.Add(this.button_ListDirectoryDetails);
@@ -127,6 +130,26 @@
             this.groupBox_FTPHelper.TabIndex = 32;
             this.groupBox_FTPHelper.TabStop = false;
             this.groupBox_FTPHelper.Text = "FTP Helper";
+            // 
+            // button_Exists
+            // 
+            this.button_Exists.Location = new System.Drawing.Point(355, 21);
+            this.button_Exists.Name = "button_Exists";
+            this.button_Exists.Size = new System.Drawing.Size(69, 23);
+            this.button_Exists.TabIndex = 3;
+            this.button_Exists.Text = "Exists";
+            this.button_Exists.UseVisualStyleBackColor = true;
+            this.button_Exists.Click += new System.EventHandler(this.button_Exists_Click);
+            // 
+            // button_ListDirectory
+            // 
+            this.button_ListDirectory.Location = new System.Drawing.Point(245, 21);
+            this.button_ListDirectory.Name = "button_ListDirectory";
+            this.button_ListDirectory.Size = new System.Drawing.Size(104, 23);
+            this.button_ListDirectory.TabIndex = 2;
+            this.button_ListDirectory.Text = "List Directory";
+            this.button_ListDirectory.UseVisualStyleBackColor = true;
+            this.button_ListDirectory.Click += new System.EventHandler(this.button_ListDirectory_Click);
             // 
             // button_ListDirectoryDetails
             // 
@@ -148,25 +171,15 @@
             this.button_Upload.UseVisualStyleBackColor = true;
             this.button_Upload.Click += new System.EventHandler(this.button_Upload_Click);
             // 
-            // button_ListDirectory
+            // button_Download
             // 
-            this.button_ListDirectory.Location = new System.Drawing.Point(245, 21);
-            this.button_ListDirectory.Name = "button_ListDirectory";
-            this.button_ListDirectory.Size = new System.Drawing.Size(104, 23);
-            this.button_ListDirectory.TabIndex = 2;
-            this.button_ListDirectory.Text = "List Directory";
-            this.button_ListDirectory.UseVisualStyleBackColor = true;
-            this.button_ListDirectory.Click += new System.EventHandler(this.button_ListDirectory_Click);
-            // 
-            // button_Exists
-            // 
-            this.button_Exists.Location = new System.Drawing.Point(355, 21);
-            this.button_Exists.Name = "button_Exists";
-            this.button_Exists.Size = new System.Drawing.Size(69, 23);
-            this.button_Exists.TabIndex = 3;
-            this.button_Exists.Text = "Exists";
-            this.button_Exists.UseVisualStyleBackColor = true;
-            this.button_Exists.Click += new System.EventHandler(this.button_Exists_Click);
+            this.button_Download.Location = new System.Drawing.Point(430, 21);
+            this.button_Download.Name = "button_Download";
+            this.button_Download.Size = new System.Drawing.Size(69, 23);
+            this.button_Download.TabIndex = 4;
+            this.button_Download.Text = "Download";
+            this.button_Download.UseVisualStyleBackColor = true;
+            this.button_Download.Click += new System.EventHandler(this.button_Download_Click);
             // 
             // Form_FTP
             // 
@@ -205,5 +218,6 @@
         private System.Windows.Forms.Button button_ListDirectoryDetails;
         private System.Windows.Forms.Button button_ListDirectory;
         private System.Windows.Forms.Button button_Exists;
+        private System.Windows.Forms.Button button_Download;
     }
 }

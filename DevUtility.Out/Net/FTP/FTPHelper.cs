@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -8,7 +9,7 @@ using System.Text.RegularExpressions;
 
 namespace DevUtility.Out.Net.FTP
 {
-    public class FtpHelper : BaseNetHelper, IDisposable
+    public class FtpHelper : BaseNetHelper
     {
         #region Variables
 
@@ -18,13 +19,15 @@ namespace DevUtility.Out.Net.FTP
 
         #region Porperties
 
-        public event DownloadProgressChanged DownloadProgressChangedEvent;
+        public int BufferSize = 2048;
 
-        public event DownloadDataCompleted DownloadDataCompletedEvent;
+        public DownloadProgressChanged DownloadProgressChangedEvent { set; get; }
 
-        public event UploadProgressChanged UploadProgressChangedEvent;
+        public DownloadCompleted DownloadCompletedEvent { set; get; }
 
-        public event UploadFileCompleted UploadFileCompletedEvent;
+        public UploadProgressChanged UploadProgressChangedEvent { set; get; }
+
+        public UploadFileCompleted UploadFileCompletedEvent { set; get; }
 
         #endregion
 
@@ -124,13 +127,12 @@ namespace DevUtility.Out.Net.FTP
         public void Download(string ftpPath, string path, bool overwrite)
         {
             InitDirAndFile(path, overwrite);
-            FtpWebRequest request = CreateRequest(ftpPath, WebRequestMethods.Ftp.DownloadFile);
-            FtpWebResponse response = request.GetResponse() as FtpWebResponse;
+            FtpWebResponse response = GetResponse(ftpPath, WebRequestMethods.Ftp.DownloadFile);
 
             using (Stream stream = response.GetResponseStream())
             {
                 int readBytesCount = 0;
-                byte[] buffer = new byte[1024];
+                byte[] buffer = new byte[BufferSize];
 
                 using (FileStream fileStream = new FileStream(path, FileMode.Create, FileAccess.Write))
                 {
@@ -140,6 +142,8 @@ namespace DevUtility.Out.Net.FTP
                     }
                 }
             }
+
+            CloseResponse(ref response);
         }
 
         public void DownloadAsync(string ftpPath, string path)
@@ -154,7 +158,7 @@ namespace DevUtility.Out.Net.FTP
             using (WebClient webClient = webClientHelper.Create())
             {
                 webClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(DownloadProgressChanged);
-                webClient.DownloadDataCompleted += new DownloadDataCompletedEventHandler(DownloadFileCompleted);
+                webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(DownloadFileCompleted);
                 webClient.DownloadFileAsync(new Uri(ftpPath), path);
             }
         }
@@ -168,9 +172,9 @@ namespace DevUtility.Out.Net.FTP
             DownloadProgressChangedEvent?.Invoke(sender, e);
         }
 
-        private void DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
+        private void DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
-            DownloadDataCompletedEvent?.Invoke(sender, e);
+            DownloadCompletedEvent?.Invoke(sender, e);
         }
 
         #endregion
@@ -258,6 +262,80 @@ namespace DevUtility.Out.Net.FTP
 
         #endregion
 
+        #region Upload
+
+        public void Upload(string path, string ftpPath)
+        {
+            Upload(path, ftpPath, true);
+        }
+
+        public void Upload(string path, string ftpPath, bool overwrite)
+        {
+            UploadValidate(path, ftpPath, overwrite);
+
+            using (FileStream fileStream = new FileStream(path, FileMode.Open, FileAccess.Read))
+            {
+                FtpWebRequest request = CreateRequest(ftpPath, WebRequestMethods.Ftp.UploadFile);
+
+                using (Stream stream = request.GetRequestStream())
+                {
+                    int readBytesCount = 0;
+                    byte[] buffer = new byte[BufferSize];
+
+                    while ((readBytesCount = fileStream.Read(buffer, 0, buffer.Length)) > 0)
+                    {
+                        stream.Write(buffer, 0, readBytesCount);
+                    }
+                }
+            }
+        }
+
+        public void UploadAsync(string path, string ftpPath)
+        {
+            UploadAsync(path, ftpPath, true);
+        }
+
+        public void UploadAsync(string path, string ftpPath, bool overwrite)
+        {
+            UploadValidate(path, ftpPath, overwrite);
+
+            using (WebClient webClient = webClientHelper.Create())
+            {
+                webClient.UploadProgressChanged += new UploadProgressChangedEventHandler(UploadProgressChanged);
+                webClient.UploadFileCompleted += new UploadFileCompletedEventHandler(UploadFileCompleted);
+                webClient.UploadFileAsync(new Uri(ftpPath), path);
+            }
+        }
+
+        private void UploadValidate(string path, string ftpPath, bool overwrite)
+        {
+            if (!File.Exists(path))
+            {
+                throw new Exception("File does not exist.");
+            }
+
+            if (!overwrite && Exists(ftpPath))
+            {
+                throw new Exception("File already exists in Ftp.");
+            }
+        }
+
+        #endregion
+
+        #region Upload Events
+
+        private void UploadProgressChanged(object sender, UploadProgressChangedEventArgs e)
+        {
+            UploadProgressChangedEvent?.Invoke(sender, e);
+        }
+
+        private void UploadFileCompleted(object sender, UploadFileCompletedEventArgs e)
+        {
+            UploadFileCompletedEvent?.Invoke(sender, e);
+        }
+
+        #endregion
+
         #region Get Ftp OS Type
 
         public static FtpOSTypes GetFtpOSType(string detail)
@@ -303,15 +381,6 @@ namespace DevUtility.Out.Net.FTP
 
             string str = value.Substring(0, 8);
             return Regex.IsMatch(str, "[0-9][0-9]-[0-9][0-9]-[0-9][0-9]");
-        }
-
-        #endregion
-
-        #region Dispose
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
         }
 
         #endregion
