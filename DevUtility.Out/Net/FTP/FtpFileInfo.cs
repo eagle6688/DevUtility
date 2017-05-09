@@ -14,5 +14,7 @@ namespace DevUtility.Out.Net.FTP
         public FtpFileTypes Type { set; get; }
 
         public DateTime UpdateTime { set; get; }
+
+        public string UnixAuthority { set; get; }
     }
 }

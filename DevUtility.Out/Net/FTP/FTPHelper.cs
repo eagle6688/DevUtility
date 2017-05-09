@@ -1,11 +1,11 @@
-﻿using System;
+﻿using DevUtility.Com.Extension.SystemExt;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
-using System.Text.RegularExpressions;
 
 namespace DevUtility.Out.Net.FTP
 {
@@ -336,51 +336,107 @@ namespace DevUtility.Out.Net.FTP
 
         #endregion
 
-        #region Get Ftp OS Type
+        #region Get File Information
 
-        public static FtpOSTypes GetFtpOSType(string detail)
+        public FtpFileInfo GetFileInfo(string ftpPath)
         {
-            if (IsUnixDetail(detail))
+            var list = GetFileInfoList(ftpPath);
+            return list.Count == 0 ? null : list[0];
+        }
+
+        public List<FtpFileInfo> GetFileInfoList(string ftpPath)
+        {
+            List<FtpFileInfo> list = new List<FtpFileInfo>();
+            List<string> details = ListDetails(ftpPath);
+
+            foreach (string detail in details)
             {
-                return FtpOSTypes.Unix;
+                var fileInfo = GetFileInfoByDetail(detail);
+                list.Add(fileInfo);
             }
 
-            if (IsWindowsDetail(detail))
-            {
-                return FtpOSTypes.Windows;
-            }
-
-            return FtpOSTypes.Unknown;
+            return list;
         }
 
         #endregion
 
-        #region Is Unix Detail
+        #region Get File Information by detail
 
-        public static bool IsUnixDetail(string value)
+        private FtpFileInfo GetFileInfoByDetail(string detail)
         {
-            if (value.Length < 10)
+            FtpOSTypes osType = FtpOSTypesHelper.GetFtpOSType(detail);
+
+            switch (osType)
             {
-                return false;
+                case FtpOSTypes.Unix:
+                    return GetUnixFileInfoByDetail(detail);
+
+                case FtpOSTypes.Windows:
+                    return GetWindowsFileInfoByDetail(detail);
+
+                default:
+                    return null;
+            }
+        }
+
+        private FtpFileInfo GetUnixFileInfoByDetail(string detail)
+        {
+            List<string> detailInfo = detail.SplitStringWithMultiSameChar(' ');
+
+            if (detailInfo.Count != 9)
+            {
+                return null;
             }
 
-            string str = value.Substring(0, 8);
-            return Regex.IsMatch(str, "(-|d)(-|r)(-|w)(-|x)(-|r)(-|w)(-|x)(-|r)(-|w)(-|x)");
+            FtpFileInfo ftpileInfo = new FtpFileInfo();
+            ftpileInfo.UnixAuthority = detailInfo[0];
+            ftpileInfo.Type = FtpFileTypesHelper.GetUnixFileType(detailInfo[2]);
+            ftpileInfo.Size = long.Parse(detailInfo[4]);
+            ftpileInfo.Name = detailInfo[8];
+            return ftpileInfo;
+        }
+
+        private FtpFileInfo GetWindowsFileInfoByDetail(string detail)
+        {
+            List<string> detailInfo = detail.SplitStringWithMultiSameChar(' ');
+
+            if (detailInfo.Count != 4)
+            {
+                return null;
+            }
+
+            FtpFileInfo ftpileInfo = new FtpFileInfo();
+            ftpileInfo.Name = detailInfo[3];
+
+            if (detailInfo[2] == "<DIR>")
+            {
+                ftpileInfo.Type = FtpFileTypes.Directory;
+            }
+            else
+            {
+                long size = 0;
+
+                if (long.TryParse(detailInfo[2], out size))
+                {
+                    ftpileInfo.Size = size;
+                    ftpileInfo.Type = FtpFileTypes.File;
+                }
+                else
+                {
+                    ftpileInfo.Type = FtpFileTypes.Unknow;
+                }
+            }
+
+            return ftpileInfo;
         }
 
         #endregion
 
-        #region Is Windows Detail
+        #region Delete
 
-        public static bool IsWindowsDetail(string value)
+        public void Delete(string ftpPath)
         {
-            if (value.Length < 8)
-            {
-                return false;
-            }
-
-            string str = value.Substring(0, 8);
-            return Regex.IsMatch(str, "[0-9][0-9]-[0-9][0-9]-[0-9][0-9]");
+            GetResponse(ftpPath, WebRequestMethods.Ftp.DeleteFile);
         }
 
         #endregion

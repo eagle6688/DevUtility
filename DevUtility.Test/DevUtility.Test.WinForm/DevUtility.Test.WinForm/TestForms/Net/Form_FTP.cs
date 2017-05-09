@@ -66,5 +66,14 @@ namespace DevUtility.Test.WinForm.TestForms.Net
         }
 
         #endregion
+
+        #region button_GetFileInfo_Click
+
+        private void button_GetFileInfo_Click(object sender, EventArgs e)
+        {
+            ExecuteService(new Service.Net.FTP.GetFileInfoService(textBox_Input.Text, textBox_User.Text, textBox_Pwd.Text), button_GetFileInfo);
+        }
+
+        #endregion
     }
 }

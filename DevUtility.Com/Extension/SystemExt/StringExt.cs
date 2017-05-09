@@ -58,6 +58,33 @@ namespace DevUtility.Com.Extension.SystemExt
             return value.Split(separator.ToCharArray(), StringSplitOptions.RemoveEmptyEntries).ToList();
         }
 
+        public static List<string> SplitStringWithMultiSameChar(this string value, char separator)
+        {
+            List<string> list = new List<string>();
+            int start = 0;
+            int index = 0;
+            char[] chars = value.ToCharArray();
+
+            while ((index = value.IndexOf(separator, start)) != -1)
+            {
+                list.Add(value.Substring(start, index - start));
+                start = index + 1;
+
+                while (chars[start] == separator)
+                {
+                    start++;
+                }
+            }
+
+            if (index < value.Length - 1)
+            {
+                index = value.Length - 1;
+                list.Add(value.Substring(start));
+            }
+
+            return list;
+        }
+
         #endregion
 
         #region To TitleCase
@@ -75,7 +102,7 @@ namespace DevUtility.Com.Extension.SystemExt
 
         #endregion
 
-        #region ThousandsPlace
+        #region Thousands Place
 
         public static string ThousandsPlace(int number)
         {
