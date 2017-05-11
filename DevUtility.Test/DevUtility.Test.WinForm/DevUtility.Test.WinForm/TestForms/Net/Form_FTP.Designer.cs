@@ -37,12 +37,13 @@
             this.label_Input = new System.Windows.Forms.Label();
             this.textBox_Message = new System.Windows.Forms.TextBox();
             this.groupBox_FTPHelper = new System.Windows.Forms.GroupBox();
+            this.button_GetFileInfo = new System.Windows.Forms.Button();
             this.button_Download = new System.Windows.Forms.Button();
             this.button_Exists = new System.Windows.Forms.Button();
             this.button_ListDirectory = new System.Windows.Forms.Button();
             this.button_ListDirectoryDetails = new System.Windows.Forms.Button();
             this.button_Upload = new System.Windows.Forms.Button();
-            this.button_GetFileInfo = new System.Windows.Forms.Button();
+            this.button_Delete = new System.Windows.Forms.Button();
             this.groupBox_FTPHelper.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -120,6 +121,7 @@
             // 
             // groupBox_FTPHelper
             // 
+            this.groupBox_FTPHelper.Controls.Add(this.button_Delete);
             this.groupBox_FTPHelper.Controls.Add(this.button_GetFileInfo);
             this.groupBox_FTPHelper.Controls.Add(this.button_Download);
             this.groupBox_FTPHelper.Controls.Add(this.button_Exists);
@@ -132,6 +134,16 @@
             this.groupBox_FTPHelper.TabIndex = 32;
             this.groupBox_FTPHelper.TabStop = false;
             this.groupBox_FTPHelper.Text = "FTP Helper";
+            // 
+            // button_GetFileInfo
+            // 
+            this.button_GetFileInfo.Location = new System.Drawing.Point(505, 21);
+            this.button_GetFileInfo.Name = "button_GetFileInfo";
+            this.button_GetFileInfo.Size = new System.Drawing.Size(96, 23);
+            this.button_GetFileInfo.TabIndex = 5;
+            this.button_GetFileInfo.Text = "Get File Info";
+            this.button_GetFileInfo.UseVisualStyleBackColor = true;
+            this.button_GetFileInfo.Click += new System.EventHandler(this.button_GetFileInfo_Click);
             // 
             // button_Download
             // 
@@ -183,15 +195,15 @@
             this.button_Upload.UseVisualStyleBackColor = true;
             this.button_Upload.Click += new System.EventHandler(this.button_Upload_Click);
             // 
-            // button_GetFileInfo
+            // button_Delete
             // 
-            this.button_GetFileInfo.Location = new System.Drawing.Point(505, 21);
-            this.button_GetFileInfo.Name = "button_GetFileInfo";
-            this.button_GetFileInfo.Size = new System.Drawing.Size(96, 23);
-            this.button_GetFileInfo.TabIndex = 5;
-            this.button_GetFileInfo.Text = "Get File Info";
-            this.button_GetFileInfo.UseVisualStyleBackColor = true;
-            this.button_GetFileInfo.Click += new System.EventHandler(this.button_GetFileInfo_Click);
+            this.button_Delete.Location = new System.Drawing.Point(606, 21);
+            this.button_Delete.Name = "button_Delete";
+            this.button_Delete.Size = new System.Drawing.Size(69, 23);
+            this.button_Delete.TabIndex = 6;
+            this.button_Delete.Text = "Delete";
+            this.button_Delete.UseVisualStyleBackColor = true;
+            this.button_Delete.Click += new System.EventHandler(this.button_Delete_Click);
             // 
             // Form_FTP
             // 
@@ -232,5 +244,6 @@
         private System.Windows.Forms.Button button_Exists;
         private System.Windows.Forms.Button button_Download;
         private System.Windows.Forms.Button button_GetFileInfo;
+        private System.Windows.Forms.Button button_Delete;
     }
 }

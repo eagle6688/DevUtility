@@ -75,5 +75,14 @@ namespace DevUtility.Test.WinForm.TestForms.Net
         }
 
         #endregion
+
+        #region button_Delete_Click
+
+        private void button_Delete_Click(object sender, EventArgs e)
+        {
+            ExecuteService(new Service.Net.FTP.DeleteService(textBox_Input.Text, textBox_User.Text, textBox_Pwd.Text), button_Delete);
+        }
+
+        #endregion
     }
 }

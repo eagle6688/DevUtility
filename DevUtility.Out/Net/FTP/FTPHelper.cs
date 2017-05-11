@@ -390,7 +390,7 @@ namespace DevUtility.Out.Net.FTP
 
             FtpFileInfo ftpileInfo = new FtpFileInfo();
             ftpileInfo.UnixAuthority = detailInfo[0];
-            ftpileInfo.Type = FtpFileTypesHelper.GetUnixFileType(detailInfo[2]);
+            ftpileInfo.Type = FtpFileTypesHelper.GetUnixFileType(detailInfo[1]);
             ftpileInfo.Size = long.Parse(detailInfo[4]);
             ftpileInfo.Name = detailInfo[8];
             return ftpileInfo;
@@ -434,9 +434,14 @@ namespace DevUtility.Out.Net.FTP
 
         #region Delete
 
-        public void Delete(string ftpPath)
+        public void DeleteFile(string ftpPath)
         {
             GetResponse(ftpPath, WebRequestMethods.Ftp.DeleteFile);
+        }
+
+        public void DeleteDirectory(string ftpPath)
+        {
+            GetResponse(ftpPath, WebRequestMethods.Ftp.RemoveDirectory);
         }
 
         #endregion
