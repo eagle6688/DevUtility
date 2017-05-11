@@ -459,5 +459,38 @@ namespace DevUtility.Out.Net.FTP
         }
 
         #endregion
+
+        #region Get Parent
+
+        public static string GetParent(string ftpPath)
+        {
+            string path = ftpPath.TrimEnd('/');
+            List<string> list = path.Split('/').ToList();
+            list.RemoveAt(list.Count - 1);
+            return string.Join("/", list);
+        }
+
+        #endregion
+
+        #region Get Last
+
+        public static string GetLast(string ftpPath)
+        {
+            string path = ftpPath.TrimEnd('/');
+            string[] array = path.Split('/');
+            return array[array.Length - 1];
+        }
+
+        #endregion
+
+        #region Create Directory
+
+        public void CreateDirectory(string ftpPath)
+        {
+            FtpWebResponse response = GetResponse(ftpPath, WebRequestMethods.Ftp.MakeDirectory);
+            CloseResponse(ref response);
+        }
+
+        #endregion
     }
 }

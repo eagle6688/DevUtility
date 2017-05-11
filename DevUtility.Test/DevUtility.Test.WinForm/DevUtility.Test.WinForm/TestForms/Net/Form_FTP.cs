@@ -93,5 +93,14 @@ namespace DevUtility.Test.WinForm.TestForms.Net
         }
 
         #endregion
+
+        #region button_CreateDirectory_Click
+
+        private void button_CreateDirectory_Click(object sender, EventArgs e)
+        {
+            ExecuteService(new Service.Net.FTP.CreateDirectoryService(textBox_Input.Text, textBox_User.Text, textBox_Pwd.Text), button_CreateDirectory);
+        }
+
+        #endregion
     }
 }

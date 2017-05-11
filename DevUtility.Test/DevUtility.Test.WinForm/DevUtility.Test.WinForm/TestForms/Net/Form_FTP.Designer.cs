@@ -37,6 +37,7 @@
             this.label_Input = new System.Windows.Forms.Label();
             this.textBox_Message = new System.Windows.Forms.TextBox();
             this.groupBox_FTPHelper = new System.Windows.Forms.GroupBox();
+            this.button_Rename = new System.Windows.Forms.Button();
             this.button_Delete = new System.Windows.Forms.Button();
             this.button_GetFileInfo = new System.Windows.Forms.Button();
             this.button_Download = new System.Windows.Forms.Button();
@@ -44,7 +45,7 @@
             this.button_ListDirectory = new System.Windows.Forms.Button();
             this.button_ListDirectoryDetails = new System.Windows.Forms.Button();
             this.button_Upload = new System.Windows.Forms.Button();
-            this.button_Rename = new System.Windows.Forms.Button();
+            this.button_CreateDirectory = new System.Windows.Forms.Button();
             this.groupBox_FTPHelper.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -112,16 +113,17 @@
             // 
             // textBox_Message
             // 
-            this.textBox_Message.Location = new System.Drawing.Point(12, 140);
+            this.textBox_Message.Location = new System.Drawing.Point(12, 166);
             this.textBox_Message.MaxLength = 0;
             this.textBox_Message.Multiline = true;
             this.textBox_Message.Name = "textBox_Message";
             this.textBox_Message.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox_Message.Size = new System.Drawing.Size(760, 319);
+            this.textBox_Message.Size = new System.Drawing.Size(760, 333);
             this.textBox_Message.TabIndex = 33;
             // 
             // groupBox_FTPHelper
             // 
+            this.groupBox_FTPHelper.Controls.Add(this.button_CreateDirectory);
             this.groupBox_FTPHelper.Controls.Add(this.button_Rename);
             this.groupBox_FTPHelper.Controls.Add(this.button_Delete);
             this.groupBox_FTPHelper.Controls.Add(this.button_GetFileInfo);
@@ -132,10 +134,20 @@
             this.groupBox_FTPHelper.Controls.Add(this.button_Upload);
             this.groupBox_FTPHelper.Location = new System.Drawing.Point(12, 75);
             this.groupBox_FTPHelper.Name = "groupBox_FTPHelper";
-            this.groupBox_FTPHelper.Size = new System.Drawing.Size(760, 59);
+            this.groupBox_FTPHelper.Size = new System.Drawing.Size(760, 85);
             this.groupBox_FTPHelper.TabIndex = 32;
             this.groupBox_FTPHelper.TabStop = false;
             this.groupBox_FTPHelper.Text = "FTP Helper";
+            // 
+            // button_Rename
+            // 
+            this.button_Rename.Location = new System.Drawing.Point(681, 21);
+            this.button_Rename.Name = "button_Rename";
+            this.button_Rename.Size = new System.Drawing.Size(69, 23);
+            this.button_Rename.TabIndex = 7;
+            this.button_Rename.Text = "Rename";
+            this.button_Rename.UseVisualStyleBackColor = true;
+            this.button_Rename.Click += new System.EventHandler(this.button_Rename_Click);
             // 
             // button_Delete
             // 
@@ -207,21 +219,21 @@
             this.button_Upload.UseVisualStyleBackColor = true;
             this.button_Upload.Click += new System.EventHandler(this.button_Upload_Click);
             // 
-            // button_Rename
+            // button_CreateDirectory
             // 
-            this.button_Rename.Location = new System.Drawing.Point(681, 21);
-            this.button_Rename.Name = "button_Rename";
-            this.button_Rename.Size = new System.Drawing.Size(69, 23);
-            this.button_Rename.TabIndex = 7;
-            this.button_Rename.Text = "Rename";
-            this.button_Rename.UseVisualStyleBackColor = true;
-            this.button_Rename.Click += new System.EventHandler(this.button_Rename_Click);
+            this.button_CreateDirectory.Location = new System.Drawing.Point(7, 50);
+            this.button_CreateDirectory.Name = "button_CreateDirectory";
+            this.button_CreateDirectory.Size = new System.Drawing.Size(119, 23);
+            this.button_CreateDirectory.TabIndex = 8;
+            this.button_CreateDirectory.Text = "Create Directory";
+            this.button_CreateDirectory.UseVisualStyleBackColor = true;
+            this.button_CreateDirectory.Click += new System.EventHandler(this.button_CreateDirectory_Click);
             // 
             // Form_FTP
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 471);
+            this.ClientSize = new System.Drawing.Size(784, 511);
             this.Controls.Add(this.textBox_Message);
             this.Controls.Add(this.groupBox_FTPHelper);
             this.Controls.Add(this.textBox_User);
@@ -258,5 +270,6 @@
         private System.Windows.Forms.Button button_GetFileInfo;
         private System.Windows.Forms.Button button_Delete;
         private System.Windows.Forms.Button button_Rename;
+        private System.Windows.Forms.Button button_CreateDirectory;
     }
 }
