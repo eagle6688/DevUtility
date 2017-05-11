@@ -164,6 +164,58 @@ namespace DevUtility.Out.Net.FTP
 
         #endregion
 
+        #region Upload
+
+        public void Upload(string path, string ftpPath)
+        {
+            using (FileStream fileStream = new FileStream(path, FileMode.Open, FileAccess.Read))
+            {
+                FtpWebRequest request = CreateRequest(ftpPath, WebRequestMethods.Ftp.UploadFile);
+
+                using (Stream stream = request.GetRequestStream())
+                {
+                    int readBytesCount = 0;
+                    byte[] buffer = new byte[BufferSize];
+
+                    while ((readBytesCount = fileStream.Read(buffer, 0, buffer.Length)) > 0)
+                    {
+                        stream.Write(buffer, 0, readBytesCount);
+                    }
+                }
+            }
+        }
+
+        public void UploadAsync(string path, string ftpPath)
+        {
+            UploadAsync(path, ftpPath, true);
+        }
+
+        public void UploadAsync(string path, string ftpPath, bool overwrite)
+        {
+            using (WebClient webClient = webClientHelper.Create())
+            {
+                webClient.UploadProgressChanged += new UploadProgressChangedEventHandler(UploadProgressChanged);
+                webClient.UploadFileCompleted += new UploadFileCompletedEventHandler(UploadFileCompleted);
+                webClient.UploadFileAsync(new Uri(ftpPath), path);
+            }
+        }
+
+        #endregion
+
+        #region Upload Events
+
+        private void UploadProgressChanged(object sender, UploadProgressChangedEventArgs e)
+        {
+            UploadProgressChangedEvent?.Invoke(sender, e);
+        }
+
+        private void UploadFileCompleted(object sender, UploadFileCompletedEventArgs e)
+        {
+            UploadFileCompletedEvent?.Invoke(sender, e);
+        }
+
+        #endregion
+
         #region Download
 
         /// <summary>
@@ -215,80 +267,6 @@ namespace DevUtility.Out.Net.FTP
         private void DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
             DownloadCompletedEvent?.Invoke(sender, e);
-        }
-
-        #endregion
-
-        #region Upload
-
-        public void Upload(string path, string ftpPath)
-        {
-            Upload(path, ftpPath, true);
-        }
-
-        public void Upload(string path, string ftpPath, bool overwrite)
-        {
-            UploadValidate(path, ftpPath, overwrite);
-
-            using (FileStream fileStream = new FileStream(path, FileMode.Open, FileAccess.Read))
-            {
-                FtpWebRequest request = CreateRequest(ftpPath, WebRequestMethods.Ftp.UploadFile);
-
-                using (Stream stream = request.GetRequestStream())
-                {
-                    int readBytesCount = 0;
-                    byte[] buffer = new byte[BufferSize];
-
-                    while ((readBytesCount = fileStream.Read(buffer, 0, buffer.Length)) > 0)
-                    {
-                        stream.Write(buffer, 0, readBytesCount);
-                    }
-                }
-            }
-        }
-
-        public void UploadAsync(string path, string ftpPath)
-        {
-            UploadAsync(path, ftpPath, true);
-        }
-
-        public void UploadAsync(string path, string ftpPath, bool overwrite)
-        {
-            UploadValidate(path, ftpPath, overwrite);
-
-            using (WebClient webClient = webClientHelper.Create())
-            {
-                webClient.UploadProgressChanged += new UploadProgressChangedEventHandler(UploadProgressChanged);
-                webClient.UploadFileCompleted += new UploadFileCompletedEventHandler(UploadFileCompleted);
-                webClient.UploadFileAsync(new Uri(ftpPath), path);
-            }
-        }
-
-        private void UploadValidate(string path, string ftpPath, bool overwrite)
-        {
-            if (!File.Exists(path))
-            {
-                throw new Exception("File does not exist.");
-            }
-
-            if (!overwrite && Exists(ftpPath))
-            {
-                throw new Exception("File already exists in Ftp.");
-            }
-        }
-
-        #endregion
-
-        #region Upload Events
-
-        private void UploadProgressChanged(object sender, UploadProgressChangedEventArgs e)
-        {
-            UploadProgressChangedEvent?.Invoke(sender, e);
-        }
-
-        private void UploadFileCompleted(object sender, UploadFileCompletedEventArgs e)
-        {
-            UploadFileCompletedEvent?.Invoke(sender, e);
         }
 
         #endregion
@@ -413,29 +391,6 @@ namespace DevUtility.Out.Net.FTP
             request.RenameTo = newName;
             FtpWebResponse response = request.GetResponse() as FtpWebResponse;
             CloseResponse(ref response);
-        }
-
-        #endregion
-
-        #region Get Parent
-
-        public static string GetParent(string ftpPath)
-        {
-            string path = ftpPath.TrimEnd('/');
-            List<string> list = path.Split('/').ToList();
-            list.RemoveAt(list.Count - 1);
-            return string.Join("/", list);
-        }
-
-        #endregion
-
-        #region Get Last
-
-        public static string GetLast(string ftpPath)
-        {
-            string path = ftpPath.TrimEnd('/');
-            string[] array = path.Split('/');
-            return array[array.Length - 1];
         }
 
         #endregion

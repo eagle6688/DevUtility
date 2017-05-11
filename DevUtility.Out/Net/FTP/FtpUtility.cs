@@ -9,6 +9,34 @@ namespace DevUtility.Out.Net.FTP
 {
     public class FtpUtility
     {
+        #region Upload
+
+        public static OperationResult Upload(string uid, string pwd, string path, string ftpPath)
+        {
+            OperationResult result = new OperationResult();
+
+            if (!File.Exists(path))
+            {
+                result.SetErrorMessage("File does not exist.");
+                return result;
+            }
+
+            FtpHelper ftpHelper = new FtpHelper(uid, pwd);
+
+            try
+            {
+                ftpHelper.Upload(path, ftpPath);
+            }
+            catch (Exception exception)
+            {
+                result.SetErrorMessage(exception);
+            }
+
+            return result;
+        }
+
+        #endregion
+
         #region Download
 
         public static OperationResult Download(string uid, string pwd, string ftpPath, string path)
@@ -38,6 +66,72 @@ namespace DevUtility.Out.Net.FTP
             }
 
             return result;
+        }
+
+        #endregion
+
+        #region Delete
+
+        public static OperationResult Delete(string uid, string pwd, string ftpPath)
+        {
+            OperationResult result = new OperationResult();
+            FtpHelper ftpHelper = new FtpHelper(uid, pwd);
+            string parent = GetParent(ftpPath);
+
+            if (string.IsNullOrEmpty(parent))
+            {
+                result.SetErrorMessage("Ftp path format error.");
+                return result;
+            }
+
+            List<FtpFileInfo> elements = new List<FtpFileInfo>();
+
+            try
+            {
+                elements = ftpHelper.GetFileInfoList(parent);
+            }
+            catch (Exception exception)
+            {
+                result.SetErrorMessage(exception);
+            }
+
+            if (elements.Count == 0)
+            {
+                return result;
+            }
+
+
+
+            return result;
+        }
+
+        #endregion
+
+        #region Get Parent
+
+        public static string GetParent(string ftpPath)
+        {
+            string path = ftpPath.TrimEnd('/');
+            List<string> list = path.Split('/').ToList();
+
+            if (list.Count == 0)
+            {
+                return null;
+            }
+
+            list.RemoveAt(list.Count - 1);
+            return string.Join("/", list);
+        }
+
+        #endregion
+
+        #region Get Last
+
+        public static string GetLast(string ftpPath)
+        {
+            string path = ftpPath.TrimEnd('/');
+            string[] array = path.Split('/');
+            return array[array.Length - 1];
         }
 
         #endregion
