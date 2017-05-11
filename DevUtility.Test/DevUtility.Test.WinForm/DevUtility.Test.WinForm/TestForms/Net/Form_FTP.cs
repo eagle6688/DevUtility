@@ -84,5 +84,14 @@ namespace DevUtility.Test.WinForm.TestForms.Net
         }
 
         #endregion
+
+        #region button_Rename_Click
+
+        private void button_Rename_Click(object sender, EventArgs e)
+        {
+            ExecuteService(new Service.Net.FTP.RenameService(textBox_Input.Text, textBox_User.Text, textBox_Pwd.Text), button_Rename);
+        }
+
+        #endregion
     }
 }

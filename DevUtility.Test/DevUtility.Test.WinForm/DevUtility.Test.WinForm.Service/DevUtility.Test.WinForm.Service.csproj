@@ -65,6 +65,7 @@
     <Compile Include="Net\FTP\GetFileInfoService.cs" />
     <Compile Include="Net\FTP\ListDirectoryDetailsService.cs" />
     <Compile Include="Net\FTP\ListDirectoryService.cs" />
+    <Compile Include="Net\FTP\RenameService.cs" />
     <Compile Include="Net\FTP\UploadService.cs" />
     <Compile Include="Net\UriService.cs" />
     <Compile Include="NoSQL\Redis\Hash\HashHelper\GetHashModelService.cs" />

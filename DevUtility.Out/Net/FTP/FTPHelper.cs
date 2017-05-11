@@ -436,12 +436,26 @@ namespace DevUtility.Out.Net.FTP
 
         public void DeleteFile(string ftpPath)
         {
-            GetResponse(ftpPath, WebRequestMethods.Ftp.DeleteFile);
+            FtpWebResponse response = GetResponse(ftpPath, WebRequestMethods.Ftp.DeleteFile);
+            CloseResponse(ref response);
         }
 
         public void DeleteDirectory(string ftpPath)
         {
-            GetResponse(ftpPath, WebRequestMethods.Ftp.RemoveDirectory);
+            FtpWebResponse response = GetResponse(ftpPath, WebRequestMethods.Ftp.RemoveDirectory);
+            CloseResponse(ref response);
+        }
+
+        #endregion
+
+        #region Rename
+
+        public void Rename(string ftpPath, string newName)
+        {
+            FtpWebRequest request = CreateRequest(ftpPath, WebRequestMethods.Ftp.Rename);
+            request.RenameTo = newName;
+            FtpWebResponse response = request.GetResponse() as FtpWebResponse;
+            CloseResponse(ref response);
         }
 
         #endregion
