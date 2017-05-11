@@ -104,100 +104,19 @@ namespace DevUtility.Out.Net.FTP
 
         #endregion
 
-        #region Download
+        #region Exists
 
-        /// <summary>
-        /// Download a file from ftpPath to path.
-        /// </summary>
-        /// <param name="ftpPath"></param>
-        /// <param name="path"></param>
-        /// <returns></returns>
-        public void Download(string ftpPath, string path)
+        public bool Exists(string ftpPath)
         {
-            Download(ftpPath, path, true);
-        }
-
-        /// <summary>
-        /// Download a file from ftpPath to path.
-        /// </summary>
-        /// <param name="ftpPath"></param>
-        /// <param name="path"></param>
-        /// <param name="overwrite"></param>
-        /// <returns></returns>
-        public void Download(string ftpPath, string path, bool overwrite)
-        {
-            InitDirAndFile(path, overwrite);
-            FtpWebResponse response = GetResponse(ftpPath, WebRequestMethods.Ftp.DownloadFile);
-
-            using (Stream stream = response.GetResponseStream())
+            try
             {
-                int readBytesCount = 0;
-                byte[] buffer = new byte[BufferSize];
-
-                using (FileStream fileStream = new FileStream(path, FileMode.Create, FileAccess.Write))
-                {
-                    while ((readBytesCount = stream.Read(buffer, 0, buffer.Length)) > 0)
-                    {
-                        fileStream.Write(buffer, 0, readBytesCount);
-                    }
-                }
+                var list = List(ftpPath);
+                return list.Count > 0;
             }
-
-            CloseResponse(ref response);
-        }
-
-        public void DownloadAsync(string ftpPath, string path)
-        {
-            DownloadAsync(ftpPath, path, true);
-        }
-
-        public void DownloadAsync(string ftpPath, string path, bool overwrite)
-        {
-            InitDirAndFile(path, overwrite);
-
-            using (WebClient webClient = webClientHelper.Create())
+            catch
             {
-                webClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(DownloadProgressChanged);
-                webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(DownloadFileCompleted);
-                webClient.DownloadFileAsync(new Uri(ftpPath), path);
+                return false;
             }
-        }
-
-        #endregion
-
-        #region Download Events
-
-        private void DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
-        {
-            DownloadProgressChangedEvent?.Invoke(sender, e);
-        }
-
-        private void DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
-        {
-            DownloadCompletedEvent?.Invoke(sender, e);
-        }
-
-        #endregion
-
-        #region Init directory and file
-
-        private void InitDirAndFile(string path, bool overwrite)
-        {
-            FileInfo fileInfo = new FileInfo(path);
-
-            if (!fileInfo.Exists)
-            {
-                Directory.CreateDirectory(fileInfo.DirectoryName);
-                return;
-            }
-
-            if (overwrite)
-            {
-                File.Delete(path);
-                return;
-            }
-
-            throw new Exception("File already exists in local machine.");
         }
 
         #endregion
@@ -245,19 +164,57 @@ namespace DevUtility.Out.Net.FTP
 
         #endregion
 
-        #region Exists
+        #region Download
 
-        public bool Exists(string ftpPath)
+        /// <summary>
+        /// Download a file from ftpPath to path.
+        /// </summary>
+        /// <param name="ftpPath"></param>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public void Download(string ftpPath, string path)
         {
-            try
+            FtpWebResponse response = GetResponse(ftpPath, WebRequestMethods.Ftp.DownloadFile);
+
+            using (Stream stream = response.GetResponseStream())
             {
-                var list = List(ftpPath);
-                return list.Count > 0;
+                int readBytesCount = 0;
+                byte[] buffer = new byte[BufferSize];
+
+                using (FileStream fileStream = new FileStream(path, FileMode.Create, FileAccess.Write))
+                {
+                    while ((readBytesCount = stream.Read(buffer, 0, buffer.Length)) > 0)
+                    {
+                        fileStream.Write(buffer, 0, readBytesCount);
+                    }
+                }
             }
-            catch
+
+            CloseResponse(ref response);
+        }
+
+        public void DownloadAsync(string ftpPath, string path)
+        {
+            using (WebClient webClient = webClientHelper.Create())
             {
-                return false;
+                webClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(DownloadProgressChanged);
+                webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(DownloadFileCompleted);
+                webClient.DownloadFileAsync(new Uri(ftpPath), path);
             }
+        }
+
+        #endregion
+
+        #region Download Events
+
+        private void DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        {
+            DownloadProgressChangedEvent?.Invoke(sender, e);
+        }
+
+        private void DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+            DownloadCompletedEvent?.Invoke(sender, e);
         }
 
         #endregion

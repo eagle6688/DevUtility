@@ -106,6 +106,7 @@
     <Compile Include="Net\FTP\FtpFileTypes.cs" />
     <Compile Include="Net\FTP\FtpHelper.cs" />
     <Compile Include="Net\FTP\FtpOSTypes.cs" />
+    <Compile Include="Net\FTP\FtpUtility.cs" />
     <Compile Include="Net\Http\HttpHelper.cs" />
     <Compile Include="Net\Mail\Delegates.cs" />
     <Compile Include="Net\Mail\EmailCredential.cs" />

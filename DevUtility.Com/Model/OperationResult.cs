@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DevUtility.Com.Extension.SystemExt;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -44,6 +45,12 @@ namespace DevUtility.Com.Model
         #endregion
 
         #region Set Error Message
+
+        public void SetErrorMessage(Exception exception)
+        {
+            IsSucceeded = false;
+            Message = exception.ToExceptionString();
+        }
 
         public void SetErrorMessage(string message)
         {
