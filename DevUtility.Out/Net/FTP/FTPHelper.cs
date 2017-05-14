@@ -46,9 +46,8 @@ namespace DevUtility.Out.Net.FTP
         }
 
         public FtpHelper(string loginName, string password, WebProxy webProxy)
+            : base(loginName, password, webProxy)
         {
-            SetCredential(loginName, password);
-            base.webProxy = webProxy;
             webClientHelper = new WebClientHelper(loginName, password, webProxy);
         }
 
@@ -271,22 +270,65 @@ namespace DevUtility.Out.Net.FTP
 
         #endregion
 
-        #region Get File Information
+        #region Get Item Information
 
-        public FtpFileInfo GetFileInfo(string ftpPath)
+        /// <summary>
+        /// Can be used for get file and directory item information.
+        /// </summary>
+        /// <param name="ftpPath"></param>
+        /// <returns></returns>
+        public FtpItemInfo GetItemInfo(string ftpPath)
         {
-            var list = GetFileInfoList(ftpPath);
-            return list.Count == 0 ? null : list[0];
+            string value = ftpPath.TrimEnd('/');
+            string parent = FtpCommon.GetParent(value);
+            var list = GetDirectoryItems(parent);
+            return list.FirstOrDefault(q => q.FtpPath == value);
         }
 
-        public List<FtpFileInfo> GetFileInfoList(string ftpPath)
+        /// <summary>
+        /// Only can be used for file path.
+        /// </summary>
+        /// <param name="ftpPath"></param>
+        /// <returns></returns>
+        public FtpItemInfo GetFileInfo(string ftpPath)
         {
-            List<FtpFileInfo> list = new List<FtpFileInfo>();
+            List<string> details = ListDetails(ftpPath);
+
+            if (details.Count == 0 || details.Count > 1)
+            {
+                return null;
+            }
+
+            var fileInfo = GetItemInfoByDetail(details[0]);
+
+            if (fileInfo != null)
+            {
+                fileInfo.FtpPath = ftpPath;
+            }
+
+            return fileInfo;
+        }
+
+        /// <summary>
+        /// Only can be used for directory path, this method will return files and sub-directories that contained in ftpPath.
+        /// </summary>
+        /// <param name="ftpPath"></param>
+        /// <returns></returns>
+        public List<FtpItemInfo> GetDirectoryItems(string ftpPath)
+        {
+            List<FtpItemInfo> list = new List<FtpItemInfo>();
             List<string> details = ListDetails(ftpPath);
 
             foreach (string detail in details)
             {
-                var fileInfo = GetFileInfoByDetail(detail);
+                var fileInfo = GetItemInfoByDetail(detail);
+
+                if (fileInfo == null)
+                {
+                    continue;
+                }
+
+                fileInfo.FtpPath = FtpCommon.AppendPath(ftpPath, fileInfo.Name);
                 list.Add(fileInfo);
             }
 
@@ -295,70 +337,68 @@ namespace DevUtility.Out.Net.FTP
 
         #endregion
 
-        #region Get File Information by detail
+        #region Get Item Information by detail
 
-        private FtpFileInfo GetFileInfoByDetail(string detail)
+        private FtpItemInfo GetItemInfoByDetail(string detail)
         {
             FtpOSTypes osType = FtpOSTypesHelper.GetFtpOSType(detail);
 
             switch (osType)
             {
                 case FtpOSTypes.Unix:
-                    return GetUnixFileInfoByDetail(detail);
+                    return GetUnixItemInfoByDetail(detail);
 
                 case FtpOSTypes.Windows:
-                    return GetWindowsFileInfoByDetail(detail);
+                    return GetWindowsItemInfoByDetail(detail);
 
                 default:
                     return null;
             }
         }
 
-        private FtpFileInfo GetUnixFileInfoByDetail(string detail)
+        private FtpItemInfo GetUnixItemInfoByDetail(string detail)
         {
-            List<string> detailInfo = detail.SplitStringWithMultiSameChar(' ');
+            List<string> detailInfo = detail.Substring(0, 56).SplitStringWithMultiSameChar(' ');
+            detailInfo.Add(detail.Substring(56).Trim());
 
             if (detailInfo.Count != 9)
             {
                 return null;
             }
 
-            FtpFileInfo ftpileInfo = new FtpFileInfo();
+            FtpItemInfo ftpileInfo = new FtpItemInfo();
             ftpileInfo.UnixAuthority = detailInfo[0];
-            ftpileInfo.Type = FtpFileTypesHelper.GetUnixFileType(detailInfo[1]);
+            ftpileInfo.Type = FtpItemTypesHelper.GetUnixItemType(detailInfo[0].Substring(0, 1));
             ftpileInfo.Size = long.Parse(detailInfo[4]);
             ftpileInfo.Name = detailInfo[8];
             return ftpileInfo;
         }
 
-        private FtpFileInfo GetWindowsFileInfoByDetail(string detail)
+        private FtpItemInfo GetWindowsItemInfoByDetail(string detail)
         {
-            List<string> detailInfo = detail.SplitStringWithMultiSameChar(' ');
+            List<string> detailInfo = detail.Substring(0, 39).SplitStringWithMultiSameChar(' ');
+            detailInfo.Add(detail.Substring(39).Trim());
 
             if (detailInfo.Count != 4)
             {
                 return null;
             }
 
-            FtpFileInfo ftpileInfo = new FtpFileInfo();
+            FtpItemInfo ftpileInfo = new FtpItemInfo();
             ftpileInfo.Name = detailInfo[3];
 
             if (detailInfo[2] == "<DIR>")
             {
-                ftpileInfo.Type = FtpFileTypes.Directory;
+                ftpileInfo.Type = FtpItemTypes.Directory;
             }
             else
             {
                 long size = 0;
+                ftpileInfo.Type = FtpItemTypes.File;
 
                 if (long.TryParse(detailInfo[2], out size))
                 {
                     ftpileInfo.Size = size;
-                    ftpileInfo.Type = FtpFileTypes.File;
-                }
-                else
-                {
-                    ftpileInfo.Type = FtpFileTypes.Unknow;
                 }
             }
 

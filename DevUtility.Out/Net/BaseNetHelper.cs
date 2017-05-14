@@ -16,9 +16,36 @@ namespace DevUtility.Out.Net
 
         #endregion
 
+        #region Constructor
+
+        public BaseNetHelper()
+            : this("anonymous", "")
+        {
+
+        }
+
+        public BaseNetHelper(string loginName, string password)
+            : this(loginName, password, null)
+        {
+
+        }
+
+        public BaseNetHelper(string loginName, string password, WebProxy webProxy)
+        {
+            if (string.IsNullOrEmpty(loginName))
+            {
+                loginName = "anonymous";
+            }
+
+            SetCredential(loginName, password);
+            this.webProxy = webProxy;
+        }
+
+        #endregion
+
         #region Set Credential
 
-        public void SetCredential(string loginName, string password)
+        protected void SetCredential(string loginName, string password)
         {
             networkCredential = new NetworkCredential(loginName, password);
         }

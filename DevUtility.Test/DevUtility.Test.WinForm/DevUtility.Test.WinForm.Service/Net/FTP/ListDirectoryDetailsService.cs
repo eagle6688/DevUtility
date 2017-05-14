@@ -31,12 +31,12 @@ namespace DevUtility.Test.WinForm.Service.Net.FTP
 
         public override void Start()
         {
-            FtpHelper ftpHelperForWindows = new FtpHelper();
+            //FtpHelper ftpHelperForWindows = new FtpHelper();
 
-            foreach (string line in ftpHelperForWindows.ListDetails("ftp://10.100.97.145:2101/"))
-            {
-                DisplayMessage(line);
-            }
+            //foreach (string line in ftpHelperForWindows.ListDetails("ftp://10.100.97.145:2101/"))
+            //{
+            //    DisplayMessage(line);
+            //}
 
             FtpHelper ftpHelperForUnix = new FtpHelper(user, pwd);
 

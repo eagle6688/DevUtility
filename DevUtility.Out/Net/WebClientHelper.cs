@@ -11,6 +11,7 @@ namespace DevUtility.Out.Net
         #region Constructor
 
         public WebClientHelper()
+            : this("anonymous", "")
         {
 
         }
@@ -22,9 +23,9 @@ namespace DevUtility.Out.Net
         }
 
         public WebClientHelper(string loginName, string password, WebProxy webProxy)
+            : base(loginName, password, webProxy)
         {
-            SetCredential(loginName, password);
-            base.webProxy = webProxy;
+
         }
 
         #endregion

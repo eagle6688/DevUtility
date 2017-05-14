@@ -75,63 +75,18 @@ namespace DevUtility.Out.Net.FTP
         public static OperationResult Delete(string uid, string pwd, string ftpPath)
         {
             OperationResult result = new OperationResult();
-            FtpHelper ftpHelper = new FtpHelper(uid, pwd);
-            string parent = GetParent(ftpPath);
-
-            if (string.IsNullOrEmpty(parent))
-            {
-                result.SetErrorMessage("Ftp path format error.");
-                return result;
-            }
-
-            List<FtpFileInfo> elements = new List<FtpFileInfo>();
+            FtpDeleteHelper ftpDeleteHelper = new FtpDeleteHelper(uid, pwd);
 
             try
             {
-                elements = ftpHelper.GetFileInfoList(parent);
+                ftpDeleteHelper.Delete(ftpPath);
             }
             catch (Exception exception)
             {
                 result.SetErrorMessage(exception);
             }
 
-            if (elements.Count == 0)
-            {
-                return result;
-            }
-
-
-
             return result;
-        }
-
-        #endregion
-
-        #region Get Parent
-
-        public static string GetParent(string ftpPath)
-        {
-            string path = ftpPath.TrimEnd('/');
-            List<string> list = path.Split('/').ToList();
-
-            if (list.Count == 0)
-            {
-                return null;
-            }
-
-            list.RemoveAt(list.Count - 1);
-            return string.Join("/", list);
-        }
-
-        #endregion
-
-        #region Get Last
-
-        public static string GetLast(string ftpPath)
-        {
-            string path = ftpPath.TrimEnd('/');
-            string[] array = path.Split('/');
-            return array[array.Length - 1];
         }
 
         #endregion

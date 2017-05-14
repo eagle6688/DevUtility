@@ -61,25 +61,30 @@ namespace DevUtility.Com.Extension.SystemExt
         public static List<string> SplitStringWithMultiSameChar(this string value, char separator)
         {
             List<string> list = new List<string>();
-            int start = 0;
-            int index = 0;
-            char[] chars = value.ToCharArray();
 
-            while ((index = value.IndexOf(separator, start)) != -1)
+            if (string.IsNullOrEmpty(value))
             {
-                list.Add(value.Substring(start, index - start));
+                return list;
+            }
+
+            int start = 0, index = 0;
+            string str = value.Trim();
+            char[] chars = str.ToCharArray();
+
+            while ((index = str.IndexOf(separator, start)) != -1)
+            {
+                list.Add(str.Substring(start, index - start));
                 start = index + 1;
 
-                while (chars[start] == separator)
+                while (start < chars.Length && chars[start] == separator)
                 {
                     start++;
                 }
             }
 
-            if (index < value.Length - 1)
+            if (start < str.Length)
             {
-                index = value.Length - 1;
-                list.Add(value.Substring(start));
+                list.Add(str.Substring(start));
             }
 
             return list;

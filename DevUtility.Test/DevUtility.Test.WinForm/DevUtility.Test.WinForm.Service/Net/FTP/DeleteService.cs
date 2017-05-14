@@ -1,4 +1,5 @@
 ﻿using DevUtility.Com.Extension.SystemExt;
+using DevUtility.Com.Model;
 using DevUtility.Out.Net.FTP;
 using DevUtility.Win.Services.AppService;
 using System;
@@ -32,27 +33,31 @@ namespace DevUtility.Test.WinForm.Service.Net.FTP
 
         public override void Start()
         {
-            FtpHelper ftpHelper = new FtpHelper(user, pwd);
+            //FtpHelper ftpHelper = new FtpHelper(user, pwd);
 
-            try
-            {
-                ftpHelper.DeleteFile(url);
-                DisplayMessage("Remove file completed!");
-            }
-            catch (Exception exception)
-            {
-                DisplayMessage(exception.ToExceptionContent().ToString());
-            }
+            //try
+            //{
+            //    ftpHelper.DeleteFile(url);
+            //    DisplayMessage("Remove file completed!");
+            //}
+            //catch (Exception exception)
+            //{
+            //    DisplayMessage(exception.ToExceptionContent().ToString());
+            //}
 
-            try
-            {
-                ftpHelper.DeleteDirectory(url);
-                DisplayMessage("Remove directory completed!");
-            }
-            catch (Exception exception)
-            {
-                DisplayMessage(exception.ToExceptionContent().ToString());
-            }
+            //try
+            //{
+            //    ftpHelper.DeleteDirectory(url);
+            //    DisplayMessage("Remove directory completed!");
+            //}
+            //catch (Exception exception)
+            //{
+            //    DisplayMessage(exception.ToExceptionContent().ToString());
+            //}
+
+            OperationResult result = FtpUtility.Delete(user, pwd, url);
+            DisplayMessage(result.Message);
+            DisplayMessage("Completed!");
         }
 
         #endregion
