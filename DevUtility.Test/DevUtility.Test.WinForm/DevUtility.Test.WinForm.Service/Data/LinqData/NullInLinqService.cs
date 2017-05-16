@@ -12,13 +12,24 @@ namespace DevUtility.Test.WinForm.Service.Data.LinqData
     {
         public override void Start()
         {
-            List<Student> students = null;
+            List<Student> students = new List<Student>();
 
             var query = from q in students
                         where q.Name == "asd"
                         select q;
 
             if (query == null)
+            {
+                DisplayMessage("Null");
+            }
+            else
+            {
+                DisplayMessage("No Null object!");
+            }
+
+            var findAll = students.FindAll(q => q.Age == 1);
+
+            if (findAll == null)
             {
                 DisplayMessage("Null");
             }
