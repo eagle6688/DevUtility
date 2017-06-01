@@ -77,6 +77,7 @@
     <Compile Include="Database\DBHelper\DBHelperOleDb.cs" />
     <Compile Include="Database\DBHelper\DBHelperSQL.cs" />
     <Compile Include="Database\DBHelper\IDbHelper.cs" />
+    <Compile Include="Data\EnumHelper.cs" />
     <Compile Include="Extension\SystemCollections\KeyValuePairExt.cs" />
     <Compile Include="Extension\SystemIO\FileExt.cs" />
     <Compile Include="IO\Files\FilesCombiner.cs" />
