@@ -283,5 +283,23 @@ namespace DevUtility.Test.WinForm
         }
 
         #endregion
+
+        #region button_Enum_Click
+
+        private void button_Enum_Click(object sender, EventArgs e)
+        {
+            OpenForm(new TestForms.Data.Form_Enums());
+        }
+
+        #endregion
+
+        #region button_WCF_Click
+
+        private void button_WCF_Click(object sender, EventArgs e)
+        {
+            OpenForm(new TestForms.Net.Form_WCF());
+        }
+
+        #endregion
     }
 }

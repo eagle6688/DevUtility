@@ -115,6 +115,12 @@
     <Compile Include="TestForms\Data\Form_EntityHelper.Designer.cs">
       <DependentUpon>Form_EntityHelper.cs</DependentUpon>
     </Compile>
+    <Compile Include="TestForms\Data\Form_Enums.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestForms\Data\Form_Enums.Designer.cs">
+      <DependentUpon>Form_Enums.cs</DependentUpon>
+    </Compile>
     <Compile Include="TestForms\Data\Form_LinqData.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -180,6 +186,12 @@
     </Compile>
     <Compile Include="TestForms\Net\Form_Net.Designer.cs">
       <DependentUpon>Form_Net.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TestForms\Net\Form_WCF.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestForms\Net\Form_WCF.Designer.cs">
+      <DependentUpon>Form_WCF.cs</DependentUpon>
     </Compile>
     <Compile Include="TestForms\NoSQL\Form_Redis.cs">
       <SubType>Form</SubType>
@@ -257,6 +269,9 @@
     <EmbeddedResource Include="TestForms\Data\Form_EntityHelper.resx">
       <DependentUpon>Form_EntityHelper.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TestForms\Data\Form_Enums.resx">
+      <DependentUpon>Form_Enums.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TestForms\Data\Form_LinqData.resx">
       <DependentUpon>Form_LinqData.cs</DependentUpon>
     </EmbeddedResource>
@@ -289,6 +304,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TestForms\Net\Form_Net.resx">
       <DependentUpon>Form_Net.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestForms\Net\Form_WCF.resx">
+      <DependentUpon>Form_WCF.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TestForms\NoSQL\Form_Redis.resx">
       <DependentUpon>Form_Redis.cs</DependentUpon>

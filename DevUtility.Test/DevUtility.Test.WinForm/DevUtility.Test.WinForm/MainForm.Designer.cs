@@ -44,6 +44,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button_Reflection = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button_Enum = new System.Windows.Forms.Button();
             this.button_Convert = new System.Windows.Forms.Button();
             this.button_DBHelper = new System.Windows.Forms.Button();
             this.button_MemoryFootprint = new System.Windows.Forms.Button();
@@ -51,6 +52,7 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.button_SystemExt = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.button_Directory = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.button_FTP = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
@@ -63,7 +65,7 @@
             this.button_Research = new System.Windows.Forms.Button();
             this.button_Unicode = new System.Windows.Forms.Button();
             this.button_Linq = new System.Windows.Forms.Button();
-            this.button_Directory = new System.Windows.Forms.Button();
+            this.button_WCF = new System.Windows.Forms.Button();
             this.groupBox_Application.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -229,6 +231,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.button_Enum);
             this.groupBox2.Controls.Add(this.button_Convert);
             this.groupBox2.Controls.Add(this.button_DBHelper);
             this.groupBox2.Controls.Add(this.button_MemoryFootprint);
@@ -239,10 +242,20 @@
             this.groupBox2.Controls.Add(this.button_Security);
             this.groupBox2.Location = new System.Drawing.Point(12, 166);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(760, 60);
+            this.groupBox2.Size = new System.Drawing.Size(760, 83);
             this.groupBox2.TabIndex = 14;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Data";
+            // 
+            // button_Enum
+            // 
+            this.button_Enum.Location = new System.Drawing.Point(9, 49);
+            this.button_Enum.Name = "button_Enum";
+            this.button_Enum.Size = new System.Drawing.Size(47, 23);
+            this.button_Enum.TabIndex = 17;
+            this.button_Enum.Text = "Enum";
+            this.button_Enum.UseVisualStyleBackColor = true;
+            this.button_Enum.Click += new System.EventHandler(this.button_Enum_Click);
             // 
             // button_Convert
             // 
@@ -287,7 +300,7 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.button_SystemExt);
-            this.groupBox3.Location = new System.Drawing.Point(12, 232);
+            this.groupBox3.Location = new System.Drawing.Point(12, 262);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(760, 60);
             this.groupBox3.TabIndex = 13;
@@ -308,19 +321,30 @@
             // 
             this.groupBox4.Controls.Add(this.button_Directory);
             this.groupBox4.Controls.Add(this.button_FileHelper);
-            this.groupBox4.Location = new System.Drawing.Point(12, 298);
+            this.groupBox4.Location = new System.Drawing.Point(12, 328);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(760, 60);
             this.groupBox4.TabIndex = 14;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "IO";
             // 
+            // button_Directory
+            // 
+            this.button_Directory.Location = new System.Drawing.Point(104, 20);
+            this.button_Directory.Name = "button_Directory";
+            this.button_Directory.Size = new System.Drawing.Size(79, 23);
+            this.button_Directory.TabIndex = 12;
+            this.button_Directory.Text = "Directory";
+            this.button_Directory.UseVisualStyleBackColor = true;
+            this.button_Directory.Click += new System.EventHandler(this.button_Directory_Click);
+            // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.button_WCF);
             this.groupBox5.Controls.Add(this.button_FTP);
             this.groupBox5.Controls.Add(this.button_Mail);
             this.groupBox5.Controls.Add(this.button_Net);
-            this.groupBox5.Location = new System.Drawing.Point(12, 364);
+            this.groupBox5.Location = new System.Drawing.Point(12, 394);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(760, 60);
             this.groupBox5.TabIndex = 15;
@@ -343,7 +367,7 @@
             this.groupBox6.Controls.Add(this.button_RedisHash);
             this.groupBox6.Controls.Add(this.button_Redis1);
             this.groupBox6.Controls.Add(this.button_Redis);
-            this.groupBox6.Location = new System.Drawing.Point(12, 430);
+            this.groupBox6.Location = new System.Drawing.Point(12, 460);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(760, 60);
             this.groupBox6.TabIndex = 15;
@@ -383,7 +407,7 @@
             // groupBox_MultiThreads
             // 
             this.groupBox_MultiThreads.Controls.Add(this.button_MultiThreads1);
-            this.groupBox_MultiThreads.Location = new System.Drawing.Point(12, 496);
+            this.groupBox_MultiThreads.Location = new System.Drawing.Point(12, 526);
             this.groupBox_MultiThreads.Name = "groupBox_MultiThreads";
             this.groupBox_MultiThreads.Size = new System.Drawing.Size(760, 60);
             this.groupBox_MultiThreads.TabIndex = 15;
@@ -404,7 +428,7 @@
             // 
             this.groupBox_Research.Controls.Add(this.button_Research);
             this.groupBox_Research.Controls.Add(this.button_Unicode);
-            this.groupBox_Research.Location = new System.Drawing.Point(12, 562);
+            this.groupBox_Research.Location = new System.Drawing.Point(12, 592);
             this.groupBox_Research.Name = "groupBox_Research";
             this.groupBox_Research.Size = new System.Drawing.Size(760, 60);
             this.groupBox_Research.TabIndex = 16;
@@ -441,21 +465,21 @@
             this.button_Linq.UseVisualStyleBackColor = true;
             this.button_Linq.Click += new System.EventHandler(this.button_Linq_Click);
             // 
-            // button_Directory
+            // button_WCF
             // 
-            this.button_Directory.Location = new System.Drawing.Point(104, 20);
-            this.button_Directory.Name = "button_Directory";
-            this.button_Directory.Size = new System.Drawing.Size(79, 23);
-            this.button_Directory.TabIndex = 12;
-            this.button_Directory.Text = "Directory";
-            this.button_Directory.UseVisualStyleBackColor = true;
-            this.button_Directory.Click += new System.EventHandler(this.button_Directory_Click);
+            this.button_WCF.Location = new System.Drawing.Point(189, 20);
+            this.button_WCF.Name = "button_WCF";
+            this.button_WCF.Size = new System.Drawing.Size(56, 23);
+            this.button_WCF.TabIndex = 5;
+            this.button_WCF.Text = "WCF";
+            this.button_WCF.UseVisualStyleBackColor = true;
+            this.button_WCF.Click += new System.EventHandler(this.button_WCF_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 631);
+            this.ClientSize = new System.Drawing.Size(784, 661);
             this.Controls.Add(this.button_Linq);
             this.Controls.Add(this.groupBox_Research);
             this.Controls.Add(this.groupBox_MultiThreads);
@@ -520,5 +544,7 @@
         private System.Windows.Forms.Button button_Research;
         private System.Windows.Forms.Button button_Linq;
         private System.Windows.Forms.Button button_Directory;
+        private System.Windows.Forms.Button button_Enum;
+        private System.Windows.Forms.Button button_WCF;
     }
 }

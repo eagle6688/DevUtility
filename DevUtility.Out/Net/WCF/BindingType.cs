@@ -13,7 +13,6 @@ namespace DevUtility.Out.Net.WCF
         NetPeerTcpBinding,
         NetTcpBinding,
         WSDualHttpBinding,
-        WebHttpBinding,
         WSFederationHttpBinding,
         WSHttpBinding
     }
