@@ -1,52 +1,18 @@
 ﻿using DevUtility.Com.Application;
 using DevUtility.Com.Model;
-using DevUtility.Win.Services;
-using DevUtility.Win.Services.AppService;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 
 namespace DevUtility.Test.WinForm.TestForms.Application
 {
-    public partial class Form_Application : Form
+    public partial class Form_Application : BaseForm
     {
-        #region Variable
-
-        TextBoxService textBoxService;
-
-        #endregion
-
         #region Constructor
 
         public Form_Application()
         {
             InitializeComponent();
-            this.StartPosition = FormStartPosition.CenterScreen;
-            Init();
-        }
-
-        #endregion
-
-        #region Init
-
-        private void Init()
-        {
-            textBoxService = new TextBoxService(this, textBox_Message);
-        }
-
-        #endregion
-
-        #region Form_Application_FormClosing
-
-        private void Form_Application_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            AppServiceHelper.OpenForm("MainForm");
+            Init(textBox_Message);
         }
 
         #endregion
@@ -111,6 +77,15 @@ namespace DevUtility.Test.WinForm.TestForms.Application
             {
                 textBoxService.SafeAppend(item);
             }
+        }
+
+        #endregion
+
+        #region button_GetSection_Click
+
+        private void button_GetSection_Click(object sender, EventArgs e)
+        {
+            ExecuteService(new Service.Application.ConfigHelperTest.GetSectionService(textBox_inputValue.Text), button_GetAllServices);
         }
 
         #endregion

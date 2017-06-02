@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\ConfigHelperTest\GetSectionService.cs" />
     <Compile Include="Base\Reflection\AssemblyLoadFileService.cs" />
     <Compile Include="Base\Reflection\AssemblyLoadService.cs" />
     <Compile Include="Base\Reflection\LockerHelperService.cs" />

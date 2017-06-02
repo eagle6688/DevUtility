@@ -36,13 +36,16 @@
             this.button_ExcuteCmd = new System.Windows.Forms.Button();
             this.button_ServiceStatus = new System.Windows.Forms.Button();
             this.button_GetAllServices = new System.Windows.Forms.Button();
+            this.button_GetSection = new System.Windows.Forms.Button();
+            this.groupBox_Functions = new System.Windows.Forms.GroupBox();
+            this.groupBox_Functions.SuspendLayout();
             this.SuspendLayout();
             // 
             // label_Title
             // 
             this.label_Title.AutoSize = true;
             this.label_Title.Font = new System.Drawing.Font("SimSun", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label_Title.Location = new System.Drawing.Point(286, 9);
+            this.label_Title.Location = new System.Drawing.Point(286, 7);
             this.label_Title.Name = "label_Title";
             this.label_Title.Size = new System.Drawing.Size(185, 19);
             this.label_Title.TabIndex = 5;
@@ -50,7 +53,7 @@
             // 
             // textBox_inputValue
             // 
-            this.textBox_inputValue.Location = new System.Drawing.Point(121, 41);
+            this.textBox_inputValue.Location = new System.Drawing.Point(119, 38);
             this.textBox_inputValue.Name = "textBox_inputValue";
             this.textBox_inputValue.Size = new System.Drawing.Size(302, 21);
             this.textBox_inputValue.TabIndex = 11;
@@ -59,7 +62,7 @@
             // 
             this.label_inputValue.AutoSize = true;
             this.label_inputValue.Font = new System.Drawing.Font("SimSun", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label_inputValue.Location = new System.Drawing.Point(12, 44);
+            this.label_inputValue.Location = new System.Drawing.Point(10, 41);
             this.label_inputValue.Name = "label_inputValue";
             this.label_inputValue.Size = new System.Drawing.Size(103, 15);
             this.label_inputValue.TabIndex = 10;
@@ -67,7 +70,7 @@
             // 
             // button_RunProgram
             // 
-            this.button_RunProgram.Location = new System.Drawing.Point(12, 77);
+            this.button_RunProgram.Location = new System.Drawing.Point(6, 20);
             this.button_RunProgram.Name = "button_RunProgram";
             this.button_RunProgram.Size = new System.Drawing.Size(95, 23);
             this.button_RunProgram.TabIndex = 12;
@@ -86,7 +89,7 @@
             // 
             // button_ExcuteCmd
             // 
-            this.button_ExcuteCmd.Location = new System.Drawing.Point(114, 77);
+            this.button_ExcuteCmd.Location = new System.Drawing.Point(107, 20);
             this.button_ExcuteCmd.Name = "button_ExcuteCmd";
             this.button_ExcuteCmd.Size = new System.Drawing.Size(83, 23);
             this.button_ExcuteCmd.TabIndex = 14;
@@ -96,7 +99,7 @@
             // 
             // button_ServiceStatus
             // 
-            this.button_ServiceStatus.Location = new System.Drawing.Point(204, 77);
+            this.button_ServiceStatus.Location = new System.Drawing.Point(196, 20);
             this.button_ServiceStatus.Name = "button_ServiceStatus";
             this.button_ServiceStatus.Size = new System.Drawing.Size(114, 23);
             this.button_ServiceStatus.TabIndex = 15;
@@ -106,7 +109,7 @@
             // 
             // button_GetAllServices
             // 
-            this.button_GetAllServices.Location = new System.Drawing.Point(325, 77);
+            this.button_GetAllServices.Location = new System.Drawing.Point(316, 20);
             this.button_GetAllServices.Name = "button_GetAllServices";
             this.button_GetAllServices.Size = new System.Drawing.Size(119, 23);
             this.button_GetAllServices.TabIndex = 16;
@@ -114,22 +117,43 @@
             this.button_GetAllServices.UseVisualStyleBackColor = true;
             this.button_GetAllServices.Click += new System.EventHandler(this.button_GetAllServices_Click);
             // 
+            // button_GetSection
+            // 
+            this.button_GetSection.Location = new System.Drawing.Point(441, 20);
+            this.button_GetSection.Name = "button_GetSection";
+            this.button_GetSection.Size = new System.Drawing.Size(95, 23);
+            this.button_GetSection.TabIndex = 17;
+            this.button_GetSection.Text = "Get Section";
+            this.button_GetSection.UseVisualStyleBackColor = true;
+            this.button_GetSection.Click += new System.EventHandler(this.button_GetSection_Click);
+            // 
+            // groupBox_Functions
+            // 
+            this.groupBox_Functions.Controls.Add(this.button_RunProgram);
+            this.groupBox_Functions.Controls.Add(this.button_GetSection);
+            this.groupBox_Functions.Controls.Add(this.button_ExcuteCmd);
+            this.groupBox_Functions.Controls.Add(this.button_GetAllServices);
+            this.groupBox_Functions.Controls.Add(this.button_ServiceStatus);
+            this.groupBox_Functions.Location = new System.Drawing.Point(12, 65);
+            this.groupBox_Functions.Name = "groupBox_Functions";
+            this.groupBox_Functions.Size = new System.Drawing.Size(760, 59);
+            this.groupBox_Functions.TabIndex = 62;
+            this.groupBox_Functions.TabStop = false;
+            this.groupBox_Functions.Text = "Funtions";
+            // 
             // Form_Application
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 461);
-            this.Controls.Add(this.button_GetAllServices);
-            this.Controls.Add(this.button_ServiceStatus);
-            this.Controls.Add(this.button_ExcuteCmd);
+            this.Controls.Add(this.groupBox_Functions);
             this.Controls.Add(this.textBox_Message);
-            this.Controls.Add(this.button_RunProgram);
             this.Controls.Add(this.textBox_inputValue);
             this.Controls.Add(this.label_inputValue);
             this.Controls.Add(this.label_Title);
             this.Name = "Form_Application";
             this.Text = "Form_Application";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form_Application_FormClosing);
+            this.groupBox_Functions.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -145,5 +169,7 @@
         private System.Windows.Forms.Button button_ExcuteCmd;
         private System.Windows.Forms.Button button_ServiceStatus;
         private System.Windows.Forms.Button button_GetAllServices;
+        private System.Windows.Forms.Button button_GetSection;
+        private System.Windows.Forms.GroupBox groupBox_Functions;
     }
 }

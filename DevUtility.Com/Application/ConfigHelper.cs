@@ -46,12 +46,14 @@ namespace DevUtility.Com.Application
         /// <returns></returns>
         public static NameValueCollection GetSection(string sectionName)
         {
-            if (string.IsNullOrWhiteSpace(sectionName))
+            var section = ConfigurationManager.GetSection(sectionName);
+
+            if (section == null)
             {
                 return null;
             }
 
-            return ConfigurationManager.GetSection(sectionName) as NameValueCollection;
+            return section as NameValueCollection;
         }
 
         public static string GetSectionValue(string sectionName, string name)
