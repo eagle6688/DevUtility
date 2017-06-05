@@ -39,7 +39,6 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Caching" />
-    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -65,6 +64,7 @@
     <Compile Include="Base\NamespaceHelper.cs" />
     <Compile Include="Base\PropertyHelper.cs" />
     <Compile Include="Base\Reflection\AssemblyHelper.cs" />
+    <Compile Include="Base\Reflection\InstanceHelper.cs" />
     <Compile Include="Base\SingletonInstance.cs" />
     <Compile Include="Database\Access\BaseMySQLDataAccessHelper.cs" />
     <Compile Include="Database\Access\MSSQLDataAccessHelper.cs" />

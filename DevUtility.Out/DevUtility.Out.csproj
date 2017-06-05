@@ -120,6 +120,7 @@
     <Compile Include="Net\NetDelegates.cs" />
     <Compile Include="Net\NetUri.cs" />
     <Compile Include="Net\WCF\BindingType.cs" />
+    <Compile Include="Net\WCF\IDevServiceContract.cs" />
     <Compile Include="Net\WCF\WCFHelper.cs" />
     <Compile Include="Net\WebClientHelper.cs" />
     <Compile Include="NoSQL\Redis\Base\BaseRedisHelper.cs" />

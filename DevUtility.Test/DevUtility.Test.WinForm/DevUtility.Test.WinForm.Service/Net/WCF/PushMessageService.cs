@@ -29,8 +29,12 @@ namespace DevUtility.Test.WinForm.Service.Net.WCF
 
         public override void Start()
         {
-            IPushMessage client = WCFHelper.CreateService<IPushMessage>("BasicHttpBinding_IPushMessage");
-            client.Push(input);
+            using (IPushMessage client = WCFHelper.CreateService<IPushMessage>("BasicHttpBinding_IPushMessage"))
+            {
+                client.Push(input);
+            }
+
+            WCFHelper.ExecuteMethod<IPushMessage>("BasicHttpBinding_IPushMessage", "Push", new object[] { input });
         }
 
         #endregion

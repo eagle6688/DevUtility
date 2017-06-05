@@ -1,4 +1,5 @@
-﻿using DevUtility.Com.Data;
+﻿using DevUtility.Com.Base.Reflection;
+using DevUtility.Com.Data;
 using DevUtility.Out.Application;
 using System;
 using System.ServiceModel;
@@ -9,6 +10,18 @@ namespace DevUtility.Out.Net.WCF
 {
     public class WCFHelper
     {
+        #region Execute Method
+
+        public static object ExecuteMethod<TServiceContract>(string bindingName, string method, params object[] parameters) where TServiceContract : IDevServiceContract
+        {
+            using (TServiceContract client = CreateService<TServiceContract>(bindingName))
+            {
+                return InstanceHelper.ExecuteMethod<TServiceContract>(client, method, parameters);
+            }
+        }
+
+        #endregion
+
         #region Create Service
 
         public static TServiceContract CreateService<TServiceContract>(string bindingName)
