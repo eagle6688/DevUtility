@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Configuration;
 using System.Linq;
+using System.ServiceModel.Configuration;
 using System.Text;
 
 namespace DevUtility.Com.Application
@@ -15,7 +16,7 @@ namespace DevUtility.Com.Application
         {
             if (string.IsNullOrWhiteSpace(key))
             {
-                return "";
+                return null;
             }
 
             return ConfigurationManager.AppSettings[key];
@@ -29,7 +30,7 @@ namespace DevUtility.Com.Application
         {
             if (string.IsNullOrWhiteSpace(name))
             {
-                return "";
+                return null;
             }
 
             return ConfigurationManager.ConnectionStrings[name].ConnectionString;
@@ -62,10 +63,29 @@ namespace DevUtility.Com.Application
 
             if (section == null)
             {
-                return "";
+                return null;
             }
 
             return section[name];
+        }
+
+        #endregion
+
+        #region Get Endpoint
+
+        public static ChannelEndpointElement GetEndpoint(string name)
+        {
+            ClientSection clientSection = ConfigurationManager.GetSection("system.serviceModel/client") as ClientSection;
+
+            foreach (ChannelEndpointElement endpoint in clientSection.Endpoints)
+            {
+                if (endpoint.Name == name)
+                {
+                    return endpoint;
+                }
+            }
+
+            return null;
         }
 
         #endregion

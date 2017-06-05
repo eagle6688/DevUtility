@@ -1,10 +1,9 @@
-﻿using DevUtility.Com.Data;
+﻿using DevUtility.Com.Application;
+using DevUtility.Com.Data;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
-using System.Text;
+using System.ServiceModel.Configuration;
 
 namespace DevUtility.Out.Net.WCF
 {
@@ -12,11 +11,29 @@ namespace DevUtility.Out.Net.WCF
     {
         #region Create Service
 
-        public static T CreateService<T>(string url, string bindingType)
+        public static TServiceContract CreateService<TServiceContract>(string bindingName)
+        {
+            ChannelEndpointElement endpoint = ConfigHelper.GetEndpoint(bindingName);
+
+            if (endpoint == null)
+            {
+                throw new Exception("Endpoint not found!");
+            }
+
+            return CreateService<TServiceContract>(endpoint.Address.ToString(), endpoint.Binding);
+        }
+
+        public static TServiceContract CreateService<TServiceContract>(string url, string bindingType)
         {
             EndpointAddress address = new EndpointAddress(url);
             Binding binding = CreateBinding(bindingType);
-            ChannelFactory<T> channelFactory = new ChannelFactory<T>(binding, address);
+
+            if (binding == null)
+            {
+                throw new Exception("Binging type error!");
+            }
+
+            ChannelFactory<TServiceContract> channelFactory = new ChannelFactory<TServiceContract>(binding, address);
             return channelFactory.CreateChannel();
         }
 
@@ -86,6 +103,9 @@ namespace DevUtility.Out.Net.WCF
                     WSHttpBinding wsHttpBinding = new WSHttpBinding();
                     wsHttpBinding.MaxReceivedMessageSize = maxReceivedMessageSize;
                     binding = wsHttpBinding;
+                    break;
+
+                default:
                     break;
             }
 

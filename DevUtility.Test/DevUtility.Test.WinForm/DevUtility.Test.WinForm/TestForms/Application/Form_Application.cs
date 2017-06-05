@@ -89,5 +89,14 @@ namespace DevUtility.Test.WinForm.TestForms.Application
         }
 
         #endregion
+
+        #region button_GetEndpoint_Click
+
+        private void button_GetEndpoint_Click(object sender, EventArgs e)
+        {
+            ExecuteService(new Service.Application.ConfigHelperTest.GetEndpointService(textBox_inputValue.Text), button_GetEndpoint);
+        }
+
+        #endregion
     }
 }

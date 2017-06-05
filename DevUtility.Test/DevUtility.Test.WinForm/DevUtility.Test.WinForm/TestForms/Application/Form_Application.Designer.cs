@@ -38,6 +38,7 @@
             this.button_GetAllServices = new System.Windows.Forms.Button();
             this.button_GetSection = new System.Windows.Forms.Button();
             this.groupBox_Functions = new System.Windows.Forms.GroupBox();
+            this.button_GetEndpoint = new System.Windows.Forms.Button();
             this.groupBox_Functions.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -129,6 +130,7 @@
             // 
             // groupBox_Functions
             // 
+            this.groupBox_Functions.Controls.Add(this.button_GetEndpoint);
             this.groupBox_Functions.Controls.Add(this.button_RunProgram);
             this.groupBox_Functions.Controls.Add(this.button_GetSection);
             this.groupBox_Functions.Controls.Add(this.button_ExcuteCmd);
@@ -140,6 +142,16 @@
             this.groupBox_Functions.TabIndex = 62;
             this.groupBox_Functions.TabStop = false;
             this.groupBox_Functions.Text = "Funtions";
+            // 
+            // button_GetEndpoint
+            // 
+            this.button_GetEndpoint.Location = new System.Drawing.Point(542, 20);
+            this.button_GetEndpoint.Name = "button_GetEndpoint";
+            this.button_GetEndpoint.Size = new System.Drawing.Size(95, 23);
+            this.button_GetEndpoint.TabIndex = 18;
+            this.button_GetEndpoint.Text = "Get Endpoint";
+            this.button_GetEndpoint.UseVisualStyleBackColor = true;
+            this.button_GetEndpoint.Click += new System.EventHandler(this.button_GetEndpoint_Click);
             // 
             // Form_Application
             // 
@@ -171,5 +183,6 @@
         private System.Windows.Forms.Button button_GetAllServices;
         private System.Windows.Forms.Button button_GetSection;
         private System.Windows.Forms.GroupBox groupBox_Functions;
+        private System.Windows.Forms.Button button_GetEndpoint;
     }
 }
