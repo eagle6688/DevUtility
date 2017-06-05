@@ -6,7 +6,7 @@ using System.Linq;
 using System.ServiceModel.Configuration;
 using System.Text;
 
-namespace DevUtility.Com.Application
+namespace DevUtility.Out.Application
 {
     public class ConfigHelper
     {

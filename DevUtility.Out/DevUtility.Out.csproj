@@ -97,6 +97,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\ConfigHelper.cs" />
     <Compile Include="Application\Security\LDAPAuthenticationHelper.cs" />
     <Compile Include="Application\Security\LDAPUser.cs" />
     <Compile Include="Application\Security\LDAPUserParam.cs" />

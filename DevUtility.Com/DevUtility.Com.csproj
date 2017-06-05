@@ -54,7 +54,6 @@
     <Compile Include="Application\ComAttributes\RedisIndexAttribute.cs" />
     <Compile Include="Application\ComAttributes\RelationTableAttribute.cs" />
     <Compile Include="Application\ComAttributes\ReportFieldAttribute.cs" />
-    <Compile Include="Application\ConfigHelper.cs" />
     <Compile Include="Base\LockerHelper.cs" />
     <Compile Include="Application\Log\LogConfig.cs" />
     <Compile Include="Application\Log\LogHandler.cs" />

@@ -1,5 +1,5 @@
-﻿using DevUtility.Com.Application;
-using DevUtility.Com.Data;
+﻿using DevUtility.Com.Data;
+using DevUtility.Out.Application;
 using System;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
