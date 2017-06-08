@@ -68,11 +68,16 @@
     };
 
     Plugin.prototype.initData = function () {
-        if (!this.options.viewModel) {
-            this.loadData(this.paginationOptions.pageIndex);
+        if (this.options.viewModel) {
+            this.initDataWithData();
             return;
         }
 
+        this.loadData(this.paginationOptions.pageIndex);
+    };
+
+    Plugin.prototype.initDataWithData = function () {
+        this.beforeLoadData(data);
         var count = this.options.viewModel.Count;
         var data = this.options.viewModel.Data;
 
@@ -136,12 +141,13 @@
         displayDom(this.options.loadingDom, true);
 
         this.ajax(function (data) {
+            that.beforeLoadData(data);
             that.applyData(data, pageIndex);
             displayDom(that.options.loadingDom, false);
         });
     };
 
-    Plugin.prototype.applyData = function (data, pageIndex) {
+    Plugin.prototype.beforeLoadData = function (data) {
         if (this.verifyData(data)) {
             this.isValidData = true;
         }
@@ -153,7 +159,9 @@
         if (this.options.beforeLoadData) {
             this.options.beforeLoadData(data);
         }
+    };
 
+    Plugin.prototype.applyData = function (data, pageIndex) {
         if (data && data.Count > 0 && data.Data) {
             this.displayData(data.Count, data.Data, pageIndex);
         }
