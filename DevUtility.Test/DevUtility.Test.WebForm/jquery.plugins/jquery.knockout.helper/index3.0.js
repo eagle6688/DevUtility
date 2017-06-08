@@ -5,6 +5,12 @@ page.init = function () {
 };
 
 page.register = function () {
+    for (var i in initViewModel.Data) {
+        initViewModel.Data[i].NameID = ko.pureComputed(function () {
+            return this.Name + " " + this.MyID;
+        }, initViewModel.Data[i]);
+    }
+
     $('#btn-loadKo').click(function () {
         $('#myKo').koHelper({
             url: 'http://localhost:9000/Handlers/DataHandler.ashx',
@@ -23,12 +29,6 @@ page.register = function () {
     });
 
     $('#btn-loadKoWithData').click(function () {
-        for (var i in initViewModel.Data) {
-            initViewModel.Data[i].NameID = ko.pureComputed(function () {
-                return this.Name + " " + this.MyID;
-            }, initViewModel.Data[i]);
-        }
-
         $('#myKo').koHelper({
             url: 'http://localhost:9000/Handlers/DataHandler.ashx',
             viewModel: initViewModel,
