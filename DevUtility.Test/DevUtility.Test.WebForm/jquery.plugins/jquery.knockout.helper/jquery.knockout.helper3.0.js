@@ -69,15 +69,15 @@
 
     Plugin.prototype.initData = function () {
         if (this.options.viewModel) {
-            this.initDataWithData();
+            this._initDataWithData();
             return;
         }
 
         this.loadData(this.paginationOptions.pageIndex);
     };
 
-    Plugin.prototype.initDataWithData = function () {
-        this.beforeLoadData(data);
+    Plugin.prototype._initDataWithData = function () {
+        this.beforeLoadData(this.options.viewModel);
         var count = this.options.viewModel.Count;
         var data = this.options.viewModel.Data;
 
