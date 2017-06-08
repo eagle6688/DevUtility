@@ -1,7 +1,7 @@
 ﻿;
 (function ($, window, document, undefined) {
     var pluginName = 'koHelper',
-        version = '20170410';
+        version = '20170608';
 
     var defaults = {
         url: '', //request url，required
@@ -123,6 +123,11 @@
         }
 
         this.loadData(config.pageIndex);
+    };
+
+    Plugin.prototype.reloadPost = function (options) {
+        options.type = 'POST';
+        this.reload(options);
     };
 
     Plugin.prototype.loadData = function (pageIndex) {
