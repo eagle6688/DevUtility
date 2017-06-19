@@ -7,7 +7,37 @@
     <input id="btn-ajax" type="button" value="ajax" />
 </div>
 <script type="text/javascript">
+    $.ajaxSetup({
+        statusCode: {
+            203: function (data) {
+                console.log('ajaxSetup');
+                console.log(data);
+            }
+        }
+    });
+
+    $(document).ajaxComplete(function (event, xhr, options) {
+        console.log('ajaxComplete');
+    });
+
+    $(document).ajaxSuccess(function (event, xhr, settrings) {
+        console.log('ajaxSuccess');
+    });
+
     $('#btn-ajax').click(function () {
-        $.getJSON('/api/TestAPI/AuthorityAction');
+        $.getJSON('/api/TestAPI/AuthorityAction', function (data) {
+            console.log('getJSON');
+            console.log(data);
+        });
+
+        //$.ajax({
+        //    cache: true,
+        //    type: "GET",
+        //    url: '/api/TestAPI/AuthorityAction',
+        //    success: function (data) {
+        //        console.log('get');
+        //        console.log(data);
+        //    }
+        //});
     });
 </script>

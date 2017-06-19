@@ -15,7 +15,7 @@ namespace DevUtility.Test.MVC.Attributes
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
             base.OnActionExecuting(actionContext);
-            HttpResponseMessage response = actionContext.Request.CreateResponse<object>(HttpStatusCode.OK, new { Message = "Hello World!" }, "application/json");
+            HttpResponseMessage response = actionContext.Request.CreateResponse<object>(HttpStatusCode.NonAuthoritativeInformation, new { Message = "Hello World!" }, "application/json");
             actionContext.Response = response;
         }
     }
