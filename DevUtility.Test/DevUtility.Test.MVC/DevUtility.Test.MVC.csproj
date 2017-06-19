@@ -149,6 +149,7 @@
     <Compile Include="Areas\JsLibs\Controllers\JQueryPluginController.cs" />
     <Compile Include="Areas\JsLibs\JsLibsAreaRegistration.cs" />
     <Compile Include="Attributes\AuthAttribute.cs" />
+    <Compile Include="Attributes\AuthorityActionAttribute.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TestAPIController.cs" />
     <Compile Include="Controllers\WebSocketController.cs" />

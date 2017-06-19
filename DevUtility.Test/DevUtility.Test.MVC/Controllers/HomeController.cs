@@ -23,7 +23,7 @@ namespace DevUtility.Test.MVC.Controllers
 
         #region Auth
 
-        [Auth(IsAuth = false)]
+        [Auth(IsAuth = true)]
         public ActionResult Auth()
         {
             return View();

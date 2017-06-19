@@ -3,3 +3,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h2>Auth</h2>
+<div>
+    <input id="btn-ajax" type="button" value="ajax" />
+</div>
+<script type="text/javascript">
+    $('#btn-ajax').click(function () {
+        $.getJSON('/api/TestAPI/AuthorityAction');
+    });
+</script>

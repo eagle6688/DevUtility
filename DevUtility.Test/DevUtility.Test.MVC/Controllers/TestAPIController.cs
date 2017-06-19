@@ -1,4 +1,5 @@
 ﻿using DevUtility.Test.Model.MvcApp;
+using DevUtility.Test.MVC.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,13 @@ namespace DevUtility.Test.MVC.Controllers
         public IHttpActionResult TestCache()
         {
             return Ok(Com.Application.Cache.MemoryCacheHelper.Get(key));
+        }
+
+        [HttpGet]
+        [AuthorityAction]
+        public IHttpActionResult AuthorityAction()
+        {
+            return Ok(new { QWE = "asd" });
         }
     }
 }
