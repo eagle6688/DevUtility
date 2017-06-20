@@ -175,6 +175,7 @@
     <Content Include="Areas\Data\Views\web.config" />
     <Content Include="Areas\Data\Views\Security\Index.cshtml" />
     <None Include="Properties\PublishProfiles\Local.pubxml" />
+    <Content Include="Views\Home\URL.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
