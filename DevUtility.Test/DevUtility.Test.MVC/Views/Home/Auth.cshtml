@@ -1,6 +1,6 @@
 ﻿@{
-    ViewBag.Title = "Auth";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+  ViewBag.Title = "Auth";
+  Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h2>Auth</h2>
 <div>
@@ -22,6 +22,10 @@
 
     $(document).ajaxSuccess(function (event, xhr, settrings) {
         console.log('ajaxSuccess');
+    });
+
+    $(document).ajaxError(function (event, jqxhr, settings, thrownError) {
+        console.log('ajaxError');
     });
 
     $('#btn-ajax').click(function () {
