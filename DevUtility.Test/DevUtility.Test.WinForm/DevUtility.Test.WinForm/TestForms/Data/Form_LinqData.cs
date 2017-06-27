@@ -30,5 +30,14 @@ namespace DevUtility.Test.WinForm.TestForms.Data
         }
 
         #endregion
+
+        #region button_WhereReference_Click
+
+        private void button_WhereReference_Click(object sender, EventArgs e)
+        {
+            ExecuteService(new Service.Data.LinqData.WhereReferenceService(), button_WhereReference);
+        }
+
+        #endregion
     }
 }

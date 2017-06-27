@@ -34,6 +34,7 @@
             this.textBox_inputValue = new System.Windows.Forms.TextBox();
             this.label_inputValue = new System.Windows.Forms.Label();
             this.label_Title = new System.Windows.Forms.Label();
+            this.button_WhereReference = new System.Windows.Forms.Button();
             this.groupBox_Functions.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,6 +49,7 @@
             // 
             // groupBox_Functions
             // 
+            this.groupBox_Functions.Controls.Add(this.button_WhereReference);
             this.groupBox_Functions.Controls.Add(this.button_NullInLinq);
             this.groupBox_Functions.Location = new System.Drawing.Point(12, 77);
             this.groupBox_Functions.Name = "groupBox_Functions";
@@ -94,6 +96,16 @@
             this.label_Title.TabIndex = 55;
             this.label_Title.Text = "Linq Data";
             // 
+            // button_WhereReference
+            // 
+            this.button_WhereReference.Location = new System.Drawing.Point(102, 21);
+            this.button_WhereReference.Name = "button_WhereReference";
+            this.button_WhereReference.Size = new System.Drawing.Size(109, 23);
+            this.button_WhereReference.TabIndex = 1;
+            this.button_WhereReference.Text = "Where Reference";
+            this.button_WhereReference.UseVisualStyleBackColor = true;
+            this.button_WhereReference.Click += new System.EventHandler(this.button_WhereReference_Click);
+            // 
             // Form_LinqData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -120,5 +132,6 @@
         private System.Windows.Forms.TextBox textBox_inputValue;
         private System.Windows.Forms.Label label_inputValue;
         private System.Windows.Forms.Label label_Title;
+        private System.Windows.Forms.Button button_WhereReference;
     }
 }

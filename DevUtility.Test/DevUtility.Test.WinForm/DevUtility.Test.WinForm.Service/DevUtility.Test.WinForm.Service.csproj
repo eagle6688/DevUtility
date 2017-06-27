@@ -58,6 +58,7 @@
     <Compile Include="Data\Cryptography\FileMD5EncryptService.cs" />
     <Compile Include="Data\Enums\GetTypeService.cs" />
     <Compile Include="Data\LinqData\NullInLinqService.cs" />
+    <Compile Include="Data\LinqData\WhereReferenceService.cs" />
     <Compile Include="Data\MemoryFootprint\ProductsService.cs" />
     <Compile Include="IO\Directory\DeleteService.cs" />
     <Compile Include="IO\Path\CombineService.cs" />
