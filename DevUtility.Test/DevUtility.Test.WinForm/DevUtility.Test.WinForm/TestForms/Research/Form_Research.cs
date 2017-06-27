@@ -30,5 +30,14 @@ namespace DevUtility.Test.WinForm.TestForms.Research
         }
 
         #endregion
+
+        #region button_StaticProperty_Click
+
+        private void button_StaticProperty_Click(object sender, EventArgs e)
+        {
+            ExecuteService(new Service.Research.Others.StaticPropertyService(), button_StaticProperty);
+        }
+
+        #endregion
     }
 }

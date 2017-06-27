@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Application\ConfigHelperTest\GetEndpointService.cs" />
     <Compile Include="Application\ConfigHelperTest\GetSectionService.cs" />
+    <Compile Include="Research\Others\StaticPropertyService.cs" />
     <Compile Include="Base\Reflection\AssemblyLoadFileService.cs" />
     <Compile Include="Base\Reflection\AssemblyLoadService.cs" />
     <Compile Include="Base\Reflection\LockerHelperService.cs" />
@@ -112,6 +113,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Base\Attribute\" />
     <Folder Include="NoSQL\Redis\HashSet\" />
     <Folder Include="NoSQL\Redis\Hash\RedisTableHelperTest\" />
     <Folder Include="Research\IOC\" />

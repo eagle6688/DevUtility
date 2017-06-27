@@ -34,6 +34,7 @@
             this.textBox_Value = new System.Windows.Forms.TextBox();
             this.label_Value = new System.Windows.Forms.Label();
             this.label_UnicodeTest = new System.Windows.Forms.Label();
+            this.button_StaticProperty = new System.Windows.Forms.Button();
             this.groupBox_ButtonsArea.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,6 +49,7 @@
             // 
             // groupBox_ButtonsArea
             // 
+            this.groupBox_ButtonsArea.Controls.Add(this.button_StaticProperty);
             this.groupBox_ButtonsArea.Controls.Add(this.button_ADLogin);
             this.groupBox_ButtonsArea.Location = new System.Drawing.Point(12, 77);
             this.groupBox_ButtonsArea.Name = "groupBox_ButtonsArea";
@@ -94,6 +96,16 @@
             this.label_UnicodeTest.TabIndex = 43;
             this.label_UnicodeTest.Text = "Research";
             // 
+            // button_StaticProperty
+            // 
+            this.button_StaticProperty.Location = new System.Drawing.Point(86, 20);
+            this.button_StaticProperty.Name = "button_StaticProperty";
+            this.button_StaticProperty.Size = new System.Drawing.Size(116, 23);
+            this.button_StaticProperty.TabIndex = 1;
+            this.button_StaticProperty.Text = "Static Property";
+            this.button_StaticProperty.UseVisualStyleBackColor = true;
+            this.button_StaticProperty.Click += new System.EventHandler(this.button_StaticProperty_Click);
+            // 
             // Form_Research
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -120,5 +132,6 @@
         private System.Windows.Forms.TextBox textBox_Value;
         private System.Windows.Forms.Label label_Value;
         private System.Windows.Forms.Label label_UnicodeTest;
+        private System.Windows.Forms.Button button_StaticProperty;
     }
 }
