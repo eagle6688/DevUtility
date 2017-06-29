@@ -39,5 +39,18 @@ namespace DevUtility.Test.MVC.Controllers
         {
             return Ok(new { QWE = "asd" });
         }
+
+        #region Dic
+
+        [HttpGet]
+        public IHttpActionResult Dic()
+        {
+            Dictionary<string, string> dic = new Dictionary<string, string>();
+            dic.Add("a", "asd");
+            dic.Add("b", "qwe");
+            return Json(dic);
+        }
+
+        #endregion
     }
 }
