@@ -15,10 +15,14 @@ namespace DevUtility.Test.MVC.Controllers
 
         string key = "TestCache";
 
+        #region ReceiveParam
+
         public IHttpActionResult ReceiveParam(TestTable param, int index = 1)
         {
             return Ok(Newtonsoft.Json.JsonConvert.SerializeObject(param));
         }
+
+        #endregion
 
         [HttpGet]
         public IHttpActionResult SetMemoryCache()
