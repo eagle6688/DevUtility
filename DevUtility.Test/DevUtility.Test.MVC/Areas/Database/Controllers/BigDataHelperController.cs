@@ -26,7 +26,7 @@ namespace DevUtility.Test.MVC.Areas.Database.Controllers
                 Name = "Test"
             });
 
-            DataTable table = ListHelper.ConvertToDataTable<TestTable>(list, new List<string>() { "ID" });
+            DataTable table = ListHelper.ToDataTable<TestTable>(list, new List<string>() { "ID" });
             table.TableName = "Test";
             bool result = bigDataHelper.Insert(table);
 

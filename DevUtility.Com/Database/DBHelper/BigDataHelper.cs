@@ -100,7 +100,7 @@ namespace DevUtility.Com.Database.DBHelper
 
         public bool Insert<TModel>(string tableName, List<TModel> list, List<string> excludeProperties) where TModel : class, new()
         {
-            DataTable dt = ListHelper.ConvertToDataTable<TModel>(list, excludeProperties);
+            DataTable dt = ListHelper.ToDataTable<TModel>(list, excludeProperties);
             dt.TableName = tableName;
             return Insert(dt);
         }

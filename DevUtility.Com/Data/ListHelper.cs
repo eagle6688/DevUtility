@@ -9,9 +9,9 @@ namespace DevUtility.Com.Data
 {
     public class ListHelper
     {
-        #region Convert To DataTable
+        #region To DataTable
 
-        public static DataTable ConvertToDataTable<TModel>(List<TModel> list, List<string> excludeProperties) where TModel : class, new()
+        public static DataTable ToDataTable<TModel>(List<TModel> list, List<string> excludeProperties) where TModel : class, new()
         {
             DataTable table = new DataTable();
 
@@ -40,6 +40,39 @@ namespace DevUtility.Com.Data
             }
 
             return table;
+        }
+
+        #endregion
+
+        #region To Array
+
+        public static string[][] ToArray<TModel>(List<TModel> list) where TModel : class, new()
+        {
+            return ToArray<TModel>(list, null);
+        }
+
+        public static string[][] ToArray<TModel>(List<TModel> list, List<string> excludeProperties) where TModel : class, new()
+        {
+            if (list == null || list.Count == 0)
+            {
+                return null;
+            }
+
+            var properties = PropertyHelper.GetProperties<TModel>(excludeProperties);
+
+            if (properties.Count == 0)
+            {
+                return null;
+            }
+
+            string[][] array = new string[list.Count][];
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                array[i] = EntityHelper.ToArray<TModel>(list[i], properties);
+            }
+
+            return array;
         }
 
         #endregion

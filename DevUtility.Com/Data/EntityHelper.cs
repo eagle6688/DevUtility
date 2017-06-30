@@ -296,5 +296,39 @@ namespace DevUtility.Com.Data
         }
 
         #endregion
+
+        #region To Array
+
+        public static string[] ToArray<TModel>(TModel model, List<PropertyInfo> properties) where TModel : class, new()
+        {
+            if (model == null || properties == null || properties.Count == 0)
+            {
+                return null;
+            }
+
+            string[] array = new string[properties.Count];
+            int index = 0;
+            object value = null;
+
+            foreach (var property in properties)
+            {
+                value = property.GetValue(model, null);
+
+                if (value == null)
+                {
+                    array[index] = string.Empty;
+                }
+                else
+                {
+                    array[index] = value.ToString();
+                }
+
+                index++;
+            }
+
+            return array;
+        }
+
+        #endregion
     }
 }
