@@ -19,7 +19,7 @@ namespace DevUtility.Com.Extension.SystemCollections
                 return;
             }
 
-            PropertyInfo propertyInfo = PropertyHelper.GetProperty<TModel>(model, keyValuePair.Key);
+            PropertyInfo propertyInfo = PropertyHelper.GetProperty<TModel>(keyValuePair.Key);
 
             if (propertyInfo != null)
             {

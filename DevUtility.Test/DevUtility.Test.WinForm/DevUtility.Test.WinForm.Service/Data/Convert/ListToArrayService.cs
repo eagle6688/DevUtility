@@ -1,4 +1,5 @@
-﻿using DevUtility.Com.Data;
+﻿using DevUtility.Com.Application.ComAttributes;
+using DevUtility.Com.Data;
 using DevUtility.Test.Model.Com;
 using DevUtility.Win.Services.AppService;
 using System;
@@ -30,7 +31,17 @@ namespace DevUtility.Test.WinForm.Service.Data.Convert
 
             string[][] array = ListHelper.ToArray<Student>(list);
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(array);
-            DisplayMessage(json);
+            //DisplayMessage(json);
+
+            var properties = Com.Base.PropertyHelper.GetPropertiesByAttribute<Student, PropertyIndexAttribute>();
+            properties = PropertyIndexAttribute.SortByIndex(properties);
+            string[][] array1 = ListHelper.ToArray<Student>(list, properties);
+            string json1 = Newtonsoft.Json.JsonConvert.SerializeObject(array1);
+            DisplayMessage(json1);
+
+            var students = ListHelper.ToList<Student>(array1, properties);
+            string json2 = Newtonsoft.Json.JsonConvert.SerializeObject(students);
+            DisplayMessage(json2);
         }
     }
 }

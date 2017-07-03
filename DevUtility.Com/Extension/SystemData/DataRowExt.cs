@@ -23,7 +23,7 @@ namespace DevUtility.Com.Extension.SystemData
 
             TModel model = new TModel();
             DataColumnCollection columns = dr.Table.Columns;
-            List<PropertyInfo> properties = PropertyHelper.GetAllProperties<TModel>(model);
+            List<PropertyInfo> properties = PropertyHelper.GetProperties<TModel>();
 
             foreach (PropertyInfo property in properties)
             {
@@ -79,7 +79,7 @@ namespace DevUtility.Com.Extension.SystemData
 
             TReportModel model = new TReportModel();
             DataColumnCollection columns = dr.Table.Columns;
-            var properties = PropertyHelper.GetAllProperties<TReportModel>(model);
+            var properties = PropertyHelper.GetProperties<TReportModel>();
 
             foreach (var property in properties)
             {

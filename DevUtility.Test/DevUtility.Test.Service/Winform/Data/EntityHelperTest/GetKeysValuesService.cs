@@ -1,4 +1,5 @@
-﻿using DevUtility.Com.Base;
+﻿using DevUtility.Com.Application.ComAttributes;
+using DevUtility.Com.Base;
 using DevUtility.Com.Data;
 using DevUtility.Test.Model.Com;
 using DevUtility.Win.Services.AppService;
@@ -15,8 +16,8 @@ namespace DevUtility.Test.Service.Winform.Data.EntityHelperTest
         {
             StudentScore studentScore = new StudentScore();
             studentScore.StudentID = 1;
-            var properties = PropertyHelper.GetAllProperties<StudentScore>(studentScore);
-            var primaryKeysProperties = PropertyHelper.GetPrimaryKeyProperties(properties);
+            var properties = PropertyHelper.GetProperties<StudentScore>();
+            var primaryKeysProperties = PropertyHelper.FiltrateByAttribute<PrimaryKeyAttribute>(properties);
 
             EntityHelper.GetKeysValues<StudentScore>(studentScore, primaryKeysProperties).ForEach((string keyvalue) =>
             {

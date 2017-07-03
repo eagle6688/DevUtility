@@ -54,6 +54,7 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.button_Directory = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.button_WCF = new System.Windows.Forms.Button();
             this.button_FTP = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.button_RedisSet = new System.Windows.Forms.Button();
@@ -65,7 +66,7 @@
             this.button_Research = new System.Windows.Forms.Button();
             this.button_Unicode = new System.Windows.Forms.Button();
             this.button_Linq = new System.Windows.Forms.Button();
-            this.button_WCF = new System.Windows.Forms.Button();
+            this.button_Property = new System.Windows.Forms.Button();
             this.groupBox_Application.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -209,6 +210,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button_Property);
             this.groupBox1.Controls.Add(this.button_Reflection);
             this.groupBox1.Controls.Add(this.button_Attribute);
             this.groupBox1.Controls.Add(this.button_Inherit);
@@ -351,6 +353,16 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Net";
             // 
+            // button_WCF
+            // 
+            this.button_WCF.Location = new System.Drawing.Point(189, 20);
+            this.button_WCF.Name = "button_WCF";
+            this.button_WCF.Size = new System.Drawing.Size(56, 23);
+            this.button_WCF.TabIndex = 5;
+            this.button_WCF.Text = "WCF";
+            this.button_WCF.UseVisualStyleBackColor = true;
+            this.button_WCF.Click += new System.EventHandler(this.button_WCF_Click);
+            // 
             // button_FTP
             // 
             this.button_FTP.Location = new System.Drawing.Point(127, 20);
@@ -465,15 +477,15 @@
             this.button_Linq.UseVisualStyleBackColor = true;
             this.button_Linq.Click += new System.EventHandler(this.button_Linq_Click);
             // 
-            // button_WCF
+            // button_Property
             // 
-            this.button_WCF.Location = new System.Drawing.Point(189, 20);
-            this.button_WCF.Name = "button_WCF";
-            this.button_WCF.Size = new System.Drawing.Size(56, 23);
-            this.button_WCF.TabIndex = 5;
-            this.button_WCF.Text = "WCF";
-            this.button_WCF.UseVisualStyleBackColor = true;
-            this.button_WCF.Click += new System.EventHandler(this.button_WCF_Click);
+            this.button_Property.Location = new System.Drawing.Point(259, 20);
+            this.button_Property.Name = "button_Property";
+            this.button_Property.Size = new System.Drawing.Size(82, 23);
+            this.button_Property.TabIndex = 12;
+            this.button_Property.Text = "Property";
+            this.button_Property.UseVisualStyleBackColor = true;
+            this.button_Property.Click += new System.EventHandler(this.button_Property_Click);
             // 
             // MainForm
             // 
@@ -546,5 +558,6 @@
         private System.Windows.Forms.Button button_Directory;
         private System.Windows.Forms.Button button_Enum;
         private System.Windows.Forms.Button button_WCF;
+        private System.Windows.Forms.Button button_Property;
     }
 }

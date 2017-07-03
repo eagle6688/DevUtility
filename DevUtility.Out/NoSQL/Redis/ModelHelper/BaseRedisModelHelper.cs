@@ -1,4 +1,5 @@
-﻿using DevUtility.Com.Base;
+﻿using DevUtility.Com.Application.ComAttributes;
+using DevUtility.Com.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,17 +42,17 @@ namespace DevUtility.Out.NoSQL.Redis.ModelHelper
 
         private void Init()
         {
-            TModel model = new TModel();
-            className = model.GetType().Name;
-            properties = PropertyHelper.GetAllProperties<TModel>(model);
-            primaryKeysProperties = PropertyHelper.GetPrimaryKeyProperties(properties);
+            Type type = typeof(TModel);
+            className = type.Name;
+            properties = PropertyHelper.GetProperties<TModel>();
+            primaryKeysProperties = PropertyHelper.FiltrateByAttribute<PrimaryKeyAttribute>(properties);
 
             if (primaryKeysProperties.Count > 1)
             {
                 redisIndexProperties.AddRange(primaryKeysProperties);
             }
 
-            redisIndexProperties.AddRange(PropertyHelper.GetRedisIndexProperties(properties));
+            redisIndexProperties.AddRange(PropertyHelper.FiltrateByAttribute<RedisIndexAttribute>(properties));
         }
 
         #endregion

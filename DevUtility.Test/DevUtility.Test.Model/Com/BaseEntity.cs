@@ -11,6 +11,8 @@ namespace DevUtility.Test.Model.Com
 
         public DateTime CreateTime { set; get; }
 
+        public DateTime LastUpdate { set; get; }
+
         public BaseEntity()
         {
             CreateTime = DateTime.Now;

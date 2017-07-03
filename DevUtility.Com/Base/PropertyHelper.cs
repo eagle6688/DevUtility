@@ -1,4 +1,4 @@
-﻿using DevUtility.Com.Application.ComAttributes;
+﻿using DevUtility.Com.Base.Reflection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,194 +11,118 @@ namespace DevUtility.Com.Base
     {
         #region Get property
 
-        public static PropertyInfo GetProperty<TModel>(TModel model, string propertyName)
+        public static PropertyInfo GetProperty<TModel>(string propertyName) where TModel : class, new()
         {
-            List<PropertyInfo> properties = GetAllProperties<TModel>(model);
-
-            foreach (PropertyInfo propertyInfo in properties)
-            {
-                if (propertyName == propertyInfo.Name)
-                {
-                    return propertyInfo;
-                }
-            }
-
-            return null;
-        }
-
-        #endregion
-
-        #region Get all properties
-
-        public static List<PropertyInfo> GetAllProperties<TModel>() where TModel : class, new()
-        {
-            return GetAllProperties<TModel>(new TModel());
-        }
-
-        public static List<PropertyInfo> GetAllProperties<TModel>(TModel model)
-        {
-            List<PropertyInfo> properties = new List<PropertyInfo>();
-
-            if (model != null)
-            {
-                properties = model.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public).ToList();
-            }
-
-            return properties;
+            List<PropertyInfo> properties = GetProperties<TModel>();
+            return properties.FirstOrDefault(q => propertyName.Equals(q.Name));
         }
 
         #endregion
 
         #region Get properties
 
+        public static List<PropertyInfo> GetProperties<TModel>() where TModel : class, new()
+        {
+            Type type = typeof(TModel);
+
+            if (type == null)
+            {
+                throw new Exception("Type not found!");
+            }
+
+            PropertyInfo[] array = type.GetProperties(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static);
+
+            if (array == null)
+            {
+                return new List<PropertyInfo>();
+            }
+
+            return array.ToList();
+        }
+
+        public static List<PropertyInfo> GetProperties<TModel>(string excludeProperty) where TModel : class, new()
+        {
+            return GetProperties<TModel>(new List<string>() { excludeProperty });
+        }
+
         public static List<PropertyInfo> GetProperties<TModel>(List<string> excludeProperties) where TModel : class, new()
         {
-            List<PropertyInfo> properties = GetAllProperties<TModel>(new TModel());
-            properties = FiltrateProperties(excludeProperties, properties);
-            properties = FiltrateNoDatabaseFieldProperties(properties);
+            List<PropertyInfo> properties = GetProperties<TModel>();
+            properties = FiltrateExcludeProperties(excludeProperties, properties);
             return properties;
         }
 
-        public static List<PropertyInfo> GetProperties<TModel>(TModel model)
+        public static List<PropertyInfo> GetProperties<TModel, TAttribute>(List<string> excludeProperties) where TModel : class, new()
         {
-            List<PropertyInfo> properties = GetAllProperties<TModel>(model);
-            properties = FiltrateNullProperties<TModel>(model, properties);
-            properties = FiltrateDateTimeProperties<TModel>(model, properties);
-            properties = FiltrateNoDatabaseFieldProperties(properties);
-            return properties;
-        }
-
-        public static List<PropertyInfo> GetProperties<TModel>(TModel model, string excludeProperty)
-        {
-            return GetProperties<TModel>(model, new List<string>() { excludeProperty });
-        }
-
-        public static List<PropertyInfo> GetProperties<TModel>(TModel model, List<string> excludeProperties)
-        {
-            List<PropertyInfo> properties = GetAllProperties<TModel>(model);
-            properties = FiltrateProperties(excludeProperties, properties);
-            properties = FiltrateNullProperties<TModel>(model, properties);
-            properties = FiltrateDateTimeProperties<TModel>(model, properties);
-            properties = FiltrateNoDatabaseFieldProperties(properties);
+            List<PropertyInfo> properties = GetProperties<TModel>(excludeProperties);
+            properties = FiltrateByAttribute<TAttribute>(properties);
             return properties;
         }
 
         #endregion
 
-        #region Filtrate
+        #region Get properties for database
 
-        public static List<PropertyInfo> FiltrateProperties(List<string> excludeProperties, List<PropertyInfo> properties)
+        public static List<PropertyInfo> GetPropertiesForDatabase<TModel>(TModel model, string excludeProperty) where TModel : class, new()
         {
-            List<PropertyInfo> list = new List<PropertyInfo>();
+            return GetPropertiesForDatabase<TModel>(model, new List<string>() { excludeProperty });
+        }
 
+        public static List<PropertyInfo> GetPropertiesForDatabase<TModel>(TModel model, List<string> excludeProperties) where TModel : class, new()
+        {
+            var properties = GetProperties<TModel>();
+            properties = FiltrateExcludeProperties(excludeProperties, properties);
+            properties = FiltrateInvalidDateTimeProperties<TModel>(model, properties);
+            return properties;
+        }
+
+        #endregion
+
+        #region Get properties by attribute
+
+        public static List<PropertyInfo> GetPropertiesByAttribute<TModel, TAttribute>() where TModel : class, new()
+        {
+            List<PropertyInfo> properties = GetProperties<TModel>();
+            return FiltrateByAttribute<TAttribute>(properties);
+        }
+
+        #endregion
+
+        #region Filtrate exclude properties
+
+        public static List<PropertyInfo> FiltrateExcludeProperties(List<string> excludeProperties, List<PropertyInfo> properties)
+        {
             if (excludeProperties == null || properties == null)
             {
                 return properties;
             }
 
-            foreach (PropertyInfo property in properties)
-            {
-                if (!excludeProperties.Contains(property.Name))
-                {
-                    list.Add(property);
-                }
-            }
+            var query = from p in properties
+                        where !excludeProperties.Contains(p.Name)
+                        select p;
 
-            return list;
+            return query.ToList();
         }
 
-        public static List<PropertyInfo> FiltrateNullProperties<TModel>(TModel model, List<PropertyInfo> properties)
-        {
-            List<PropertyInfo> list = new List<PropertyInfo>();
-            object value = null;
+        #endregion
 
+        #region Filtrate null value properties
+
+        public static List<PropertyInfo> FiltrateNullValueProperties<TModel>(TModel model, List<PropertyInfo> properties)
+        {
             if (model == null || properties == null)
             {
                 return properties;
             }
+
+            List<PropertyInfo> list = new List<PropertyInfo>();
+            object value = null;
 
             foreach (PropertyInfo property in properties)
             {
                 value = property.GetValue(model, null);
 
                 if (value != null)
-                {
-                    list.Add(property);
-                }
-            }
-
-            return list;
-        }
-
-        public static List<PropertyInfo> FiltrateDateTimeProperties<TModel>(TModel model, List<PropertyInfo> properties)
-        {
-            List<PropertyInfo> list = new List<PropertyInfo>();
-
-            bool isDateTimeType = false;
-            Type type = null;
-            object value = null;
-
-            if (model == null || properties == null)
-            {
-                return properties;
-            }
-
-            foreach (PropertyInfo property in properties)
-            {
-                value = property.GetValue(model, null);
-
-                if (value != null)
-                {
-                    isDateTimeType = false;
-
-                    if (property.PropertyType.Name == "DateTime")
-                    {
-                        isDateTimeType = true;
-                    }
-                    else if (property.PropertyType.IsGenericType && property.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
-                    {
-                        type = property.PropertyType.GetGenericArguments()[0];
-
-                        if (type.Name == "DateTime")
-                        {
-                            isDateTimeType = true;
-                        }
-                    }
-
-                    if (isDateTimeType)
-                    {
-                        DateTime time = DateTime.MinValue;
-                        DateTime.TryParse(value.ToString(), out time);
-
-                        if (time != DateTime.MaxValue && time != DateTime.MinValue)
-                        {
-                            list.Add(property);
-                        }
-                    }
-                    else
-                    {
-                        list.Add(property);
-                    }
-                }
-            }
-
-            return list;
-        }
-
-        public static List<PropertyInfo> FiltrateNoDatabaseFieldProperties(List<PropertyInfo> properties)
-        {
-            List<PropertyInfo> list = new List<PropertyInfo>();
-
-            if (properties == null)
-            {
-                return properties;
-            }
-
-            foreach (PropertyInfo property in properties)
-            {
-                var array = property.GetCustomAttributes(typeof(NoDatabaseFieldAttribute), true);
-
-                if (array.OfType<NoDatabaseFieldAttribute>().Count() == 0)
                 {
                     list.Add(property);
                 }
@@ -209,32 +133,97 @@ namespace DevUtility.Com.Base
 
         #endregion
 
-        #region Get propertyNames
+        #region Filtrate invalid DateTime properties
 
-        public static List<string> GetPropertyNames<TModel>(List<string> excludeProperties) where TModel : class, new()
+        public static List<PropertyInfo> FiltrateInvalidDateTimeProperties<TModel>(TModel model, List<PropertyInfo> properties)
         {
-            List<string> list = new List<string>();
-            List<PropertyInfo> properties = GetProperties<TModel>(excludeProperties);
-            
-            foreach (var property in properties)
+            if (model == null || properties == null)
             {
-                list.Add(property.Name);
+                return properties;
+            }
+
+            List<PropertyInfo> list = new List<PropertyInfo>();
+            object value = null;
+
+            foreach (PropertyInfo property in properties)
+            {
+                if (!TypeHelper.IsType(property.PropertyType, "DateTime"))
+                {
+                    list.Add(property);
+                    continue;
+                }
+
+                value = property.GetValue(model, null);
+
+                if (value == null)
+                {
+                    continue;
+                }
+
+                DateTime time = DateTime.MinValue;
+                DateTime.TryParse(value.ToString(), out time);
+
+                if (time != DateTime.MaxValue && time != DateTime.MinValue)
+                {
+                    list.Add(property);
+                }
             }
 
             return list;
         }
 
-        public static List<string> GetPropertyNames<TModel>(TModel model, List<string> excludeProperties)
-        {
-            List<string> list = new List<string>();
-            List<PropertyInfo> properties = GetProperties<TModel>(model, excludeProperties);
+        #endregion
 
-            foreach (var property in properties)
+        #region Filtrate by attribute
+
+        public static List<PropertyInfo> FiltrateByAttribute<TAttribute>(List<PropertyInfo> properties)
+        {
+            List<PropertyInfo> list = new List<PropertyInfo>();
+            Type attributeType = typeof(TAttribute);
+
+            foreach (PropertyInfo property in properties)
             {
-                list.Add(property.Name);
+                var array = property.GetCustomAttributes(attributeType, true);
+
+                if (array != null && array.Length > 0)
+                {
+                    list.Add(property);
+                }
             }
 
             return list;
+        }
+
+        #endregion
+
+        #region Filtrate by no attribute
+
+        public static List<PropertyInfo> FiltrateByNoAttribute<TAttribute>(List<PropertyInfo> properties)
+        {
+            List<PropertyInfo> list = new List<PropertyInfo>();
+            Type attributeType = typeof(TAttribute);
+
+            foreach (PropertyInfo property in properties)
+            {
+                var array = property.GetCustomAttributes(attributeType, true);
+
+                if (array == null || array.Length == 0)
+                {
+                    list.Add(property);
+                }
+            }
+
+            return list;
+        }
+
+        #endregion
+
+        #region Get property names
+
+        public static List<string> GetPropertyNames<TModel>(List<string> excludeProperties) where TModel : class, new()
+        {
+            List<PropertyInfo> properties = GetProperties<TModel>(excludeProperties);
+            return properties.Select(q => q.Name).ToList();
         }
 
         #endregion
@@ -265,60 +254,18 @@ namespace DevUtility.Com.Base
 
         #endregion
 
-        #region Get PrimaryKey properties
-
-        public static List<PropertyInfo> GetPrimaryKeyProperties(List<PropertyInfo> properties)
-        {
-            List<PropertyInfo> keys = new List<PropertyInfo>();
-
-            foreach (PropertyInfo property in properties)
-            {
-                var array = property.GetCustomAttributes(typeof(PrimaryKeyAttribute), true);
-
-                if (array.OfType<PrimaryKeyAttribute>().Count() > 0)
-                {
-                    keys.Add(property);
-                }
-            }
-
-            return keys;
-        }
-
-        #endregion
-
-        #region Get RedisIndex properties
-
-        public static List<PropertyInfo> GetRedisIndexProperties(List<PropertyInfo> properties)
-        {
-            List<PropertyInfo> keys = new List<PropertyInfo>();
-
-            foreach (PropertyInfo property in properties)
-            {
-                var array = property.GetCustomAttributes(typeof(RedisIndexAttribute), true);
-
-                if (array.OfType<RedisIndexAttribute>().Count() > 0 && array.OfType<PrimaryKeyAttribute>().Count() == 0)
-                {
-                    keys.Add(property);
-                }
-            }
-
-            return keys;
-        }
-
-        #endregion
-
         #region Get Attribute
 
         public static TAttribute GetAttribute<TAttribute>(PropertyInfo property) where TAttribute : class
         {
             var array = property.GetCustomAttributes(typeof(TAttribute), true);
 
-            if (array.OfType<TAttribute>().Count() > 0)
+            if (array == null || array.Length == 0)
             {
-                return array[0] as TAttribute;
+                return null;
             }
 
-            return null;
+            return array[0] as TAttribute;
         }
 
         #endregion

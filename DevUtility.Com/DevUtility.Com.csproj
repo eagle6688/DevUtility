@@ -50,6 +50,7 @@
     <Compile Include="Application\Cache\MemoryCacheHelper.cs" />
     <Compile Include="Application\ComAttributes\NoDatabaseFieldAttribute.cs" />
     <Compile Include="Application\ComAttributes\PrimaryKeyAttribute.cs" />
+    <Compile Include="Application\ComAttributes\PropertyIndexAttribute.cs" />
     <Compile Include="Application\ComAttributes\RedisIndexAttribute.cs" />
     <Compile Include="Application\ComAttributes\RelationTableAttribute.cs" />
     <Compile Include="Application\ComAttributes\ReportFieldAttribute.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="Base\PropertyHelper.cs" />
     <Compile Include="Base\Reflection\AssemblyHelper.cs" />
     <Compile Include="Base\Reflection\InstanceHelper.cs" />
+    <Compile Include="Base\Reflection\TypeHelper.cs" />
     <Compile Include="Base\SingletonInstance.cs" />
     <Compile Include="Database\Access\BaseMySQLDataAccessHelper.cs" />
     <Compile Include="Database\Access\MSSQLDataAccessHelper.cs" />

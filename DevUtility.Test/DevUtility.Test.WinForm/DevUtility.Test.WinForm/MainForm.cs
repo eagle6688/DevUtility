@@ -1,7 +1,6 @@
 ﻿using DevUtility.Win.Extension.SystemWindows.Forms;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -298,6 +297,15 @@ namespace DevUtility.Test.WinForm
         private void button_WCF_Click(object sender, EventArgs e)
         {
             OpenForm(new TestForms.Net.Form_WCF());
+        }
+
+        #endregion
+
+        #region button_Property_Click
+
+        private void button_Property_Click(object sender, EventArgs e)
+        {
+            OpenForm(new TestForms.Base.Form_Property());
         }
 
         #endregion

@@ -16,7 +16,7 @@ namespace DevUtility.Test.Data.Winform.Data.Concurrency
 
         public long Add(TestTable entity)
         {
-            var properties = PropertyHelper.GetProperties<TestTable>(entity, "ID");
+            var properties = PropertyHelper.GetPropertiesForDatabase<TestTable>(entity, "ID");
             var sqlString = EntityHelper.GetInsertSqlWithIdentity("TestTable", properties);
             var parameters = EntityHelper.GetSqlParameters<TestTable>(entity, properties);
             return GetValue<long>(AppConfigHelper.TestDBConn, sqlString, parameters);

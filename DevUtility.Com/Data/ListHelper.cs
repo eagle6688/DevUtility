@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace DevUtility.Com.Data
@@ -33,7 +34,7 @@ namespace DevUtility.Com.Data
 
                 foreach (var property in properties)
                 {
-                    row[property.Name] = EntityHelper.GetPropertyValue<TModel>(model, property.Name);
+                    row[property.Name] = EntityHelper.GetPropertyValue<TModel>(model, property);
                 }
 
                 table.Rows.Add(row);
@@ -48,7 +49,7 @@ namespace DevUtility.Com.Data
 
         public static string[][] ToArray<TModel>(List<TModel> list) where TModel : class, new()
         {
-            return ToArray<TModel>(list, null);
+            return ToArray<TModel>(list, new List<string>());
         }
 
         public static string[][] ToArray<TModel>(List<TModel> list, List<string> excludeProperties) where TModel : class, new()
@@ -59,8 +60,12 @@ namespace DevUtility.Com.Data
             }
 
             var properties = PropertyHelper.GetProperties<TModel>(excludeProperties);
+            return ToArray<TModel>(list, properties);
+        }
 
-            if (properties.Count == 0)
+        public static string[][] ToArray<TModel>(List<TModel> list, List<PropertyInfo> properties) where TModel : class, new()
+        {
+            if (list == null || list.Count == 0 || properties == null || properties.Count == 0)
             {
                 return null;
             }
@@ -73,6 +78,28 @@ namespace DevUtility.Com.Data
             }
 
             return array;
+        }
+
+        #endregion
+
+        #region To List
+
+        public static List<TModel> ToList<TModel>(string[][] array, List<PropertyInfo> properties) where TModel : class, new()
+        {
+            if (array == null || array.Length == 0 || properties == null || properties.Count == 0)
+            {
+                return new List<TModel>();
+            }
+
+            List<TModel> list = new List<TModel>();
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                TModel model = EntityHelper.ToModel<TModel>(array[i], properties);
+                list.Add(model);
+            }
+
+            return list;
         }
 
         #endregion

@@ -1,4 +1,5 @@
 ﻿using DevUtility.Com.Base;
+using DevUtility.Com.Base.Reflection;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -218,17 +219,27 @@ namespace DevUtility.Com.Data
 
         #region Get property value
 
-        public static object GetPropertyValue<TModel>(TModel model, string propertyName)
+        public static object GetPropertyValue<TModel>(TModel model, PropertyInfo property)
         {
-            Type type = typeof(TModel);
-            PropertyInfo propertyInfo = type.GetProperty(propertyName);
+            object value = property.GetValue(model, null);
 
-            if (propertyInfo == null)
+            if (value == null)
             {
                 return null;
             }
 
-            return propertyInfo.GetValue(model, null);
+            if (TypeHelper.IsType(property.PropertyType, "DateTime"))
+            {
+                DateTime time = DateTime.MinValue;
+                DateTime.TryParse(value.ToString(), out time);
+
+                if (time == DateTime.MinValue || time == DateTime.MaxValue)
+                {
+                    return null;
+                }
+            }
+
+            return value;
         }
 
         #endregion
@@ -237,7 +248,7 @@ namespace DevUtility.Com.Data
 
         public static IEnumerable<KeyValuePair<string, string>> ToKeyValuePairs<TModel>(TModel model) where TModel : class, new()
         {
-            var properties = PropertyHelper.GetProperties<TModel>(model);
+            var properties = PropertyHelper.GetProperties<TModel>();
             return ToKeyValuePairs<TModel>(model, properties);
         }
 
@@ -327,6 +338,24 @@ namespace DevUtility.Com.Data
             }
 
             return array;
+        }
+
+        #endregion
+
+        #region To Model
+
+        public static TModel ToModel<TModel>(string[] array, List<PropertyInfo> properties) where TModel : class, new()
+        {
+            TModel model = new TModel();
+            int index = 0;
+
+            foreach (var property in properties)
+            {
+                SetModel<TModel>(ref model, property, array[index]);
+                index++;
+            }
+
+            return model;
         }
 
         #endregion

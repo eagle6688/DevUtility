@@ -45,7 +45,7 @@ namespace DevUtility.Com.Extension.SystemCollections
                 return null;
             }
 
-            List<PropertyInfo> properties = PropertyHelper.GetAllProperties<TModel>(new TModel());
+            List<PropertyInfo> properties = PropertyHelper.GetProperties<TModel>();
             return dictionary.ToModel<TModel>(properties);
         }
 
