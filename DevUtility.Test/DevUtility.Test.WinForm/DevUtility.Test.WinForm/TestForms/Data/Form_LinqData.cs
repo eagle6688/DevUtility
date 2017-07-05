@@ -39,5 +39,14 @@ namespace DevUtility.Test.WinForm.TestForms.Data
         }
 
         #endregion
+
+        #region button_Distinct_Click
+
+        private void button_Distinct_Click(object sender, EventArgs e)
+        {
+            ExecuteService(new Service.Data.LinqData.DistinctService(), button_Distinct);
+        }
+
+        #endregion
     }
 }

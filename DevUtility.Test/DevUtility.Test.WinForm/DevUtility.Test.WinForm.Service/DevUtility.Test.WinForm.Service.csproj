@@ -51,7 +51,9 @@
     <Compile Include="Application\ConfigHelperTest\GetEndpointService.cs" />
     <Compile Include="Application\ConfigHelperTest\GetSectionService.cs" />
     <Compile Include="Base\Property\FiltrateInvalidDateTimeService.cs" />
+    <Compile Include="Data\Convert\ArrayListService.cs" />
     <Compile Include="Data\Convert\ListToArrayService.cs" />
+    <Compile Include="Data\LinqData\DistinctService.cs" />
     <Compile Include="Research\Others\StaticPropertyService.cs" />
     <Compile Include="Base\Reflection\AssemblyLoadFileService.cs" />
     <Compile Include="Base\Reflection\AssemblyLoadService.cs" />
