@@ -10,5 +10,7 @@ namespace DevUtility.Test.Model.MvcApp
         public int ID { set; get; }
 
         public string Name { set; get; }
+
+        public string[] Array { set; get; }
     }
 }
