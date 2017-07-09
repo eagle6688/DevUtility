@@ -54,6 +54,7 @@
     <Compile Include="Data\Convert\ArrayListService.cs" />
     <Compile Include="Data\Convert\ListToArrayService.cs" />
     <Compile Include="Data\LinqData\DistinctService.cs" />
+    <Compile Include="Data\LinqData\LinqContainsService.cs" />
     <Compile Include="Research\Others\StaticPropertyService.cs" />
     <Compile Include="Base\Reflection\AssemblyLoadFileService.cs" />
     <Compile Include="Base\Reflection\AssemblyLoadService.cs" />

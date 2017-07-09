@@ -1,0 +1,81 @@
+﻿using DevUtility.Test.Model.Com;
+using DevUtility.Win.Services.AppService;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DevUtility.Test.WinForm.Service.Data.LinqData
+{
+    public class LinqContainsService : BaseAppService
+    {
+        string input = string.Empty;
+
+        public LinqContainsService(string input)
+        {
+            this.input = input;
+        }
+
+        public override void Start()
+        {
+            var students = GetStudents();
+            DisplayMessage($"Get {students.Count} students");
+            DateTime start = DateTime.Now;
+
+            var query = (from s in students
+                         where s.Name.IndexOf(input, StringComparison.OrdinalIgnoreCase) > -1
+                         select s).ToList();
+
+            DisplayMessage($"cost {DateTime.Now.Subtract(start).TotalMilliseconds} ms");
+            DisplayMessage($"{query.Count} items found!");
+        }
+
+        private List<Student> GetStudents()
+        {
+            var list = new List<Student>();
+
+            for (int i = 0; i < 20000; i++)
+            {
+                list.Add(new Student
+                {
+                    ID = i + 1,
+                    Age = i + 10,
+                    Name = $"Student{i}FromSchool1"
+                });
+            }
+
+            for (int i = 0; i < 30000; i++)
+            {
+                list.Add(new Student
+                {
+                    ID = i + 20001,
+                    Age = i + 10,
+                    Name = $"Student{i}FromSchool2"
+                });
+            }
+
+            for (int i = 0; i < 20000; i++)
+            {
+                list.Add(new Student
+                {
+                    ID = i + 50001,
+                    Age = i + 10,
+                    Name = $"Student{i}FromSchool3"
+                });
+            }
+
+            for (int i = 0; i < 30000; i++)
+            {
+                list.Add(new Student
+                {
+                    ID = i + 70001,
+                    Age = i + 10,
+                    Name = $"Student{i}FromSchool4"
+                });
+            }
+
+            return list;
+        }
+    }
+}

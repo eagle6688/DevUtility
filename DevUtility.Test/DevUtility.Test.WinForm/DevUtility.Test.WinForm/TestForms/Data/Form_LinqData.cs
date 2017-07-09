@@ -48,5 +48,14 @@ namespace DevUtility.Test.WinForm.TestForms.Data
         }
 
         #endregion
+
+        #region button_LinqContains_Click
+
+        private void button_LinqContains_Click(object sender, EventArgs e)
+        {
+            ExecuteService(new Service.Data.LinqData.LinqContainsService(textBox_inputValue.Text), button_LinqContains);
+        }
+
+        #endregion
     }
 }
