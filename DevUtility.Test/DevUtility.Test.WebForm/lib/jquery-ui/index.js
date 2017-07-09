@@ -24,15 +24,35 @@ var availableTags = [
     "Scala",
     "Scheme"
 ];
+
+var selected = false;
+
+$('#autocomplete').change(function () {
+    console.log('change');
+    selected = false;
+});
+
+//$("#autocomplete").autocomplete({
+//    source: [
+//        { label: 'asd', value: 'zxc' },
+//        { label: 'qwe', value: 'haha' }],
+//    select: function (event, ui) {
+//        console.log('select');
+//        console.log(event);
+//        console.log(ui);
+//        console.log(ui.item);
+//    }
+//});
+
 $("#autocomplete").autocomplete({
-    source: [
-        { label: 'asd', value: 'zxc' },
-        { label: 'qwe', value: 'haha' }],
+    source: availableTags,
     select: function (event, ui) {
         console.log('select');
         console.log(event);
         console.log(ui);
         console.log(ui.item);
+        selected = true;
+        console.log(selected);
     }
 });
 
