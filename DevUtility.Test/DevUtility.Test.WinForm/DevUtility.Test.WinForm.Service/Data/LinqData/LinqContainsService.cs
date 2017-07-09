@@ -21,32 +21,9 @@ namespace DevUtility.Test.WinForm.Service.Data.LinqData
         {
             var students = GetStudents();
             DisplayMessage($"Get {students.Count} students");
-            DateTime start = DateTime.Now;
-
-            var query = (from s in students
-                         where s.Name.IndexOf(input, StringComparison.OrdinalIgnoreCase) > -1
-                         select s).ToList();
-
-            DisplayMessage($"cost {DateTime.Now.Subtract(start).TotalMilliseconds} ms");
-            DisplayMessage($"{query.Count} items found!");
-
-            start = DateTime.Now;
-
-            var query1 = from s in students
-                         where s.Name.IndexOf(input, StringComparison.OrdinalIgnoreCase) > -1
-                         select s;
-
-            var query2 = from s in students
-                         where s.Name.IndexOf(input, StringComparison.OrdinalIgnoreCase) > -1
-                         select s;
-
-            var query3 = from s in students
-                         where s.Name.IndexOf(input, StringComparison.OrdinalIgnoreCase) > -1
-                         select s;
-
-            var list = query1.Concat(query2).Concat(query3).Distinct().ToList();
-            DisplayMessage($"cost {DateTime.Now.Subtract(start).TotalMilliseconds} ms");
-            DisplayMessage($"{list.Count} items found!");
+            ContainsSearch(students);
+            MultiContainsSearch(students);
+            MultiEqualsSearch(students);
         }
 
         private List<Student> GetStudents()
@@ -94,6 +71,60 @@ namespace DevUtility.Test.WinForm.Service.Data.LinqData
             }
 
             return list;
+        }
+
+        private void ContainsSearch(List<Student> students)
+        {
+            DateTime start = DateTime.Now;
+
+            var query = (from s in students
+                         where s.Name.IndexOf(input, StringComparison.OrdinalIgnoreCase) > -1
+                         select s).ToList();
+
+            DisplayMessage($"cost {DateTime.Now.Subtract(start).TotalMilliseconds} ms");
+            DisplayMessage($"{query.Count} items found!");
+        }
+
+        private void MultiContainsSearch(List<Student> students)
+        {
+            DateTime start = DateTime.Now;
+
+            var query1 = from s in students
+                         where s.Name.IndexOf(input, StringComparison.OrdinalIgnoreCase) > -1
+                         select s;
+
+            var query2 = from s in students
+                         where s.Name.IndexOf(input, StringComparison.OrdinalIgnoreCase) > -1
+                         select s;
+
+            var query3 = from s in students
+                         where s.Name.IndexOf(input, StringComparison.OrdinalIgnoreCase) > -1
+                         select s;
+
+            var list = query1.Concat(query2).Concat(query3).Distinct().ToList();
+            DisplayMessage($"cost {DateTime.Now.Subtract(start).TotalMilliseconds} ms");
+            DisplayMessage($"{list.Count} items found!");
+        }
+
+        private void MultiEqualsSearch(List<Student> students)
+        {
+            DateTime start = DateTime.Now;
+
+            var query1 = from s in students
+                         where s.Name.Equals(input, StringComparison.OrdinalIgnoreCase)
+                         select s;
+
+            var query2 = from s in students
+                         where s.Name.Equals(input, StringComparison.OrdinalIgnoreCase)
+                         select s;
+
+            var query3 = from s in students
+                         where s.Name.Equals(input, StringComparison.OrdinalIgnoreCase)
+                         select s;
+
+            var list = query1.Concat(query2).Concat(query3).Distinct().ToList();
+            DisplayMessage($"cost {DateTime.Now.Subtract(start).TotalMilliseconds} ms");
+            DisplayMessage($"{list.Count} items found!");
         }
     }
 }
