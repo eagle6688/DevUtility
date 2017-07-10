@@ -193,6 +193,7 @@
                 $li.append($input);
                 $input.removeClass("hidden").focus();
             });
+
             $input.bind("blur", function () {
                 var num = parseInt($(this).val().trim());
                 if (!isNaN(num)) {
@@ -211,6 +212,7 @@
                 _this.setCurrentStatus();
                 $(this).addClass("hidden").siblings(".show-page").removeClass("hidden");
             });
+
             $input.keypress(function (event) {
                 var keycode = (event.keyCode ? event.keyCode : event.which);
                 if (keycode === 13) {
@@ -218,17 +220,20 @@
                 }
             });
         }
+
         return $li;
     };
 
     Plugin.prototype.setCurrentStatus = function () {
         this.$element.find(".page>input").val(this.currentPage);
         this.$element.find(".page-index").text(this.currentPage);
+
         if (this.currentPage === 1) {
             this.$element.find(".prev").addClass("disabled");
             this.$element.find(".next").removeClass("disabled");
             this.$element.find(".first").addClass("hidden").siblings(".last").removeClass("hidden");
         }
+
         if (this.currentPage === this.pagesCount) {
             this.$element.find(".next").addClass("disabled");
             this.$element.find(".prev").removeClass("disabled");
@@ -257,10 +262,10 @@
             return defaults
         }
     };
+
     $.fn[pluginName] = function (options) {
         return this.each(function () {
             var plugin = new Plugin(this, options)
         })
     };
-
 })(jQuery, window, document);
