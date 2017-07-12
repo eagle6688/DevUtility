@@ -1,4 +1,5 @@
-﻿(function ($, window, document, undefined) {
+﻿;
+(function ($, window, document, undefined) {
     var pluginName = 'paginationmobile',
         version = '20170712';
 
