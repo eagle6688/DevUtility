@@ -1,7 +1,7 @@
 ﻿;
 (function ($, window, document, undefined) {
     var pluginName = 'pagination',
-        version = '20170409';
+        version = '20170712';
 
     var defaults = {
         totalRecords: 0,
@@ -24,7 +24,8 @@
         ulClass: 'pagination pagination-sm', //Class of ul
         positionID: '',
         onPageClick: null, //Event that on click.
-        afterPageClick: null //Event that after click.
+        afterPageClick: null, //Event that after click.
+        onReload: function (recordsCount, pageIndex, pageSize) { }
     };
 
     function Plugin(element, options) {
@@ -57,7 +58,9 @@
     };
 
     Plugin.prototype.reLoad = function (recordsCount, pageIndex, pageSize) {
-        this.options.totalRecords = recordsCount;
+        if (recordsCount) {
+            this.options.totalRecords = recordsCount;
+        }
 
         if (pageIndex) {
             this.options.pageIndex = pageIndex;
@@ -68,6 +71,10 @@
         }
 
         this.init();
+
+        if (this.options.onReload) {
+            this.options.onReload(recordsCount, pageIndex, pageSize);
+        }
     };
 
     Plugin.prototype.verifyParameter = function () {
@@ -217,14 +224,13 @@
 
         if (canClick) {
             link.bind('click', function () {
-                var pageIndex = parseInt($(this).attr(pageTagName));
-                pageIndex = that.currentPage = getCurrentPage(pageIndex, that.currentPage, that.pagesCount);
+                var pageIndex = getCurrentPage(parseInt($(this).attr(pageTagName)), that.currentPage, that.pagesCount);
 
                 if (onPageClick) {
                     onPageClick(pageIndex);
                 }
 
-                that.changingPage();
+                that.changingPage(pageIndex);
 
                 if (afterPageClick) {
                     afterPageClick(pageIndex);
@@ -242,7 +248,8 @@
         return link;
     };
 
-    Plugin.prototype.changingPage = function () {
+    Plugin.prototype.changingPage = function (pageIndex) {
+        this.currentPage = pageIndex;
         this.firstVisiblePage = getFirstVisiblePage(this.currentPage, this.options.visiblePages, this.middlePage, this.pagesCount);
         this.lastVisiblePage = getLastVisiblePage(this.currentPage, this.options.visiblePages, this.middlePage, this.pagesCount);
         this.createPagination();
