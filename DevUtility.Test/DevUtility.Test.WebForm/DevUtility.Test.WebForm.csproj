@@ -70,10 +70,12 @@
     <Content Include="jquery.plugins\jquery.knockout.helper\index3.0.js" />
     <Content Include="jquery.plugins\jquery.knockout.helper\jquery.knockout.helper2.0.js" />
     <Content Include="jquery.plugins\jquery.knockout.helper\jquery.knockout.helper3.0.js" />
+    <Content Include="jquery.plugins\jquery.knockout.helper\jquery.knockout.helper4.0.js" />
     <Content Include="jquery.plugins\jquery.knockout.helper\viewModel.js" />
     <Content Include="jquery.plugins\jquery.pagination.mobile\index.html" />
     <Content Include="jquery.plugins\jquery.pagination.mobile\index.min.css" />
     <Content Include="jquery.plugins\jquery.pagination.mobile\jquery.pagination.mobile.js" />
+    <Content Include="jquery.plugins\jquery.pagination\jquery.pagination3.0.js" />
     <Content Include="jquery.plugins\jquery.pagination\jquery.pagination2.0.js" />
     <Content Include="jquery.plugins\jquery.slicingUploader\index.html" />
     <Content Include="jquery.plugins\jquery.slicingUploader\jquery.slicingUploader.js" />
@@ -102,6 +104,7 @@
     <Content Include="lib\jquery-ui\jquery-ui.theme.min.css" />
     <Content Include="lib\jquery-ui\ui-weidget.html" />
     <Content Include="lib\jquery\jquery-1.12.4.min.js" />
+    <Content Include="lib\knockout\knockout-3.4.2.js" />
     <Content Include="lib\md5\index.html" />
     <Content Include="ownLib\extends\extends.js" />
     <Content Include="ownLib\webSocketHelper\index.html" />
@@ -999,6 +1002,7 @@
     <Content Include="jquery.plugins\jquery.uploader\TestUploaderHandler.ashx" />
     <Content Include="jquery.plugins\jquery.slicingUploader\UploadHandler.ashx" />
     <Content Include="Handlers\Concurrency.ashx" />
+    <Content Include="jquery.plugins\jquery.knockout.helper\index4.0.html" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
