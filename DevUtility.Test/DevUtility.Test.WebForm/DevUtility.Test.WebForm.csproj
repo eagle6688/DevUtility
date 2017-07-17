@@ -42,8 +42,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Newtonsoft.Json.9.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.10.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
@@ -997,12 +997,12 @@
     <Content Include="work\demos\angular\angular-1.5.8\errors.json" />
     <Content Include="work\demos\angular\angular-1.5.8\version.json" />
     <Content Include="jquery.plugins\jquery.upload.helper\UploadHandler.ashx" />
-    <Content Include="packages.config" />
     <Content Include="package.json" />
     <Content Include="jquery.plugins\jquery.uploader\TestUploaderHandler.ashx" />
     <Content Include="jquery.plugins\jquery.slicingUploader\UploadHandler.ashx" />
     <Content Include="Handlers\Concurrency.ashx" />
     <Content Include="jquery.plugins\jquery.knockout.helper\index4.0.html" />
+    <Content Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
