@@ -42,6 +42,7 @@
             this.groupBox_Application = new System.Windows.Forms.GroupBox();
             this.label_Title = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button_Property = new System.Windows.Forms.Button();
             this.button_Reflection = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button_Enum = new System.Windows.Forms.Button();
@@ -66,7 +67,7 @@
             this.button_Research = new System.Windows.Forms.Button();
             this.button_Unicode = new System.Windows.Forms.Button();
             this.button_Linq = new System.Windows.Forms.Button();
-            this.button_Property = new System.Windows.Forms.Button();
+            this.button_MongoDB = new System.Windows.Forms.Button();
             this.groupBox_Application.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -221,6 +222,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Base";
             // 
+            // button_Property
+            // 
+            this.button_Property.Location = new System.Drawing.Point(259, 20);
+            this.button_Property.Name = "button_Property";
+            this.button_Property.Size = new System.Drawing.Size(82, 23);
+            this.button_Property.TabIndex = 12;
+            this.button_Property.Text = "Property";
+            this.button_Property.UseVisualStyleBackColor = true;
+            this.button_Property.Click += new System.EventHandler(this.button_Property_Click);
+            // 
             // button_Reflection
             // 
             this.button_Reflection.Location = new System.Drawing.Point(171, 20);
@@ -233,6 +244,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.button_MongoDB);
             this.groupBox2.Controls.Add(this.button_Enum);
             this.groupBox2.Controls.Add(this.button_Convert);
             this.groupBox2.Controls.Add(this.button_DBHelper);
@@ -477,15 +489,15 @@
             this.button_Linq.UseVisualStyleBackColor = true;
             this.button_Linq.Click += new System.EventHandler(this.button_Linq_Click);
             // 
-            // button_Property
+            // button_MongoDB
             // 
-            this.button_Property.Location = new System.Drawing.Point(259, 20);
-            this.button_Property.Name = "button_Property";
-            this.button_Property.Size = new System.Drawing.Size(82, 23);
-            this.button_Property.TabIndex = 12;
-            this.button_Property.Text = "Property";
-            this.button_Property.UseVisualStyleBackColor = true;
-            this.button_Property.Click += new System.EventHandler(this.button_Property_Click);
+            this.button_MongoDB.Location = new System.Drawing.Point(62, 49);
+            this.button_MongoDB.Name = "button_MongoDB";
+            this.button_MongoDB.Size = new System.Drawing.Size(68, 23);
+            this.button_MongoDB.TabIndex = 18;
+            this.button_MongoDB.Text = "MongoDB";
+            this.button_MongoDB.UseVisualStyleBackColor = true;
+            this.button_MongoDB.Click += new System.EventHandler(this.button_MongoDB_Click);
             // 
             // MainForm
             // 
@@ -559,5 +571,6 @@
         private System.Windows.Forms.Button button_Enum;
         private System.Windows.Forms.Button button_WCF;
         private System.Windows.Forms.Button button_Property;
+        private System.Windows.Forms.Button button_MongoDB;
     }
 }

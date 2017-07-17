@@ -309,5 +309,14 @@ namespace DevUtility.Test.WinForm
         }
 
         #endregion
+
+        #region button_MongoDB_Click
+
+        private void button_MongoDB_Click(object sender, EventArgs e)
+        {
+            OpenForm(new TestForms.Database.Form_MongoDB());
+        }
+
+        #endregion
     }
 }
