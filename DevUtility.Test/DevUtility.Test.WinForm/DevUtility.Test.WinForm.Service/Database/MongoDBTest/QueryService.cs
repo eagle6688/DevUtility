@@ -40,6 +40,24 @@ namespace DevUtility.Test.WinForm.Service.Database.MongoDBTest
             var result = collection.Find(filter).Project(fields).FirstOrDefault();
             var dic = BsonSerializer.Deserialize<Dictionary<string, string>>(result);
             DisplayMessage(dic["User"]);
+
+            filter = Builders<BsonDocument>.Filter.Eq("DMU.Name", "American Express Global Business Travel"); // & Builders<BsonDocument>.Filter.BitsAllSet("DMU.$", 1)
+            fields = Builders<BsonDocument>.Projection.Exclude("_id").Include("DMU.$");
+            result = database.GetCollection<BsonDocument>("GlobalAccounts").Find(filter).Project(fields).FirstOrDefault();
+
+            if (result != null)
+            {
+                var dResult = BsonSerializer.Deserialize<Dictionary<string, BsonArray>>(result);
+                DisplayMessage(dResult["DMU"].ToJson());
+
+                var bArray = dResult["DMU"];
+                dic = BsonSerializer.Deserialize<Dictionary<string, string>>(bArray[0].AsBsonDocument);
+                DisplayMessage(dic["ID"]);
+            }
+            else
+            {
+                DisplayMessage("No data!");
+            }
         }
 
         #endregion
