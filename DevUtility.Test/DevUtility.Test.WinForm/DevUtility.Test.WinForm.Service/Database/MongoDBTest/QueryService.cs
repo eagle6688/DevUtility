@@ -41,7 +41,7 @@ namespace DevUtility.Test.WinForm.Service.Database.MongoDBTest
             var dic = BsonSerializer.Deserialize<Dictionary<string, string>>(result);
             DisplayMessage(dic["User"]);
 
-            filter = Builders<BsonDocument>.Filter.Eq("DMU.Name", "American Express Global Business Travel"); // & Builders<BsonDocument>.Filter.BitsAllSet("DMU.$", 1)
+            filter = Builders<BsonDocument>.Filter.Eq("DMU.Name", "American Express Global Business Travel");
             fields = Builders<BsonDocument>.Projection.Exclude("_id").Include("DMU.$");
             result = database.GetCollection<BsonDocument>("GlobalAccounts").Find(filter).Project(fields).FirstOrDefault();
 
