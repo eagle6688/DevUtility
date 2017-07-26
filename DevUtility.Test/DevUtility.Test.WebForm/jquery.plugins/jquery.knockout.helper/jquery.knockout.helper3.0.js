@@ -101,6 +101,14 @@
         });
     };
 
+    Plugin.prototype.getRequestData = function () {
+        return this.options.requestData;
+    };
+
+    Plugin.prototype.setRequestData = function (requestData) {
+        this.options.requestData = requestData;
+    };
+
     Plugin.prototype.reload = function (options) {
         var defaults = {
             url: '',
