@@ -106,6 +106,7 @@
             url: '',
             type: 'GET',
             data: null,
+            viewModel: null,
             pageIndex: 1
         };
 
@@ -127,12 +128,22 @@
             config.pageIndex = 1;
         }
 
-        this.loadData(config.pageIndex);
+        if (config.viewModel) {
+            this.beforeLoadData(config.viewModel);
+            this.applyData(config.viewModel, config.pageIndex);
+        }
+        else {
+            this.loadData(config.pageIndex);
+        }
     };
 
     Plugin.prototype.reloadPost = function (options) {
         options.type = 'POST';
         this.reload(options);
+    };
+
+    Plugin.prototype.reloadWithData = function (data) {
+        this.reload({ viewModel: data });
     };
 
     Plugin.prototype.loadData = function (pageIndex) {
