@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>/jquery.plugins/jquery.autocomplete.helper/index.html</title>
+    <link href="../../lib/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+    <script src="../../lib/jquery/jquery-1.12.4.min.js"></script>
+    <script src="../../lib/jquery-ui/jquery-ui.js"></script>
+    <script src="jquery.autocomplete.helper.js"></script>
+    <script src="index.js"></script>
+</head>
+<body>
+    <h2 class="demoHeaders">Autocomplete</h2>
+    <div>
+        <input id="autocomplete" type="text" value="">
+    </div>
+    <script type="text/javascript">
+        $("#autocomplete").autocompleteHelper({
+            data: availableTags,
+            select: function (data, event, ui) {
+                console.log('select');
+                console.log(data);
+                console.log(event);
+                console.log(ui);
+            },
+            search: function (data) {
+                console.log('search');
+                console.log(data);
+            }
+        });
+    </script>
+</body>
+</html>

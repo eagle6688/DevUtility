@@ -64,6 +64,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="jquery.plugins\jquery.autocomplete.helper\index.html" />
+    <Content Include="jquery.plugins\jquery.autocomplete.helper\index.js" />
+    <Content Include="jquery.plugins\jquery.autocomplete.helper\jquery.autocomplete.helper.js" />
     <Content Include="jquery.plugins\jquery.drag.helper\index.html" />
     <Content Include="jquery.plugins\jquery.drag.helper\jquery.drag.helper.js" />
     <Content Include="jquery.plugins\jquery.knockout.helper\index3.0.html" />
