@@ -7,7 +7,6 @@
         data: [],
         appendTo: null,
         select: function (data, event, ui) { },
-        keyup: function (event) { },
         search: function (data) { }
     };
 
@@ -34,16 +33,6 @@
             appendTo: this.options.appendTo,
             select: function (event, ui) {
                 self._select(event, ui);
-            }
-        });
-
-        this.$element.keyup(function (event) {
-            if (self.options.keyup) {
-                self.options.keyup(event, self.getData());
-            }
-
-            if (event.keyCode == 13) {
-                self.search();
             }
         });
     };
