@@ -1,7 +1,7 @@
 ﻿;
 (function ($, window, document, undefined) {
     var pluginName = 'koHelper',
-        version = '20170228';
+        version = 'v2.0.20170228';
 
     var defaults = {
         url: '', //request url，required
