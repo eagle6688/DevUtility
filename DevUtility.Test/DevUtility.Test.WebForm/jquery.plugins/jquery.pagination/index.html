@@ -8,13 +8,13 @@
     <script src="jquery.pagination.js"></script>
 </head>
 <body>
-    <div id="pagination" class="pagination pagination-sm"></div>
-    <div id="pagination1" class="pagination"></div>
+    <div id="pagination"></div>
+    <div id="pagination1"></div>
     <script type="text/javascript">
         $('#pagination').pagination({
             totalRecords: 101,
             onPageClick: function (pageIndex) {
-                //alert(pageIndex);
+                console.log(pageIndex);
             }
         });
 

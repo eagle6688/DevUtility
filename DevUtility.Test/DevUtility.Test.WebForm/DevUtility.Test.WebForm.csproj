@@ -1006,6 +1006,7 @@
     <Content Include="Handlers\Concurrency.ashx" />
     <Content Include="jquery.plugins\jquery.knockout.helper\index4.0.html" />
     <Content Include="packages.config" />
+    <Content Include="jquery.plugins\jquery.pagination\index3.0.html" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

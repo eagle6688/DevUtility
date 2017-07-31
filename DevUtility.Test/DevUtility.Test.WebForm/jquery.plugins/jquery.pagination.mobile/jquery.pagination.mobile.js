@@ -1,5 +1,4 @@
-﻿;
-(function ($, window, document, undefined) {
+﻿(function ($, window, document, undefined) {
     var pluginName = 'paginationmobile',
         version = '20170712';
 
@@ -30,9 +29,9 @@
             this.init();
         }
         else {
-            console.error("Parameter error!")
+            console.error("Parameter error!");
         }
-    };
+    }
 
     Plugin.prototype.constructor = Plugin;
 

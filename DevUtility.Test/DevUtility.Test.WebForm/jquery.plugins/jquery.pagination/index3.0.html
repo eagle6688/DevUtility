@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>/jquery.plugins/jquery.pagination/index3.0.html</title>
+    <link href="../../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="../../lib/jquery/jquery-1.12.4.min.js"></script>
+    <script src="jquery.pagination3.0.js"></script>
+</head>
+<body>
+    <div id="pagination"></div>
+    <script type="text/javascript">
+        $('#pagination').pagination({
+            totalRecords: 101,
+            onPageClick: function (pageIndex) {
+                console.log(pageIndex);
+            }
+        });
+    </script>
+</body>
+</html>

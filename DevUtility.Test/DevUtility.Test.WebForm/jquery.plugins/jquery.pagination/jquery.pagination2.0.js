@@ -1,7 +1,6 @@
-﻿;
-(function ($, window, document, undefined) {
+﻿(function ($, window, document, undefined) {
     var pluginName = 'pagination',
-        version = '20170712';
+        version = 'v2.0.20170731';
 
     var defaults = {
         totalRecords: 0,
@@ -32,7 +31,7 @@
         this.$element = $(element);
         this.options = $.extend({}, defaults, options);
         this.init();
-    };
+    }
 
     Plugin.prototype.constructor = Plugin;
 
@@ -268,20 +267,20 @@
 
         count = count === 0 ? 1 : count;
         return count;
-    };
+    }
 
     function getMiddlePage(visiblePages) {
         var middlePage = parseInt(visiblePages / 2);
-        middlePage = (visiblePages % 2 > 0) ? middlePage + 1 : middlePage;
+        middlePage = visiblePages % 2 > 0 ? middlePage + 1 : middlePage;
         return middlePage;
-    };
+    }
 
     function getDefaultPage(pagesCount, customerDefaultPage) {
         if (customerDefaultPage > pagesCount)
             return pagesCount;
 
         return customerDefaultPage;
-    };
+    }
 
     function getFirstVisiblePage(currentPage, visiblePages, middlePage, pagesCount) {
         if (pagesCount <= visiblePages) {
@@ -295,7 +294,7 @@
         }
 
         return pageIndex < 1 ? 1 : pageIndex;
-    };
+    }
 
     function getLastVisiblePage(currentPage, visiblePages, middlePage, pagesCount) {
         if (pagesCount <= visiblePages) {
@@ -309,7 +308,7 @@
         }
 
         return pageIndex > pagesCount ? pagesCount : pageIndex;
-    };
+    }
 
     function getCurrentPage(pageIndex, prePage, pagesCount) {
         switch (pageIndex) {
@@ -340,7 +339,7 @@
             default:
                 return pageIndex;
         }
-    };
+    }
 
     $[pluginName] = {
         getDefaults: function () {
