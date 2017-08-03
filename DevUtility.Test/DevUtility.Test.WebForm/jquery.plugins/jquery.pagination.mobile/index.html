@@ -5,39 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>/jquery.plugins/jquery.pagination.mobile/index.html</title>
-    <link href="../../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link href="index.min.css" rel="stylesheet" />
     <script src="../../lib/jquery/jquery-1.12.4.min.js"></script>
-    <script src="../jquery.pagination/jquery.pagination2.0.js"></script>
     <script src="jquery.pagination.mobile.js"></script>
 </head>
 <body>
-    <p>pagination for PC</p>
-    <div id="pagination" class="pagination"></div>
-    <p>pagination for Mobile</p>
     <div id="pager" class="pager"></div>
     <input id="btn-reload" type="button" value="reload pagination" />
     <script>
-        $('#pagination').pagination({
-            totalRecords: 101,
-            ulClass: 'pagination',
-            onPageClick: function (pageIndex) {
-                $('#pager').data('paginationmobile').changingPage(pageIndex);
-            },
-            onReload: function (recordsCount, pageIndex, pageSize) {
-                $('#pager').data('paginationmobile').reLoad(recordsCount, pageIndex, pageSize);
-            }
-        });
-
         $('#pager').paginationmobile({
             totalRecords: 101,
-            onChangingPage: function (pageIndex) {
-                $('#pagination').data('pagination').changingPage(pageIndex);
+            onPageClick: function (pageIndex) {
+                console.log(pageIndex);
             }
         });
 
         $('#btn-reload').click(function () {
-            $('#pagination').data('pagination').reLoad(11);
+            $('#pagination').data('pagination').reload(11);
         });
     </script>
 </body>
