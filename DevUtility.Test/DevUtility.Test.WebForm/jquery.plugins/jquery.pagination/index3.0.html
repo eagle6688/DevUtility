@@ -8,14 +8,49 @@
     <script src="jquery.pagination3.0.js"></script>
 </head>
 <body>
-    <div id="pagination"></div>
+    <div id="pagination1"></div>
+    <div id="pagination2"></div>
+    <div>
+        <p>
+            <input id="btn-changePageSize" value="change page size" type="button" />
+            <input id="btn-changePageIndex" value="change page index" type="button" />
+            <input id="btn-changeOptions" value="change options" type="button" />
+        </p>
+    </div>
     <script type="text/javascript">
-        $('#pagination').pagination({
+        $('#pagination1').pagination({
             visiblePagesCount: 8,
             totalRecords: 101,
             onPageClick: function (pageIndex) {
                 console.log(pageIndex);
             }
+        });
+
+        $('#pagination2').pagination({
+            totalRecords: 101,
+            onPageClick: function (pageIndex) {
+                console.log(pageIndex);
+            },
+            onReload: function (options) {
+                console.log(options);
+            }
+        });
+
+        $('#btn-changePageSize').click(function () {
+            $('#pagination2').data('pagination').reload('pageSize', 20);
+        });
+
+        $('#btn-changePageIndex').click(function () {
+            $('#pagination2').data('pagination').reload('pageIndex', 8);
+        });
+
+        $('#btn-changeOptions').click(function () {
+            $('#pagination2').data('pagination').reload({
+                pageIndex: 2,
+                pageSize: 50,
+                totalRecords: 5000,
+                visiblePagesCount: 20
+            });
         });
     </script>
 </body>

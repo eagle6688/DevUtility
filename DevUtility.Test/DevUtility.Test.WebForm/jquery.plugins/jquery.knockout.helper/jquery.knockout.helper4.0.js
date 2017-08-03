@@ -1,5 +1,4 @@
-﻿;
-(function ($, window, document, undefined) {
+﻿(function ($, window, document, undefined) {
     var pluginName = 'koHelper',
         version = 'v4.0.20170712';
 
@@ -22,7 +21,7 @@
         this.$element = $(element);
         this.options = $.extend(true, {}, defaults, options);
         this._init();
-    };
+    }
 
     Plugin.prototype.constructor = Plugin;
 

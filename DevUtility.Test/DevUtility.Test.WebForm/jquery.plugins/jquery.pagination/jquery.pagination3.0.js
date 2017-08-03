@@ -21,11 +21,11 @@
         paginationClass: 'pagination pagination-sm', //Style of ul dom.
         onPageClick: function (pageIndex) { },
         afterPageClick: function (pageIndex) { },
-        onReload: function (recordsCount, pageIndex, pageSize) { }
+        onReload: function (options) { }
     };
 
     function Plugin(element, options) {
-        this.$element = $(element).empty();
+        this.$element = $(element);
         this.options = $.extend({}, defaults, options);
 
         if (this._verify()) {
@@ -82,7 +82,7 @@
         }
 
         this._loadPagination();
-        this.$element.append(this.$pagination);
+        this.$element.empty().append(this.$pagination);
     };
 
     Plugin.prototype._loadPagination = function () {
@@ -223,17 +223,31 @@
         this._loadPagination();
     };
 
+    Plugin.prototype._reloadOption = function (name, value) {
+        if (this.options.hasOwnProperty(name)) {
+            this.options[name] = value;
+        }
+    };
+
+    Plugin.prototype._reloadOptions = function (options) {
+        this.options = $.extend(true, {}, this.options, options);
+    };
+
+    //events
+
     Plugin.prototype._onPageClick = function (pageIndex) {
         if (this.options.onPageClick) {
             this.options.onPageClick(pageIndex);
         }
     };
 
-    Plugin.prototype._onReload = function (recordsCount, pageIndex, pageSize) {
+    Plugin.prototype._onReload = function () {
         if (this.options.onReload) {
-            this.options.onReload(recordsCount, pageIndex, pageSize);
+            this.options.onReload(this.options);
         }
     };
+
+    //inner functions
 
     var calculatePagesCount = function (totalRecords, pageSize) {
         var count = parseInt(totalRecords / pageSize);
@@ -295,6 +309,26 @@
 
     var isButton = function ($button, text) {
         return $button.children('a').html() === text;
+    };
+
+    //export methods
+
+    Plugin.prototype.reload = function () {
+        switch(arguments.length){
+            case 1:
+                this._reloadOptions(arguments[0]);
+                break;
+
+            case 2:
+                this._reloadOption(arguments[0], arguments[1]);
+                break;
+
+            default:
+                return;
+        }
+
+        this._init();
+        this._onReload();
     };
 
     $.fn[pluginName] = function (options) {
