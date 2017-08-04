@@ -236,20 +236,6 @@
         return this.options.hasOwnProperty(name) && this.options[name] !== value;
     };
 
-    Plugin.prototype._needResetPageIndex = function (oldOptions, name, value) {
-        var array = ['totalRecords', 'visiblePagesCount', 'pageSize'];
-        return $.inArray(name, array) >= 0 && oldOptions[name] !== value;
-    };
-
-    Plugin.prototype._resetPageIndex = function (oldOptions, newOptions) {
-        for (var p in oldOptions) {
-            if (this._needResetPageIndex(oldOptions, p, newOptions[p])) {
-                this.options.pageIndex = 1;
-                break;
-            }
-        }
-    };
-
     Plugin.prototype._reloadOptions = function (options) {
         this.options = $.extend(true, {}, this.options, options);
     };
@@ -338,6 +324,22 @@
 
     //export methods
 
+    Plugin.prototype.changeTotalRecords = function (totalRecords) {
+        var options = {
+            totalRecords: totalRecords
+        };
+
+        if (this.options.totalRecords !== totalRecords) {
+            options.pageIndex = 1;
+        }
+
+        this.reload(options);
+    };
+
+    Plugin.prototype.changePageIndex = function (pageIndex) {
+        this.reload('pageIndex', pageIndex);
+    };
+
     Plugin.prototype.reload = function () {
         var options = $.extend(true, {}, this.options, {});
 
@@ -358,7 +360,6 @@
                 break;
         }
 
-        //this._resetPageIndex(options, this.options);
         this._init();
         this._onReload();
     };

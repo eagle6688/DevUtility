@@ -217,6 +217,7 @@
                 break;
         }
 
+        this.pageIndex = 1;
         this._loadData();
     };
 

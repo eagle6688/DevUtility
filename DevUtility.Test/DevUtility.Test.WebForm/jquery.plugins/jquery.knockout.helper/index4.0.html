@@ -73,7 +73,7 @@
                     }, data.Data[i]);
                 }
 
-                $('#pagination').data('pagination').reload('totalRecords', data.Count);
+                $('#pagination').data('pagination').changeTotalRecords(data.Count);
             }
         });
 
