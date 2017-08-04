@@ -11,7 +11,7 @@
 </head>
 <body>
     <h2>jquery.pagination.mobile.js</h2>
-    <div id="pager" class="pager"></div>
+    <div id="paginationmobile" class="pager"></div>
     <div>
         <p>
             <input id="btn-changePageIndex" type="button" value="change page index" />
@@ -19,7 +19,7 @@
         </p>
     </div>
     <script>
-        $('#pager').paginationmobile({
+        $('#paginationmobile').paginationmobile({
             totalRecords: 101,
             onPageClick: function (pageIndex) {
                 console.log(pageIndex);

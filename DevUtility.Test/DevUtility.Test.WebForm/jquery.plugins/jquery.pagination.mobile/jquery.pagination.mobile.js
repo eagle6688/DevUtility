@@ -70,7 +70,7 @@
     Plugin.prototype._initPagination = function () {
         this.$pagination = $('<ul></ul>');
         this.pagesCount = calculatePagesCount(this.options.totalRecords, this.options.pageSize);
-        this.currentPageIndex = Math.min(this.options.pageIndex, this.pagesCount);
+        this.options.pageIndex = Math.min(this.options.pageIndex, this.pagesCount);
 
         if (this.options.paginationClass) {
             this.$pagination.addClass(this.options.paginationClass);
@@ -84,7 +84,7 @@
     Plugin.prototype._fillPagination = function () {
         this.$firstBtn = createButton(this.options.firstBtnText, this.options.firstBtnClass);
         this.$prevBtn = createButton(this.options.prevBtnText, this.options.prevBtnClass);
-        this.$pageBtn = createPageButton(this._getPageText(), this.currentPageIndex);
+        this.$pageBtn = createPageButton(this._getPageText(), this.options.pageIndex);
         this.$nextBtn = createButton(this.options.nextBtnText, this.options.nextBtnClass);
         this.$lastBtn = createButton(this.options.lastBtnText, this.options.lastBtnClass);
         this.$pagination.append(this.$firstBtn, this.$prevBtn, this.$pageBtn, this.$nextBtn, this.$lastBtn);
@@ -108,7 +108,7 @@
 
         $button.unbind('click');
 
-        if (this.currentPageIndex === 1) {
+        if (this.options.pageIndex === 1) {
             $button.addClass(this.options.disabledBtnClass);
         }
         else {
@@ -130,14 +130,14 @@
 
         $button.unbind('click');
 
-        if (this.currentPageIndex === 1) {
+        if (this.options.pageIndex === 1) {
             $button.addClass(this.options.disabledBtnClass);
         }
         else {
             $button.removeClass(this.options.disabledBtnClass);
 
             $button.click(function () {
-                self._changePage(self.currentPageIndex - 1);
+                self._changePage(self.options.pageIndex - 1);
             });
         }
     };
@@ -152,14 +152,14 @@
 
         $button.unbind('click');
 
-        if (this.currentPageIndex === this.pagesCount) {
+        if (this.options.pageIndex === this.pagesCount) {
             $button.addClass(this.options.disabledBtnClass);
         }
         else {
             $button.removeClass(this.options.disabledBtnClass);
 
             $button.click(function () {
-                self._changePage(self.currentPageIndex + 1);
+                self._changePage(self.options.pageIndex + 1);
             });
         }
     };
@@ -174,7 +174,7 @@
 
         $button.unbind('click');
 
-        if (this.currentPageIndex === this.pagesCount) {
+        if (this.options.pageIndex === this.pagesCount) {
             $button.addClass(this.options.disabledBtnClass);
         }
         else {
@@ -208,7 +208,7 @@
 
     Plugin.prototype._getPageText = function () {
         var regExp = new RegExp(this.options.pageIndexPattern, 'g');
-        return this.options.pageTextFormat.replace(regExp, this.currentPageIndex);
+        return this.options.pageTextFormat.replace(regExp, this.options.pageIndex);
     };
 
     Plugin.prototype._needReloadOptions = function (options) {
@@ -241,7 +241,7 @@
             return;
         }
 
-        this.currentPageIndex = pageIndex;
+        this.options.pageIndex = pageIndex;
         setPageText(this.$pageBtn, this._getPageText(), pageIndex);
         this._bind();
 

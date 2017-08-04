@@ -44,6 +44,64 @@
         </div>
         <div id="pagination" class="pagination pagination-sm"></div>
         <div id="paginationmobile" class="pager"></div>
+        <div>
+            <input id="btn-loadKo" type="button" value="Load Ko" />
+            <input id="btn-loadKoWithData" type="button" value="Load Ko with Data" />
+        </div>
+        <div style="margin: 20px 0;">
+            <input id="btn-reloadWithDifferentURL" type="button" value="Reload with different url" />
+            <input id="btn-reloadWithDifferentURLAndPageIndex" type="button" value="Reload with different url and page index" />
+            <input id="btn-reloadWithDifferentURLAndErrorPageIndex" type="button" value="Reload with different url and error page index" />
+        </div>
     </div>
+    <script src="../jquery.knockout.helper/viewModel.js"></script>
+    <script>
+        $('#pagination').pagination({
+            onPageClick: function (pageIndex) {
+                $('#paginationmobile').data('paginationmobile').changePageIndex(pageIndex);
+                $('#myKo').data('koHelper').changePage(pageIndex);
+            }
+        });
+
+        $('#paginationmobile').paginationmobile({
+            onPageClick: function (pageIndex) {
+                $('#pagination').data('pagination').changePageIndex(pageIndex);
+                $('#myKo').data('koHelper').changePage(pageIndex);
+            }
+        });
+
+        $('#myKo').koHelper({
+            url: 'http://localhost:9000/Handlers/DataHandler.ashx',
+            autoLoad: false,
+            beforeLoadData: function (data) {
+                for (var i in data.Data) {
+                    data.Data[i].NameID = ko.pureComputed(function () {
+                        return this.Name + " " + this.MyID;
+                    }, data.Data[i]);
+                }
+
+                $('#pagination').data('pagination').changeTotalRecords(data.Count);
+                $('#paginationmobile').data('paginationmobile').changeTotalRecords(data.Count);
+            }
+        });
+
+        $('#btn-loadKo').click(function () {
+            $('#myKo').data('koHelper').reload();
+        });
+
+        $('#btn-loadKoWithData').click(function () {
+            $('#myKo').data('koHelper').reload({
+                viewModel: initViewModel
+            });
+        });
+
+        $('#btn-reloadWithDifferentURL').click(function () {
+            $('#myKo').data('koHelper').reload('url', 'http://localhost:9000/Handlers/DataHandler.ashx?length=52');
+        });
+
+        $('#btn-getSelectedItems').click(function () {
+            console.log($('#myKo').data('koHelper').getSelectedItems());
+        });
+    </script>
 </body>
 </html>
