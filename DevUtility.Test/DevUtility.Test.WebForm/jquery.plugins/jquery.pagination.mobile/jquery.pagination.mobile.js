@@ -1,6 +1,6 @@
 ﻿(function ($, window, document, undefined) {
     var pluginName = 'paginationmobile',
-        version = '20170803';
+        version = '20170804';
 
     var defaults = {
         totalRecords: 0,
@@ -211,14 +211,26 @@
         return this.options.pageTextFormat.replace(regExp, this.currentPageIndex);
     };
 
+    Plugin.prototype._needReloadOptions = function (options) {
+        for (var p in options) {
+            if (this._needReloadOption(p, options[p])) {
+                return true;
+            }
+        }
+
+        return false;
+    };
+
+    Plugin.prototype._needReloadOption = function (name, value) {
+        return this.options.hasOwnProperty(name) && this.options[name] !== value;
+    };
+
     Plugin.prototype._reloadOptions = function (options) {
         this.options = $.extend(true, {}, this.options, options);
     };
 
     Plugin.prototype._reloadOption = function (name, value) {
-        if (this.options.hasOwnProperty(name)) {
-            this.options[name] = value;
-        }
+        this.options[name] = value;
     };
 
     //events
@@ -292,14 +304,34 @@
 
     //export methods
 
+    Plugin.prototype.changeTotalRecords = function (totalRecords) {
+        var options = {
+            totalRecords: totalRecords
+        };
+
+        if (this.options.totalRecords !== totalRecords) {
+            options.pageIndex = 1;
+        }
+
+        this.reload(options);
+    };
+
+    Plugin.prototype.changePageIndex = function (pageIndex) {
+        this.reload('pageIndex', pageIndex);
+    };
+
     Plugin.prototype.reload = function () {
         switch (arguments.length) {
             case 1:
-                this._reloadOptions(arguments[0]);
+                if (this._needReloadOptions(arguments[0])) {
+                    this._reloadOptions(arguments[0]);
+                }
                 break;
 
             case 2:
-                this._reloadOption(arguments[0], arguments[1]);
+                if (this._needReloadOption(arguments[0], arguments[1])) {
+                    this._reloadOption(arguments[0], arguments[1]);
+                }
                 break;
 
             default:

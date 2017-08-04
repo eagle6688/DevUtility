@@ -1,6 +1,6 @@
 ﻿(function ($, window, document, undefined) {
     var pluginName = 'pagination',
-        version = 'v3.0.20170731';
+        version = 'v3.0.20170804';
 
     var defaults = {
         totalRecords: 0,
@@ -341,8 +341,6 @@
     };
 
     Plugin.prototype.reload = function () {
-        var options = $.extend(true, {}, this.options, {});
-
         switch(arguments.length){
             case 1:
                 if (this._needReloadOptions(arguments[0])) {
