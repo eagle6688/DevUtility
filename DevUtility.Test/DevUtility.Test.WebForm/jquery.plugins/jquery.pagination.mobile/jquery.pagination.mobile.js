@@ -64,13 +64,13 @@
 
     Plugin.prototype._init = function () {
         this.buttonTypeName = 'buttonType';
-        this.pagesCount = calculatePagesCount(this.options.totalRecords, this.options.pageSize);
-        this.currentPageIndex = Math.min(this.options.pageIndex, this.pagesCount);
         this._initPagination();
     };
 
     Plugin.prototype._initPagination = function () {
         this.$pagination = $('<ul></ul>');
+        this.pagesCount = calculatePagesCount(this.options.totalRecords, this.options.pageSize);
+        this.currentPageIndex = Math.min(this.options.pageIndex, this.pagesCount);
 
         if (this.options.paginationClass) {
             this.$pagination.addClass(this.options.paginationClass);
@@ -211,6 +211,16 @@
         return this.options.pageTextFormat.replace(regExp, this.currentPageIndex);
     };
 
+    Plugin.prototype._reloadOptions = function (options) {
+        this.options = $.extend(true, {}, this.options, options);
+    };
+
+    Plugin.prototype._reloadOption = function (name, value) {
+        if (this.options.hasOwnProperty(name)) {
+            this.options[name] = value;
+        }
+    };
+
     //events
 
     Plugin.prototype._changePage = function (pageIndex) {
@@ -225,6 +235,12 @@
 
         if (this.options.onPageClick) {
             this.options.onPageClick(pageIndex);
+        }
+    };
+
+    Plugin.prototype._onReload = function () {
+        if (this.options.onReload) {
+            this.options.onReload(this.options);
         }
     };
 
@@ -276,20 +292,22 @@
 
     //export methods
 
-    Plugin.prototype.reload = function (recordsCount, pageIndex, pageSize) {
-        if (recordsCount) {
-            this.options.totalRecords = recordsCount;
+    Plugin.prototype.reload = function () {
+        switch (arguments.length) {
+            case 1:
+                this._reloadOptions(arguments[0]);
+                break;
+
+            case 2:
+                this._reloadOption(arguments[0], arguments[1]);
+                break;
+
+            default:
+                return;
         }
 
-        if (pageIndex) {
-            this.options.pageIndex = pageIndex;
-        }
-
-        if (pageSize) {
-            this.options.pageSize = pageSize;
-        }
-
-        this._init();
+        this._initPagination();
+        this._onReload();
     };
 
     $.fn[pluginName] = function (options) {

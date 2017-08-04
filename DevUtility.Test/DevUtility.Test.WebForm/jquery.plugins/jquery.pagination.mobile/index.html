@@ -10,8 +10,14 @@
     <script src="jquery.pagination.mobile.js"></script>
 </head>
 <body>
+    <h2>jquery.pagination.mobile.js</h2>
     <div id="pager" class="pager"></div>
-    <input id="btn-reload" type="button" value="reload pagination" />
+    <div>
+        <p>
+            <input id="btn-changePageIndex" type="button" value="change page index" />
+            <input id="btn-changeOptions" type="button" value="change options" />
+        </p>
+    </div>
     <script>
         $('#pager').paginationmobile({
             totalRecords: 101,
@@ -20,8 +26,15 @@
             }
         });
 
-        $('#btn-reload').click(function () {
-            $('#pagination').data('pagination').reload(11);
+        $('#btn-changePageIndex').click(function () {
+            $('#pager').data('paginationmobile').reload('pageIndex', 8);
+        });
+
+        $('#btn-changeOptions').click(function () {
+            $('#pager').data('paginationmobile').reload({
+                pageIndex: 2,
+                totalRecords: 21
+            });
         });
     </script>
 </body>

@@ -75,6 +75,8 @@
     <Content Include="jquery.plugins\jquery.knockout.helper\jquery.knockout.helper3.0.js" />
     <Content Include="jquery.plugins\jquery.knockout.helper\jquery.knockout.helper4.0.js" />
     <Content Include="jquery.plugins\jquery.knockout.helper\viewModel.js" />
+    <Content Include="jquery.plugins\jquery.kotable.helper\index.html" />
+    <Content Include="jquery.plugins\jquery.kotable.helper\jquery.kotable.helper.js" />
     <Content Include="jquery.plugins\jquery.pagination.mobile\index.html" />
     <Content Include="jquery.plugins\jquery.pagination.mobile\index.min.css" />
     <Content Include="jquery.plugins\jquery.pagination.mobile\jquery.pagination.mobile.js" />

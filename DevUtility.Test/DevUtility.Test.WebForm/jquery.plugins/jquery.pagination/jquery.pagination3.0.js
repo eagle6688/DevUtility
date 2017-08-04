@@ -223,14 +223,14 @@
         this._loadPagination();
     };
 
+    Plugin.prototype._reloadOptions = function (options) {
+        this.options = $.extend(true, {}, this.options, options);
+    };
+
     Plugin.prototype._reloadOption = function (name, value) {
         if (this.options.hasOwnProperty(name)) {
             this.options[name] = value;
         }
-    };
-
-    Plugin.prototype._reloadOptions = function (options) {
-        this.options = $.extend(true, {}, this.options, options);
     };
 
     //events

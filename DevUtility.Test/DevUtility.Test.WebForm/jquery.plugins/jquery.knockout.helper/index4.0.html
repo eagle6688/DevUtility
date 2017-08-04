@@ -7,58 +7,58 @@
     <script src="../../lib/jquery/jquery-1.12.4.min.js"></script>
     <script src="../../lib/knockout/knockout-3.4.2.js"></script>
     <script src="jquery.knockout.helper4.0.js"></script>
-    <script src="../jquery.pagination/jquery.pagination2.0.js"></script>
+    <script src="../jquery.pagination/jquery.pagination3.0.js"></script>
 </head>
 <body>
-    <h2>jquery.knockout.helper 4.0</h2>
-    <div style="margin: 200px 0 20px 0;">
-        <input id="btn-loadKo" type="button" value="Load Ko" />
-        <input id="btn-loadKoWithData" type="button" value="Load Ko with Data" />
+    <div style="margin: 0 10px 0 10px">
+        <h2>jquery.knockout.helper 4.0</h2>
+        <div id="myKo">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th width="20px">
+                            <input id="cb-selectAll" type="checkbox" name="" />
+                        </th>
+                        <th style="min-width: 20px;">MyID</th>
+                        <th style="min-width: 40px;">Name</th>
+                        <th style="min-width: 60px;">NameID</th>
+                        <th style="min-width: 40px;">CreateTime</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: Data">
+                    <tr>
+                        <td>
+                            <input name="cb-list" type="checkbox" data-bind="value: MyID" />
+                        </td>
+                        <td data-bind="text: MyID"></td>
+                        <td data-bind="text: Name"></td>
+                        <td data-bind="text: NameID"></td>
+                        <td data-bind="text: CreateTime"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <span data-bind="text: Data().length"></span> records in this page.
+        </div>
+        <div id="pagination" class="pagination pagination-sm"></div>
+        <div>
+            <input id="btn-loadKo" type="button" value="Load Ko" />
+            <input id="btn-loadKoWithData" type="button" value="Load Ko with Data" />
+        </div>
+        <div style="margin: 20px 0;">
+            <input id="btn-reloadWithDifferentURL" type="button" value="Reload with different url" />
+            <input id="btn-reloadWithDifferentURLAndPageIndex" type="button" value="Reload with different url and page index" />
+            <input id="btn-reloadWithDifferentURLAndErrorPageIndex" type="button" value="Reload with different url and error page index" />
+        </div>
+        <div style="margin: 20px 0;">
+            <input id="btn-getSelectedItems" type="button" value="Get selected items" />
+            <input id="btn-getRecordsCount" type="button" value="Get records count" />
+            <input id="btn-changeRequestType" type="button" value="Change Request Type" />
+        </div>
     </div>
-    <div style="margin: 0 0 20px 0;">
-        <input id="btn-reloadWithDifferentURL" type="button" value="Reload with different url" />
-        <input id="btn-reloadWithDifferentURLAndPageIndex" type="button" value="Reload with different url and page index" />
-        <input id="btn-reloadWithDifferentURLAndErrorPageIndex" type="button" value="Reload with different url and error page index" />
-    </div>
-    <div style="margin: 0 0 20px 0;">
-        <input id="btn-getSelectedItems" type="button" value="Get selected items" />
-        <input id="btn-getRecordsCount" type="button" value="Get records count" />
-        <input id="btn-changeRequestType" type="button" value="Change Request Type" />
-    </div>
-    <div id="myKo">
-        <table class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                    <th width="20px">
-                        <input id="cb-selectAll" type="checkbox" name="" />
-                    </th>
-                    <th style="min-width: 20px;">MyID</th>
-                    <th style="min-width: 40px;">Name</th>
-                    <th style="min-width: 60px;">NameID</th>
-                    <th style="min-width: 40px;">CreateTime</th>
-                </tr>
-            </thead>
-            <tbody data-bind="foreach: Data">
-                <tr>
-                    <td>
-                        <input name="cb-list" type="checkbox" data-bind="value: MyID" />
-                    </td>
-                    <td data-bind="text: MyID"></td>
-                    <td data-bind="text: Name"></td>
-                    <td data-bind="text: NameID"></td>
-                    <td data-bind="text: CreateTime"></td>
-                </tr>
-            </tbody>
-        </table>
-        <span data-bind="text: Data().length"></span> records in this page.
-    </div>
-    <div id="pagination" class="pagination pagination-sm"></div>
-    <br />
     <script src="viewModel.js"></script>
     <script>
         $('#pagination').pagination({
             onPageClick: function (pageIndex) {
-
             }
         });
 
@@ -69,6 +69,8 @@
                         return this.Name + " " + this.MyID;
                     }, data.Data[i]);
                 }
+
+                $('#pagination').data('pagination').reload('totalRecords', data.Count);
             }
         });
 
