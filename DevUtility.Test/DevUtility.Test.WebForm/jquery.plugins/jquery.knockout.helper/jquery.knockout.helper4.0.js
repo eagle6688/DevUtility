@@ -1,6 +1,6 @@
 ﻿(function ($, window, document, undefined) {
     var pluginName = 'koHelper',
-        version = 'v4.0.20170712';
+        version = 'v4.0.20170804';
 
     var defaults = {
         url: '',
@@ -10,6 +10,7 @@
         selectAllBtn: '#cb-selectAll',
         selectItemsSelector: 'tbody input[type="checkbox"]',
         pageSize: 10,
+        autoLoad: true,
         noDataDom: '', //Dom displays when there is no datum loaded.
         loadingDom: '', //Dom displays when data are loading.
         beforeLoadData: function (data) { },
@@ -28,8 +29,8 @@
     Plugin.prototype._init = function () {
         this._initData();
         this._initKo();
-        this._register();
-        this._loadData();
+        this._load();
+        this._bind();
     };
 
     Plugin.prototype._initData = function () {
@@ -46,48 +47,16 @@
         ko.applyBindings(this.viewModel, this.element);
     };
 
-    Plugin.prototype._register = function () {
-        var self = this;
-
-        $(this.options.selectAllBtn).click(function () {
-            var index = 0;
-
-            if ($(this).is(':checked')) {
-                self.$element.find(self.options.selectItemsSelector).prop('checked', true);
-
-                for (index in self.viewModel.Data()) {
-                    self._addSelectedItem(self.viewModel.Data()[index]);
-                }
-            }
-            else {
-                self.$element.find(self.options.selectItemsSelector).prop('checked', false);
-
-                for (index in self.viewModel.Data()) {
-                    self._removeSelectedItem(self.viewModel.Data()[index]);
-                }
-            }
-        });
-    };
-
-    Plugin.prototype._registerSelectItems = function () {
-        var self = this;
-
-        $(this.options.selectItemsSelector).click(function () {
-            var index = $(self.options.selectItemsSelector).index(this);
-            var item = self.viewModel.Data()[index];
-
-            if ($(this).is(':checked')) {
-                self._addSelectedItem(item);
-            }
-            else {
-                self._removeSelectedItem(item);
-            }
-        });
+    Plugin.prototype._load = function () {
+        if (this.options.autoLoad) {
+            this._loadData();
+        }
     };
 
     Plugin.prototype._loadData = function () {
         if (this.options.viewModel) {
             this._setViewModel(this.options.viewModel);
+            this.options.viewModel = null;
         }
         else if (this.options.url) {
             this._requestData();
@@ -110,18 +79,43 @@
         this._afterLoadData(data);
     };
 
-    Plugin.prototype._beforeLoadData = function (data) {
-        if (this.options.beforeLoadData) {
-            this.options.beforeLoadData(data);
-        }
+    Plugin.prototype._bind = function () {
+        var self = this;
+
+        $(this.options.selectAllBtn).click(function () {
+            var index = 0;
+
+            if ($(this).is(':checked')) {
+                self.$element.find(self.options.selectItemsSelector).prop('checked', true);
+
+                for (index in self.viewModel.Data()) {
+                    self._addSelectedItem(self.viewModel.Data()[index]);
+                }
+            }
+            else {
+                self.$element.find(self.options.selectItemsSelector).prop('checked', false);
+
+                for (index in self.viewModel.Data()) {
+                    self._removeSelectedItem(self.viewModel.Data()[index]);
+                }
+            }
+        });
     };
 
-    Plugin.prototype._afterLoadData = function (data) {
-        this._registerSelectItems();
+    Plugin.prototype._bindSelectItems = function () {
+        var self = this;
 
-        if (this.options.afterLoadData) {
-            this.options.afterLoadData(data);
-        }
+        $(this.options.selectItemsSelector).click(function () {
+            var index = $(self.options.selectItemsSelector).index(this);
+            var item = self.viewModel.Data()[index];
+
+            if ($(this).is(':checked')) {
+                self._addSelectedItem(item);
+            }
+            else {
+                self._removeSelectedItem(item);
+            }
+        });
     };
 
     Plugin.prototype._ajax = function (url, success) {
@@ -158,6 +152,35 @@
         }
     };
 
+    Plugin.prototype._reloadOptions = function (options) {
+        this.options = $.extend(true, {}, this.options, options);
+        this.pageIndex = 1;
+    };
+
+    Plugin.prototype._reloadOption = function (name, value) {
+        if (this.options.hasOwnProperty(name)) {
+            this.options[name] = value;
+        }
+    };
+
+    //events
+
+    Plugin.prototype._beforeLoadData = function (data) {
+        if (this.options.beforeLoadData) {
+            this.options.beforeLoadData(data);
+        }
+    };
+
+    Plugin.prototype._afterLoadData = function (data) {
+        this._bindSelectItems();
+
+        if (this.options.afterLoadData) {
+            this.options.afterLoadData(data);
+        }
+    };
+
+    //inner functions
+
     var getPageUrl = function (url, pageIndex, pageSize) {
         if (url.indexOf('?') > 0) {
             url += '&';
@@ -175,26 +198,26 @@
 
     //exported methods
 
-    Plugin.prototype.changePage = function (pageIndex, pageSize) {
+    Plugin.prototype.changePage = function (pageIndex) {
         this.pageIndex = pageIndex;
-
-        if (pageSize) {
-            this.options.pageSize = pageSize;
-        }
-
         this._requestData();
     };
 
-    Plugin.prototype.reload = function (options) {
-        this.pageIndex = 1;
-        this.options = $.extend(true, {}, this.options, options);
-        this._loadData();
-    };
+    Plugin.prototype.reload = function () {
+        switch (arguments.length) {
+            case 1:
+                this._reloadOptions(arguments[0]);
+                break;
 
-    Plugin.prototype.reloadPost = function (options) {
-        options = options || {};
-        options.requestType = 'POST';
-        this.reload(options);
+            case 2:
+                this._reloadOption(arguments[0], arguments[1]);
+                break;
+
+            default:
+                break;
+        }
+
+        this._loadData();
     };
 
     Plugin.prototype.getSelectedItems = function () {

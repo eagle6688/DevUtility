@@ -68,7 +68,6 @@
 
     Plugin.prototype._init = function () {
         this.buttonDataName = 'pageIndex';
-        this.currentPageIndex = this.options.pageIndex;
         this.pagesCount = calculatePagesCount(this.options.totalRecords, this.options.pageSize);
         this.displayPagesCount = getDisplayPagesCount(this.pagesCount, this.options.visiblePagesCount);
         this._initPagination();
@@ -104,7 +103,7 @@
     };
 
     Plugin.prototype._fillPageButtons = function () {
-        var pagesRegion = getPagesRegion(this.currentPageIndex, this.displayPagesCount, this.pagesCount);
+        var pagesRegion = getPagesRegion(this.options.pageIndex, this.displayPagesCount, this.pagesCount);
         this._createPageButtons(pagesRegion.start, pagesRegion.end);
     };
 
@@ -128,7 +127,7 @@
             else {
                 var pageIndex = ~~data;
 
-                if (self.currentPageIndex === pageIndex) {
+                if (self.options.pageIndex === pageIndex) {
                     if (!(isButton($button, self.options.firstButtonName) || isButton($button, self.options.lastButtonName))) {
                         $button.addClass(self.options.currentButtonClass);
                     }
@@ -168,7 +167,7 @@
     Plugin.prototype._bindFirstButton = function ($button) {
         var self = this;
 
-        if (this.currentPageIndex === 1) {
+        if (this.options.pageIndex === 1) {
             $button.addClass(this.options.disabledButtonClass);
         }
         else {
@@ -181,12 +180,12 @@
     Plugin.prototype._bindPrevButton = function ($button) {
         var self = this;
 
-        if (this.currentPageIndex === 1) {
+        if (this.options.pageIndex === 1) {
             $button.addClass(this.options.disabledButtonClass);
         }
         else {
             $button.click(function () {
-                self._changePage(self.currentPageIndex - 1);
+                self._changePage(self.options.pageIndex - 1);
             });
         }
     };
@@ -194,12 +193,12 @@
     Plugin.prototype._bindNextButton = function ($button) {
         var self = this;
 
-        if (this.currentPageIndex === this.pagesCount) {
+        if (this.options.pageIndex === this.pagesCount) {
             $button.addClass(this.options.disabledButtonClass);
         }
         else {
             $button.click(function () {
-                self._changePage(self.currentPageIndex + 1);
+                self._changePage(self.options.pageIndex + 1);
             });
         }
     };
@@ -207,7 +206,7 @@
     Plugin.prototype._bindLastButton = function ($button) {
         var self = this;
 
-        if (this.currentPageIndex === this.pagesCount) {
+        if (this.options.pageIndex === this.pagesCount) {
             $button.addClass(this.options.disabledButtonClass);
         }
         else {
@@ -218,9 +217,37 @@
     };
 
     Plugin.prototype._changePage = function (pageIndex) {
-        this.currentPageIndex = pageIndex;
+        this.options.pageIndex = pageIndex;
         this._onPageClick(pageIndex);
         this._loadPagination();
+    };
+
+    Plugin.prototype._needReloadOptions = function (options) {
+        for (var p in options) {
+            if (this._needReloadOption(p, options[p])) {
+                return true;
+            }
+        }
+
+        return false;
+    };
+
+    Plugin.prototype._needReloadOption = function (name, value) {
+        return this.options.hasOwnProperty(name) && this.options[name] !== value;
+    };
+
+    Plugin.prototype._needResetPageIndex = function (oldOptions, name, value) {
+        var array = ['totalRecords', 'visiblePagesCount', 'pageSize'];
+        return $.inArray(name, array) >= 0 && oldOptions[name] !== value;
+    };
+
+    Plugin.prototype._resetPageIndex = function (oldOptions, newOptions) {
+        for (var p in oldOptions) {
+            if (this._needResetPageIndex(oldOptions, p, newOptions[p])) {
+                this.options.pageIndex = 1;
+                break;
+            }
+        }
     };
 
     Plugin.prototype._reloadOptions = function (options) {
@@ -228,9 +255,7 @@
     };
 
     Plugin.prototype._reloadOption = function (name, value) {
-        if (this.options.hasOwnProperty(name)) {
-            this.options[name] = value;
-        }
+        this.options[name] = value;
     };
 
     //events
@@ -314,19 +339,26 @@
     //export methods
 
     Plugin.prototype.reload = function () {
+        var options = $.extend(true, {}, this.options, {});
+
         switch(arguments.length){
             case 1:
-                this._reloadOptions(arguments[0]);
+                if (this._needReloadOptions(arguments[0])) {
+                    this._reloadOptions(arguments[0]);
+                }
                 break;
 
             case 2:
-                this._reloadOption(arguments[0], arguments[1]);
+                if (this._needReloadOption(arguments[0], arguments[1])) {
+                    this._reloadOption(arguments[0], arguments[1]);
+                }
                 break;
 
             default:
-                return;
+                break;
         }
 
+        //this._resetPageIndex(options, this.options);
         this._init();
         this._onReload();
     };

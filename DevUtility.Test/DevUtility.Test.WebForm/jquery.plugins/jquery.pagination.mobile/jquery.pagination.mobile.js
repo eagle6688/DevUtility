@@ -303,7 +303,7 @@
                 break;
 
             default:
-                return;
+                break;
         }
 
         this._initPagination();

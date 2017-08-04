@@ -59,10 +59,13 @@
     <script>
         $('#pagination').pagination({
             onPageClick: function (pageIndex) {
+                $('#myKo').data('koHelper').changePage(pageIndex);
             }
         });
 
         $('#myKo').koHelper({
+            url: 'http://localhost:9000/Handlers/DataHandler.ashx',
+            autoLoad: false,
             beforeLoadData: function (data) {
                 for (var i in data.Data) {
                     data.Data[i].NameID = ko.pureComputed(function () {
@@ -75,15 +78,17 @@
         });
 
         $('#btn-loadKo').click(function () {
-            $('#myKo').data('koHelper').reload({
-                url: 'http://localhost:9000/Handlers/DataHandler.ashx'
-            });
+            $('#myKo').data('koHelper').reload();
         });
 
         $('#btn-loadKoWithData').click(function () {
             $('#myKo').data('koHelper').reload({
                 viewModel: initViewModel
             });
+        });
+
+        $('#btn-reloadWithDifferentURL').click(function () {
+            $('#myKo').data('koHelper').reload('url', 'http://localhost:9000/Handlers/DataHandler.ashx?length=52');
         });
 
         $('#btn-getSelectedItems').click(function () {
