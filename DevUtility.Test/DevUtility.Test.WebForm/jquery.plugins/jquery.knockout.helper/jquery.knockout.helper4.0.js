@@ -153,8 +153,14 @@
     };
 
     Plugin.prototype._reloadOptions = function (options) {
+        if (options.hasOwnProperty('pageIndex') && !isNaN(options['pageIndex'])) {
+            this.pageIndex = ~~options['pageIndex'];
+        }
+        else {
+            this.pageIndex = 1;
+        }
+
         this.options = $.extend(true, {}, this.options, options);
-        this.pageIndex = 1;
     };
 
     Plugin.prototype._reloadOption = function (name, value) {
@@ -217,7 +223,6 @@
                 break;
         }
 
-        this.pageIndex = 1;
         this._loadData();
     };
 

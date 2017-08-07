@@ -133,7 +133,7 @@
     };
 
     Plugin.prototype.gotoAnchorPoint = function () {
-        if (this.options.anchorPointSelector) {
+        if (this.options.anchorPointSelector && $(this.options.anchorPointSelector).length > 0) {
             $(this.options.anchorPointSelector)[0].scrollIntoView();
         }
     };
