@@ -221,6 +221,10 @@
         this._loadData();
     };
 
+    Plugin.prototype.get = function (name) {
+        return this.options[name];
+    };
+
     Plugin.prototype.getSelectedItems = function () {
         return this.selectedItems;
     };

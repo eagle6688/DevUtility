@@ -40,6 +40,10 @@
             options = {},
             beforeLoadData = null;
 
+        if (!self.options.ko || !self.options.ko.selector) {
+            return;
+        }
+
         if (self.options.ko.options && self.options.ko.options.beforeLoadData) {
             beforeLoadData = self.options.ko.options.beforeLoadData;
         }
@@ -66,6 +70,10 @@
         var self = this,
             options = {},
             onPageClick = null;
+
+        if (!self.options.pagination || !self.options.pagination.selector) {
+            return;
+        }
 
         if (self.options.pagination.options && self.options.pagination.options.onPageClick) {
             onPageClick = self.options.pagination.options.onPageClick;
@@ -95,6 +103,10 @@
         var self = this,
             options = {},
             onPageClick = null;
+
+        if (!self.options.mobilepagination || !self.options.mobilepagination.selector) {
+            return;
+        }
 
         if (self.options.mobilepagination.options && self.options.mobilepagination.options.onPageClick) {
             onPageClick = self.options.mobilepagination.options.onPageClick;
