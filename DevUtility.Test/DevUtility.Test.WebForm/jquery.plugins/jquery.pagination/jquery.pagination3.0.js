@@ -1,6 +1,6 @@
 ﻿(function ($, window, document, undefined) {
     var pluginName = 'pagination',
-        version = 'v3.0.20170804';
+        version = 'v3.0.20170807';
 
     var defaults = {
         totalRecords: 0,
@@ -20,7 +20,6 @@
         currentButtonClass: 'active', //Style of current button.
         paginationClass: 'pagination pagination-sm', //Style of ul dom.
         onPageClick: function (pageIndex) { },
-        afterPageClick: function (pageIndex) { },
         onReload: function (options) { }
     };
 

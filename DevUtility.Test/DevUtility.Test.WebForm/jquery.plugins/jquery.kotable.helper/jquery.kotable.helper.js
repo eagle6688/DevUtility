@@ -3,6 +3,7 @@
         version = 'v4.0.20170807';
 
     var defaults = {
+        anchorPointSelector: '',
         ko: {
             selector: '',
             options: null
@@ -82,6 +83,8 @@
             if (self.$ko) {
                 self.$ko.data('koHelper').changePage(pageIndex);
             }
+
+            self.gotoAnchorPoint();
         };
 
         this.options.pagination.options = $.extend(true, {}, this.options.pagination.options, options);
@@ -109,10 +112,18 @@
             if (self.$ko) {
                 self.$ko.data('koHelper').changePage(pageIndex);
             }
+
+            self.gotoAnchorPoint();
         };
 
         this.options.mobilepagination.options = $.extend(true, {}, this.options.mobilepagination.options, options);
         this.$mobilepagination = $(this.options.mobilepagination.selector).paginationmobile(this.options.mobilepagination.options);
+    };
+
+    Plugin.prototype.gotoAnchorPoint = function () {
+        if (this.options.anchorPointSelector) {
+            $(this.options.anchorPointSelector)[0].scrollIntoView();
+        }
     };
 
     $[pluginName] = function (options) {
