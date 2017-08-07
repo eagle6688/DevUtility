@@ -56,32 +56,55 @@
     </div>
     <script src="../jquery.knockout.helper/viewModel.js"></script>
     <script>
-        $('#pagination').pagination({
-            onPageClick: function (pageIndex) {
-                $('#paginationmobile').data('paginationmobile').changePageIndex(pageIndex);
-                $('#myKo').data('koHelper').changePage(pageIndex);
-            }
-        });
+        //$('#pagination').pagination({
+        //    onPageClick: function (pageIndex) {
+        //        $('#paginationmobile').data('paginationmobile').changePageIndex(pageIndex);
+        //        $('#myKo').data('koHelper').changePage(pageIndex);
+        //    }
+        //});
 
-        $('#paginationmobile').paginationmobile({
-            onPageClick: function (pageIndex) {
-                $('#pagination').data('pagination').changePageIndex(pageIndex);
-                $('#myKo').data('koHelper').changePage(pageIndex);
-            }
-        });
+        //$('#paginationmobile').paginationmobile({
+        //    onPageClick: function (pageIndex) {
+        //        $('#pagination').data('pagination').changePageIndex(pageIndex);
+        //        $('#myKo').data('koHelper').changePage(pageIndex);
+        //    }
+        //});
 
-        $('#myKo').koHelper({
-            url: 'http://localhost:9000/Handlers/DataHandler.ashx',
-            autoLoad: false,
-            beforeLoadData: function (data) {
-                for (var i in data.Data) {
-                    data.Data[i].NameID = ko.pureComputed(function () {
-                        return this.Name + " " + this.MyID;
-                    }, data.Data[i]);
+        //$('#myKo').koHelper({
+        //    url: 'http://localhost:9000/Handlers/DataHandler.ashx',
+        //    autoLoad: false,
+        //    beforeLoadData: function (data) {
+        //        for (var i in data.Data) {
+        //            data.Data[i].NameID = ko.pureComputed(function () {
+        //                return this.Name + " " + this.MyID;
+        //            }, data.Data[i]);
+        //        }
+
+        //        $('#pagination').data('pagination').changeTotalRecords(data.Count);
+        //        $('#paginationmobile').data('paginationmobile').changeTotalRecords(data.Count);
+        //    }
+        //});
+
+        $.koTableHelper({
+            ko: {
+                selector: '#myKo',
+                options: {
+                    url: 'http://localhost:9000/Handlers/DataHandler.ashx',
+                    autoLoad: false,
+                    beforeLoadData: function (data) {
+                        for (var i in data.Data) {
+                            data.Data[i].NameID = ko.pureComputed(function () {
+                                return this.Name + " " + this.MyID;
+                            }, data.Data[i]);
+                        }
+                    }
                 }
-
-                $('#pagination').data('pagination').changeTotalRecords(data.Count);
-                $('#paginationmobile').data('paginationmobile').changeTotalRecords(data.Count);
+            },
+            pagination: {
+                selector: '#pagination'
+            },
+            mobilepagination: {
+                selector: '#paginationmobile'
             }
         });
 
