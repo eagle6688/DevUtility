@@ -161,6 +161,27 @@
             default:
                 break;
         }
+
+        switch ($button.children('a').text()) {
+            case this.options.firstButtonName:
+                this._bindFirstButton($button);
+                break;
+
+            case this.options.prevButtonName:
+                this._bindPrevButton($button);
+                break;
+
+            case this.options.nextButtonName:
+                this._bindNextButton($button);
+                break;
+
+            case this.options.lastButtonName:
+                this._bindLastButton($button);
+                break;
+
+            default:
+                break;
+        }
     };
 
     Plugin.prototype._bindFirstButton = function ($button) {
@@ -192,7 +213,7 @@
     Plugin.prototype._bindNextButton = function ($button) {
         var self = this;
 
-        if (this.options.pageIndex === this.pagesCount) {
+        if (this.options.pageIndex === this.pagesCount || this.pagesCount === 0) {
             $button.addClass(this.options.disabledButtonClass);
         }
         else {
@@ -205,7 +226,7 @@
     Plugin.prototype._bindLastButton = function ($button) {
         var self = this;
 
-        if (this.options.pageIndex === this.pagesCount) {
+        if (this.options.pageIndex === this.pagesCount || this.pagesCount === 0) {
             $button.addClass(this.options.disabledButtonClass);
         }
         else {

@@ -70,7 +70,7 @@
     Plugin.prototype._initPagination = function () {
         this.$pagination = $('<ul></ul>');
         this.pagesCount = calculatePagesCount(this.options.totalRecords, this.options.pageSize);
-        this.options.pageIndex = Math.min(this.options.pageIndex, this.pagesCount);
+        this.options.pageIndex = Math.min(this.options.pageIndex, Math.max(1, this.pagesCount));
 
         if (this.options.paginationClass) {
             this.$pagination.addClass(this.options.paginationClass);
@@ -152,7 +152,7 @@
 
         $button.unbind('click');
 
-        if (this.options.pageIndex === this.pagesCount) {
+        if (this.options.pageIndex === this.pagesCount || this.pagesCount === 0) {
             $button.addClass(this.options.disabledBtnClass);
         }
         else {
@@ -174,7 +174,7 @@
 
         $button.unbind('click');
 
-        if (this.options.pageIndex === this.pagesCount) {
+        if (this.options.pageIndex === this.pagesCount || this.pagesCount === 0) {
             $button.addClass(this.options.disabledBtnClass);
         }
         else {
@@ -236,7 +236,7 @@
     //events
 
     Plugin.prototype._changePage = function (pageIndex) {
-        if (pageIndex > this.pagesCount || pageIndex < 0) {
+        if ((this.pagesCount > 0 && pageIndex > this.pagesCount) || pageIndex < 0) {
             this._error(pageIndex, 'Invalid page index!');
             return;
         }
