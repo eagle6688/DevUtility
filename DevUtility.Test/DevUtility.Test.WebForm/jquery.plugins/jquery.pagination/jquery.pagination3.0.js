@@ -257,7 +257,7 @@
     };
 
     Plugin.prototype._reloadOptions = function (options) {
-        this.options = $.extend(true, {}, this.options, options);
+        this.options = $.extend({}, this.options, options);
     };
 
     Plugin.prototype._reloadOption = function (name, value) {

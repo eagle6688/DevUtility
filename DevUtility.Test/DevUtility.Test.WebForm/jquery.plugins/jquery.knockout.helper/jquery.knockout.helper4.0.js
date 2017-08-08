@@ -19,7 +19,7 @@
     function Plugin(element, options) {
         this.element = element;
         this.$element = $(element);
-        this.options = $.extend(true, {}, defaults, options);
+        this.options = $.extend({}, defaults, options);
         this._init();
     }
 
@@ -161,7 +161,7 @@
             this.pageIndex = 1;
         }
 
-        this.options = $.extend(true, {}, this.options, options);
+        this.options = $.extend({}, this.options, options);
     };
 
     Plugin.prototype._reloadOption = function (name, value) {

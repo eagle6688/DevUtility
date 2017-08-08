@@ -26,7 +26,7 @@
 
     function Plugin(element, options) {
         this.$element = $(element);
-        this.options = $.extend(true, {}, defaults, options);
+        this.options = $.extend({}, defaults, options);
 
         if (this._verify()) {
             this._init();
@@ -226,7 +226,7 @@
     };
 
     Plugin.prototype._reloadOptions = function (options) {
-        this.options = $.extend(true, {}, this.options, options);
+        this.options = $.extend({}, this.options, options);
     };
 
     Plugin.prototype._reloadOption = function (name, value) {
