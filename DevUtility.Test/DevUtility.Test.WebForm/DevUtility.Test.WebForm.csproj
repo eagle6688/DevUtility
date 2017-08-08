@@ -64,6 +64,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="images\loading.gif" />
     <Content Include="jquery.plugins\jquery.autocomplete.helper\index.html" />
     <Content Include="jquery.plugins\jquery.autocomplete.helper\index.js" />
     <Content Include="jquery.plugins\jquery.autocomplete.helper\jquery.autocomplete.helper.js" />
@@ -120,6 +121,7 @@
     <Content Include="research\ie\formDataIE11.html" />
     <Content Include="research\object\index.html" />
     <Content Include="research\TypeScript\jquery-plugins\index.html" />
+    <Content Include="Styles\loading.css" />
     <Content Include="work\demos\angular\angular-1.5.8\angular-animate.js" />
     <Content Include="work\demos\angular\angular-1.5.8\angular-animate.min.js" />
     <Content Include="work\demos\angular\angular-1.5.8\angular-aria.js" />

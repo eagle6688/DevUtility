@@ -1,6 +1,6 @@
 ﻿(function ($, window, document, undefined) {
     var pluginName = 'koHelper',
-        version = 'v4.0.20170804';
+        version = 'v4.0.20170808';
 
     var defaults = {
         url: '',
@@ -11,7 +11,6 @@
         selectItemsSelector: 'tbody input[type="checkbox"]',
         pageSize: 10,
         autoLoad: true,
-        noDataDom: '', //Dom displays when there is no datum loaded.
         loadingDom: '', //Dom displays when data are loading.
         beforeLoadData: function (data) { },
         afterLoadData: function (data) { }
@@ -66,9 +65,11 @@
     Plugin.prototype._requestData = function () {
         var self = this;
         var url = getPageUrl(this.options.url, this.pageIndex, this.options.pageSize);
+        this._displayDom(this.options.loadingDom);
 
         this._ajax(url, function (data) {
             self._setViewModel(data);
+            self._hideDom(self.options.loadingDom);
         });
     };
 
@@ -166,6 +167,18 @@
     Plugin.prototype._reloadOption = function (name, value) {
         if (this.options.hasOwnProperty(name)) {
             this.options[name] = value;
+        }
+    };
+
+    Plugin.prototype._displayDom = function (selector) {
+        if (selector && $(selector).length > 0) {
+            $(selector).show();
+        }
+    };
+
+    Plugin.prototype._hideDom = function (selector) {
+        if (selector && $(selector).length > 0) {
+            $(selector).hide();
         }
     };
 

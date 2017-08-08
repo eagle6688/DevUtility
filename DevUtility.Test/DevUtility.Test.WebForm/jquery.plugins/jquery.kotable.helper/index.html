@@ -5,6 +5,7 @@
     <title>/jquery.plugins/jquery.kotable.helper/index.html</title>
     <link href="../../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../jquery.pagination.mobile/index.min.css" rel="stylesheet" />
+    <link href="../../Styles/loading.css" rel="stylesheet" />
     <script src="../../lib/jquery/jquery-1.12.4.min.js"></script>
     <script src="../../lib/knockout/knockout-3.4.2.js"></script>
     <script src="../jquery.knockout.helper/jquery.knockout.helper4.0.js"></script>
@@ -55,6 +56,7 @@
             <input id="btn-reloadWithDifferentURLAndErrorPageIndex" type="button" value="Reload with different url and error page index" />
         </div>
     </div>
+    <div id="div-loading" class="loading-mask" style="display: none;"></div>
     <script src="../jquery.knockout.helper/viewModel.js"></script>
     <script>
         //$('#pagination').pagination({
@@ -93,6 +95,7 @@
                 options: {
                     url: 'http://localhost:9000/Handlers/DataHandler.ashx',
                     autoLoad: false,
+                    loadingDom: '#div-loading',
                     beforeLoadData: function (data) {
                         for (var i in data.Data) {
                             data.Data[i].NameID = ko.pureComputed(function () {

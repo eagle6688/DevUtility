@@ -1,0 +1,12 @@
+﻿.loading-mask {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 9999;
+    height: 100%;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.5);
+    background-image: url(/images/loading.gif);
+    background-repeat: no-repeat;
+    background-position: center;
+}
