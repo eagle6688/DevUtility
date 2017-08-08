@@ -1,6 +1,6 @@
 ﻿(function ($, window, document, undefined) {
     var pluginName = 'paginationmobile',
-        version = '20170807';
+        version = '20170808';
 
     var defaults = {
         totalRecords: 0,

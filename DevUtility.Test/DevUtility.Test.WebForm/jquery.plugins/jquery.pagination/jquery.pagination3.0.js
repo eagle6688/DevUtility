@@ -1,6 +1,6 @@
 ﻿(function ($, window, document, undefined) {
     var pluginName = 'pagination',
-        version = 'v3.0.20170807';
+        version = 'v3.0.20170808';
 
     var defaults = {
         totalRecords: 0,
