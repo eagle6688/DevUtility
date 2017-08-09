@@ -1,6 +1,6 @@
 ﻿(function ($, window, document, undefined) {
     var pluginName = 'paginationmobile',
-        version = '20170808';
+        version = '20170809';
 
     var defaults = {
         totalRecords: 0,
@@ -195,20 +195,38 @@
         }
 
         $button.children('.show-page').unbind('click').click(function () {
-            $button.children(':text').removeClass('hidden');
+            $button.children(':text').removeClass('hidden').focus();
             $(this).addClass('hidden');
         });
 
         $button.children(':text').unbind('blur').blur(function () {
             $(this).addClass('hidden');
             $button.children('.show-page').removeClass('hidden');
-            self._changePage(~~$(this).val());
+
+            if (!self._inputPageIndex($(this).val())) {
+                $(this).val(self.options.pageIndex);
+            }
         });
     };
 
     Plugin.prototype._getPageText = function () {
         var regExp = new RegExp(this.options.pageIndexPattern, 'g');
         return this.options.pageTextFormat.replace(regExp, this.options.pageIndex);
+    };
+
+    Plugin.prototype._inputPageIndex = function (input) {
+        if (!input || isNaN(input)) {
+            return false;
+        }
+
+        var pageIndex = parseInt(input);
+
+        if (pageIndex < 1 || pageIndex > this.pagesCount) {
+            return false;
+        }
+
+        this._changePage(pageIndex);
+        return true;
     };
 
     Plugin.prototype._needReloadOptions = function (options) {
