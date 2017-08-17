@@ -152,6 +152,10 @@
     Plugin.prototype._bindFirstButton = function ($button) {
         var self = this;
 
+        if ($button === null) {
+            return;
+        }
+
         if (this.options.pageIndex === 1) {
             $button.addClass(this.options.disabledButtonClass);
         }
@@ -164,6 +168,10 @@
 
     Plugin.prototype._bindPrevButton = function ($button) {
         var self = this;
+
+        if ($button === null) {
+            return;
+        }
 
         if (this.options.pageIndex === 1) {
             $button.addClass(this.options.disabledButtonClass);
@@ -178,6 +186,10 @@
     Plugin.prototype._bindNextButton = function ($button) {
         var self = this;
 
+        if ($button === null) {
+            return;
+        }
+
         if (this.options.pageIndex === this.pagesCount || this.pagesCount === 0) {
             $button.addClass(this.options.disabledButtonClass);
         }
@@ -190,6 +202,10 @@
 
     Plugin.prototype._bindLastButton = function ($button) {
         var self = this;
+
+        if ($button === null) {
+            return;
+        }
 
         if (this.options.pageIndex === this.pagesCount || this.pagesCount === 0) {
             $button.addClass(this.options.disabledButtonClass);
