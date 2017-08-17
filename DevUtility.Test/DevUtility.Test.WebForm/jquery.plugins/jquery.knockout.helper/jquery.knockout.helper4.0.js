@@ -1,6 +1,6 @@
 ﻿(function ($, window, document, undefined) {
     var pluginName = 'koHelper',
-        version = 'v4.0.20170808';
+        version = 'v4.0.20170817';
 
     var defaults = {
         url: '',
@@ -12,7 +12,7 @@
         pageSize: 10,
         autoLoad: true,
         loadingDom: '', //Dom displays when data are loading.
-        beforeLoadData: function (data) { },
+        beforeLoadData: function (data, context) { },
         afterLoadData: function (data) { }
     };
 
@@ -182,11 +182,18 @@
         }
     };
 
+    Plugin.prototype._getContext = function () {
+        return {
+            pageIndex: this.pageIndex,
+            pageSize: this.options.pageSize
+        };
+    };
+
     //events
 
     Plugin.prototype._beforeLoadData = function (data) {
         if (this.options.beforeLoadData) {
-            this.options.beforeLoadData(data);
+            this.options.beforeLoadData(data, this._getContext());
         }
     };
 
