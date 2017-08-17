@@ -1,6 +1,6 @@
 ﻿(function ($, window, document, undefined) {
     var pluginName = 'pagination',
-        version = 'v3.0.20170808';
+        version = 'v3.0.20170817';
 
     var defaults = {
         totalRecords: 0,
@@ -114,16 +114,25 @@
     };
 
     Plugin.prototype._bind = function () {
+        this._bindButtons();
+        this._bindPageButtons();
+    };
+
+    Plugin.prototype._bindButtons = function () {
+        this._bindFirstButton(this.$firstBtn);
+        this._bindPrevButton(this.$prevBtn);
+        this._bindNextButton(this.$nextBtn);
+        this._bindLastButton(this.$lastBtn);
+    };
+
+    Plugin.prototype._bindPageButtons = function () {
         var self = this;
 
         this.$pagination.children('li').each(function () {
             var $button = $(this);
             var data = $button.data(self.buttonDataName);
 
-            if (data === undefined) {
-                self._bindButton($button);
-            }
-            else {
+            if (data) {
                 var pageIndex = ~~data;
 
                 if (self.options.pageIndex === pageIndex) {
@@ -138,50 +147,6 @@
                 }
             }
         });
-    };
-
-    Plugin.prototype._bindButton = function ($button) {
-        switch ($button.children('a').html()) {
-            case this.options.firstButtonName:
-                this._bindFirstButton($button);
-                break;
-
-            case this.options.prevButtonName:
-                this._bindPrevButton($button);
-                break;
-
-            case this.options.nextButtonName:
-                this._bindNextButton($button);
-                break;
-
-            case this.options.lastButtonName:
-                this._bindLastButton($button);
-                break;
-
-            default:
-                break;
-        }
-
-        switch ($button.children('a').text()) {
-            case this.options.firstButtonName:
-                this._bindFirstButton($button);
-                break;
-
-            case this.options.prevButtonName:
-                this._bindPrevButton($button);
-                break;
-
-            case this.options.nextButtonName:
-                this._bindNextButton($button);
-                break;
-
-            case this.options.lastButtonName:
-                this._bindLastButton($button);
-                break;
-
-            default:
-                break;
-        }
     };
 
     Plugin.prototype._bindFirstButton = function ($button) {
@@ -346,12 +311,9 @@
 
     Plugin.prototype.changeTotalRecords = function (totalRecords) {
         var options = {
+            pageIndex: 1,
             totalRecords: totalRecords
         };
-
-        if (this.options.totalRecords !== totalRecords) {
-            options.pageIndex = 1;
-        }
 
         this.reload(options);
     };

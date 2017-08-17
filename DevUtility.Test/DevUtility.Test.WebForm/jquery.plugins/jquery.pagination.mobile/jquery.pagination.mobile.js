@@ -324,12 +324,9 @@
 
     Plugin.prototype.changeTotalRecords = function (totalRecords) {
         var options = {
+            pageIndex: 1,
             totalRecords: totalRecords
         };
-
-        if (this.options.totalRecords !== totalRecords) {
-            options.pageIndex = 1;
-        }
 
         this.reload(options);
     };

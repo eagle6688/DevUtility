@@ -51,6 +51,7 @@
             <input id="btn-loadKoWithData" type="button" value="Load Ko with Data" />
         </div>
         <div style="margin: 20px 0;">
+            <input id="btn-reloadNone" type="button" value="Reload none" />
             <input id="btn-reloadWithDifferentURL" type="button" value="Reload with different url" />
             <input id="btn-reloadWithDifferentURLAndPageIndex" type="button" value="Reload with different url and page index" />
             <input id="btn-reloadWithDifferentURLAndErrorPageIndex" type="button" value="Reload with different url and error page index" />
@@ -76,18 +77,15 @@
         $('#myKo').koHelper({
             url: 'http://localhost:9000/Handlers/DataHandler.ashx',
             autoLoad: false,
-            beforeLoadData: function (data, context) {
+            beforeLoadData: function (data) {
                 for (var i in data.Data) {
                     data.Data[i].NameID = ko.pureComputed(function () {
                         return this.Name + " " + this.MyID;
                     }, data.Data[i]);
                 }
-
-                $('#pagination').data('pagination').reload({
-                    totalRecords: data.Count,
-                    pageIndex: context.pageIndex
-                });
-
+            },
+            onReload: function (data) {
+                $('#pagination').data('pagination').changeTotalRecords(data.Count);
                 $('#paginationmobile').data('paginationmobile').changeTotalRecords(data.Count);
             }
         });
@@ -136,6 +134,10 @@
             $('#myKo').data('koHelper').reload({
                 viewModel: initViewModel
             });
+        });
+
+        $('#btn-reloadNone').click(function () {
+            $('#myKo').data('koHelper').reload();
         });
 
         $('#btn-reloadWithDifferentURL').click(function () {

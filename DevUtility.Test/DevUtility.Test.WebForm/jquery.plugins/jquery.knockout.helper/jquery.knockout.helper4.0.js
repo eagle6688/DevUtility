@@ -12,8 +12,15 @@
         pageSize: 10,
         autoLoad: true,
         loadingDom: '', //Dom displays when data are loading.
-        beforeLoadData: function (data, context) { },
-        afterLoadData: function (data) { }
+        beforeLoadData: function (data) { },
+        afterLoadData: function (data) { },
+        onReload: function (data) { }
+    };
+
+    var events = {
+        init: 1,
+        reload: 2,
+        changePage: 3
     };
 
     function Plugin(element, options) {
@@ -33,6 +40,7 @@
     };
 
     Plugin.prototype._initData = function () {
+        this.event = events.init;
         this.pageIndex = 1;
         this.selectedItems = [];
 
@@ -74,6 +82,7 @@
     };
 
     Plugin.prototype._setViewModel = function (data) {
+        this._onReload(data);
         this._beforeLoadData(data);
         this.viewModel.Count(data.Count);
         this.viewModel.Data(data.Data);
@@ -182,18 +191,11 @@
         }
     };
 
-    Plugin.prototype._getContext = function () {
-        return {
-            pageIndex: this.pageIndex,
-            pageSize: this.options.pageSize
-        };
-    };
-
     //events
 
     Plugin.prototype._beforeLoadData = function (data) {
         if (this.options.beforeLoadData) {
-            this.options.beforeLoadData(data, this._getContext());
+            this.options.beforeLoadData(data);
         }
     };
 
@@ -202,6 +204,16 @@
 
         if (this.options.afterLoadData) {
             this.options.afterLoadData(data);
+        }
+    };
+
+    Plugin.prototype._onReload = function (data) {
+        if (this.event !== events.init && this.event !== events.reload) {
+            return;
+        }
+
+        if (this.options.onReload) {
+            this.options.onReload(data);
         }
     };
 
@@ -225,11 +237,14 @@
     //exported methods
 
     Plugin.prototype.changePage = function (pageIndex) {
+        this.event = events.changePage;
         this.pageIndex = pageIndex;
         this._requestData();
     };
 
     Plugin.prototype.reload = function () {
+        this.event = events.reload;
+
         switch (arguments.length) {
             case 1:
                 this._reloadOptions(arguments[0]);
@@ -240,6 +255,7 @@
                 break;
 
             default:
+                this.pageIndex = 1;
                 break;
         }
 
