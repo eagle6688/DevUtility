@@ -72,7 +72,8 @@
                         return this.Name + " " + this.MyID;
                     }, data.Data[i]);
                 }
-
+            },
+            onReload: function (data) {
                 $('#pagination').data('pagination').changeTotalRecords(data.Count);
             }
         });

@@ -63,14 +63,18 @@
         $('#pagination').pagination({
             onPageClick: function (pageIndex) {
                 $('#paginationmobile').data('paginationmobile').changePageIndex(pageIndex);
-                $('#myKo').data('koHelper').changePage(pageIndex);
+                $('#myKo').data('koHelper').changePageAndOptions(pageIndex, {
+                    requestData: [1, 2]
+                });
             }
         });
 
         $('#paginationmobile').paginationmobile({
             onPageClick: function (pageIndex) {
                 $('#pagination').data('pagination').changePageIndex(pageIndex);
-                $('#myKo').data('koHelper').changePage(pageIndex);
+                $('#myKo').data('koHelper').changePageAndOptions(pageIndex, {
+                    requestData: [1, 2]
+                });
             }
         });
 
