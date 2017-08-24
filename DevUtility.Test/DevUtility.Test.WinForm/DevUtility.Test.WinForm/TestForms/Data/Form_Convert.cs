@@ -59,5 +59,14 @@ namespace DevUtility.Test.WinForm.TestForms.Data
         }
 
         #endregion
+
+        #region button_ArrayToString_Click
+
+        private void button_ArrayToString_Click(object sender, EventArgs e)
+        {
+            ExecuteService(new Service.Data.Convert.ArrayToString(), button_ArrayToString);
+        }
+
+        #endregion
     }
 }

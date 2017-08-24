@@ -69,6 +69,7 @@
     <Compile Include="Base\Property\FiltrateInvalidDateTimeService.cs" />
     <Compile Include="Database\MongoDBTest\QueryService.cs" />
     <Compile Include="Data\Convert\ArrayListService.cs" />
+    <Compile Include="Data\Convert\ArrayToString.cs" />
     <Compile Include="Data\Convert\ListToArrayService.cs" />
     <Compile Include="Data\LinqData\DistinctService.cs" />
     <Compile Include="Data\LinqData\LinqContainsService.cs" />
