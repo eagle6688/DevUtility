@@ -1,6 +1,6 @@
 ﻿(function ($, window, document, undefined) {
     var pluginName = 'koHelper',
-        version = 'v4.0.20170818';
+        version = 'v4.0.20170825';
 
     var defaults = {
         url: '',
@@ -163,12 +163,13 @@
     };
 
     Plugin.prototype._reloadOptions = function (options) {
-        this.options = $.extend({}, this.options, options);
+        var newOptions = $.extend(true, {}, options);
+        this.options = $.extend({}, this.options, newOptions);
     };
 
     Plugin.prototype._reloadOption = function (name, value) {
         if (this.options.hasOwnProperty(name)) {
-            this.options[name] = value;
+            this.options[name] = clone(value);
         }
     };
 
@@ -225,6 +226,15 @@
         url += '&pageSize=' + pageSize;
         url += '&skip=' + skip;
         return url;
+    };
+
+    var clone = function (value) {
+        var obj = {
+            value: value
+        };
+
+        var newObject = $.extend(true, {}, obj);
+        return newObject.value;
     };
 
     //exported methods
