@@ -30,6 +30,7 @@
         {
             this.textBox_Message = new System.Windows.Forms.TextBox();
             this.groupBox_Functions = new System.Windows.Forms.GroupBox();
+            this.button_ArrayToString = new System.Windows.Forms.Button();
             this.button_ArrayList = new System.Windows.Forms.Button();
             this.button_ListToArray = new System.Windows.Forms.Button();
             this.button_Count0ToList = new System.Windows.Forms.Button();
@@ -37,7 +38,7 @@
             this.textBox_inputValue = new System.Windows.Forms.TextBox();
             this.label_inputValue = new System.Windows.Forms.Label();
             this.label_Title = new System.Windows.Forms.Label();
-            this.button_ArrayToString = new System.Windows.Forms.Button();
+            this.button_BytesToString = new System.Windows.Forms.Button();
             this.groupBox_Functions.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,6 +53,7 @@
             // 
             // groupBox_Functions
             // 
+            this.groupBox_Functions.Controls.Add(this.button_BytesToString);
             this.groupBox_Functions.Controls.Add(this.button_ArrayToString);
             this.groupBox_Functions.Controls.Add(this.button_ArrayList);
             this.groupBox_Functions.Controls.Add(this.button_ListToArray);
@@ -63,6 +65,16 @@
             this.groupBox_Functions.TabIndex = 51;
             this.groupBox_Functions.TabStop = false;
             this.groupBox_Functions.Text = "Funtions";
+            // 
+            // button_ArrayToString
+            // 
+            this.button_ArrayToString.Location = new System.Drawing.Point(420, 21);
+            this.button_ArrayToString.Name = "button_ArrayToString";
+            this.button_ArrayToString.Size = new System.Drawing.Size(116, 23);
+            this.button_ArrayToString.TabIndex = 4;
+            this.button_ArrayToString.Text = "Array to String";
+            this.button_ArrayToString.UseVisualStyleBackColor = true;
+            this.button_ArrayToString.Click += new System.EventHandler(this.button_ArrayToString_Click);
             // 
             // button_ArrayList
             // 
@@ -132,15 +144,15 @@
             this.label_Title.TabIndex = 50;
             this.label_Title.Text = "Convert";
             // 
-            // button_ArrayToString
+            // button_BytesToString
             // 
-            this.button_ArrayToString.Location = new System.Drawing.Point(420, 21);
-            this.button_ArrayToString.Name = "button_ArrayToString";
-            this.button_ArrayToString.Size = new System.Drawing.Size(116, 23);
-            this.button_ArrayToString.TabIndex = 4;
-            this.button_ArrayToString.Text = "Array to String";
-            this.button_ArrayToString.UseVisualStyleBackColor = true;
-            this.button_ArrayToString.Click += new System.EventHandler(this.button_ArrayToString_Click);
+            this.button_BytesToString.Location = new System.Drawing.Point(542, 21);
+            this.button_BytesToString.Name = "button_BytesToString";
+            this.button_BytesToString.Size = new System.Drawing.Size(116, 23);
+            this.button_BytesToString.TabIndex = 5;
+            this.button_BytesToString.Text = "Bytes to String";
+            this.button_BytesToString.UseVisualStyleBackColor = true;
+            this.button_BytesToString.Click += new System.EventHandler(this.button_BytesToString_Click);
             // 
             // Form_Convert
             // 
@@ -172,5 +184,6 @@
         private System.Windows.Forms.Button button_ListToArray;
         private System.Windows.Forms.Button button_ArrayList;
         private System.Windows.Forms.Button button_ArrayToString;
+        private System.Windows.Forms.Button button_BytesToString;
     }
 }

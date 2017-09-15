@@ -68,5 +68,14 @@ namespace DevUtility.Test.WinForm.TestForms.Data
         }
 
         #endregion
+
+        #region button_BytesToString_Click
+
+        private void button_BytesToString_Click(object sender, EventArgs e)
+        {
+            ExecuteService(new Service.Data.Convert.BytesToStringService(), button_BytesToString);
+        }
+
+        #endregion
     }
 }
