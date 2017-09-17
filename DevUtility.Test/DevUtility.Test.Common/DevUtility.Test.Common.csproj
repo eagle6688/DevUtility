@@ -45,6 +45,7 @@
     <Compile Include="Winform\AppConfigHelper.cs" />
     <Compile Include="Winform\IOConfig.cs" />
     <Compile Include="Winform\RedisConfigHelper.cs" />
+    <Compile Include="Winform\TestTypes.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\DevUtility.Com\DevUtility.Com.csproj">
