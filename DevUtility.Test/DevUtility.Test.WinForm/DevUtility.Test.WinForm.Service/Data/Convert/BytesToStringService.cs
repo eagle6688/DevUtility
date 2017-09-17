@@ -44,16 +44,22 @@ namespace DevUtility.Test.WinForm.Service.Data.Convert
         string Compress(string value)
         {
             byte[] bytes = Encoding.UTF8.GetBytes(value);
-            string asd = Encoding.UTF8.GetString(bytes);
             byte[] compressedBytes = Compress(bytes);
-            return Encoding.UTF8.GetString(compressedBytes);
+            return System.Convert.ToBase64String(compressedBytes);
         }
 
         string Decompress(string value)
         {
-            byte[] utf8Bytes = Encoding.ASCII.GetBytes(value);
-            //byte[] bytes = Decompress(utf8Bytes);
-            return Decompress(utf8Bytes);
+            string base64Value = value.Trim().Replace("%", "").Replace(",", "").Replace(" ", "+");
+
+            if (base64Value.Length % 4 > 0)
+            {
+                base64Value = base64Value.PadRight(base64Value.Length + 4 - base64Value.Length % 4, '=');
+            }
+
+            byte[] compressedBytes = System.Convert.FromBase64String(base64Value);
+            byte[] bytes = Decompress(compressedBytes);
+            return Encoding.UTF8.GetString(bytes);
         }
 
         static byte[] Compress(byte[] bytes)
@@ -68,70 +74,20 @@ namespace DevUtility.Test.WinForm.Service.Data.Convert
             return memoryStream.ToArray();
         }
 
-        static string Decompress(byte[] bytes)
+        static byte[] Decompress(byte[] bytes)
         {
-            //using (GZipStream gZipStream = new GZipStream(new MemoryStream(bytes), CompressionMode.Decompress))
-            //{
-            //    const int size = 4096;
-            //    byte[] buffer = new byte[size];
-
-            //    using (MemoryStream memoryStream = new MemoryStream())
-            //    {
-            //        int count = 0;
-
-            //        while ((count = gZipStream.Read(buffer, 0, size)) > 0)
-            //        {
-            //            memoryStream.Write(buffer, 0, count);
-            //        }
-
-            //        return memoryStream.ToArray();
-            //    }
-            //}
-
-            using (var decomStream = new MemoryStream(bytes))
+            using (MemoryStream decomStream = new MemoryStream(bytes))
             {
-                using (var hgs = new GZipStream(decomStream, CompressionMode.Decompress))
+                using (MemoryStream memoryStream = new MemoryStream())
                 {
-                    using (var reader = new StreamReader(hgs, Encoding.UTF8))
+                    using (GZipStream gZipStream = new GZipStream(decomStream, CompressionMode.Decompress))
                     {
-                        return reader.ReadToEnd();
+                        gZipStream.CopyTo(memoryStream);
                     }
+
+                    return memoryStream.ToArray();
                 }
             }
-        }
-
-        public static byte[] CompressObject(object value)
-        {
-            if (value == null)
-            {
-                return null;
-            }
-
-            using (MemoryStream memoryStream = new MemoryStream())
-            {
-                BinaryFormatter binaryFormatter = new BinaryFormatter();
-                binaryFormatter.Serialize(memoryStream, value);
-                byte[] bytes = memoryStream.ToArray();
-
-                MemoryStream oStream = new MemoryStream();
-                DeflateStream zipStream = new DeflateStream(oStream, CompressionMode.Compress);
-                zipStream.Write(bytes, 0, bytes.Length);
-                zipStream.Flush();
-                zipStream.Close();
-                return oStream.ToArray();
-            }
-        }
-
-        public static object DecompressionObject(byte[] bytes)
-        {
-            if (bytes == null) return null;
-            MemoryStream mStream = new MemoryStream(bytes);
-            mStream.Seek(0, SeekOrigin.Begin);
-            DeflateStream unZipStream = new DeflateStream(mStream, CompressionMode.Decompress, true);
-            object dsResult = null;
-            BinaryFormatter bFormatter = new BinaryFormatter();
-            dsResult = (object)bFormatter.Deserialize(unZipStream);
-            return dsResult;
         }
     }
 }
