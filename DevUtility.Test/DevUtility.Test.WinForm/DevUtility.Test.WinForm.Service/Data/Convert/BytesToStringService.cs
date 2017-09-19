@@ -64,23 +64,24 @@ namespace DevUtility.Test.WinForm.Service.Data.Convert
 
         static byte[] Compress(byte[] bytes)
         {
-            MemoryStream memoryStream = new MemoryStream();
-
-            using (GZipStream gZipStream = new GZipStream(memoryStream, CompressionMode.Compress))
+            using (MemoryStream memoryStream = new MemoryStream())
             {
-                gZipStream.Write(bytes, 0, bytes.Length);
-            }
+                using (GZipStream gZipStream = new GZipStream(memoryStream, CompressionMode.Compress))
+                {
+                    gZipStream.Write(bytes, 0, bytes.Length);
+                }
 
-            return memoryStream.ToArray();
+                return memoryStream.ToArray();
+            }
         }
 
         static byte[] Decompress(byte[] bytes)
         {
-            using (MemoryStream decomStream = new MemoryStream(bytes))
+            using (MemoryStream compressedStream = new MemoryStream(bytes))
             {
                 using (MemoryStream memoryStream = new MemoryStream())
                 {
-                    using (GZipStream gZipStream = new GZipStream(decomStream, CompressionMode.Decompress))
+                    using (GZipStream gZipStream = new GZipStream(compressedStream, CompressionMode.Decompress))
                     {
                         gZipStream.CopyTo(memoryStream);
                     }
