@@ -27,7 +27,7 @@ namespace DevUtility.Test.MVC.Controllers
         [HttpGet]
         public IHttpActionResult SetMemoryCache()
         {
-            Com.Application.Cache.MemoryCacheHelper.Set(key, "asd", 1);
+            Com.Application.Cache.MemoryCacheHelper.Set(key, "asd", new TimeSpan(0, 1, 0), null);
             return Ok("OK");
         }
 

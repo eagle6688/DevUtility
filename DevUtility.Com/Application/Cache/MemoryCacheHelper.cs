@@ -1,65 +1,40 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Caching;
-using System.Text;
 
 namespace DevUtility.Com.Application.Cache
 {
     public class MemoryCacheHelper
     {
-        #region Variables
-
-        private static readonly object locker = new object();
-
-        #endregion
-
         #region Set
 
-        public static void Set(string key, object value, int minutes, bool isAbsoluteExpiration = true)
+        public static bool Set(string key, object value)
         {
-            if (isAbsoluteExpiration)
-            {
-                DateTimeOffset dateTimeOffset = DateTimeOffset.Now.AddMinutes(minutes);
-                Set(key, value, null, dateTimeOffset, null);
-                return;
-            }
-
-            TimeSpan timeSpan = new TimeSpan(0, minutes, 0);
-            Set(key, value, timeSpan);
+            CacheItemPolicy cacheItemPolicy = CreateCacheItemPolicy();
+            return Set(key, value, cacheItemPolicy);
         }
 
-        public static void Set(string key, object value, int minutes, CacheEntryUpdateCallback cacheEntryUpdateCallback)
+        public static bool Set(string key, object value, DateTimeOffset absoluteExpiration, CacheEntryUpdateCallback cacheEntryUpdateCallback)
         {
-            TimeSpan timeSpan = new TimeSpan(0, minutes, 0);
-            Set(key, value, timeSpan, null, cacheEntryUpdateCallback);
+            CacheItemPolicy cacheItemPolicy = CreateCacheItemPolicy(absoluteExpiration, cacheEntryUpdateCallback);
+            return Set(key, value, cacheItemPolicy);
         }
 
-        public static void Set(string key, object value, int hours, int minutes, int seconds)
+        public static bool Set(string key, object value, TimeSpan slidingExpiration, CacheEntryUpdateCallback cacheEntryUpdateCallback)
         {
-            TimeSpan timeSpan = new TimeSpan(hours, minutes, seconds);
-            Set(key, value, timeSpan);
+            CacheItemPolicy cacheItemPolicy = CreateCacheItemPolicy(slidingExpiration, cacheEntryUpdateCallback);
+            return Set(key, value, cacheItemPolicy);
         }
 
-        public static void Set(string key, object value, TimeSpan? slidingExpiration = null, DateTimeOffset? absoluteExpiration = null, CacheEntryUpdateCallback cacheEntryUpdateCallback = null)
+        public static bool Set(string key, object value, CacheItemPolicy cacheItemPolicy)
         {
-            if (string.IsNullOrWhiteSpace(key) || value == null)
+            if (string.IsNullOrEmpty(key) || value == null)
             {
-                return;
+                return false;
             }
 
-            CacheItemPolicy cacheItemPolicy = CacheHelper.CreateCacheItemPolicy(slidingExpiration, absoluteExpiration, cacheEntryUpdateCallback);
-
-            if (cacheItemPolicy == null)
-            {
-                return;
-            }
-
-            lock (locker)
-            {
-                CacheItem cacheItem = new CacheItem(key, value);
-                MemoryCache.Default.Set(cacheItem, cacheItemPolicy);
-            }
+            CacheItem cacheItem = new CacheItem(key, value);
+            MemoryCache.Default.Set(cacheItem, cacheItemPolicy);
+            return true;
         }
 
         #endregion
@@ -73,17 +48,15 @@ namespace DevUtility.Com.Application.Cache
                 return null;
             }
 
-            object value = null;
-
-            lock (locker)
+            if (!MemoryCache.Default.Contains(key))
             {
-                value = MemoryCache.Default[key];
+                return null;
             }
 
-            return value;
+            return MemoryCache.Default[key];
         }
 
-        public static T GetValue<T>(string key)
+        public static T Get<T>(string key)
         {
             object value = Get(key);
 
@@ -95,28 +68,72 @@ namespace DevUtility.Com.Application.Cache
             return (T)Convert.ChangeType(value, typeof(T));
         }
 
-        public static TModel Get<TModel>(string key) where TModel : class, new()
-        {
-            object value = Get(key);
-
-            if (value == null)
-            {
-                return null;
-            }
-
-            return value as TModel;
-        }
-
         #endregion
 
         #region Remove
 
         public static void Remove(string key)
         {
-            lock (locker)
+            MemoryCache.Default.Remove(key);
+        }
+
+        #endregion
+
+        #region Create CacheItemPolicy
+
+        private static CacheItemPolicy CreateCacheItemPolicy()
+        {
+            CacheItemPolicy cacheItemPolicy = new CacheItemPolicy();
+            cacheItemPolicy.Priority = CacheItemPriority.NotRemovable;
+            return cacheItemPolicy;
+        }
+
+        private static CacheItemPolicy CreateCacheItemPolicy(TimeSpan slidingExpiration)
+        {
+            return CreateCacheItemPolicy(slidingExpiration, null);
+        }
+
+        private static CacheItemPolicy CreateCacheItemPolicy(TimeSpan slidingExpiration, CacheEntryUpdateCallback cacheEntryUpdateCallback)
+        {
+            if (slidingExpiration == TimeSpan.MinValue)
             {
-                MemoryCache.Default.Remove(key);
+                return CreateCacheItemPolicy();
             }
+
+            CacheItemPolicy cacheItemPolicy = new CacheItemPolicy();
+            cacheItemPolicy.Priority = CacheItemPriority.Default;
+            cacheItemPolicy.SlidingExpiration = slidingExpiration;
+
+            if (cacheEntryUpdateCallback != null)
+            {
+                cacheItemPolicy.UpdateCallback = cacheEntryUpdateCallback;
+            }
+
+            return cacheItemPolicy;
+        }
+
+        private static CacheItemPolicy CreateCacheItemPolicy(DateTimeOffset absoluteExpiration)
+        {
+            return CreateCacheItemPolicy(absoluteExpiration, null);
+        }
+
+        private static CacheItemPolicy CreateCacheItemPolicy(DateTimeOffset absoluteExpiration, CacheEntryUpdateCallback cacheEntryUpdateCallback)
+        {
+            if (absoluteExpiration == null)
+            {
+                return CreateCacheItemPolicy();
+            }
+
+            CacheItemPolicy cacheItemPolicy = new CacheItemPolicy();
+            cacheItemPolicy.Priority = CacheItemPriority.Default;
+            cacheItemPolicy.AbsoluteExpiration = absoluteExpiration;
+
+            if (cacheEntryUpdateCallback != null)
+            {
+                cacheItemPolicy.UpdateCallback = cacheEntryUpdateCallback;
+            }
+
+            return cacheItemPolicy;
         }
 
         #endregion

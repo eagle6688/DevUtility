@@ -46,7 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Application\Cache\CacheHelper.cs" />
     <Compile Include="Application\Cache\MemoryCacheHelper.cs" />
     <Compile Include="Application\ComAttributes\NoDatabaseFieldAttribute.cs" />
     <Compile Include="Application\ComAttributes\PrimaryKeyAttribute.cs" />
