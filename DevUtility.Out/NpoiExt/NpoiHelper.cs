@@ -233,7 +233,7 @@ namespace DevUtility.Out.NpoiExt
 
         public static HSSFWorkbook GetWorkbook()
         {
-            return GetWorkbook("NPOI Team", "NPOI SDK Example");
+            return GetWorkbook("NPOI Team", "NPOI");
         }
 
         public static HSSFWorkbook GetWorkbook(string companyName, string subject)
@@ -302,12 +302,11 @@ namespace DevUtility.Out.NpoiExt
             style.Alignment = HorizontalAlignment.Center;
             style.VerticalAlignment = VerticalAlignment.Center;
 
-            //表头字体
             IFont font = workbook.CreateFont();
-            font.FontHeightInPoints = 12; //字号
+            font.FontHeightInPoints = 12;
             font.FontName = "宋体";
-            font.Boldweight = 600; //加粗
-            font.Color = HSSFColor.Black.Index; //颜色
+            font.Boldweight = 600;
+            font.Color = HSSFColor.Black.Index;
             style.SetFont(font);
             return style;
         }
@@ -318,11 +317,10 @@ namespace DevUtility.Out.NpoiExt
             style.Alignment = HorizontalAlignment.Center;
             style.VerticalAlignment = VerticalAlignment.Center;
 
-            //数据的字体
             IFont font = workbook.CreateFont();
-            font.FontHeightInPoints = 12;//字号
+            font.FontHeightInPoints = 12;
             font.FontName = "宋体";
-            font.Color = HSSFColor.Black.Index; //颜色
+            font.Color = HSSFColor.Black.Index;
             style.SetFont(font);
             return style;
         }
@@ -358,9 +356,9 @@ namespace DevUtility.Out.NpoiExt
 
         #endregion
 
-        #region Get
+        #region Get Sheets count
 
-        public static int GetSheetsCount(long recordsCount, ExcelProperties excelProperties)
+        private static int GetSheetsCount(long recordsCount, ExcelProperties excelProperties)
         {
             int count = (int)recordsCount / excelProperties.MaxRowsCount;
 
