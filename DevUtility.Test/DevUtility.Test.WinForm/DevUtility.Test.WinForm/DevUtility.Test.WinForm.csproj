@@ -35,6 +35,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -241,6 +244,12 @@
     <Compile Include="TestForms\Research\Form_Unicode.Designer.cs">
       <DependentUpon>Form_Unicode.cs</DependentUpon>
     </Compile>
+    <Compile Include="TestForms\ThirdPart\Form_NPOI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestForms\ThirdPart\Form_NPOI.Designer.cs">
+      <DependentUpon>Form_NPOI.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -344,7 +353,11 @@
     <EmbeddedResource Include="TestForms\Research\Form_Unicode.resx">
       <DependentUpon>Form_Unicode.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TestForms\ThirdPart\Form_NPOI.resx">
+      <DependentUpon>Form_NPOI.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="App.config" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -380,6 +393,7 @@
   <ItemGroup>
     <Content Include="App_Data\Test.html" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

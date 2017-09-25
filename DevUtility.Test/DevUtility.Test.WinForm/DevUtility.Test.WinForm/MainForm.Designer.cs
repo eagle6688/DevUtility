@@ -45,6 +45,7 @@
             this.button_Property = new System.Windows.Forms.Button();
             this.button_Reflection = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button_MongoDB = new System.Windows.Forms.Button();
             this.button_Enum = new System.Windows.Forms.Button();
             this.button_Convert = new System.Windows.Forms.Button();
             this.button_DBHelper = new System.Windows.Forms.Button();
@@ -67,7 +68,8 @@
             this.button_Research = new System.Windows.Forms.Button();
             this.button_Unicode = new System.Windows.Forms.Button();
             this.button_Linq = new System.Windows.Forms.Button();
-            this.button_MongoDB = new System.Windows.Forms.Button();
+            this.groupBox_ThirdPart = new System.Windows.Forms.GroupBox();
+            this.button_NPOI = new System.Windows.Forms.Button();
             this.groupBox_Application.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -77,6 +79,7 @@
             this.groupBox6.SuspendLayout();
             this.groupBox_MultiThreads.SuspendLayout();
             this.groupBox_Research.SuspendLayout();
+            this.groupBox_ThirdPart.SuspendLayout();
             this.SuspendLayout();
             // 
             // button_Security
@@ -260,6 +263,16 @@
             this.groupBox2.TabIndex = 14;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Data";
+            // 
+            // button_MongoDB
+            // 
+            this.button_MongoDB.Location = new System.Drawing.Point(62, 49);
+            this.button_MongoDB.Name = "button_MongoDB";
+            this.button_MongoDB.Size = new System.Drawing.Size(68, 23);
+            this.button_MongoDB.TabIndex = 18;
+            this.button_MongoDB.Text = "MongoDB";
+            this.button_MongoDB.UseVisualStyleBackColor = true;
+            this.button_MongoDB.Click += new System.EventHandler(this.button_MongoDB_Click);
             // 
             // button_Enum
             // 
@@ -489,21 +502,32 @@
             this.button_Linq.UseVisualStyleBackColor = true;
             this.button_Linq.Click += new System.EventHandler(this.button_Linq_Click);
             // 
-            // button_MongoDB
+            // groupBox_ThirdPart
             // 
-            this.button_MongoDB.Location = new System.Drawing.Point(62, 49);
-            this.button_MongoDB.Name = "button_MongoDB";
-            this.button_MongoDB.Size = new System.Drawing.Size(68, 23);
-            this.button_MongoDB.TabIndex = 18;
-            this.button_MongoDB.Text = "MongoDB";
-            this.button_MongoDB.UseVisualStyleBackColor = true;
-            this.button_MongoDB.Click += new System.EventHandler(this.button_MongoDB_Click);
+            this.groupBox_ThirdPart.Controls.Add(this.button_NPOI);
+            this.groupBox_ThirdPart.Location = new System.Drawing.Point(12, 658);
+            this.groupBox_ThirdPart.Name = "groupBox_ThirdPart";
+            this.groupBox_ThirdPart.Size = new System.Drawing.Size(760, 60);
+            this.groupBox_ThirdPart.TabIndex = 17;
+            this.groupBox_ThirdPart.TabStop = false;
+            this.groupBox_ThirdPart.Text = "Third Part";
+            // 
+            // button_NPOI
+            // 
+            this.button_NPOI.Location = new System.Drawing.Point(9, 20);
+            this.button_NPOI.Name = "button_NPOI";
+            this.button_NPOI.Size = new System.Drawing.Size(66, 23);
+            this.button_NPOI.TabIndex = 11;
+            this.button_NPOI.Text = "NPOI";
+            this.button_NPOI.UseVisualStyleBackColor = true;
+            this.button_NPOI.Click += new System.EventHandler(this.button_NPOI_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 661);
+            this.ClientSize = new System.Drawing.Size(784, 721);
+            this.Controls.Add(this.groupBox_ThirdPart);
             this.Controls.Add(this.button_Linq);
             this.Controls.Add(this.groupBox_Research);
             this.Controls.Add(this.groupBox_MultiThreads);
@@ -526,6 +550,7 @@
             this.groupBox6.ResumeLayout(false);
             this.groupBox_MultiThreads.ResumeLayout(false);
             this.groupBox_Research.ResumeLayout(false);
+            this.groupBox_ThirdPart.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -572,5 +597,7 @@
         private System.Windows.Forms.Button button_WCF;
         private System.Windows.Forms.Button button_Property;
         private System.Windows.Forms.Button button_MongoDB;
+        private System.Windows.Forms.GroupBox groupBox_ThirdPart;
+        private System.Windows.Forms.Button button_NPOI;
     }
 }

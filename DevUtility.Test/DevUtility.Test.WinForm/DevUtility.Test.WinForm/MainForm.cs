@@ -318,5 +318,14 @@ namespace DevUtility.Test.WinForm
         }
 
         #endregion
+
+        #region button_NPOI_Click
+
+        private void button_NPOI_Click(object sender, EventArgs e)
+        {
+            OpenForm(new TestForms.ThirdPart.Form_NPOI());
+        }
+
+        #endregion
     }
 }
