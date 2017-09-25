@@ -23,7 +23,7 @@ namespace DevUtility.Test.WinForm.Service.ThirdPart.NPOI
 
         public override void Start()
         {
-            IWorkbook workbook;
+            IWorkbook workbook = new XSSFWorkbook();
 
             DataTable dt = new DataTable();
             dt.Columns.Add("A");
@@ -39,10 +39,16 @@ namespace DevUtility.Test.WinForm.Service.ThirdPart.NPOI
                 dt.Rows.Add(dr);
             }
 
-            using (FileStream inFileStream = new FileStream(file, FileMode.Open))
+            using (FileStream createFileStream = File.Create(file))
+            {
+                ISheet sheet = workbook.CreateSheet("Sheet1");
+                workbook.Write(createFileStream);
+            }
+
+            using (FileStream inFileStream = new FileStream(file, FileMode.OpenOrCreate))
             {
                 workbook = new XSSFWorkbook(inFileStream);
-                workbook.AppendRows("Sheet1", dt);
+                workbook.Append("Sheet1", dt);
             }
 
             using (FileStream outFileStream = new FileStream(file, FileMode.Open))

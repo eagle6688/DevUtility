@@ -371,5 +371,29 @@ namespace DevUtility.Out.NpoiExt
         }
 
         #endregion
+
+        /*
+         * new start
+         */
+
+
+
+        #region Create
+
+        public static void Create(string file)
+        {
+            IWorkbook workbook;
+
+            using (FileStream fileStream = File.Create(file))
+            {
+                workbook = new XSSFWorkbook();
+                ISheet sheet = workbook.CreateSheet("Sheet1");
+                workbook.Write(fileStream);
+            }
+        }
+
+        #endregion
+
+
     }
 }

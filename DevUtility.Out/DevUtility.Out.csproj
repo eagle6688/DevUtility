@@ -147,12 +147,13 @@
     <Compile Include="NoSQL\Redis\RedisHostConfig.cs" />
     <Compile Include="NpoiExt\ExcelCom.cs" />
     <Compile Include="NpoiExt\ExcelProperties.cs" />
-    <Compile Include="NpoiExt\ICellStyleExt.cs" />
-    <Compile Include="NpoiExt\IFontExt.cs" />
-    <Compile Include="NpoiExt\ISheetExt.cs" />
-    <Compile Include="NpoiExt\IWorkbookExt.cs" />
+    <Compile Include="NpoiExt\Extension\ICellStyleExt.cs" />
+    <Compile Include="NpoiExt\Extension\IFontExt.cs" />
+    <Compile Include="NpoiExt\Extension\ISheetExt.cs" />
+    <Compile Include="NpoiExt\Extension\IWorkbookExt.cs" />
     <Compile Include="NpoiExt\NpoiHelper.cs" />
     <Compile Include="NpoiExt\NpoiMemoryStream.cs" />
+    <Compile Include="NpoiExt\WorkbookHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Web\Client\ClientHelper.cs" />
     <Compile Include="Web\Client\CookieHelper.cs" />
