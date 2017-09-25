@@ -3,7 +3,7 @@ using System;
 using System.Data;
 using System.IO;
 
-namespace DevUtility.Out.NpoiExt
+namespace DevUtility.Out.NPOI
 {
     public static class IWorkbookExt
     {
@@ -55,19 +55,6 @@ namespace DevUtility.Out.NpoiExt
         #endregion
 
         #region Append
-
-        public static void Append(this IWorkbook workbook, string file)
-        {
-            if (workbook == null || string.IsNullOrEmpty(file))
-            {
-                return;
-            }
-
-            using (FileStream fileStream = new FileStream(file, FileMode.Open))
-            {
-                workbook.Write(fileStream);
-            }
-        }
 
         public static void Append(this IWorkbook workbook, DataSet ds)
         {

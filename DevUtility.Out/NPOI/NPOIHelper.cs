@@ -3,7 +3,6 @@ using NPOI.HSSF.UserModel;
 using NPOI.HSSF.Util;
 using NPOI.SS.UserModel;
 using NPOI.SS.Util;
-using NPOI.XSSF.UserModel;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -11,12 +10,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace DevUtility.Out.NpoiExt
+namespace DevUtility.Out.NPOI
 {
-    /// <summary>
-    /// 2017-03-16
-    /// </summary>
-    public class NpoiHelper
+    public class NPOIHelper
     {
         #region Read
 
@@ -68,7 +64,7 @@ namespace DevUtility.Out.NpoiExt
                     continue;
                 }
 
-                int rowCount = sheet.LastRowNum + 1;
+                int rowsCount = sheet.LastRowNum + 1;
                 int columnsCount = firstRow.LastCellNum;
 
                 for (int j = 0; j < columnsCount; j++)
@@ -76,7 +72,7 @@ namespace DevUtility.Out.NpoiExt
                     table.Columns.Add(j.ToString());
                 }
 
-                for (int j = 0; j < rowCount; j++)
+                for (int j = 0; j < rowsCount; j++)
                 {
                     IRow row = sheet.GetRow(j);
 
@@ -131,100 +127,6 @@ namespace DevUtility.Out.NpoiExt
             }
 
             return workbook.ToNpoiMemoryStream();
-        }
-
-        #endregion
-
-        #region Write big data to excel
-
-        public static void InitExcel(string excelName, string tableName, long recordsCount)
-        {
-            string extension = Path.GetExtension(excelName);
-
-            if (File.Exists(excelName))
-            {
-                File.Delete(excelName);
-            }
-
-            if (IsExcel03(extension))
-            {
-                Create03Workbook(excelName, tableName, recordsCount);
-            }
-            else if (IsExcel07(extension))
-            {
-                Create07Workbook(excelName, tableName, recordsCount);
-            }
-        }
-
-        public static void WriteExcel(string excelName, DataTable table)
-        {
-            using (FileStream fileStream = File.Open(excelName, FileMode.Open))
-            {
-                IWorkbook workbook = new XSSFWorkbook(fileStream);
-            }
-        }
-
-        private static void Create03Workbook(string excelName, string tableName, long recordsCount)
-        {
-            HSSFWorkbook workbook = new HSSFWorkbook();
-            Create03Sheets(ref workbook, tableName, recordsCount);
-
-            using (FileStream fileStream = File.Create(excelName))
-            {
-                workbook.Write(fileStream);
-            }
-        }
-
-        private static void Create03Sheets(ref HSSFWorkbook workbook, string tableName, long recordsCount)
-        {
-            int sheetsCount = GetSheetsCount(recordsCount, ExcelCom.Excel03Properties);
-
-            foreach (string sheetName in GetSheetsNames(tableName, sheetsCount))
-            {
-                workbook.CreateSheet(sheetName);
-            }
-        }
-
-        private static void Create07Workbook(string excelName, string tableName, long recordsCount)
-        {
-            XSSFWorkbook workbook = new XSSFWorkbook();
-            Create07Sheets(ref workbook, tableName, recordsCount);
-
-            using (FileStream fileStream = File.Create(excelName))
-            {
-                workbook.Write(fileStream);
-            }
-        }
-
-        private static void Create07Sheets(ref XSSFWorkbook workbook, string tableName, long recordsCount)
-        {
-            int sheetsCount = GetSheetsCount(recordsCount, ExcelCom.Excel07Properties);
-
-            foreach (string sheetName in GetSheetsNames(tableName, sheetsCount))
-            {
-                workbook.CreateSheet(sheetName);
-            }
-        }
-
-        private static List<string> GetSheetsNames(string tableName, int sheetsCount)
-        {
-            List<string> list = new List<string>();
-
-            if (string.IsNullOrEmpty(tableName))
-            {
-                tableName = "Sheet{0}";
-            }
-            else
-            {
-                tableName += "{0}";
-            }
-
-            for (int i = 0; i < sheetsCount; i++)
-            {
-                list.Add(string.Format(tableName, i));
-            }
-
-            return list;
         }
 
         #endregion
@@ -337,25 +239,6 @@ namespace DevUtility.Out.NpoiExt
 
         #endregion
 
-        #region Verify
-
-        public static bool IsExcel(string extension)
-        {
-            return ExcelCom.AllowedExtensions.Contains(extension);
-        }
-
-        public static bool IsExcel03(string extension)
-        {
-            return ExcelCom.AllowedExtensions.ToList().IndexOf(extension) == 0;
-        }
-
-        public static bool IsExcel07(string extension)
-        {
-            return ExcelCom.AllowedExtensions.ToList().IndexOf(extension) == 1;
-        }
-
-        #endregion
-
         #region Get Sheets count
 
         private static int GetSheetsCount(long recordsCount, ExcelProperties excelProperties)
@@ -372,28 +255,50 @@ namespace DevUtility.Out.NpoiExt
 
         #endregion
 
-        /*
-         * new start
-         */
-
 
 
         #region Create
 
-        public static void Create(string file)
+        public static void Create(string fileName, string sheetName)
         {
-            IWorkbook workbook;
+            IWorkbook workbook = WorkbookHelper.Create(fileName);
 
-            using (FileStream fileStream = File.Create(file))
+            if (workbook == null)
             {
-                workbook = new XSSFWorkbook();
-                ISheet sheet = workbook.CreateSheet("Sheet1");
+                throw new Exception("Cannot create IWorkbook object!");
+            }
+
+            using (FileStream fileStream = File.Create(fileName))
+            {
+                ISheet sheet = workbook.CreateSheet(sheetName);
                 workbook.Write(fileStream);
             }
         }
 
         #endregion
 
+        #region Append
 
+        public static void Append(string fileName, DataSet ds)
+        {
+            if (!File.Exists(fileName))
+            {
+                Create(fileName, ExcelCom.GetSheetName(1));
+            }
+
+            WorkbookHelper.Append(fileName, ds);
+        }
+
+        public static void Append(string fileName, string sheetName, DataTable dt)
+        {
+            if (!File.Exists(fileName))
+            {
+                Create(fileName, sheetName);
+            }
+
+            WorkbookHelper.Append(fileName, sheetName, dt);
+        }
+
+        #endregion
     }
 }

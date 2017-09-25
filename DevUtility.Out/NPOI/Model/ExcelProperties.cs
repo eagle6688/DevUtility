@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace DevUtility.Out.NpoiExt
+namespace DevUtility.Out.NPOI
 {
     public class ExcelProperties
     {

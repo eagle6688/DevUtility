@@ -1,14 +1,7 @@
-﻿using DevUtility.Out.NpoiExt;
+﻿using DevUtility.Out.NPOI;
 using DevUtility.Win.Services.AppService;
-using NPOI.SS.UserModel;
-using NPOI.XSSF.UserModel;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DevUtility.Test.WinForm.Service.ThirdPart.NPOI
 {
@@ -23,8 +16,6 @@ namespace DevUtility.Test.WinForm.Service.ThirdPart.NPOI
 
         public override void Start()
         {
-            IWorkbook workbook = new XSSFWorkbook();
-
             DataTable dt = new DataTable();
             dt.Columns.Add("A");
             dt.Columns.Add("B");
@@ -39,22 +30,7 @@ namespace DevUtility.Test.WinForm.Service.ThirdPart.NPOI
                 dt.Rows.Add(dr);
             }
 
-            using (FileStream createFileStream = File.Create(file))
-            {
-                ISheet sheet = workbook.CreateSheet("Sheet1");
-                workbook.Write(createFileStream);
-            }
-
-            using (FileStream inFileStream = new FileStream(file, FileMode.OpenOrCreate))
-            {
-                workbook = new XSSFWorkbook(inFileStream);
-                workbook.Append("Sheet1", dt);
-            }
-
-            using (FileStream outFileStream = new FileStream(file, FileMode.Open))
-            {
-                workbook.Write(outFileStream);
-            }
+            NPOIHelper.Append(file, "haha", dt);
         }
     }
 }

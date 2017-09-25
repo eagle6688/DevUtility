@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace DevUtility.Out.NpoiExt
+namespace DevUtility.Out.NPOI
 {
     public class NpoiMemoryStream : MemoryStream
     {

@@ -5,7 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 
-namespace DevUtility.Out.NpoiExt
+namespace DevUtility.Out.NPOI
 {
     public static class ISheetExt
     {
