@@ -153,6 +153,7 @@
     <Compile Include="NPOI\Extension\IWorkbookExt.cs" />
     <Compile Include="NPOI\NPOIHelper.cs" />
     <Compile Include="NPOI\Model\NPOIMemoryStream.cs" />
+    <Compile Include="NPOI\SheetHelper.cs" />
     <Compile Include="NPOI\WorkbookHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Web\Client\ClientHelper.cs" />

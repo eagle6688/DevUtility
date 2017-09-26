@@ -16,6 +16,15 @@ namespace DevUtility.Test.WinForm.Service.ThirdPart.NPOI
 
         public override void Start()
         {
+            DataTable table = GetDataTable();
+            string template = @"E:\Download\Products Template.xlsx";
+            string dest = @"E:\Download\AsdQwe.xlsx";
+            NPOIHelper.Create(template, dest, "Sheet1", table);
+            //NPOIHelper.Append(file, "haha", dt);
+        }
+
+        private DataTable GetDataTable()
+        {
             DataTable dt = new DataTable();
             dt.Columns.Add("A");
             dt.Columns.Add("B");
@@ -30,7 +39,7 @@ namespace DevUtility.Test.WinForm.Service.ThirdPart.NPOI
                 dt.Rows.Add(dr);
             }
 
-            NPOIHelper.Append(file, "haha", dt);
+            return dt;
         }
     }
 }

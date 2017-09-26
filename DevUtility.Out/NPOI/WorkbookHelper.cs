@@ -58,6 +58,11 @@ namespace DevUtility.Out.NPOI
                 throw new Exception("Workbook cannot be null!");
             }
 
+            if (!File.Exists(fileName))
+            {
+                throw new Exception("File not found!");
+            }
+
             using (FileStream fileStream = new FileStream(fileName, FileMode.Open, FileAccess.ReadWrite))
             {
                 workbook.Write(fileStream);
@@ -88,6 +93,12 @@ namespace DevUtility.Out.NPOI
 
             workbook.Append(sheetName, table);
             Append(workbook, fileName);
+        }
+
+        public static IWorkbook Append(IWorkbook workbook, string sheetName, DataTable table)
+        {
+            workbook.Append(sheetName, table);
+            return workbook;
         }
 
         #endregion

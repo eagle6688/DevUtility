@@ -268,11 +268,67 @@ namespace DevUtility.Out.NPOI
                 throw new Exception("Cannot create IWorkbook object!");
             }
 
+            workbook.CreateSheet(sheetName);
+            Create(workbook, fileName);
+        }
+
+        public static void Create(IWorkbook workbook, string fileName)
+        {
+            if (workbook == null)
+            {
+                throw new Exception("workbook cannot be null!");
+            }
+
             using (FileStream fileStream = File.Create(fileName))
             {
-                ISheet sheet = workbook.CreateSheet(sheetName);
                 workbook.Write(fileStream);
             }
+        }
+
+        public static void Create(string templateFileName, string fileName, DataSet ds)
+        {
+            if (!File.Exists(templateFileName))
+            {
+                throw new Exception("Template file not found!");
+            }
+
+            if (File.Exists(fileName))
+            {
+                throw new Exception("File exists!");
+            }
+
+            IWorkbook templateWorkbook = WorkbookHelper.CreateInputWorkbook(templateFileName);
+
+            if (templateWorkbook == null)
+            {
+                throw new Exception("Cannot create IWorkbook object!");
+            }
+
+            IWorkbook workbook = templateWorkbook;
+            Create(workbook, fileName);
+        }
+
+        public static void Create(string templateFileName, string fileName, string sheetName, DataTable table)
+        {
+            if (!File.Exists(templateFileName))
+            {
+                throw new Exception("Template file not found!");
+            }
+
+            if (File.Exists(fileName))
+            {
+                throw new Exception("File exists!");
+            }
+
+            IWorkbook templateWorkbook = WorkbookHelper.CreateInputWorkbook(templateFileName);
+
+            if (templateWorkbook == null)
+            {
+                throw new Exception("Cannot create IWorkbook object!");
+            }
+
+            IWorkbook workbook = WorkbookHelper.Append(templateWorkbook, sheetName, table);
+            Create(workbook, fileName);
         }
 
         #endregion
@@ -281,21 +337,11 @@ namespace DevUtility.Out.NPOI
 
         public static void Append(string fileName, DataSet ds)
         {
-            if (!File.Exists(fileName))
-            {
-                Create(fileName, ExcelCom.GetSheetName(1));
-            }
-
             WorkbookHelper.Append(fileName, ds);
         }
 
         public static void Append(string fileName, string sheetName, DataTable dt)
         {
-            if (!File.Exists(fileName))
-            {
-                Create(fileName, sheetName);
-            }
-
             WorkbookHelper.Append(fileName, sheetName, dt);
         }
 
