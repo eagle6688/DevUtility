@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Knockout Test</title>
+    <script src="../../lib/jquery/jquery-1.11.1.min.js"></script>
+    <script src="knockout-3.4.2.js"></script>
+</head>
+<body>
+    <div id="div-outer">
+        <!-- ko foreach: { data: array, as: 'firstLevelData' } -->
+        <!-- ko if: parent == 0 -->
+        <p>
+            <span>Level1: </span>
+            <span data-bind="text: firstLevelData.id"></span>
+        </p>
+
+        <!--Second-->
+        <!-- ko foreach: { data: $root.array, as: 'secondLevelData' } -->
+        <!-- ko if: parent == firstLevelData.id -->
+        <p>
+            <span>Level2: </span>
+            <span data-bind="text: secondLevelData.id"></span>
+        </p>
+
+        <!--third-->
+        <!-- ko foreach: { data: $root.array, as: 'thirdLevelData' } -->
+        <!-- ko if: parent == secondLevelData.id -->
+        <p>
+            <span>Level3: </span>
+            <span data-bind="text: thirdLevelData.id"></span>
+        </p>
+        <!-- /ko -->
+        <!-- /ko -->
+        <!--third end-->
+
+        <!-- /ko -->
+        <!-- /ko -->
+        <!--Second end-->
+
+        <!-- /ko -->
+        <!-- /ko -->
+    </div>
+    <script type="text/javascript">
+        var viewModel = {
+            array: []
+        };
+
+        viewModel.array.push({ id: 1, parent: 0 });
+        viewModel.array.push({ id: 2, parent: 0 });
+        viewModel.array.push({ id: 3, parent: 0 });
+        viewModel.array.push({ id: 4, parent: 1 });
+        viewModel.array.push({ id: 5, parent: 2 });
+        viewModel.array.push({ id: 6, parent: 3 });
+        viewModel.array.push({ id: 7, parent: 4 });
+        viewModel.array.push({ id: 8, parent: 4 });
+        viewModel.array.push({ id: 9, parent: 4 });
+
+        ko.applyBindings(viewModel, document.getElementById('div-outer'));
+    </script>
+</body>
+</html>

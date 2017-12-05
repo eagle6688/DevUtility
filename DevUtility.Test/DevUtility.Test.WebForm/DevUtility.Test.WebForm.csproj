@@ -119,6 +119,8 @@
     <Content Include="research\block\index.html" />
     <Content Include="research\domain-upgrade\index.html" />
     <Content Include="research\ie\formDataIE11.html" />
+    <Content Include="research\knockout\index.html" />
+    <Content Include="research\knockout\knockout-3.4.2.js" />
     <Content Include="research\object\index.html" />
     <Content Include="research\TypeScript\jquery-plugins\index.html" />
     <Content Include="Styles\loading.css" />
