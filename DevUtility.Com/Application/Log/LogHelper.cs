@@ -48,8 +48,11 @@ namespace DevUtility.Com.Application.Log
             {
                 return true;
             }
-            
-            return Save(LogConfig.ErrorLogDirectory, exception.ToExceptionContent().ToString());
+
+            string content = exception.ToExceptionContent().ToString();
+            Console.WriteLine(content);
+
+            return Save(LogConfig.ErrorLogDirectory, content);
         }
 
         public static bool Error(string directory, Exception exception)
