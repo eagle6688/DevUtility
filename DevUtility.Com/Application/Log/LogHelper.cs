@@ -101,6 +101,7 @@ namespace DevUtility.Com.Application.Log
                 directory = LogConfig.InfoLogDirectory;
             }
 
+            Console.WriteLine(content);
             return Save(directory, content);
         }
 
